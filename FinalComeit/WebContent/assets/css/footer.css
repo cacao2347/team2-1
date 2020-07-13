@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+
+.push footer.footer{
+	height:60px;
+    background-color: #183350;
+    
+    
+}
+
+
+.fpy-5 {
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+}
+.push > footer.footer > div.fcontainer
+ {
+   display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+ 
+ }
+.push > footer.footer >  div.fcontainer > p.ftext
+{
+  color: #fff !important;
+  margin: 0 auto !important;	
+  text-align: center !important;
+}
