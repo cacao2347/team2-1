@@ -1,0 +1,47 @@
+@charset "UTF-8";
+
+.sub-title
+{
+	font-weight: bold;
+}
+
+.member
+{
+	margin-top: 80px;
+	
+}
+
+.title
+{
+	margin-top: 30px;
+	font-weight: bold;
+}
+
+.study-member
+{
+	margin-top: 20px;
+}
+
+.report
+{
+	margin-left: 200px;
+}
+
+.study-img
+{
+	margin-top: 20px;
+	width: 1200px;
+	height: 200px;
+}
+
+.memImg
+{
+	padding-right: 20pt;
+	padding-bottom: 10pt;
+}
+
+
+.profileImg
+{
+	width: 70px;
+}

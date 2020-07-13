@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+.col-md-8 > h1 , .meetDate> h3
+{
+	font-weight: bold;
+}
+
+.meetDate
+{
+	margin-top: 30px;
+	margin-left: 50px;
+}
+
+.ePoint
+{
+	color: red;
+}
+/* 
+
+{
+	display: inline-block;
+} */
+
+.box
+{
+	background-color: #f0f0f5;
+	border-radius: 20px;
+}

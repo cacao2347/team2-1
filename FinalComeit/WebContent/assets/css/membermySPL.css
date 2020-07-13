@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+.col-md-8 > .paging
+{
+	text-align: center;
+}
+.pagination>li>a, .pagination>li>span
+{
+	color: black;
+}
+
+.container-fluid
+{
+	text-align: center;
+}
