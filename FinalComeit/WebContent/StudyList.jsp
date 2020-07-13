@@ -15,14 +15,14 @@
 <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/bootstrap/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
-<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="<%=cp %>/assets/js/bootstrap.min.js"></script>
 
 
 </head>
 <body>
 <div class="row">
 	<div class="col-md-12">
-	<c:import url="header.jsp"></c:import>
+	<%-- <c:import url="header.jsp"></c:import> --%>
 	</div>
 </div>
 			
@@ -150,10 +150,14 @@
 								<img class="study-logo" alt="study-logo" src="assets/images/studylogo.PNG">
 								</div>
 								<div class="item-body">
-								<div class="listTitle form-inline">
-									<h4 class="study-title" style="font-weight: bold;">[언어] 자바 공부 같이해요</h4>
+								<div class="firstLine">
+									<div class="listTitle">
+										<h4 class="study-title" style="font-weight: bold;">[언어] 자바 공부 같이해요</h4>
+									</div>
+									<div class="lock">
+										<h5><span class="glyphicon glyphicon-lock icon" aria-hidden="true"></span></h5>
+									</div>
 								</div>
-								
 								<div class="form-inline">
 									<h5 class="study-date">2020-06-16 ~ 2020-07-15</h5>
 									<h5 class="study-term">1개월</h5>
@@ -314,7 +318,7 @@
 </div>
 <div class="row">
 	<div class="col-md-12">
-	<c:import url="footer.jsp"></c:import>
+	<%-- <c:import url="footer.jsp"></c:import> --%>
 	</div>
 </div>
 </body>

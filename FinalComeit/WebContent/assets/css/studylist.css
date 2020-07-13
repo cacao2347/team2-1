@@ -19,6 +19,15 @@
    color: black;
    text-align: center;
 }
+.firstLine .listTitle, .firstLine .lock
+{
+	display: inline-block;
+}
+.firstLine .lock
+{
+	float: right;
+	margin: 2.25%
+}
 .create
 {
 	margin-top: 20px;
