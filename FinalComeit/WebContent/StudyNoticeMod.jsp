@@ -60,7 +60,7 @@
 		
 			<div class="bottom">
 				<div class="errMsg">
-					필수 입력항목이 누락되었습니다...
+					필수 입력항목이 누락되었습니다.
 				</div>
 				
 				<button type="button" class="btn btn-primary btn-lg btm">
