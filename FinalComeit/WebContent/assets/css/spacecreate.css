@@ -1,0 +1,97 @@
+@charset "UTF-8";
+.spawh
+{
+	background-color: white;
+	padding: 50px;
+	border-radius: 10pt;
+}
+.stepwizard-step p {
+    margin-top: 0px;
+    color:#666;
+}
+.stepwizard-row {
+    display: table-row;
+}
+.stepwizard {
+    display: table;
+    width: 100%;
+    position: relative;
+}
+.stepwizard .btn.disabled, .stepwizard .btn[disabled], .stepwizard fieldset[disabled] .btn {
+    opacity:1 !important;
+    color:#bbb;
+}
+.stepwizard-row:before {
+    top: 14px;
+    bottom: 0;
+    position: absolute;
+    content:" ";
+    width: 100%;
+    height: 1px;
+    background-color: #ccc;
+    z-index: 0;
+}
+.stepwizard-step {
+    display: table-cell;
+    text-align: center;
+    position: relative;
+}
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 12px;
+    line-height: 1.428571429;
+    border-radius: 15px;
+}
+.aa
+{
+	width: 200px;
+}
+.aa2
+{
+	float : right;
+	margin-left: 8px;
+}
+.spah1
+{
+	margin-left: 300px;
+}
+
+.spahr
+{
+	width: 80%;
+}
+.spadiv
+{
+	margin-top: 100px;
+}
+#spa2
+{
+	margin-left: 5px;
+}
+.selects {
+    position:relative;
+    width:100px;
+    height:40px;
+    background:url(select_arrow.png)180px center no-repeat;/* 화살표 이미지 */
+    border:1px solid gray;
+    border-radius: 6pt;
+}
+.selects label {
+    position:absolute;
+    font-size:14px;
+    color:#183350;
+    top:13px;
+    left:12px;
+    letter-spacing:1px;
+}
+.selects select#mm {
+    width:100%;
+    height:40px;
+  	 	min-height:40px;
+    line-height:40px;
+    padding:0 10px;
+    opacity:0;
+}
