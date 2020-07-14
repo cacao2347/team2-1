@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <title>COME-IT</title>
-<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/studylist.css" >
+<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/projectlist.css" >
 
 <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/bootstrap/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -43,15 +43,7 @@
 				<div class="col-md-2">
 				</div>
 				<div class="col-md-2"><!-- 필터 시작 -->
-				<div class="side">
-					<dl class="cat">
-						<dt>카테고리</dt>
-						<dd><a href="">언어</a></dd>
-						<dd><a href="">면접</a></dd>
-						<dd><a href="">자격증</a></dd>
-						<dd><a href="">기타</a></dd>
-					</dl><!-- end cat -->
-					
+				<div class="side">					
 					<dl class="region">
 						<dt>지역</dt>
 						<dd>
@@ -132,7 +124,7 @@
 						<div class="col-md-12">
 						<div class="form-inline search">
 							<input type="text" class="form-control tag" id="tag" placeholder="기술 태그">
-							<input type="text" class="form-control title" id="title" placeholder="스터디방 제목">
+							<input type="text" class="form-control title" id="title" placeholder="프로젝트방 제목">
 							<button type="button" class="btn btn-primary searchBtn">검색</button>
 						</div>
 						</div>
@@ -141,7 +133,7 @@
 					<!-- 리스트 영역 -->
 					<div class="row list">
 						<div class="col-md-12">
-						99개의 스터디방
+						99개의 프로젝트방
 						</div>
 						<div class="col-md-12">
 						<ul class="list-study">
@@ -152,15 +144,15 @@
 								<div class="item-body">
 								<div class="firstLine">
 									<div class="listTitle">
-										<h4 class="study-title" style="font-weight: bold;">[언어] 자바 공부 같이해요</h4>
+										<h4 class="study-title" style="font-weight: bold;">자바기반 웹 어플리케이션 만드는 프로젝트</h4>
 									</div>
 									<div class="lock">
 										<h5><span class="glyphicon glyphicon-lock icon" aria-hidden="true"></span></h5>
 									</div>
 								</div>
 								<div class="form-inline">
-									<h5 class="study-date">2020-06-16 ~ 2020-07-15</h5>
-									<h5 class="study-term">1개월</h5>
+									<h5 class="study-date">2020-06-16 ~ 2020-09-15</h5>
+									<h5 class="study-term">3개월</h5>
 								</div>
 								
 								<ul class="study-info">
@@ -171,6 +163,9 @@
 								<ul class="list-study-tags">
 									<li class="stack-item">Java</li>
 									<li class="stack-item">Oracle</li>
+									<li class="stack-item">Spring</li>
+									<li class="stack-item">JSP</li>
+									<li class="stack-item">JavaScript</li>
 								</ul>
 								</div>
 							</li>
@@ -179,10 +174,10 @@
 								<img class="study-logo" alt="study-logo" src="assets/images/studylogo.PNG">
 								</div>
 								<div class="item-body">
-								<h4 class="study-title" style="font-weight: bold;">[자격증] 정보처리기사 필기 같이 공부하실 분</h4>
+								<h4 class="study-title" style="font-weight: bold;">안드로이드 어쩌구 앱 만들기</h4>
 								<div class="form-inline">
-									<h5 class="study-date">2020-05-16 ~ 2020-08-15</h5>
-									<h5 class="study-term">3개월</h5>
+									<h5 class="study-date">2020-05-16 ~ 2020-11-15</h5>
+									<h5 class="study-term">6개월</h5>
 								</div>
 								
 								<ul class="study-info">
@@ -191,7 +186,8 @@
 									<li class="numb"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> 8명</li>
 								</ul>
 								<ul class="list-study-tags">
-									<li class="stack-item">정보처리기사</li>
+									<li class="stack-item">Android</li>
+									<li class="stack-item">Java</li>
 								</ul>
 								</div>
 							</li>
@@ -200,7 +196,31 @@
 								<img class="study-logo" alt="study-logo" src="assets/images/studylogo.PNG">
 								</div>
 								<div class="item-body">
-								<h4 class="study-title" style="font-weight: bold;">[언어] 웹 풀스택 개발 공부</h4>
+								<h4 class="study-title" style="font-weight: bold;">ios로 앱 어플리케이션 만드는 프로젝트</h4>
+								
+								<div class="form-inline">
+									<h5 class="study-date">2020-01-16 ~ 2020-07-15</h5>
+									<h5 class="study-term">6개월</h5>
+								</div>
+								
+								<ul class="study-info">
+									<li class="level"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span> 중급</li>
+									<li class="location"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> 서울 마포구</li>
+									<li class="numb"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> 6명</li>
+								</ul>
+								<ul class="list-study-tags">
+									<li class="stack-item">iOS</li>
+									<li class="stack-item">Swift</li>
+									<li class="stack-item">Python</li>
+								</ul>
+								</div>
+							</li>
+							<li class="list-study-item">
+								<div class="item-header">
+								<img class="study-logo" alt="study-logo" src="assets/images/studylogo.PNG">
+								</div>
+								<div class="item-body">
+								<h4 class="study-title" style="font-weight: bold;">자바기반 웹 어플리케이션 만드는 프로젝트</h4>
 								
 								<div class="form-inline">
 									<h5 class="study-date">2020-01-16 ~ 2020-07-15</h5>
@@ -226,33 +246,7 @@
 								<img class="study-logo" alt="study-logo" src="assets/images/studylogo.PNG">
 								</div>
 								<div class="item-body">
-								<h4 class="study-title" style="font-weight: bold;">[언어] 웹 풀스택 개발 공부</h4>
-								
-								<div class="form-inline">
-									<h5 class="study-date">2020-01-16 ~ 2020-07-15</h5>
-									<h5 class="study-term">6개월</h5>
-								</div>
-								
-								<ul class="study-info">
-									<li class="level"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span> 중급</li>
-									<li class="location"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> 서울 마포구</li>
-									<li class="numb"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> 6명</li>
-								</ul>
-								<ul class="list-study-tags">
-									<li class="stack-item">Java</li>
-									<li class="stack-item">Oracle</li>
-									<li class="stack-item">JavaScript</li>
-									<li class="stack-item">HTML</li>
-									<li class="stack-item">CSS</li>
-								</ul>
-								</div>
-							</li>
-							<li class="list-study-item">
-								<div class="item-header">
-								<img class="study-logo" alt="study-logo" src="assets/images/studylogo.PNG">
-								</div>
-								<div class="item-body">
-								<h4 class="study-title" style="font-weight: bold;">[언어] 웹 풀스택 개발 공부</h4>
+								<h4 class="study-title" style="font-weight: bold;">자바기반 웹 어플리케이션 만드는 프로젝트</h4>
 								
 								<div class="form-inline">
 									<h5 class="study-date">2020-01-16 ~ 2020-07-15</h5>
@@ -281,7 +275,7 @@
 					<div class="row">
 					<div class="col-md-12">
 						<div class="create">
-							<button type="button" class="btn btn-primary btn-sm createBtn">스터디방 개설</button>
+							<button type="button" class="btn btn-primary btn-sm createBtn">프로젝트방 개설</button>
 						</div>
 					</div>
 					</div>
