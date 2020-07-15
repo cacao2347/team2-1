@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>LectureDateList.jsp</title>
+<title>StudyDateList.jsp</title>
 <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/bootstrap.min.css" >
 <link rel="stylesheet"  href="<%=cp %>/assets/css/blog-post.css" >
 <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/studyDateList.css">
