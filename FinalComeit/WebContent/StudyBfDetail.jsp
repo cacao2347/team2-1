@@ -202,7 +202,7 @@
 							<span class="name">최길동</span>
 						</div>
 						
-					</div><!-- end .stuMem -->
+					</div><!-- end .stuMem  -->
 				
 				</div>
 			</div><!-- end .row -->
