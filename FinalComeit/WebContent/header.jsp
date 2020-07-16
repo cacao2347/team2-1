@@ -11,6 +11,7 @@
 <title>Insert title here</title>
   <!-- Bootstrap core CSS -->
 <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/header.css">
+
 </head>
 <body>
  <!-- Navigation -->

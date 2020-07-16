@@ -47,7 +47,7 @@
 </head>
 <body>
 
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<!-- <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="#">WebSiteName</a>
@@ -68,7 +68,9 @@
       <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
     </ul>
   </div>
-</nav>
+</nav> -->
+
+<c:import url="header.jsp"></c:import>
 
 <div class="container-fluid">
 

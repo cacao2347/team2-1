@@ -10,8 +10,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="css/main.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 <style type="text/css">
 /* 사이드바 */
 .sidenav 
@@ -20,16 +18,17 @@
   position: fixed;
   width: 200px;
   height: 100%;
-  margin-left: -20px;
-  margin-top:50px
+  margin-left: 0px;
+  margin-top: 0px
 }
 </style>
 </head>
 <body>
 
+<c:import url="header.jsp"></c:import>
 
   	<!-- 사이드바 -->
-    <nav class="col-sm-3 sidenav">
+    <nav class="col-sm-3 sidenav text-center">
       <h4><img class="img-fluid img-square myimg" src="assets/images/IU.jpg" alt="myimg" style="width: 180px; height:200px;"></h4>
       <ul class="nav nav-pills nav-stacked">
         <li class="active" style="text-align: center;">아이유 님의 프로필</li>
