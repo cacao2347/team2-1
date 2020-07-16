@@ -30,7 +30,17 @@
 		{
 			$("#stuMemInfo").css('display', 'none');
 		});
+		/* 
 		
+		$("#member2").mouseover(function() 
+		{
+			$("#stuMemInfo2").css('display', 'block');	
+		});
+		$("#member2").mouseleave(function() 
+		{
+			$("#stuMemInfo2").css('display', 'none');
+		});
+		 */
 		
 	});
 	  
@@ -192,7 +202,7 @@
 							<span class="name">최길동</span>
 						</div>
 						
-					</div><!-- end .stuMem  -->
+					</div><!-- end .stuMem -->
 				
 				</div>
 			</div><!-- end .row -->
