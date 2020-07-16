@@ -27,7 +27,6 @@
 </head>
 <body>
 
-<div class="container-fluid">
 
   	<!-- 사이드바 -->
     <nav class="col-sm-3 sidenav">
@@ -50,7 +49,6 @@
       </ul>
     </nav>
 	<!-- 사이드바 끝 -->
-</div>
 
 </body>
 </html>
