@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	request.setCharacterEncoding("UTF-8");
+	String cp = request.getContextPath();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +15,7 @@
 
 <script src="http://code.jquery.com/jquery.min.js"></script>
 <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
-<link rel="stylesheet" href="css/spafeedback.css">
+<link rel="stylesheet" href="<%=cp %>/assets/css/spafeedback.css">
 <script>
     $(document).ready(function() {
         $("#slider").slider({

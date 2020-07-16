@@ -203,7 +203,7 @@ body
                                     <input type="email" class="form-control" placeholder="Your Email *" value="" />
                                 </div><br>
                                 <div class="form-group">
-                                    <input type="text" minlength="10" maxlength="10" name="txtPhone" class="form-control" placeholder="Your Phone *" value="" />
+                                    <input type="text" maxlength="10" name="txtPhone" class="form-control" placeholder="Your Phone *" value="" />
                                 </div>
                                 <input type="submit" class="btnRegister"  value="수정하기"/>
                             </div>

@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	request.setCharacterEncoding("UTF-8");
+	String cp = request.getContextPath();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,10 +11,10 @@
 <title>Insert title here</title>     
 <!-- CSS -->
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
-<link rel="stylesheet" href="css/login2.css">
-<link rel="stylesheet" href="css/font-awesome.min.css">
-<link rel="stylesheet" href="css/form-elements.css">
-<link rel="stylesheet" href="css/loginstyle.css">
+<link rel="stylesheet" href="<%=cp %>/assets/css/login2.css">
+<link rel="stylesheet" href="<%=cp %>/assets/css/font-awesome.min.css">
+<link rel="stylesheet" href="<%=cp %>/assets/css/form-elements.css">
+<link rel="stylesheet" href="<%=cp %>/assets/css/loginstyle.css">
  </head>
 
     <body>
@@ -72,10 +76,10 @@
 
 
         <!-- Javascript -->
-        <script src="js/jquery-1.11.1.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/jquery.backstretch.min.js"></script>
-        <script src="js/scripts.js"></script>
+        <script src="<%=cp %>/assets/js/jquery-1.11.1.min.js"></script>
+        <script src="<%=cp %>/assets/js/bootstrap.min.js"></script>
+        <script src="<%=cp %>/assets/js/jquery.backstretch.min.js"></script>
+        <script src="<%=cp %>/assets/js/scripts.js"></script>
 
     </body>
 
