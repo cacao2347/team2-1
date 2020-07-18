@@ -11,38 +11,40 @@
 <meta charset="UTF-8">
 <title>StudyBfDetail.jsp</title>
 <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/studyBfDetail.css" >
-<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/bootstrap/bootstrap.min.css" >
+
+<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/bootstrap/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@800&display=swap" rel="stylesheet">
+
 
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp %>/assets/js/bootstrap.min.js"></script>
+
+
+
 <script type="text/javascript">
-	
-	$(document).ready(function() 
+
+	$(document).ready(function () 
 	{
+		$(".infoBtn").click(function() 
+		{
+			$("#modal").show();	
+		});	
 		
-		$("#member1").mouseover(function() 
-		{
-			$("#stuMemInfo").css('display', 'block');	
-		});
-		$("#member1").mouseleave(function() 
-		{
-			$("#stuMemInfo").css('display', 'none');
-		});
-		/* 
 		
-		$("#member2").mouseover(function() 
+		$(".outBtn").click(function() 
 		{
-			$("#stuMemInfo2").css('display', 'block');	
+				var outRsn = prompt("불합리한 방출은 사이트 이용에 제한이 있을 수 있습니다.\n방출 사유를 입력하세요.");
+				
 		});
-		$("#member2").mouseleave(function() 
-		{
-			$("#stuMemInfo2").css('display', 'none');
-		});
-		 */
 		
 	});
+		
+	function closeModal() 
+	{
+		$('.searchModal').hide();
+	};
+	
+
 	  
 </script>
 
@@ -74,6 +76,8 @@
 		</div>
 	</div>
 	
+	
+	
 	<!-- 방 정보 및 팀원 정보 -->
 	<div class="row">
 		<div class="col-md-2">
@@ -87,7 +91,7 @@
 						<h1 class="title">F반 스터디방</h1>
 						<input type="button" value="참가" class="btn btn-lg btn-primary join" />
 						<img src="<%=cp %>/assets/images/report.png" alt="" class="report" onclick=""/>
-						<%-- <button type="button" class="reportBtn"><img src="<%=cp%>/assets/images/report.png" alt="" class="report"/></button> --%>
+						
 						<hr />
 					</div><!-- end.stuTitle -->
 					
@@ -140,66 +144,90 @@
 					<div class="stuMem">
 						<!-- <h3>스터디장</h3> -->
 						<div class="memLeader" id="member1">
-							
+
 							<img src="<%=cp %>/assets/images/hjkim.PNG" alt="" class="img-circle memImg" />
 							<span class="glyphicon glyphicon-ok ok"></span>
 							<h4>Study Leader</h4>
 							<span class="name">김길동</span>
+							<input type="button" class="btn-sm btn-default infoBtn" id="" value="정보" />
 							
-							<!-- 멤버정보카드 -->
-							<div class="memInfo" id="stuMemInfo">
-								<div class="userName">
-									<span class="glyphicon glyphicon-user user"></span><h3>이름 :</h3><span class="name">김길동</span>
-								</div><!-- end .userName -->
-								<div class="userManner">
-									<span class="glyphicon glyphicon-pencil pencil"></span><h3>매너연필 :</h3><span class="manPencil">5cm</span>
-								</div><!-- userManner -->
-								<div class="userPosi">
-									<h3>신분 :</h3><span class="position">취업준비생</span>
-								</div><!-- end .userPosi -->
-								<div class="userKey">
-									<h3>관심키워드 :</h3><span class="keyword">Java / JSP</span>
-								</div><!-- end .userKey -->
-								<div class="userInt">
-									<h3>자기소개 :</h3><span class="oneInt">한 줄 자기소개 영역입니다.</span>
-								</div><!-- end .userInt -->
-								<div class="userStu">
-									<h3>참여중인 스터디 :</h3>
-									<span class="joinStu">·F반 스터디방</span><br>
-									<span class="joinStu">·F반 취업준비방</span>
-								</div><!-- end .userStu -->
-								<div class="userPro">
-									<h3>참여중인 스터디 :</h3>
-									<span class="joinPro">·F반 프로젝트방</span><br>
-									<span class="joinPro">·Come-It</span>
-								</div><!-- end .userStu -->
-							</div><!-- end .memInfo -->
+							<!-- 모달 -->
+							<!-- 검은 배경 -->
+							<div id="modal" class="searchModal">
+								<!-- 모달창 -->
+								<div class="search-modal-content">
+									
+									<!-- 버튼 -->
+									<div class="closeD" onClick="closeModal();">
+										<span class="pop_bt modalCloseBtn" >X</span>
+									</div><!-- end .closeD -->
+									
+									<div class="userName">
+										<span class="glyphicon glyphicon-user user"></span><h3>이름 :</h3><span class="name">김길동</span>
+									</div><!-- end .userName -->
+									<div class="userManner">
+										<span class="glyphicon glyphicon-pencil pencil"></span><h3>매너연필 :</h3><span class="manPencil">5cm</span>
+									</div><!-- userManner -->
+									<div class="userPosi">
+										<h3>신분 :</h3><span class="position">취업준비생</span>
+									</div><!-- end .userPosi -->
+									<div class="userKey">
+										<h3>관심키워드 :</h3><span class="keyword">Java / JSP / jQuery / SQL / Spring</span>
+									</div><!-- end .userKey -->
+									<div class="userInt">
+										<h3>자기소개 :</h3><span class="oneInt">한 줄 자기소개 영역입니다.</span>
+									</div><!-- end .userInt -->
+									<div class="userStu">
+										<h3>참여중인 스터디 :</h3>
+										<span class="joinStu">·F반 스터디방</span><br>
+										<span class="joinStu">·F반 취업준비방</span>
+									</div><!-- end .userStu -->
+									<div class="userPro">
+										<h3>참여중인 프로젝트 :</h3>
+										<span class="joinPro">·F반 프로젝트방</span><br>
+										<span class="joinPro">·Come-It</span>
+									</div><!-- end .userPro -->
+									<div class="out">
+										<input type="button" value="방출" class="btn btn-sm outBtn" />
+									</div><!-- end .out -->
+							</div><!-- end .search-modal-content -->
+							
+							
+							
+							</div><!-- end .searchModal -->	
+							
+						
 							
 						</div><!-- end .memLeader -->
 					<!-- 	<h3>스터디원</h3> -->
+						
+						
 						
 						<div class="member" id="member2">
 							<img src="<%=cp %>/assets/images/khjang.PNG" alt="" class="img-circle memImg" />					
 							<h4>member</h4>
 							<span class="name">장길동</span>
-							
-						</div><!-- end .mem -->
+							<input type="button" class="btn-sm btn-default infoBtn" id="" value="정보" />
+						</div><!-- end .member -->
 						
 						
 						<div class="member">
 							<img src="<%=cp %>/assets/images/sjsong.PNG" alt="" class="img-circle memImg" />
 							<h4>member</h4>
 							<span class="name">송길동</span>
+							<input type="button" class="btn-sm btn-default infoBtn" id="" value="정보" />
 						</div>
 						<div class="member">
 							<img src="<%=cp %>/assets/images/jmshin.PNG" alt="" class="img-circle memImg" />
 							<h4>member</h4>
 							<span class="name">신길동</span>
+							<input type="button" class="btn-sm btn-default infoBtn" id="" value="정보" />
 						</div>
 						<div class="member">
 							<img src="<%=cp %>/assets/images/hschoi.PNG" alt="" class="img-circle memImg" />
 							<h4>member</h4>
 							<span class="name">최길동</span>
+							<input type="button" class="btn-sm btn-default infoBtn" id="" value="정보" />
 						</div>
 						
 					</div><!-- end .stuMem -->
