@@ -1,0 +1,19 @@
+@charset "UTF-8";
+.paging
+{
+	text-align: center;
+}
+.pagination>li>a, .pagination>li>span
+{
+	color: black;
+}
+
+.add
+{
+	margin-top: 15px;
+}
+
+.searchRow
+{
+	margin-bottom: 30px;
+}

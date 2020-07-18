@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>StudyCalendar.jsp</title>
+<title>ProjectCalendar.jsp</title>
 
 <link rel="stylesheet" type="text/css" href="<%=cp%>/assets/css/bootstrap-theme.min.css" />
 <link rel="stylesheet" type="text/css" href="<%=cp%>/assets/css/bootstrap.min.css">
@@ -17,7 +17,7 @@
 <link rel="stylesheet" type="text/css" href="<%=cp%>/assets/util/daygrid/main.css">
 <link rel="stylesheet" type="text/css" href="<%=cp%>/assets/util/timegrid/main.css">
 <link rel="stylesheet" type="text/css" href="<%=cp%>/assets/util/interaction/main.css">
-<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/studycalendar.css" >
+<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/projectcalendar.css" >
 
 
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
