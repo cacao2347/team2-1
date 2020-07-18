@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>LectureProfessorDetail.jsp</title>
+<title>LectureStudentDetail.jsp</title>
 <link rel="stylesheet" type="text/css"
 	href="<%=cp%>/assets/css/lectureprofessordetail.css">
 <link rel="stylesheet" type="text/css"
@@ -155,12 +155,9 @@
 								</span>
 							</div>
 							
-							<br><br><br>
-							
 							<!-- 버튼 영역 -->
 							<div class="text-right">
-								<input type="button" value="강의 수정" class="btn btn-lg btn-primary join" />
-								<input type="button" value="강의 삭제" class="btn btn-lg btn-secondary join" />
+								<input type="button" value="강의 결제" class="btn btn-lg btn-primary join" />
 							</div>
 
 						</div>
