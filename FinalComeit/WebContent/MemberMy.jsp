@@ -66,7 +66,7 @@
 					<td>취업준비생</td>
 				</tr>
 				<tr>
-					<th>관심과목</th>
+					<th>관심키워드</th>
 					<td>
 					<ul class="list-my-tags">
 						<li class="stack-item">Java</li>
