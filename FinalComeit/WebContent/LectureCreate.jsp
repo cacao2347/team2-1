@@ -13,7 +13,7 @@
 <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/bootstrap.min.css" >
 <link rel="stylesheet"  href="<%=cp %>/assets/css/blog-post.css" >
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/studyCreate.css">
+<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/lectureCreate.css">
 
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
@@ -135,15 +135,18 @@
 				</div> 
 				<div class="areaMemNum" style="width: 990px;">
 					<h4 style="display: inline;">개설인원<span class="ePoint">*</span></h4>
-					<select class="form-control" style="width:50px; padding: 0px;">
+					<select class="form-control" style="width:50px; padding: 0px; display: inline;">
 									  <option>1</option>
 									  <option>2</option>
 					</select>
 					<span class="m">명</span>
-									
+					<br>				
 					<h4>최대인원<span class="ePoint">*</span></h4>
-					<input type="text" class="memNum form-control" id="memNum" 
-					placeholder="ex) 3"/> <span class="m">명</span>
+					<select class="form-control" style="width:50px; padding: 0px; display: inline;">
+									  <option>1</option>
+									  <option>2</option>
+					</select>
+					<span class="m">명</span>
 					
 				</div><!-- end .areaMemNum -->
 					
@@ -161,6 +164,12 @@
 						<option value="6">6개월</option>
 					</select>
 				</div><!-- end . period -->
+				
+				<div class="money">
+					<h4>수강료<span class="ePoint">*</span></h4>
+					<input type="text" class="lecmoney form-control" id="lecmoney" 
+					placeholder="수강료를 입력하세요." style="display: inline;"/>
+				</div>
 					
 				<div class="weekTitle">
 					<h4>모임 지정 요일<span class="ePoint">*</span></h4>
@@ -202,41 +211,6 @@
 						</div>
 					</div><!-- end .weekBox -->
 				</div><!-- end .weekDay -->
-				
-				<div class="levelScret">
-					<div class="level">
-					<h4>레벨<span class="ePoint">*</span></h4>
-						<select name="week" id="week" class="levelSel form-control">
-							<option value="0">레벨 선택</option>
-							<option value="1">초급</option>
-							<option value="2">중급</option>
-							<option value="3">고급</option>
-						</select>
-					</div><!-- end .level -->
-				
-					<div class="scret">
-						<h4>비밀방 여부</h4>
-						<input type="text" class="scretBox form-control" id="scretNum" 
-							placeholder="ex) 4자리 숫자 입력" />
-					</div><!-- end .scret -->
-				</div><!-- end .levelScret -->
-				
-				<div class="posiImg">
-					<div class="position">
-						<h4>신분</h4>
-						<select name="week" id="week" class="posiSel form-control">
-							<option value="0">신분 선택</option>
-							<option value="1">취준생</option>
-							<option value="2">대학생</option>
-							<option value="3">직장인</option>
-						</select>
-					</div><!-- end .position -->
-					
-					<div class="image">
-						<h4>대표이미지</h4>
-												
-					</div><!-- end .image -->
-				</div><!-- end .posiImg -->
 				
 				<div class="button">
 					<div class="cancel">
