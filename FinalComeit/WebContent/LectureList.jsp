@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <title>COME-IT</title>
-<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/studylist.css" >
+<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/lecturelist.css" >
 <%-- <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/lecturelist.css" > --%>
 
 <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/bootstrap/bootstrap.min.css">
@@ -101,7 +101,7 @@
 					<div class="row">
 						<div class="col-md-4">
 							<div class="form-inline search">
-								<input type="text" class="form-control tag" id="tag" placeholder="기술 태그">
+								<input type="text" class="form-control tag" id="tag" placeholder="기술 태그" style="width:100%">
 							</div>
 						</div>
 						<div class="col-md-8">
