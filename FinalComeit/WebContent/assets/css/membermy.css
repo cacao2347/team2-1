@@ -1,4 +1,13 @@
 @charset "UTF-8";
+.myInfoDiv .infoTable
+{
+	padding: 5%;
+}
+.stuPro, .myLec, .myPay, .mySpa
+{
+	padding-left: 5%;
+	padding-right: 5%;
+}
 .row
 {
 	margin-bottom: 2%
@@ -13,14 +22,16 @@
 	margin: 2px;
     max-width: 20rem;
     max-height: 20rem;
-    margin-top: 5%;
+    margin-top: 10%;
+    margin-left: 10%;
 }
 
-.myInfo
+/* .myInfo
 {
 	margin-top: 5%;	
 	margin-bottom: 10%;
-}
+	margin-right: 10%;
+} */
 
 .list-my-tags {
     list-style: none;

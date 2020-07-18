@@ -16,21 +16,34 @@
 <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/bootstrap/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
-<script type="text/javascript" src="<%=cp %>/assets/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+<style type="text/css">
 
+ body {
+    margin-top:30px;
+    background-image: url('assets/images/199.jpg');
+}
+.bodyDiv
+{
+	background-color: white;
+	border-radius: 10pt;
+	margin: auto;
+	width: 70%;
+}
+</style>
 </head>
 <body>
 
 <div class="container-fluid">
-
+<div class="bodyDiv">
 	<!-- 내 정보 -->
-	<div class="row row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-3 img">
+	<div class="row myInfoDiv">
+		<!-- <div class="col-md-2">
+		</div> -->
+		<div class="col-md-5 img">
 		<img class="img-fluid img-circle myimg" src="assets/images/myImg.PNG" alt="myimg">
 		</div>
-		<div class="col-md-5">
+		<div class="col-md-7 infoTable">
 			<table class="table myInfo">
 				<tr>
 					<th>이름</th>
@@ -86,15 +99,15 @@
 			</div>
 			
 		</div>
-		<div class="col-md-2">
-		</div>
+		<!-- <div class="col-md-2">
+		</div> -->
 	</div><!-- 내 정보 끝 -->
 	
 	<!-- 참여 스터디/프로젝트 -->
-	<div class="row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-4">
+	<div class="row stuPro">
+		<!-- <div class="col-md-2">
+		</div> -->
+		<div class="col-md-6">
 		<div class="panel panel-default">
 			<div class="panel-heading head">
 				<h3 class="panel-title tit"><a href="">참여 스터디 ></a></h3>
@@ -127,7 +140,7 @@
 				</table>
 		</div>
 		</div>
-		<div class="col-md-4">
+		<div class="col-md-6">
 		<div class="panel panel-default">
 			<div class="panel-heading head">
 				<h3 class="panel-title tit">참여 프로젝트 ></h3>
@@ -152,15 +165,15 @@
 				</table>
 		</div>
 		</div>
-		<div class="col-md-2">
-		</div>
+		<!-- <div class="col-md-2">
+		</div> -->
 	</div><!-- 참여 스터디/프로젝트 끝 -->
 	
 	<!-- 수강 내역 -->
-	<div class="row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-8">
+	<div class="row myLec">
+		<!-- <div class="col-md-2">
+		</div> -->
+		<div class="col-md-12">
 		<div class="panel panel-default">
 			<div class="panel-heading head">
 				<h3 class="panel-title tit">수강 내역 ></h3>
@@ -280,15 +293,15 @@
 				</table>
 		</div>
 		</div>
-		<div class="col-md-2">
-		</div>
+		<!-- <div class="col-md-2">
+		</div> -->
 	</div><!-- 수강 내역 끝 -->
 	
 	<!-- 결제 내역 -->
-	<div class="row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-8">
+	<div class="row myPay">
+		<!-- <div class="col-md-2">
+		</div> -->
+		<div class="col-md-12">
 		<div class="panel panel-default">
 			<div class="panel-heading head">
 				<h3 class="panel-title tit">결제 내역 ></h3>
@@ -345,15 +358,15 @@
 				</table>
 		</div>
 		</div>
-		<div class="col-md-2">
-		</div>
+		<!-- <div class="col-md-2">
+		</div> -->
 	</div><!-- 결제 내역 끝 -->
 	
 	<!-- 공간 예약 내역 -->
-	<div class="row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-8">
+	<div class="row mySpa">
+		<!-- <div class="col-md-2">
+		</div> -->
+		<div class="col-md-12">
 		<div class="panel panel-default">
 			<div class="panel-heading head">
 				<h3 class="panel-title tit">공간 예약내역 ></h3>
@@ -432,12 +445,11 @@
 				</table>
 		</div>
 		</div>
-		<div class="col-md-2">
-		</div>
+		<!-- <div class="col-md-2">
+		</div> -->
 	</div><!-- 공간 예약 내역 끝 -->
 	
-	
-	
+</div>
 </div>
 
 </body>
