@@ -45,10 +45,10 @@
     <!--탭 메뉴 영역 -->
     <ul class="tabs">
         <li class="on"><a href="#tab1">공지사항</a></li>
-        <li><a href="#tab2">모임 날짜 정하기</a></li>
+        <li><a href="#tab2">모임 날짜</a></li>
         <li><a href="#tab3">캘린더</a></li>
          <li><a href="#tab4">산출물 관리</a></li>
-         <li><a href="#tab5">모임 장소 정하기</a></li>
+         <li><a href="#tab5">모임 장소</a></li>
          <li><a href="#tab6">투표</a></li>
     </ul>
 
