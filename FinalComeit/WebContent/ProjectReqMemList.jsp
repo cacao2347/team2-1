@@ -216,8 +216,14 @@
         
       </div>
       <div class="modal-body mbody">
-      	
-      	
+      	<div class="quest">1. 첫 번째 레벨테스트 질문입니다.</div>
+      	<div>
+      		<input type="text" class="form-control ans" readonly="readonly" value="첫 번째 레벨테스트 질문에 대한 답변이 노출되고 있습니다.">
+      	</div>
+      	<div class="quest">2. 두 번째 레벨테스트 질문입니다.</div>
+      	<div>
+      		<input type="text" class="form-control ans" readonly="readonly" value="두 번째 레벨테스트 질문에 대한 답변이 노출되고 있습니다.">
+      	</div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">확인</button>

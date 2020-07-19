@@ -62,3 +62,8 @@
 {
 	-webkit-padding-start:0px;
 }
+.mbody .quest, .mbody .ans
+{
+	margin-bottom: 2%;
+}
+
