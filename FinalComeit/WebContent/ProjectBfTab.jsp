@@ -53,7 +53,7 @@
 		<!-- 참가 요청 페이지 만들고 바꾸기 -->
         <div id="tab1" class="tab_content">
             <!--Content-->
-            <c:import url="StudyNoticeList.jsp"></c:import>
+            <c:import url="ProjectReqMemList.jsp"></c:import>
         </div>
 
     </div>

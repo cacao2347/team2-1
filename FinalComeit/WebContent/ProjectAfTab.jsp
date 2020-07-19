@@ -79,7 +79,7 @@
            <c:import url="ProjectFileList.jsp"></c:import>
         </div>
         
-        <!-- 모임 장소 정하기 -->
+        <!-- 모임 장소 정하기 → 수정 필요-->
         <div id="tab5" class="tab_content">
            <!--Content-->
            <c:import url="StudySpaceList.jsp"></c:import>
