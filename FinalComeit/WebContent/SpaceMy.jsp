@@ -11,10 +11,40 @@
 <title>SpaceMy.jsp</title>
 <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/space-manage.css">
 
+<%-- <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/bootstrap/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
 
+ --%>
+ <style type="text/css">
+.modal {
+        text-align: center;
+}
+ 
+@media screen and (min-width: 768px) { 
+        .modal:before {
+                display: inline-block;
+                vertical-align: middle;
+                content: " ";
+                height: 100%;
+        }
+}
+ 
+.modal-dialog {
+        display: inline-block;
+        text-align: left;
+        vertical-align: middle;
+}
+ </style>
 </head>
 <body>
-<c:import url="header.jsp"></c:import>
+<div class="headerrow">
+	<div class="col-md-12">
+	<c:import url="header.jsp"></c:import>
+	</div>
+</div>
+			
 
 <div class="container-fluid">
 	
@@ -60,8 +90,8 @@
 
 <div class="row">
 	<div class="col-md-12">
+	<c:import url="footer.jsp"></c:import>
 	</div>
 </div>
-<c:import url="footer.jsp"></c:import>
 </body>
 </html>

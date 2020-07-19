@@ -1,11 +1,7 @@
 @charset "UTF-8";
-
-
 .push footer.footer{
 	height:60px;
-    background-color: #183350;
-    
-    
+    background-color: black;
 }
 
 
@@ -30,4 +26,19 @@
   color: #fff !important;
   margin: 0 auto !important;	
   text-align: center !important;
+}
+* {
+  margin: 0;
+}
+html {
+  height: 100%;
+}
+body {
+  min-height: 100%;
+  display: grid;
+  grid-template-rows: 1fr auto;
+}
+.footer {
+  grid-row-start: 2;
+  grid-row-end: 3;
 }

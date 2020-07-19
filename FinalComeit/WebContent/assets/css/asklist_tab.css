@@ -8,7 +8,7 @@ body {
 }
 ul.tabs {
 	min-width: 320px;
-	max-width: 800px;
+	max-width: 100%;
 	padding: 50px;
 	padding-left: 0px;
 	padding-right: 0px; 
@@ -46,7 +46,7 @@ html ul.tabs li.active, html ul.tabs li.active a:hover  {
 }
 
 .tab_container {
-    border: 1px solid gray; 
+    border: none; 
     border-top: none;
     overflow: hidden;
     clear: both;
@@ -78,4 +78,8 @@ html ul.tabs li.active, html ul.tabs li.active a:hover  {
 	border: 1px solid #ddd;
 	border-top: 2px solid #183350;
 	border-bottom: 1px solid #ffffff;
+}
+.tabsask
+{
+	border-bottom: 1px solid gray;
 }

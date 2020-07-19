@@ -66,6 +66,9 @@ $(document).ready(function () {
 	}
 
 	$("#sdate").datepicker(datepicker_default);
+	
+	
+	
 });
 </script>
 
@@ -96,7 +99,7 @@ table.ui-datepicker-calendar { display:none; }
 	    <ul>
 	        <li class="menu" style="margin-top: 20px;">
 	            <a>업체명1</a>
-	            <ul class="hide">
+	            <ul>
 	                <li style="margin-top: 30px;">
 	               		<table class="table table-hover table-bordered">
 	               		<thead>
@@ -153,7 +156,7 @@ table.ui-datepicker-calendar { display:none; }
 	        </li>
 	        <li class="menu" style="margin-top: 20px;">
 	            <a>업체명2</a>
-	            <ul class="hide">
+	            <ul>
 	                <li style="margin-top: 30px;">
 	                <table class="table table-hover table-bordered">
 	               		<thead>

@@ -11,7 +11,7 @@
 <title>.jsp</title>
 <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/footer.css">
 </head>
-<body class="body">
+<body class="body wrapper">
 <div class="push">
 <!-- Footer -->
   <footer class="footer fpy-5 bg-dark ">
