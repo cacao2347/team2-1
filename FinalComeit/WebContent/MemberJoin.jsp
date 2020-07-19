@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	request.setCharacterEncoding("UTF-8");
-	String cp = request.getContextPath();
+   request.setCharacterEncoding("UTF-8");
+   String cp = request.getContextPath();
 %>
 <!DOCTYPE html>
 <html>
@@ -10,6 +10,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/join.css">
+<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/studyCreate.css">
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 <script src="http://code.jquery.com/jquery.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -326,45 +327,165 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group" id="divId">
+                <div class="form-group " id="divId">
                     <label for="inputId" class="col-lg-2 control-label">아이디</label>
-                    <div class="col-lg-10">
-                        <input type="text" class="form-control onlyAlphabetAndNumber" id="id" data-rule-required="true" placeholder="30자이내의 알파벳, 언더스코어(_), 숫자만 입력 가능합니다." maxlength="30">
+                    <div class="col-lg-10 form-inline" >
+                        <input type="text" class="form-control onlyAlphabetAndNumber" id="id" data-rule-required="true" placeholder="30자이내의 알파벳, 언더스코어(_), 숫자만 입력 가능합니다." maxlength="30"
+                        style="width: 85%;">
+                        &nbsp;
+                        <button type="button" class="btn btn-primary">중복확인</button>
                     </div>
                 </div>
                 <div class="form-group" id="divPassword">
                     <label for="inputPassword" class="col-lg-2 control-label">패스워드</label>
-                    <div class="col-lg-10">
-                        <input type="password" class="form-control" id="password" name="excludeHangul" data-rule-required="true" placeholder="패스워드" maxlength="30">
+                    <div class="col-lg-10 form-inline">
+                        <input type="password" class="form-control" id="password" name="excludeHangul" style="width: 85%;" data-rule-required="true" placeholder="패스워드" maxlength="30">
                     </div>
                 </div>
                 <div class="form-group" id="divPasswordCheck">
                     <label for="inputPasswordCheck" class="col-lg-2 control-label">패스워드 확인</label>
-                    <div class="col-lg-10">
-                        <input type="password" class="form-control" id="passwordCheck" data-rule-required="true" placeholder="패스워드 확인" maxlength="30">
+                    <div class="col-lg-10 form-inline">
+                        <input type="password" class="form-control" id="passwordCheck" data-rule-required="true" placeholder="패스워드 확인" maxlength="30" style="width: 85%;">
                     </div>
                 </div>
                 <div class="form-group" id="divName">
                     <label for="inputName" class="col-lg-2 control-label">이름</label>
-                    <div class="col-lg-10">
-                        <input type="text" class="form-control onlyHangul" id="name" data-rule-required="true" placeholder="한글만 입력 가능합니다." maxlength="15">
+                    <div class="col-lg-10 form-inline">
+                        <input type="text" class="form-control onlyHangul" id="name" data-rule-required="true" placeholder="한글만 입력 가능합니다." maxlength="15" style="width: 85%;">
                     </div>
                 </div>
                 <div class="form-group" id="divEmail">
                     <label for="inputEmail" class="col-lg-2 control-label">이메일</label>
                     <div class="col-lg-10">
-                        <input type="email" class="form-control" id="email" data-rule-required="true" placeholder="이메일" maxlength="40">
+                        <input type="email" class="form-control form-inline" id="email" data-rule-required="true" placeholder="이메일" maxlength="40" style="width: 85%;">
+                    </div>
+                </div>
+                
+                <label for="inputsinboon" class="col-lg-2 control-label">신분</label>
+				<div class="form-group" id="divPosition">
+					<div class="col-lg-10">
+					<select name="week" id="week" class="posiSel form-control" style="width: 450px;">
+						<option value="0">신분 선택</option>
+						<option value="1">취준생</option>
+						<option value="2">대학생</option>
+						<option value="3">직장인</option>
+					</select>
+					</div>
+				</div><!-- end .position -->
+					
+					
+				<label for="areaMemNum" class="col-lg-2 control-label" >지역</label>	
+				<div class="form-group" id="areaMemNum">
+					<div class="col-lg-10" style="float: left; width: 225px;" >
+						<select name="area" id="area" class="area form-control">
+							<option value="0">지역</option>
+							<option value="seoul">서울</option>
+							<option value="incheon">인천</option>
+						</select>
+					</div>
+					<div class="col-lg-10" style="float: left; width: 225px;" >
+						<select name="spcArea" id="spcArea" class="spcArea form-control" >
+							<option value="0">상세 지역</option>
+							<option value="mapogu">마포구</option>
+							<option value="seogu">서구</option>
+						</select>
+					</div>
+					<div class="col-lg-10 stuKeyBtn">
+						<input type="button" value="등록" class="keyBtn btn btn-primary" />
+					</div>
+				</div><!-- end .areaMemNum -->
+				
+				
+                <div class="form-group" id="divPhoneNumber">
+                    <label for="inputPhoneNumber" class="col-lg-2 control-label">휴대폰 번호</label>
+                    <div class="col-lg-10 form-inline">
+                        <input type="tel" class="form-control onlyNumber" id="phoneNumber" data-rule-required="true" placeholder="-를 제외하고 숫자만 입력하세요." maxlength="11" style="width: 85%;">
+                        &nbsp;
+                        <button type="button" class="btn btn-primary">휴대폰 인증</button>
                     </div>
                 </div>
                 <div class="form-group" id="divPhoneNumber">
-                    <label for="inputPhoneNumber" class="col-lg-2 control-label">휴대폰 번호</label>
-                    <div class="col-lg-10">
-                        <input type="tel" class="form-control onlyNumber" id="phoneNumber" data-rule-required="true" placeholder="-를 제외하고 숫자만 입력하세요." maxlength="11">
+                    <label for="inputPhoneNumber" class="col-lg-2 control-label">인증 번호</label>
+                    <div class="col-lg-10 form-inline">
+                        <input type="tel" class="form-control onlyNumber" id="phoneNumber" data-rule-required="true" placeholder="-를 제외하고 숫자만 입력하세요." maxlength="11" style="width: 85%;">
+                        &nbsp;
+                        <button type="button" class="btn btn-primary">확인</button>
                     </div>
                 </div>
+                
+                <div class="image">
+				<label for="inputPhoneNumber" class="col-lg-2 control-label">프로필 이미지</label>
+                     <div class="col-lg-10 form-inline">
+	                     	<input type="text" required="required" name="housing" id="aa2" class="aa2 aa form-control" style="width: 85%;" />
+	                		&nbsp;
+	                		<button class="btn btn-primary nextBtn pull-right aa2" type="button" >등록</button>
+                	 </div>
+                </div>
+				
+				<div class="form-group">
+                    <label for="inputPhoneNumber" class="col-lg-2 control-label">본인 소개</label>
+                    <div class="col-lg-10 form-inline">
+                    <input type="text" required="required" class="form-control" placeholder="예) 노트북 대여 가능한 스터디 카페입니다." maxlength="11" style="width: 85%;"/>
+                    </div>
+                </div>
+                
+			    <!-- 키워드 -->
+				<div class="stuKeyword">
+					<label for="inputPhoneNumber" class="col-lg-12 control-label">관심 키워드(최대 5개까지 선택)</label>
+					
+				</div>
+				<div class="stuKey1">
+					<div class="stuKeySel">
+						<div class="col-lg-10 form-inline">
+							<select name="keySelect" id="keySelect" class="form-control keySelect">
+								<option value="key1">java</option>
+								<option value="key2">oracle</option>
+								<option value="key3">jsp</option>
+								<option value="key4">spring</option>
+								<option value="key5">기타</option>
+							</select>
+							&nbsp;
+							<input type="text" class="keyInput form-control" id="keyInput" 
+								placeholder="관심 키워드를 입력해 주세요." style="width:30%"/>
+							&nbsp;	
+							<input type="button" value="추가" class="keyBtn btn btn-primary" />
+							
+						</div>
+					</div>
+					
+					<br>
+					
+					<div class="stuKeyBox">
+					<div class="tagStyle">
+						<span class="keyTag">
+							# 자바
+							<a href="" class="tag_delete">
+							X
+							</a>
+						</span>
+					</div>
+					<div class="tagStyle">
+						<span class="keyTag">
+							# 오라클
+							<a href="" class="tag_delete">
+							X
+							</a>
+						</span>
+					</div>
+					<div class="tagStyle">
+						<span class="keyTag">
+							# 정보처리기사
+							<a href="" class="tag_delete">
+							X
+							</a>
+						</span>
+					</div>
+				</div><!-- end .stuKeyBox -->
+					
+				</div><!-- end .stuKey -->
                 <div class="form-group">
                     <div class="col-lg-offset-2 col-lg-10">
-                        <button type="submit" class="btn btn-primary">Sign in</button>
+                        <button type="submit" class="btn btn-primary">가입하기</button>
                     </div>
                 </div>
             </form>
