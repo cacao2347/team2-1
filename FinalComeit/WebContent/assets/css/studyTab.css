@@ -37,6 +37,7 @@ ul.tabs li {
     position: relative;
     background: #ffffff;
     width: 245px;
+     text-align: center;
 }
 ul.tabs li a {
     text-decoration: none;
