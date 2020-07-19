@@ -193,11 +193,6 @@
 	width: 80px;
 }
 
-.memLeader , .member
-{
-	margin-bottom: 20px;
-}
-
 .userName > h3, .userName > .name
 .userManner > .glyphicon ,.userManner > h3, .userManner > .pencil
 , .userPosi > h3 , .userPosi > .position , .userKey > h3 , .userKey > .keyword
@@ -206,12 +201,10 @@
 , .stuKey > .icon , .stuKey > h3
 , .stuLevel > .icon , .stuLevel > h3
 , .stuCurr > .icon , .stuCurr > h3
-, .member > .infoBtn
 {
 	display: inline-block;
 }
-.memLeader > .leaderInfo,
-.member > .membInfo
+.memLeader > .leaderInfo
 {
 	margin-top: 10px;
 	width: 60%;
@@ -219,7 +212,6 @@
 }
 
 .memLeader > .leaderImg
-, .member > .memberImg
 {
 	width: 30%;
 	height: 80%;	
@@ -232,8 +224,7 @@
 	display: inline-block;
 }
 
-.memLeader > .leaderImg, .memLeader > .leaderInfo,
-.member > .memberImg , .member > .membInfo
+.memLeader > .leaderImg, .memLeader > .leaderInfo
 {
 	display: inline-block;
 }
@@ -283,18 +274,7 @@
 	/* font-family: Nanum Gothic; */
 }
 
-.stuMem > .member
-{
-	margin-left: 20px;
-	padding: 0px;
-	width: 95%;
-	height: 120px;
-	/* border: 1px solid #e9e9e9; */
-	border-radius: 10px;
-	background-color: #FAFAFA;
-	/* background: linear-gradient( to bottom, #E1B283, white ); */
-	/* font-family: Nanum Gothic; */
-}
+
 
 .member > h4
 {

@@ -269,39 +269,58 @@
 							
 						</div><!-- end .memLeader -->
 					<!-- 	<h3>스터디원</h3> -->
-						
-						
-						
-						<div class="member" id="member2">
-							<div class="memberImg">
+						<div class="memLeader" id="">
+							
+							<div class="leaderImg">
 								<img src="<%=cp %>/assets/images/khjang.PNG" alt="" class="img-circle memImg" />
-							</div><!-- end .memberImg -->		
-							<div class="membInfo">			
-								<h4>member</h4><br />
-								<span class="memName">장길동</span><br>
+							</div><!-- end .leaderImg -->
+							
+							<div class="leaderInfo">
+								<h4>Study Member</h4><br>
+								<span class="name">장길동</span>
 								<input type="button" class="btn-xs btn-default infoBtn" id="" value="정보" />
-							</div><!-- end .memInfo -->
-						</div><!-- end .member -->
+							</div><!-- end .leaderInfo -->
+						</div><!-- end .memLeader -->
+						
+						<div class="memLeader" id="">
+							<div class="leaderImg">
+								<img src="<%=cp %>/assets/images/sjsong.PNG" alt="" class="img-circle memImg" />
+							</div><!-- end .leaderImg -->
+							
+							<div class="leaderInfo">
+								<h4>Study Member</h4><br>
+								<span class="name">송길동</span>
+								<input type="button" class="btn-xs btn-default infoBtn" id="" value="정보" />
+							</div><!-- end .leaderInfo -->
+						</div><!-- end .memLeader -->
 						
 						
-						<div class="member">
-							<img src="<%=cp %>/assets/images/sjsong.PNG" alt="" class="img-circle memImg" />
-							<h4>member</h4>
-							<span class="name">송길동</span>
-							<input type="button" class="btn-sm btn-default infoBtn" id="" value="정보" />
-						</div>
-						<div class="member">
-							<img src="<%=cp %>/assets/images/jmshin.PNG" alt="" class="img-circle memImg" />
-							<h4>member</h4>
-							<span class="name">신길동</span>
-							<input type="button" class="btn-sm btn-default infoBtn" id="" value="정보" />
-						</div>
-						<div class="member">
-							<img src="<%=cp %>/assets/images/hschoi.PNG" alt="" class="img-circle memImg" />
-							<h4>member</h4>
-							<span class="name">최길동</span>
-							<input type="button" class="btn-sm btn-default infoBtn" id="" value="정보" />
-						</div>
+						
+						<div class="memLeader" id="">
+							<div class="leaderImg">
+								<img src="<%=cp %>/assets/images/jmshin.PNG" alt="" class="img-circle memImg" />
+							</div><!-- end .leaderImg -->
+							
+							<div class="leaderInfo">
+								<h4>Study Member</h4><br>
+								<span class="name">신길동</span>
+								<input type="button" class="btn-xs btn-default infoBtn" id="" value="정보" />
+							</div><!-- end .leaderInfo -->
+						</div><!-- end .memLeader -->
+						
+						
+						
+						<div class="memLeader" id="">
+							<div class="leaderImg">
+								<img src="<%=cp %>/assets/images/hschoi.PNG" alt="" class="img-circle memImg" />
+							</div><!-- end .leaderImg -->
+							
+							<div class="leaderInfo">
+								<h4>Study Member</h4><br>
+								<span class="name">최길동</span>
+								<input type="button" class="btn-xs btn-default infoBtn" id="" value="정보" />
+							</div><!-- end .leaderInfo -->
+						</div><!-- end .memLeader -->
 						
 					</div><!-- end .stuMem -->
 				
