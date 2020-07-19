@@ -46,26 +46,51 @@
     <ul class="tabs">
         <li class="on"><a href="#tab1">공지사항</a></li>
         <li><a href="#tab2">모임 날짜 정하기</a></li>
-        <li><a href="#tab3">산출물 관리</a></li>
+        <li><a href="#tab3">캘린더</a></li>
+        <li><a href="#tab4">산출물 관리</a></li>
+        <li><a href="#tab5">모임 장소 정하기</a></li>
+        <li><a href="#tab6">투표</a></li>
     </ul>
 
     <!--탭 콘텐츠 영역 -->
     <div class="tab_container">
-
+		
+		<!-- 공지사항 -->
         <div id="tab1" class="tab_content">
             <!--Content-->
-            <c:import url="StudyNoticeList.jsp"></c:import>
+            <c:import url="ProjectNoticeList.jsp"></c:import>
         </div>
-
+		
+		<!-- 모임 날짜 정하기 -->
         <div id="tab2" class="tab_content">
            <!--Content-->
-           <c:import url="StudyDateList.jsp"></c:import>
+           <c:import url="ProjectDateList.jsp"></c:import>
         </div>
         
+        <!-- 캘린더 -->
         <div id="tab3" class="tab_content">
            <!--Content-->
-           <c:import url="StudyFileList.jsp"></c:import>
+           <c:import url="ProjectCalendar.jsp"></c:import>
         </div>
+        
+        <!-- 산출물 관리 -->
+        <div id="tab4" class="tab_content">
+           <!--Content-->
+           <c:import url="ProjectFileList.jsp"></c:import>
+        </div>
+        
+        <!-- 모임 장소 정하기 -->
+        <div id="tab5" class="tab_content">
+           <!--Content-->
+           <c:import url="StudySpaceList.jsp"></c:import>
+        </div>
+        
+        <!-- 투표 -->
+        <div id="tab6" class="tab_content">
+           <!--Content-->
+           <c:import url="ProjectVoteList.jsp"></c:import>
+        </div>
+        
 
     </div>
 
