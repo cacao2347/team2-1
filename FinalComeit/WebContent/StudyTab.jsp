@@ -67,20 +67,20 @@
         
         <div id="tab3" class="tab_content">
            <!--Content-->
-           <c:import url="StudyFileList.jsp"></c:import>
+           <c:import url="StudyCalendar.jsp"></c:import>
         </div>
         
          <div id="tab4" class="tab_content">
            <!--Content-->
-           <c:import url="StudyDateAdd.jsp"></c:import>
+           <c:import url="StudyFileList.jsp"></c:import>
         </div>
          <div id="tab5" class="tab_content">
            <!--Content-->
-           <c:import url="StudyDateMod.jsp"></c:import>
+           <c:import url="StudySpaceList.jsp"></c:import>
         </div>
          <div id="tab6" class="tab_content">
            <!--Content-->
-           <c:import url="MemberMyPay.jsp"></c:import>
+           <c:import url="StudyVoteList.jsp"></c:import>
         </div>
 
     </div>
