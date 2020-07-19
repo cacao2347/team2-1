@@ -131,7 +131,9 @@
     <div class="modal-content">
       <div class="modal-header head">
         <h5 class="modal-title mTit" id="staticBackdropLabel">홍길동님의 정보</h5>
-        
+        <button type="button" class="close xBtn" data-dismiss="modal" aria-label="Close">
+        X
+        </button>
       </div>
       <div class="modal-body mbody">
       	<div class="modalImg">
@@ -213,7 +215,9 @@
     <div class="modal-content">
       <div class="modal-header head">
         <h5 class="modal-title mTit" id="staticBackdropLabel">홍길동님의 답변</h5>
-        
+        <button type="button" class="close xBtn" data-dismiss="modal" aria-label="Close">
+        X
+        </button>
       </div>
       <div class="modal-body mbody">
       	<div class="quest">1. 첫 번째 레벨테스트 질문입니다.</div>

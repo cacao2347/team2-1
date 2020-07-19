@@ -66,4 +66,17 @@
 {
 	margin-bottom: 2%;
 }
+.head .mTit, .head .xBtn
+{
+	display: inline-block;
+}
+.head .mTit
+{
+	font-weight: bold;
+	font-size: 16pt;
+}
+.head .xBtn
+{
+	float: right;
+}
 
