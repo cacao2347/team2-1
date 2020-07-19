@@ -18,6 +18,21 @@
 <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
 <link rel="stylesheet" href="<%=cp %>/assets/css/spafeedback.css">
+<style type="text/css">
+.head .mTit, .head .xBtn
+{
+   display: inline-block;
+}
+.head .mTit
+{
+   font-weight: bold;
+   font-size: 16pt;
+}
+.head .xBtn
+{
+   float: right;
+}
+</style>
 <script type="text/javascript">
 
 	/* 달력 */
