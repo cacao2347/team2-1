@@ -19,7 +19,6 @@
 
 </head>
 <body>
-
 <div class="container-fluid">
 
 	<!-- 상세내용 영역 -->
@@ -93,6 +92,5 @@
 	</div><!-- 버튼 영역 끝-->
 	
 </div>
-
 </body>
 </html>

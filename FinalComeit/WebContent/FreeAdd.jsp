@@ -19,6 +19,11 @@
 
 </head>
 <body>
+<div class="row">
+	<div class="col-md-12">
+	<c:import url="header.jsp"></c:import>
+	</div>
+</div>
 <div class="container-fluid">
 
 	<!-- 상세내용 영역 -->
@@ -86,6 +91,10 @@
 	
 	
 </div>
-
+<div class="row">
+	<div class="col-md-12">
+	<c:import url="footer.jsp"></c:import>
+	</div>
+</div>
 </body>
 </html>

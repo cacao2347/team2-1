@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>StudyFileAdd.jsp</title>
+<title>AskAdd.jsp</title>
 <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/studyfileadd.css" >
 
 <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/bootstrap/bootstrap.min.css">
@@ -19,7 +19,11 @@
 
 </head>
 <body>
-
+<div class="row">
+   <div class="col-md-12">
+   <c:import url="header.jsp"></c:import>
+   </div>
+</div>
 <div class="container-fluid">
 
 	<!-- 상세내용 영역 -->
@@ -81,6 +85,10 @@
 	
 	
 </div>
-
+<div class="row">
+	<div class="col-md-12">
+	<c:import url="footer.jsp"></c:import>
+	</div>
+</div>
 </body>
 </html>
