@@ -31,3 +31,8 @@
 {
 	float: right;
 }
+.container-fluid
+{
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
