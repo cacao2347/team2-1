@@ -187,8 +187,8 @@
 							<span class="glyphicon glyphicon-bookmark icon"></span>
 							<h3>상세 설명</h3><br />
 							<span class="curr">스터디의 상세 설명 영역입니다.<br>
-										   스터디장이 수정할 수 있는 영역이며, 우리 스터디가 어떤 공부를 하게 될 지<br> 
-										   상세하게 작성할 수 있습니다.상세 커리큘럼이 적혀 있는 영역입니다.</span>
+										   스터디장이 수정할 수 있는 영역이며,<br>  우리 스터디가 어떤 공부를 하게 될 지<br> 
+										   상세하게 작성할 수 있습니다.<br> 상세 커리큘럼이 적혀 있는 영역입니다.</span>
 						</div>
 					
 					</div><!-- end .stuInfo -->
@@ -207,12 +207,18 @@
 					<div class="stuMem">
 						<!-- <h3>스터디장</h3> -->
 						<div class="memLeader" id="member1">
-
-							<img src="<%=cp %>/assets/images/hjkim.PNG" alt="" class="img-circle memImg" />
-							<span class="glyphicon glyphicon-ok ok"></span>
-							<h4>Study Leader</h4>
-							<span class="name">김길동</span>
-							<input type="button" class="btn-sm btn-default infoBtn" id="" value="정보" />
+							
+							<div class="leaderImg">
+								<img src="<%=cp %>/assets/images/hjkim.PNG" alt="" class="img-circle memImg" />
+							</div><!-- end .leaderImg -->
+							
+							<div class="leaderInfo">
+								<span class="glyphicon glyphicon-ok ok"></span>
+								<h4>Study Leader</h4><br>
+								<span class="name">김길동</span>
+								<input type="button" class="btn-xs btn-default infoBtn" id="" value="정보" />
+							</div><!-- end .leaderInfo -->
+							
 							
 							<!-- 모달 -->
 							<!-- 검은 배경 -->
@@ -267,10 +273,14 @@
 						
 						
 						<div class="member" id="member2">
-							<img src="<%=cp %>/assets/images/khjang.PNG" alt="" class="img-circle memImg" />					
-							<h4>member</h4>
-							<span class="name">장길동</span>
-							<input type="button" class="btn-sm btn-default infoBtn" id="" value="정보" />
+							<div class="memberImg">
+								<img src="<%=cp %>/assets/images/khjang.PNG" alt="" class="img-circle memImg" />
+							</div><!-- end .memberImg -->		
+							<div class="membInfo">			
+								<h4>member</h4><br />
+								<span class="memName">장길동</span><br>
+								<input type="button" class="btn-xs btn-default infoBtn" id="" value="정보" />
+							</div><!-- end .memInfo -->
 						</div><!-- end .member -->
 						
 						

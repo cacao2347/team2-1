@@ -146,7 +146,7 @@
 }
 
 
-.title > h1 , .stuArea > h3 , .stuMem > h3 , .memLeader > h4
+.title > h1 , .stuArea > h3 , .stuMem > h3 , .leaderInfo > h4
 , .member > h4 , .stuTerm > h3 , .stuKey > h3 , .stuLevel > h3
 , .stuCurr > h3
 {
@@ -163,12 +163,18 @@
 
 
 .term ,.day, .area, .keword , .level , .curr
-, .name , .manPencil , .position , .keyword ,.oneInt
+, .manPencil , .position , .keyword ,.oneInt
 , .joinStu ,.joinPro , .stuTerm > .icon
 , .stuArea > .icon , .stuKey > .icon
 , .stuLevel > .icon , .stuCurr > .icon
 {
 	font-size: 17pt;
+}
+
+.leaderInfo > .name ,
+.membInfo > .memName
+{
+	font-size: 13pt;
 }
 
 .col-md-4
@@ -177,14 +183,14 @@
 	border-color: black;
 }
 
+.leaderImg > .memImg
+{
+	width: 75px;
+}
+
 .memImg
 {
 	width: 80px;
-}
-
-.name
-{
-	margin-left: 30px;
 }
 
 .memLeader , .member
@@ -195,8 +201,6 @@
 .userName > h3, .userName > .name
 .userManner > .glyphicon ,.userManner > h3, .userManner > .pencil
 , .userPosi > h3 , .userPosi > .position , .userKey > h3 , .userKey > .keyword
-, .memLeader > img, .memLeader > h4, .memLeader > .infoBtn
-, .member > img , .member > h4
 , .stuTerm > .icon , .stuTerm > h3
 , .stuArea > .icon , .stuArea > h3
 , .stuKey > .icon , .stuKey > h3
@@ -206,22 +210,50 @@
 {
 	display: inline-block;
 }
-
-.memLeader > .infoBtn
+.memLeader > .leaderInfo,
+.member > .membInfo
 {
-	margin-left: 50px;
+	margin-top: 10px;
+	width: 60%;
+	height: 80%;
+}
+
+.memLeader > .leaderImg
+, .member > .memberImg
+{
+	width: 30%;
+	height: 80%;	
+}
+
+
+.leaderImg > img, .leaderInfo > h4, .leaderInfo > .infoBtn, .leaderInfo > .leaderInfo
+, .membInfo > .memName , .membInfo > .infoBtn , .membInfo > h4
+{
+	display: inline-block;
+}
+
+.memLeader > .leaderImg, .memLeader > .leaderInfo,
+.member > .memberImg , .member > .membInfo
+{
+	display: inline-block;
+}
+
+
+.leaderInfo > .infoBtn
+{
+	margin-left: 5px;
 	background-color: #0A0A2A;
 	color: white;
 }
 
-.member > .infoBtn
+.membInfo > .infoBtn
 {
-	margin-left: 115px;
+	margin-left: 10px;
 	background-color: #0A0A2A;
 	color: white;
 }
 
-.user , .pencil ,.ok
+.user , .pencil ,.leaderInfo > .ok
 {
 	font-size: 20px;
 	margin-right: 10px;
@@ -240,10 +272,10 @@
 
 .stuMem > .memLeader
 {
-	padding-top: 20px;
-	padding-left:10px;
-	width: 100%;
-	height: 100px;
+	margin-left: 20px;
+	padding: 0px;
+	width: 95%;
+	height: 120px;
 	/* border: 1px solid #e9e9e9; */
 	border-radius: 10px;
 	background-color: #FAFAFA;
@@ -253,10 +285,10 @@
 
 .stuMem > .member
 {
-	padding-top: 10px;
-	padding-left:10px;
-	width: 100%;
-	height: 100px;
+	margin-left: 20px;
+	padding: 0px;
+	width: 95%;
+	height: 120px;
 	/* border: 1px solid #e9e9e9; */
 	border-radius: 10px;
 	background-color: #FAFAFA;
@@ -274,7 +306,7 @@
 .stuInfo > .stuKey,
 .stuInfo > .stuLevel
 {
-	width: 800px;
+	width: 100%;
 	height: 130px;
 	border-bottom: 1px solid #D8D8D8;
 }
