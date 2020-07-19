@@ -73,8 +73,7 @@
 	        $(this).siblings("label").text(select_name);
 	    });
 	});
-
-
+	
 </script>
  </head>
 
