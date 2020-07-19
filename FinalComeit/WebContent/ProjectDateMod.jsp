@@ -8,9 +8,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>StudyDateAdd.jsp</title>
+<title>ProjectDateMod.jsp</title>
 <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/bootstrap/bootstrap.min.css" >
-<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/studyDateAdd.css">
+<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/projectdateadd.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>

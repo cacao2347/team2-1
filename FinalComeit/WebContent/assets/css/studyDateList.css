@@ -6,7 +6,7 @@
 	height: 36px;
 }
 
-.col-md-8 > .date , .col-md-8 > .meet
+.col-md-8 > .date,.col-md-8 > .meet
 , .box2 > .time , .box2 > .location
 , .mem > .memImg , .mem > .memName , .mem > .memAtten
 , .memAtten > .answer1 , .memAtten > .answer2
@@ -30,6 +30,7 @@ h1
 {
 	background-color: #f0f0f5;
 	border-radius: 20px;
+	text-align: center;
 }
 
 .box2 

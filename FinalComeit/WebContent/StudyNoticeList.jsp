@@ -23,63 +23,30 @@
 <body>
 
 <div class="container-fluid">
-<!-- 	<div class="row">
-		<div class="col-md-2">
-		</div> 
-		<div class="col-md-8">
-			<div class="main">
-				<input type="radio" name="tabs" id="tab1" class="tab1" checked="checked"/>
-				<label for="tab1">공지사항</label>
-				
-				<input type="radio" name="tabs" class="tab2" id="tab2" />
-				<label for="tab2">모임날짜 정하기</label>
-				
-				<input type="radio" name="tabs" class="tab3" id="tab3"/>
-				<label for="tab3">캘린더</label>
-				
-				<input type="radio" name="tabs" class="tab4" id="tab4"/>
-				<label for="tab4">산출물 관리</label>
-				
-				<input type="radio" name="tabs" class="tab5" id="tab5"/>
-				<label for="tab5">모임장소 정하기</label>
-				
-				<input type="radio" name="tabs" class="tab6" id="tab6"/>
-				<label for="tab6">투표</label>
-		
-			</div>end.main
-		</div>end .col-md-8
-		<div class="col-md-2">
-		</div> 
-	</div>end .row
-	 -->
+
 	<div class="row searchRow">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-8">
+	
 			<div class="col-md-2">
+			</div>
+			<div class="col-md-8">
 				<select name="" id="" class="form-control searchSel">
 				<option value="title">제목</option>
 				<option value="author">작성자</option>
 				</select>
-			</div>
-			<div class="col-md-8">
 				<input type="text" id="" class="searchBox form-control" placeholder="검색어를 입력하세요."/>
+				<button type="button" class="search btn-lg btn-primary">검색</button>
 			</div>
 			<div class="col-md-2">
-				<button type="button" class="search btn btn-dark">검색</button>
 			</div>
 			
-			
-		</div><!-- end .col-md-8 -->
-		<div class="col-md-2">
-		</div>
+		
 	</div><!-- end .row .searchRow -->
 	
 	
 	<div class="row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-8 container">
+		
+		<div class="col-md-12 container">
+		
 			<table class="table">
 				<thead class="thead-dark">
 					<tr>
@@ -165,8 +132,7 @@
 		</table>
 		
 		</div>
-		<div class="col-md-2">
-		</div>
+		
 	</div><!-- end .row -->
 	<div class="row">
 		<div class="col-md-2">
@@ -193,7 +159,7 @@
 			</div>
 			</div>
 			<div class="col-md-2">
-				<button type="button" class="add btn btn-dark">등록</button>
+				<button type="button" class="add btn-lg btn-primary">등록</button>
 			</div>
 			
 			

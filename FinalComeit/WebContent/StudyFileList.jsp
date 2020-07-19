@@ -11,131 +11,128 @@
 <meta charset="UTF-8">
 <title>StudyFileList.jsp</title>
 <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/bootstrap/bootstrap.min.css" >
-<link rel="stylesheet"  href="<%=cp %>/assets/css/blog-post.css" >
+<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/studyfilelist.css">
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/studyNoticeList.css">
 
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+
 </head>
 <body>
+
 <div class="container-fluid">
 
 	<div class="row searchRow">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-8">
+	
 			<div class="col-md-2">
-				<select name="search" id="search" class="form-control searchSel">
+			</div>
+			<div class="col-md-8">
+				<select name="" id="" class="form-control searchSel">
 				<option value="title">제목</option>
 				<option value="author">작성자</option>
 				</select>
-			</div>
-			<div class="col-md-8">
-				<input type="text" id="keyword" class="searchBox form-control search" placeholder="검색어를 입력하세요."/>
+				<input type="text" id="" class="searchBox form-control" placeholder="검색어를 입력하세요."/>
+				<button type="button" class="search btn-lg btn-primary">검색</button>
 			</div>
 			<div class="col-md-2">
-				<button type="button" class="search btn btn-dark">검색</button>
 			</div>
 			
-			
-		</div><!-- end .col-md-8 -->
-		<div class="col-md-2">
-		</div>
+		
 	</div><!-- end .row .searchRow -->
 	
 	
 	<div class="row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-8 container">
-			<table class="table">
-				<thead class="thead-dark">
-					<tr>
-						<th>번호</th>
-						<th>제목</th>
-						<th>작성자</th>
-						<th>작성일</th>
-						<th>조회수</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>1</td>
-						<td>산출물 게시물 입니다.</td>
-						<td>신길동</td>
-						<td>2020-07-02</td>
-						<td>5</td>
-					</tr>
-					<tr>
-						<td>2</td>
-						<td>2020.07.03 산출물 게시물 입니다.</td>
-						<td>최길동</td>
-						<td>2020-07-03</td>
-						<td>5</td>
-					</tr>
-					<tr>
-						<td>3</td>
-						<td>2020.07.04 산출물 게시물 입니다.</td>
-						<td>장길동</td>
-						<td>2020-07-04</td>
-						<td>5</td>
-					</tr>
-					<tr>
-						<td>4</td>
-						<td>2020.07.05 산출물 게시물 입니다.</td>
-						<td>송길동</td>
-						<td>2020-07-05</td>
-						<td>5</td>
-					</tr>
-					<tr>
-						<td>5</td>
-						<td>2020.07.02 산출물 게시물 입니다.</td>
-						<td>김길동</td>
-						<td>2020-07-06</td>
-						<td>5</td>
-					</tr>
-					<tr>
-						<td>6</td>
-						<td>2020.07.02 산출물 게시물 입니다.</td>
-						<td>신길동</td>
-						<td>2020-07-06</td>
-						<td>5</td>
-					</tr>
-					<tr>
-						<td>7</td>
-						<td>2020.07.02 산출물 게시물 입니다.</td>
-						<td>장길동</td>
-						<td>2020-07-06</td>
-						<td>5</td>
-					</tr>
-					<tr>
-						<td>8</td>
-						<td>2020.07.02 산출물 게시물 입니다.</td>
-						<td>최길동</td>
-						<td>2020-07-06</td>
-						<td>5</td>
-					</tr>
-					<tr>
-						<td>9</td>
-						<td>2020.07.02 산출물 게시물 입니다.</td>
-						<td>김길동</td>
-						<td>2020-07-06</td>
-						<td>5</td>
-					</tr>
-					<tr>
-						<td>10</td>
-						<td>2020.07.02 산출물 게시물 입니다.</td>
-						<td>송길동</td>
-						<td>2020-07-06</td>
-						<td>5</td>
-					</tr>
-				</tbody>
-		</table>
 		
+		<div class="col-md-12 container">
+		
+			<table class="table">
+            <thead class="thead-dark">
+               <tr>
+                  <th>번호</th>
+                  <th>제목</th>
+                  <th>작성자</th>
+                  <th>작성일</th>
+                  <th>조회수</th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr>
+                  <td>1</td>
+                  <td>산출물 게시물 입니다.</td>
+                  <td>신길동</td>
+                  <td>2020-07-02</td>
+                  <td>5</td>
+               </tr>
+               <tr>
+                  <td>2</td>
+                  <td>2020.07.03 산출물 게시물 입니다.</td>
+                  <td>최길동</td>
+                  <td>2020-07-03</td>
+                  <td>5</td>
+               </tr>
+               <tr>
+                  <td>3</td>
+                  <td>2020.07.04 산출물 게시물 입니다.</td>
+                  <td>장길동</td>
+                  <td>2020-07-04</td>
+                  <td>5</td>
+               </tr>
+               <tr>
+                  <td>4</td>
+                  <td>2020.07.05 산출물 게시물 입니다.</td>
+                  <td>송길동</td>
+                  <td>2020-07-05</td>
+                  <td>5</td>
+               </tr>
+               <tr>
+                  <td>5</td>
+                  <td>2020.07.02 산출물 게시물 입니다.</td>
+                  <td>김길동</td>
+                  <td>2020-07-06</td>
+                  <td>5</td>
+               </tr>
+               <tr>
+                  <td>6</td>
+                  <td>2020.07.02 산출물 게시물 입니다.</td>
+                  <td>신길동</td>
+                  <td>2020-07-06</td>
+                  <td>5</td>
+               </tr>
+               <tr>
+                  <td>7</td>
+                  <td>2020.07.02 산출물 게시물 입니다.</td>
+                  <td>장길동</td>
+                  <td>2020-07-06</td>
+                  <td>5</td>
+               </tr>
+               <tr>
+                  <td>8</td>
+                  <td>2020.07.02 산출물 게시물 입니다.</td>
+                  <td>최길동</td>
+                  <td>2020-07-06</td>
+                  <td>5</td>
+               </tr>
+               <tr>
+                  <td>9</td>
+                  <td>2020.07.02 산출물 게시물 입니다.</td>
+                  <td>김길동</td>
+                  <td>2020-07-06</td>
+                  <td>5</td>
+               </tr>
+               <tr>
+                  <td>10</td>
+                  <td>2020.07.02 산출물 게시물 입니다.</td>
+                  <td>송길동</td>
+                  <td>2020-07-06</td>
+                  <td>5</td>
+               </tr>
+            </tbody>
+      </table>
+      
 		</div>
-		<div class="col-md-2">
-		</div>
+		
 	</div><!-- end .row -->
 	<div class="row">
 		<div class="col-md-2">
@@ -162,7 +159,7 @@
 			</div>
 			</div>
 			<div class="col-md-2">
-				<button type="button" class="add btn btn-dark">등록</button>
+				<button type="button" class="add btn-lg btn-primary">등록</button>
 			</div>
 			
 			
@@ -171,5 +168,6 @@
 		</div>
 	</div><!-- end .row -->
 </div><!-- end .container-fluid -->
+
 </body>
 </html>

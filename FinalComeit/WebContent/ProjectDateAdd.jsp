@@ -41,7 +41,7 @@
 	<div class="row">
 		<div class="col-md-2">
 		</div>
-		<div class="col-md-8">
+		<div class="col-md-8 dateInfo">
 		<h1>2020년 6월 7회차</h1>
 		</div>
 		<div class="col-md-2">
@@ -50,9 +50,14 @@
 	
 	<!-- 박스 영역 -->
 	<div class="row">
+	<!-- 
 		<div class="col-md-2">
 		</div>
 		<div class="col-md-8 box">
+	 -->	
+		<div class="col-md-12 box">
+		
+		
 				<div class="blank">
 				</div>	
 				<div class="meetDate">
@@ -62,6 +67,9 @@
 					
 				<div class="meetLoc">
 					<h3>장소를 선택하세요<span class="ePoint">*</span></h3>
+					
+					
+					
 					<select name="" id="" class="form-control locSel">
 						<option value="area1">서울</option>
 						<option value="area2">경기</option>
@@ -73,6 +81,8 @@
 						<option value="deArea3">서구</option>
 					</select>
 					<input type="text" class="form-control locInput" placeholder="상세 주소를 입력하는 영역입니다."/>
+					
+					
 				</div><!-- end .meetLoc -->
 				
 				<div class="meetTime">
@@ -95,8 +105,8 @@
 				<div class="blank">
 				</div>	
 		</div>
-		<div class="col-md-2">
-		</div>
+		<!-- <div class="col-md-2">
+		</div> -->
 	</div><!-- 박스 영역 -->
 	
 	<!-- 버튼 영역 -->

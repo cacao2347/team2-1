@@ -10,9 +10,8 @@
 <head>
 <meta charset="UTF-8">
 <title>ProjectDateList.jsp</title>
-<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/bootstrap.min.css" >
-<link rel="stylesheet"  href="<%=cp %>/assets/css/blog-post.css" >
-<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/projectdatelist.css">
+<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/bootstrap/bootstrap.min.css" >
+<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/studyDateList.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
@@ -60,9 +59,10 @@
 	
 <!-- 선택 박스 -->
 	<div class="row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-8 box1">
+
+		<div class="col-md-12 box1">
+		
+		
 			<div class="box2">
 				<div class="time">
 					<h3><span class="glyphicon glyphicon-time"></span> 2020년 6월 22일 오후 1 : 00 </h3>
@@ -74,7 +74,7 @@
 			<div class="box3">
 				<div class="mem">
 					<div class="memImg">
-						<img alt="Bootstrap Image Preview" src="assets/images/hjkim.PNG" class="rounded-circle profileImg" />
+						<img alt="Bootstrap Image Preview" src="assets/images/hjkim.PNG" class="img-circle profileImg" />
 					</div>
 					<div class="memName">
 						<span class="name">김길동</span>
@@ -84,13 +84,13 @@
 							<input type="radio" name="" id="" class="attendance" /><span class="yes">참여</span>
 						</div>
 						<div class="answer2">
-							<input type="radio" name="" id="" class="attendance" /><span class="no">불참</span>
+							<input type="radio" name="" id="" class="attendance" checked="checked"/><span class="no">불참</span>
 						</div>
 					</div>
 				</div><!-- end .mem -->
 				<div class="mem">
 					<div class="memImg">
-						<img alt="Bootstrap Image Preview" src="assets/images/khjang.PNG" class="rounded-circle profileImg" />
+						<img alt="Bootstrap Image Preview" src="assets/images/khjang.PNG" class="img-circle profileImg" />
 					</div>
 					<div class="memName">
 						<span class="name">장길동</span>
@@ -100,13 +100,13 @@
 							<input type="radio" name="" id="" class="attendance" /><span class="yes">참여</span>
 						</div>
 						<div class="answer2">
-							<input type="radio" name="" id="" class="attendance" /><span class="no">불참</span>
+							<input type="radio" name="" id="" class="attendance" checked="checked"/><span class="no">불참</span>
 						</div>
 					</div>
 				</div><!-- end .mem -->
 				<div class="mem">
 					<div class="memImg">
-						<img alt="Bootstrap Image Preview" src="assets/images/sjsong.PNG" class="rounded-circle profileImg" />
+						<img alt="Bootstrap Image Preview" src="assets/images/sjsong.PNG" class="img-circle profileImg" />
 					</div>
 					<div class="memName">
 						<span class="name">송길동</span>
@@ -116,13 +116,13 @@
 							<input type="radio" name="" id="" class="attendance" /><span class="yes">참여</span>
 						</div>
 						<div class="answer2">
-							<input type="radio" name="" id="" class="attendance" /><span class="no">불참</span>
+							<input type="radio" name="" id="" class="attendance" checked="checked"/><span class="no">불참</span>
 						</div>
 					</div>
 				</div><!-- end .mem -->
 				<div class="mem">
 					<div class="memImg">
-						<img alt="Bootstrap Image Preview" src="assets/images/jmshin.PNG" class="rounded-circle profileImg" />
+						<img alt="Bootstrap Image Preview" src="assets/images/jmshin.PNG" class="img-circle profileImg" />
 					</div>
 					<div class="memName">
 						<span class="name">신길동</span>
@@ -132,13 +132,13 @@
 							<input type="radio" name="" id="" class="attendance" /><span class="yes">참여</span>
 						</div>
 						<div class="answer2">
-							<input type="radio" name="" id="" class="attendance" /><span class="no">불참</span>
+							<input type="radio" name="" id="" class="attendance" checked="checked"/><span class="no">불참</span>
 						</div>
 					</div>
 				</div><!-- end .mem -->
 				<div class="mem">
 					<div class="memImg">
-						<img alt="Bootstrap Image Preview" src="assets/images/hschoi.PNG" class="rounded-circle profileImg" />
+						<img alt="Bootstrap Image Preview" src="assets/images/hschoi.PNG" class="img-circle profileImg" />
 					</div>
 					<div class="memName">
 						<span class="name">최길동</span>
@@ -148,16 +148,16 @@
 							<input type="radio" name="" id="" class="attendance" /><span class="yes">참여</span>
 						</div>
 						<div class="answer2">
-							<input type="radio" name="" id="" class="attendance" /><span class="no">불참</span>
+							<input type="radio" name="" id="" class="attendance" checked="checked"/><span class="no">불참</span>
 						</div>
 					</div>
 				</div><!-- end .mem -->
 				<div class="blank">
 				</div>
 			</div><!-- end .box3 -->
-		</div><!-- end .col-md-8 box1-->
-		<div class="col-md-2">
-		</div>
+			
+		</div>		
+			
 	</div>
 	
 <!-- 버튼 노출 -->

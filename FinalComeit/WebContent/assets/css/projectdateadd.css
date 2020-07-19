@@ -1,6 +1,11 @@
 @charset "UTF-8";
 
-.col-md-8 > h1 , .meetDate> h3 , .meetLoc > h3
+.dateInfo > h1
+{
+	text-align: center;
+}
+
+.dateInfo > h1 , .meetDate> h3 , .meetLoc > h3
 , .meetTime > h3
 {
 	font-weight: bold;
@@ -41,14 +46,15 @@
 
 .meetLoc > .locInput
 {
-	width: 650px;
+	width: 630px;
 	height: 36px;
 	text-align: center;
-	margin: 0 auto;
-	margin-right: 250px; 
+	margin-left:920px;
+	margin-right: 10px; 
 	margin-top: 5px;
 	
 }
+
  
 .btnbox
 {
@@ -67,7 +73,7 @@
 {
 	color: red;
 	margin-top: 20px;
-	text-align: center;
+	text-align: right;
 	font-weight: bold;
 	/* display: none;  */
 }

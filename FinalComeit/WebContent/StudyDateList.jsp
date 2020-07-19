@@ -59,9 +59,10 @@
 	
 <!-- 선택 박스 -->
 	<div class="row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-8 box1">
+
+		<div class="col-md-12 box1">
+		
+		
 			<div class="box2">
 				<div class="time">
 					<h3><span class="glyphicon glyphicon-time"></span> 2020년 6월 22일 오후 1 : 00 </h3>
@@ -154,9 +155,9 @@
 				<div class="blank">
 				</div>
 			</div><!-- end .box3 -->
-		</div><!-- end .col-md-8 box1-->
-		<div class="col-md-2">
-		</div>
+			
+		</div>		
+			
 	</div>
 	
 <!-- 버튼 노출 -->
