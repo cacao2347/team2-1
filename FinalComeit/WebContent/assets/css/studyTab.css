@@ -36,8 +36,7 @@ ul.tabs li {
     overflow: hidden;
     position: relative;
     background: #ffffff;
-    width: 245px;
-     text-align: center;
+    width: 150px;
 }
 ul.tabs li a {
     text-decoration: none;

@@ -274,7 +274,10 @@
 	/* font-family: Nanum Gothic; */
 }
 
-
+.memLeader
+{
+	margin-bottom: 10px;
+}
 
 .member > h4
 {
