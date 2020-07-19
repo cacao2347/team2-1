@@ -110,7 +110,8 @@
 					<div class="row">
 						<div class="col-md-4">
 							<div class="form-inline search">
-								<input type="text" class="form-control tag" id="tag" placeholder="키워드">
+								<input type="text" class="form-control tag" id="tag" placeholder="키워드" style="width: 150px;">
+							    <button type="button" class="btn btn-primary searchBtn" style="width: 60px;">검색</button>
 							</div>
 						</div>
 						<div class="col-md-8">
