@@ -11,7 +11,7 @@
 <meta charset="UTF-8">
 <title>LectureStudentDetail.jsp</title>
 <link rel="stylesheet" type="text/css"
-	href="<%=cp%>/assets/css/lectureprofessordetail.css">
+	href="<%=cp%>/assets/css/lectureStudentDetail.css">
 <link rel="stylesheet" type="text/css"
 	href="<%=cp%>/assets/css/bootstrap/bootstrap.min.css">
 <link rel="stylesheet"
