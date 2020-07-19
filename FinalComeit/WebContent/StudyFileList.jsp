@@ -10,10 +10,10 @@
 <head>
 <meta charset="UTF-8">
 <title>StudyFileList.jsp</title>
-<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/bootstrap.min.css" >
+<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/bootstrap/bootstrap.min.css" >
 <link rel="stylesheet"  href="<%=cp %>/assets/css/blog-post.css" >
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/studyfileList.css">
+<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/studyNoticeList.css">
 
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
@@ -26,13 +26,13 @@
 		</div>
 		<div class="col-md-8">
 			<div class="col-md-2">
-				<select name="search" id="search" class="form-control">
+				<select name="search" id="search" class="form-control searchSel">
 				<option value="title">제목</option>
 				<option value="author">작성자</option>
 				</select>
 			</div>
 			<div class="col-md-8">
-				<input type="text" id="keyword" class="searchBox form-control" placeholder="검색어를 입력하세요."/>
+				<input type="text" id="keyword" class="searchBox form-control search" placeholder="검색어를 입력하세요."/>
 			</div>
 			<div class="col-md-2">
 				<button type="button" class="search btn btn-dark">검색</button>

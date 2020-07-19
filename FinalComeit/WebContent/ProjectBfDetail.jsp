@@ -9,8 +9,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>StudyBfDetail.jsp</title>
-<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/studyBfDetail.css" >
+<title>ProjectAfDetail.jsp</title>
+<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/projectBfDetail.css" >
+
 <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/bootstrap/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
@@ -18,6 +19,7 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp %>/assets/js/bootstrap.min.js"></script>
 
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 
 <script type="text/javascript">
@@ -26,7 +28,15 @@
 	{
 		$(".infoBtn").click(function() 
 		{
+			$(".search-modal-content").width("500px");
 			$("#modal").show();	
+		});	
+		
+		
+		$(".joinBtn").click(function() 
+		{
+			$(".search-modal-content").width("1000px");
+			$("#levelModal").show();	
 		});	
 		
 		
@@ -36,10 +46,12 @@
 				
 		});
 		
-		$(".delBtn").click(function() 
+		$(".leave").click(function() 
 		{
-			alert("스터디 방을 폐쇄하시겠습니까?");	
+			alert("퇴장버튼 클릭 시 날짜에 따라 페널티 경고 메세지 띄우기");	
 		});
+		
+	
 		
 	});
 		
@@ -48,8 +60,8 @@
 		$('.searchModal').hide();
 	};
 	
+	
 
-	  
 </script>
 
 
@@ -58,18 +70,16 @@
 
 <!-- 헤더 -->
 <div class="row">
-	<div class="col-md-2">
-	</div>
-	<div class="col-md-8">
-	</div>
-	<div class="col-md-2">
+	<div class="row">
+		<div class="col-md-12">
+		</div>
 	</div>
 </div>
 
 <!-- 바디 -->
 <div class="container-fluid">
 	
-	<!-- 스터디방 이미지 -->
+	<!-- 프로젝트방 이미지 -->
 	<div class="row">
 		<div class="col-md-2">
 		</div>
@@ -90,19 +100,50 @@
 		<div class="col-md-8">
 			<div class="row">
 				<div class="col-md-8">
-					<!-- 스터디방 제목 -->
+					<!-- 프로젝트방 제목 -->
 					<div class="stuTitle">
-						<h1 class="title">F반 스터디방</h1>
-						<!-- 스터디장 : 커밋 , 회원 : 참가, 스터디원 : 퇴장 으로 노출 -->
+						<div class="title">
+							<h1>F반 프로젝트방</h1>
+							
+						</div>
+
 						<div class="jrBtn pull-right">
-							<input type="button" value="참가" class="btn btn-lg btn-primary" />
+							<input type="button" value="참가" class="btn btn-lg btn-primary joinBtn"/>
 							<img src="<%=cp %>/assets/images/report.png" alt="" class="report" onclick=""/>
 						</div><!-- end .button -->
-						<hr />
+						
+						<!-- 모달 -->
+							<!-- 검은 배경 -->
+							<div id="levelModal" class="searchModal">
+								<!-- 모달창 -->
+								<div class="search-modal-content">
+								
+								<!-- 버튼 -->
+								<div class="closeD pull-right" onClick="closeModal();">
+									<span class="pop_bt modalCloseBtn" >X</span>
+								</div><!-- end .closeD -->
+									
+								<div class="levelAnsTitle">
+									<h3>레벨테스트 답변 입력</h3>
+								</div>
+								
+								<div class="levelAns">
+									<h3>1. 자기 소개 한 줄 입력해주세요</h3>					
+									<textarea name="" id="" class="ansBox form-control" ></textarea>
+								</div>
+								
+								<div class="levelAns">
+									<h3>2. ~~~~~~~~~~~~ 이 문제에 대한 답변을 입력해 주세요</h3>
+									<textarea name="" id="" class="ansBox form-control" ></textarea>
+								</div>
+									
+								</div><!-- end .search-modal-content -->					
+							</div><!-- end .searchModal -->	
+					
 					</div><!-- end.stuTitle -->
 					
 					
-					<!-- 스터디방 정보 -->
+					<!-- 프로젝트방 정보 -->
 					<div class="stuInfo">
 						<!-- 활동 기간 -->
 						<div class="stuTerm">
@@ -137,20 +178,23 @@
 						<div class="stuCurr">
 							<span class="glyphicon glyphicon-bookmark icon"></span>
 							<h3>상세 설명</h3><br />
-							<span class="curr">스터디의 상세 설명 영역입니다.<br>
-										   스터디장이 수정할 수 있는 영역이며, 우리 스터디가 어떤 공부를 하게 될 지<br> 
+							<span class="curr">프로젝트의 상세 설명 영역입니다.<br>
+										   프로젝트장이 수정할 수 있는 영역이며, 우리 프로젝트가 어떤 공부를 하게 될 지<br> 
 										   상세하게 작성할 수 있습니다.상세 커리큘럼이 적혀 있는 영역입니다.</span>
 						</div>
 					
 					</div><!-- end .stuInfo -->
+					
+				
+					
 				</div><!-- end .col-md-8 -->
 				
-				<!-- 스터디원 정보 -->
+				<!-- 프로젝트원 정보 -->
 				<div class="col-md-4 ">
 				
 					
 					<div class="stuMem">
-						<!-- <h3>스터디장</h3> -->
+						<!-- <h3>프로젝트장</h3> -->
 						<div class="memLeader" id="member1">
 
 							<img src="<%=cp %>/assets/images/hjkim.PNG" alt="" class="img-circle memImg" />
@@ -166,7 +210,7 @@
 								<div class="search-modal-content">
 									
 									<!-- 버튼 -->
-									<div class="closeD" onClick="closeModal();">
+									<div class="closeD pull-right" onClick="closeModal();">
 										<span class="pop_bt modalCloseBtn" >X</span>
 									</div><!-- end .closeD -->
 									
@@ -207,7 +251,7 @@
 						
 							
 						</div><!-- end .memLeader -->
-					<!-- 	<h3>스터디원</h3> -->
+					<!-- 	<h3>프로젝트원</h3> -->
 						
 						
 						
@@ -241,7 +285,7 @@
 					</div><!-- end .stuMem -->
 				
 					
-					<!-- 스터디장에게만 보일 수정 / 폐쇄 버튼 -->
+					<!-- 프로젝트장에게만 보일 수정 / 폐쇄 버튼 -->
 					<div class="roomBtn">
 						<input type="button" value="방 정보 수정" class="btn modBtn" />
 						<input type="button" value="폐쇄" class="btn delBtn" />
@@ -249,8 +293,8 @@
 				</div>
 				
 				
+				
 			</div><!-- end .row -->
-		
 		</div><!-- end .col-md-8 -->
 		
 		<div class="col-md-2">
@@ -260,13 +304,30 @@
 	
 </div><!-- end .container-fluid -->
 
+<!-- 탭 -->
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-2">
+		</div>
+		<div class="col-md-8">
+			<div class="row">
+				<div class="col-md-12">
+				<c:import url="ProjectBfTab.jsp"></c:import>
+				
+				</div>
+			</div>
+		</div>
+		<div class="col-md-2">
+		</div>
+	</div>
+</div>
+
 <!-- 푸터 -->
 <div class="row">
-	<div class="col-md-2">
-	</div>
-	<div class="col-md-8">
-	</div>
-	<div class="col-md-2">
+	<div class="row">
+		<div class="col-md-12">
+		</div>
 	</div>
 </div>
 </body>

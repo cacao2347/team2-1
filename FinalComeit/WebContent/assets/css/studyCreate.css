@@ -1,5 +1,9 @@
 @charset "UTF-8";
-
+html, body
+{
+   overflow-x:hidden;
+   overflow-y:auto;
+}
 h1, h4 , .m
 {
 	font-weight: bold;
@@ -32,7 +36,7 @@ h1, h4 , .m
 , .level > h4 , .level > .levelSel , .scret > h4 , .scret > .scretBox,
 .levelScret > .level , .levelScret > .scret ,
 .position > h4 , .position > .posiSel , .posiImg > .position , .posiImg > .image,
-.button > .upload , .button > .cancel
+.button > .upload , .button > .cancel , .weekTitle > h4 , .weekTitle > span
 {
 	display: inline-block;
 }
@@ -137,4 +141,14 @@ h1, h4 , .m
 .button
 {
 	text-align: center;
+}
+
+
+.col-md-8 > .errMsg
+{
+	color: red;
+	margin-bottom: 10px;
+	text-align: center;
+	font-weight: bold;
+	/* display: none;  */
 }

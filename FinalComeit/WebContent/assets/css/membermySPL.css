@@ -1,15 +1,26 @@
 @charset "UTF-8";
 
-.col-md-8 > .paging
+.col-md-8 > .paging , .paging > .pagination, .container-fluid 
 {
 	text-align: center;
 }
-.pagination>li>a, .pagination>li>span
+.paging>ul >li>a, .paging>ul>li>span
 {
 	color: black;
 }
 
-.container-fluid
+.col-md-8 > .add
+{
+	text-align: right;
+}
+
+.col-md-8 > .paging , .col-md-8 > .button
+{
+	display: inline-block;
+}
+
+.detail > th
 {
 	text-align: center;
 }
+

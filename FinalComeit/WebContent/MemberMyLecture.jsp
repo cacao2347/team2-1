@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>MemberMyStudy.jsp</title>
+<title>MemberMyLecture.jsp</title>
 <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/membermy.css" >
 <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/membermySPL.css" >
 <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/bootstrap/bootstrap.min.css" >
@@ -20,57 +20,79 @@
 <body>
 
 <div class="container-fluid">
-   <!-- 참여 스터디 내역 -->
+   <!-- 수강 내역 -->
    <div class="row">
       <div class="col-md-2">
       </div>
       <div class="col-md-8">
 	      <div class="panel panel-default">
 	         <div class="panel-heading head">
-	            <h3 class="panel-title tit">참여 스터디 이력</h3>
+	            <h3 class="panel-title tit">수강 이력</h3>
 	         </div>
 	            <table class="table table-bordered">
 	            <tr class="detail">
-	               <th>스터디 코드</th>
-	               <th>스터디명</th>
-	               <th>시작일</th>
-	               <th>종료일</th>
+	               <th>강의코드</th>
+	               <th>강의명</th>
+	               <th>강사명</th>
+	               <th>강의 시작일</th>
+	               <th>강의 종료일</th>
 	               <th>진행상태</th>
+	               <th>환불신청</th>
 	            </tr>
 	            <tr class="detail">
 	               <td>A0004</td>
-	               <td>JAVA 키오스크기계만들기</td>
+	               <td>JAVA 정복</td>
+	               <td>홍길동</td>
 	               <td>2020-05-30</td>
 	               <td>2020-06-30</td>
 	               <td>진행중</td>
+	               <td>
+	               		<input type="submit" value="환불신청" class="refBtn btn-primary btn-sm" />
+	               </td>
 	            </tr>
 	            <tr class="detail">
 	               <td>A0003</td>
-	               <td>JAVA 꽃집 키오스크</td>
-	               <td>2020-04-01</td>
-	               <td>2020-05-01</td>
+	               <td>JAVA 정복</td>
+	               <td>홍길동</td>
+	               <td>2020-04-30</td>
+	               <td>2020-05-30</td>
 	               <td>종료</td>
+	               <td>
+	               		<input type="submit" value="환불신청" class="refBtn btn btn-sm" disabled="disabled"/>
+	               </td>
 	            </tr>
 	            <tr class="detail">
 	               <td>A0003</td>
-	               <td>웹만들기</td>
-	               <td>2020-04-01</td>
-	               <td>2020-05-01</td>
+	              <td>JAVA 정복</td>
+	               <td>홍길동</td>
+	               <td>2020-04-30</td>
+	               <td>2020-05-30</td>
 	               <td>종료</td>
+	               <td>
+	               		<input type="submit" value="환불신청" class="refBtn btn btn-sm" disabled="disabled"/>
+	               </td>
 	            </tr>
 	            <tr class="detail">
 	               <td>A0002</td>
-	               <td>오라클 프로젝트</td>
-	               <td>2020-02-02</td>
-	               <td>2020-02-02</td>
+	               <td>JAVA 정복</td>
+	               <td>홍길동</td>
+	               <td>2020-04-30</td>
+	               <td>2020-05-30</td>
 	               <td>종료</td>
+	               <td>
+	               		<input type="submit" value="환불신청" class="refBtn btn btn-sm" disabled="disabled"/>
+	               </td>
 	            </tr>
 	            <tr class="detail">
 	               <td>A0001</td>
-	               <td>C언어로 게임 만들기</td>
-	               <td>2020-01-01</td>
-	               <td>2020-02-01</td>
+	               <td>JAVA 정복</td>
+	               <td>홍길동</td>
+	               <td>2020-04-30</td>
+	               <td>2020-05-30</td>
 	               <td>종료</td>
+	               <td>
+	               		<input type="submit" value="환불신청" class="refBtn btn btn-sm" disabled="disabled"/>
+	               </td>
 	            </tr>
 	            </table>
 	      </div>

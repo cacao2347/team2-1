@@ -9,9 +9,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>LectureDateList.jsp</title>
-<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/bootstrap.min.css" >
-<link rel="stylesheet"  href="<%=cp %>/assets/css/blog-post.css" >
+<title>StudyDateList.jsp</title>
+<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/bootstrap/bootstrap.min.css" >
 <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/studyDateList.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
@@ -74,7 +73,7 @@
 			<div class="box3">
 				<div class="mem">
 					<div class="memImg">
-						<img alt="Bootstrap Image Preview" src="assets/images/hjkim.PNG" class="rounded-circle profileImg" />
+						<img alt="Bootstrap Image Preview" src="assets/images/hjkim.PNG" class="img-circle profileImg" />
 					</div>
 					<div class="memName">
 						<span class="name">김길동</span>
@@ -84,13 +83,13 @@
 							<input type="radio" name="" id="" class="attendance" /><span class="yes">참여</span>
 						</div>
 						<div class="answer2">
-							<input type="radio" name="" id="" class="attendance" /><span class="no">불참</span>
+							<input type="radio" name="" id="" class="attendance" checked="checked"/><span class="no">불참</span>
 						</div>
 					</div>
 				</div><!-- end .mem -->
 				<div class="mem">
 					<div class="memImg">
-						<img alt="Bootstrap Image Preview" src="assets/images/khjang.PNG" class="rounded-circle profileImg" />
+						<img alt="Bootstrap Image Preview" src="assets/images/khjang.PNG" class="img-circle profileImg" />
 					</div>
 					<div class="memName">
 						<span class="name">장길동</span>
@@ -100,13 +99,13 @@
 							<input type="radio" name="" id="" class="attendance" /><span class="yes">참여</span>
 						</div>
 						<div class="answer2">
-							<input type="radio" name="" id="" class="attendance" /><span class="no">불참</span>
+							<input type="radio" name="" id="" class="attendance" checked="checked"/><span class="no">불참</span>
 						</div>
 					</div>
 				</div><!-- end .mem -->
 				<div class="mem">
 					<div class="memImg">
-						<img alt="Bootstrap Image Preview" src="assets/images/sjsong.PNG" class="rounded-circle profileImg" />
+						<img alt="Bootstrap Image Preview" src="assets/images/sjsong.PNG" class="img-circle profileImg" />
 					</div>
 					<div class="memName">
 						<span class="name">송길동</span>
@@ -116,13 +115,13 @@
 							<input type="radio" name="" id="" class="attendance" /><span class="yes">참여</span>
 						</div>
 						<div class="answer2">
-							<input type="radio" name="" id="" class="attendance" /><span class="no">불참</span>
+							<input type="radio" name="" id="" class="attendance" checked="checked"/><span class="no">불참</span>
 						</div>
 					</div>
 				</div><!-- end .mem -->
 				<div class="mem">
 					<div class="memImg">
-						<img alt="Bootstrap Image Preview" src="assets/images/jmshin.PNG" class="rounded-circle profileImg" />
+						<img alt="Bootstrap Image Preview" src="assets/images/jmshin.PNG" class="img-circle profileImg" />
 					</div>
 					<div class="memName">
 						<span class="name">신길동</span>
@@ -132,13 +131,13 @@
 							<input type="radio" name="" id="" class="attendance" /><span class="yes">참여</span>
 						</div>
 						<div class="answer2">
-							<input type="radio" name="" id="" class="attendance" /><span class="no">불참</span>
+							<input type="radio" name="" id="" class="attendance" checked="checked"/><span class="no">불참</span>
 						</div>
 					</div>
 				</div><!-- end .mem -->
 				<div class="mem">
 					<div class="memImg">
-						<img alt="Bootstrap Image Preview" src="assets/images/hschoi.PNG" class="rounded-circle profileImg" />
+						<img alt="Bootstrap Image Preview" src="assets/images/hschoi.PNG" class="img-circle profileImg" />
 					</div>
 					<div class="memName">
 						<span class="name">최길동</span>
@@ -148,7 +147,7 @@
 							<input type="radio" name="" id="" class="attendance" /><span class="yes">참여</span>
 						</div>
 						<div class="answer2">
-							<input type="radio" name="" id="" class="attendance" /><span class="no">불참</span>
+							<input type="radio" name="" id="" class="attendance" checked="checked"/><span class="no">불참</span>
 						</div>
 					</div>
 				</div><!-- end .mem -->

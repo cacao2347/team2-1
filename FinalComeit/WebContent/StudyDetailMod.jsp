@@ -10,12 +10,11 @@
 <head>
 <meta charset="UTF-8">
 <title>StudyDetailMod.jsp</title>
-<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/bootstrap.min.css" >
+<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/bootstrap/bootstrap.min.css" >
 <link rel="stylesheet"  href="<%=cp %>/assets/css/blog-post.css" >
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/studyCreate.css">
 
-<script type="text/javascript" src="<%=cp %>/js/jquery-ui.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
@@ -36,7 +35,7 @@
 		</div>
 		<div class="col-md-8">
 			<div class="boardName">
-				<h1>스터디 개설</h1>
+				<h1>스터디 수정</h1>
 				<hr />
 			</div>
 		</div>
@@ -227,7 +226,7 @@
 					
 					<div class="image">
 						<h4>대표이미지</h4>
-												
+						<input type="file" name="" id="" class="stuImgUp" value="대표 이미지 등록"/>	
 					</div><!-- end .image -->
 				</div><!-- end .posiImg -->
 				

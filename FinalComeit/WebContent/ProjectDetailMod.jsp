@@ -9,16 +9,31 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ProjectDetailMod.jsp</title>
-<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/bootstrap.min.css" >
-<link rel="stylesheet"  href="<%=cp %>/assets/css/blog-post.css" >
+<title>StudyDetailMod.jsp</title>
+<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/bootstrap/bootstrap.min.css" >
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/projectcreate.css">
+<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/projectCreate.css">
 
-<script type="text/javascript" src="<%=cp %>/js/jquery-ui.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+	
+	$(document).ready(function() 
+	{
 
+			$("#levelCheck").change(function(){
+		        if($("#levelCheck").is(":checked"))
+		        {
+		            $(".ltAddBtn").prop("disabled", false);
+		        }else
+		        {
+		        	$(".ltAddBtn").prop("disabled", true);
+		        }
+		    });
+				
+	});
+	
+</script>
 </head>
 <body>
 
@@ -36,7 +51,7 @@
 		</div>
 		<div class="col-md-8">
 			<div class="boardName">
-				<h1>프로젝트 개설</h1>
+				<h1>프로젝트 수정</h1>
 				<hr />
 			</div>
 		</div>
@@ -227,10 +242,31 @@
 					
 					<div class="image">
 						<h4>대표이미지</h4>
-												
+						<input type="file" name="" id="" class="proImgUp" value="대표 이미지 등록"/>						
 					</div><!-- end .image -->
 				</div><!-- end .posiImg -->
 				
+				<div class="levelT">
+					<input type="checkbox" name="" id="levelCheck" class="lvCheck"/>
+					<h4>레벨 테스트 여부</h4><br />
+					<input type="text" class="levelInput form-control" placeholder="레벨 테스트 문제를 입력해 주세요."/>
+					<input type="button" value="추가" class="ltAddBtn btn btn-primary" disabled="disabled"/>
+					
+					<div class="test">
+						<input type="text" class="lvTest form-control" value="1.자기 소개 한 줄 입력하세요."/>
+						<input type="button" value="삭제" class="ltDelBtn btn" />
+					</div>
+					
+					<div class="test">
+						<input type="text" class="lvTest form-control" value="2.~~~~~~~ 이 코드에 대한 문제 풀이 답변을 입력하세요."/>
+						<input type="button" value="삭제" class="ltDelBtn btn" />
+					</div>
+					
+				</div><!-- end .levelT -->
+				
+				<div class="errMsg">
+					<span class="err">필수 입력 항목이 누락되었습니다.</span>
+				</div><!-- end .errMsg -->
 				<div class="button">
 					<div class="cancel">
 						<input type="button" value="취소" class="btn btn-default"/>

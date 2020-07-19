@@ -17,3 +17,9 @@
 {
 	margin-bottom: 30px;
 }
+
+.col-md-2 > .searchSel,
+.col-md-2 > .search
+{
+	margin-top: 15px;
+}

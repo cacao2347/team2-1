@@ -9,8 +9,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>StudyBfDetail.jsp</title>
-<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/studyBfDetail.css" >
+<title>StudyAfDetail.jsp</title>
+<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/studyAfDetail.css" >
 <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/bootstrap/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
@@ -18,6 +18,7 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp %>/assets/js/bootstrap.min.js"></script>
 
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 
 <script type="text/javascript">
@@ -36,10 +37,12 @@
 				
 		});
 		
-		$(".delBtn").click(function() 
+		$(".leave").click(function() 
 		{
-			alert("스터디 방을 폐쇄하시겠습니까?");	
+			alert("퇴장버튼 클릭 시 날짜에 따라 페널티 경고 메세지 띄우기");	
 		});
+		
+	
 		
 	});
 		
@@ -48,7 +51,51 @@
 		$('.searchModal').hide();
 	};
 	
+	
+	
+	/* 출석 차트 */
+	google.charts.load('current', {packages: ['corechart', 'bar']});
+	google.charts.setOnLoadCallback(drawBasic);
 
+	function drawBasic() {
+
+	      var data = new google.visualization.DataTable();
+	      data.addColumn('timeofday', 'Time of Day');
+	      data.addColumn('number', 'Attendance rate');
+
+	      data.addRows([
+	        [{v: [8, 0, 0], f: '8 am'}, 1],
+	        [{v: [9, 0, 0], f: '9 am'}, 2],
+	        [{v: [10, 0, 0], f:'10 am'}, 3],
+	        [{v: [11, 0, 0], f: '11 am'}, 4],
+	        [{v: [12, 0, 0], f: '12 pm'}, 5],
+	        [{v: [13, 0, 0], f: '1 pm'}, 6],
+	        [{v: [14, 0, 0], f: '2 pm'}, 7],
+	        [{v: [15, 0, 0], f: '3 pm'}, 8],
+	        [{v: [16, 0, 0], f: '4 pm'}, 9],
+	        [{v: [17, 0, 0], f: '5 pm'}, 10],
+	      ]);
+
+	      var options = {
+	        title: '우리 방 출석률',
+	        hAxis: {
+	          title: 'Member Name',
+	          format: 'h:mm a',
+	          viewWindow: {
+	            min: [7, 30, 0],
+	            max: [17, 30, 0]
+	          }
+	        },
+	         vAxis: {
+	          title: '모임 회차'
+	        } 
+	      };
+
+	      var chart = new google.visualization.ColumnChart(
+	        document.getElementById('chart_div'));
+
+	      chart.draw(data, options);
+	    }
 	  
 </script>
 
@@ -58,11 +105,9 @@
 
 <!-- 헤더 -->
 <div class="row">
-	<div class="col-md-2">
-	</div>
-	<div class="col-md-8">
-	</div>
-	<div class="col-md-2">
+	<div class="row">
+		<div class="col-md-12">
+		</div>
 	</div>
 </div>
 
@@ -92,13 +137,17 @@
 				<div class="col-md-8">
 					<!-- 스터디방 제목 -->
 					<div class="stuTitle">
-						<h1 class="title">F반 스터디방</h1>
-						<!-- 스터디장 : 커밋 , 회원 : 참가, 스터디원 : 퇴장 으로 노출 -->
+						<div class="title">
+							<h1>F반 스터디방</h1>
+							
+						</div>
+						
 						<div class="jrBtn pull-right">
-							<input type="button" value="참가" class="btn btn-lg btn-primary" />
+							<input type="button" value="퇴장" class="leave btn btn-lg btn-primary" />
 							<img src="<%=cp %>/assets/images/report.png" alt="" class="report" onclick=""/>
 						</div><!-- end .button -->
-						<hr />
+						
+					
 					</div><!-- end.stuTitle -->
 					
 					
@@ -143,6 +192,12 @@
 						</div>
 					
 					</div><!-- end .stuInfo -->
+					
+					<!-- 출석 차트 -->
+					
+				
+					<div id="chart_div" class="attChart"></div>
+					
 				</div><!-- end .col-md-8 -->
 				
 				<!-- 스터디원 정보 -->
@@ -244,13 +299,12 @@
 					<!-- 스터디장에게만 보일 수정 / 폐쇄 버튼 -->
 					<div class="roomBtn">
 						<input type="button" value="방 정보 수정" class="btn modBtn" />
-						<input type="button" value="폐쇄" class="btn delBtn" />
 					</div><!-- end .roomBtn -->
 				</div>
 				
 				
+				
 			</div><!-- end .row -->
-		
 		</div><!-- end .col-md-8 -->
 		
 		<div class="col-md-2">
@@ -260,13 +314,30 @@
 	
 </div><!-- end .container-fluid -->
 
+<!-- 탭 -->
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-2">
+		</div>
+		<div class="col-md-8">
+			<div class="row">
+				<div class="col-md-12">
+				<c:import url="StudyTab.jsp"></c:import>
+				
+				</div>
+			</div>
+		</div>
+		<div class="col-md-2">
+		</div>
+	</div>
+</div>
+
 <!-- 푸터 -->
 <div class="row">
-	<div class="col-md-2">
-	</div>
-	<div class="col-md-8">
-	</div>
-	<div class="col-md-2">
+	<div class="row">
+		<div class="col-md-12">
+		</div>
 	</div>
 </div>
 </body>

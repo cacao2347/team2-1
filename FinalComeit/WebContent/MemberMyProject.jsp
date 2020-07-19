@@ -12,7 +12,7 @@
 <title>MemberMyProject.jsp</title>
 <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/membermy.css" >
 <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/membermySPL.css" >
-<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/bootstrap.min.css" >
+<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/bootstrap/bootstrap.min.css" >
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
@@ -27,10 +27,10 @@
       <div class="col-md-8">
 	      <div class="panel panel-default">
 	         <div class="panel-heading head">
-	            <h3 class="panel-title tit">참여 프로젝트 이력 ></h3>
+	            <h3 class="panel-title tit">참여 프로젝트 이력</h3>
 	         </div>
 	            <table class="table table-bordered">
-	            <tr class="myPro">
+	            <tr class="detail">
 	               <th>프로젝트 코드</th>
 	               <th>프로젝트명</th>
 	               <th>시작일</th>
@@ -77,6 +77,7 @@
       </div>
       <div class="col-md-2">
       </div>
+      </div><!-- end .row -->
       <!--페이징 처리 -->
       <div class="row">
 	      <div class="col-md-2">
@@ -100,10 +101,9 @@
 				</div>
 			</div>
 			<div class="col-md-2">
-				<button type="button" class="add btn btn-dark">등록</button>
+				
 			</div>
 		</div><!-- 페이징처리 끝 -->
-   </div><!-- 참여 프로젝트 내역 끝 -->
 </div>
 
 </body>

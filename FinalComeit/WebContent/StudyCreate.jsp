@@ -10,8 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <title>StudyCreate.jsp</title>
-<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/bootstrap.min.css" >
-<link rel="stylesheet"  href="<%=cp %>/assets/css/blog-post.css" >
+<link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/bootstrap/bootstrap.min.css" >
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/studyCreate.css">
 
@@ -156,6 +155,7 @@
 					
 				<div class="weekTitle">
 					<h4>모임 지정 요일<span class="ePoint">*</span></h4>
+					<span class="check">&nbsp;최대 4개</span>
 				</div><!-- end .weekTitle -->
 				<div class="weekDay">
 					<select name="week" id="week" class="weekSel form-control">
@@ -226,11 +226,15 @@
 					
 					<div class="image">
 						<h4>대표이미지</h4>
-												
+						<input type="file" name="" id="" class="stuImgUp" value="대표 이미지 등록"/>						
 					</div><!-- end .image -->
 				</div><!-- end .posiImg -->
 				
-				<div class="button">
+				<div class="errMsg">
+					<span class="err">필수 입력 항목이 누락되었습니다.</span>
+				</div>
+				<div class="button"><!-- end .errMsg -->
+				
 					<div class="cancel">
 						<input type="button" value="취소" class="btn btn-default"/>
 					</div><!-- end .cancel -->
