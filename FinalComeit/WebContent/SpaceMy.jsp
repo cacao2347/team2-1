@@ -11,6 +11,7 @@
 <title>SpaceMy.jsp</title>
 <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/space-manage.css">
 
+
 </head>
 <body>
 <c:import url="header.jsp"></c:import>
