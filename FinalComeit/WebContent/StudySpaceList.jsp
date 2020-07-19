@@ -31,7 +31,6 @@
 		f.submit();
 	}
 
-	
 </script>
 
 </head>

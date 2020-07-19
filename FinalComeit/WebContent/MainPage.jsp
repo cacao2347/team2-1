@@ -10,199 +10,239 @@
 <meta charset="UTF-8">
 <title>.jsp</title>
   <!-- Bootstrap core CSS -->
+  
 <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/mainpage.css">
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+
+	$(document).ready(function() 
+	{
+	    $('#myCarousel').carousel({
+	      interval: 6000
+	    });
+	});
+
+</script>
 
 </head>
 <body>
 <c:import url="header.jsp"></c:import>
 <%-- <jsp:include page="header.jsp"></jsp:include> --%>
   <!-- Page Content -->
-  <div class="container">
-    <!-- Jumbotron Header -->
-    <header class="jumbotron my-4">
-      <h1 class="display-3">COME-IT!</h1><br><br>
-      <p class="lead">스터디의 장점 부분 어쩌구 저쩌구 환영합니다.스터디의 장점 부분 어쩌구 저쩌구 환영합니다. 스터디의 장점 부분 어쩌구 저쩌구 환영합니다.</p>
-    </header>
-
-
-    <!-- Page Features -->
-    <h4 style="margin-top: 30px;">#최신 스터디</h4>
-    <div class="row text-center">
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card h-100">
-          <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-          <div class="card-body">
-            <h4 class="card-title">스터디명</h4>
-            <p class="card-text">스터디 데이터부분</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card h-100">
-          <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-          <div class="card-body">
-            <h4 class="card-title">스터디명</h4>
-            <p class="card-text">스터디 데이터부분</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card h-100">
-          <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-          <div class="card-body">
-            <h4 class="card-title">스터디명</h4>
-            <p class="card-text">스터디 데이터부분</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card h-100">
-          <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-          <div class="card-body">
-            <h4 class="card-title">스터디명</h4>
-            <p class="card-text">스터디 데이터부분</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- /.row -->
+  <div class="main_image">
+		<div class="carousel slide" id="myCarousel">
+        	<div class="carousel-inner">
+	            <div class="item active">
+	                    <img src="<%=cp %>/assets/images/main_img_1.jpg" style="width:100%; height:324px;">
+	                    <div class="carousel-caption active align-items-center"> 
+	                    	<h1>COME-IT</h1>
+	                    	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</p> 
+	                   	</div>
+	              </div><!-- /Slide1 --> 
+	            <div class="item">
+	                    <img src="<%=cp %>/assets/images/main_img_2.jpg" style="width:100%; height:324px;">
+	                    <div class="carousel-caption active align-items-center"> 
+	                    	<h1>COME-IT</h1>
+	                    	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</p> 
+	                   	</div>
+	              </div><!-- /Slide2 --> 
+	        </div>
+			
+			<ul class="carousel-indicators"> 
+				<li data-target="#myCarousel" data-slide-to="0" class="active"></li> <!--0번부터시작--> 
+				<li data-target="#myCarousel" data-slide-to="1"></li> 
+			</ul>
+	                   
+	    </div>
+	</div>
+  
+  <div class="container" style="height: 500px;">
+  <br>
+  <div class="carousel slide" id="myCarousel2" data-interval="false">
+        <div class="carousel-inner">
+            <div class="item active">
+            		<h3>모집중인 스터디</h3>
+                    <ul class="thumbnails">
+                        <li class="col-sm-3">
+    						<div class="fff">
+								<div class="thumbnail">
+									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+								</div>
+								<div class="caption">
+									<h4>Praesent commodo</h4>
+									<p>Nullam Condimentum Nibh Etiam Sem</p>
+									<a class="btn btn-mini" href="#">» Read More</a>
+								</div>
+                            </div>
+                        </li>
+                        <li class="col-sm-3">
+							<div class="fff">
+								<div class="thumbnail">
+									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+								</div>
+								<div class="caption">
+									<h4>Praesent commodo</h4>
+									<p>Nullam Condimentum Nibh Etiam Sem</p>
+									<a class="btn btn-mini" href="#">» Read More</a>
+								</div>
+                            </div>
+                        </li>
+                        <li class="col-sm-3">
+							<div class="fff">
+								<div class="thumbnail">
+									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+								</div>
+								<div class="caption">
+									<h4>Praesent commodo</h4>
+									<p>Nullam Condimentum Nibh Etiam Sem</p>
+									<a class="btn btn-mini" href="#">» Read More</a>
+								</div>
+                            </div>
+                        </li>
+                        <li class="col-sm-3">
+							<div class="fff">
+								<div class="thumbnail">
+									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+								</div>
+								<div class="caption">
+									<h4>Praesent commodo</h4>
+									<p>Nullam Condimentum Nibh Etiam Sem</p>
+									<a class="btn btn-mini" href="#">» Read More</a>
+								</div>
+                            </div>
+                        </li>
+                    </ul>
+              </div><!-- /Slide1 --> 
+            <div class="item">
+            		<h3>모집중인 프로젝트</h3>
+                    <ul class="thumbnails">
+                        <li class="col-sm-3">
+							<div class="fff">
+								<div class="thumbnail">
+									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+								</div>
+								<div class="caption">
+									<h4>Praesent commodo</h4>
+									<p>Nullam Condimentum Nibh Etiam Sem</p>
+									<a class="btn btn-mini" href="#">» Read More</a>
+								</div>
+                            </div>
+                        </li>
+                        <li class="col-sm-3">
+							<div class="fff">
+								<div class="thumbnail">
+									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+								</div>
+								<div class="caption">
+									<h4>Praesent commodo</h4>
+									<p>Nullam Condimentum Nibh Etiam Sem</p>
+									<a class="btn btn-mini" href="#">» Read More</a>
+								</div>
+                            </div>
+                        </li>
+                        <li class="col-sm-3">
+							<div class="fff">
+								<div class="thumbnail">
+									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+								</div>
+								<div class="caption">
+									<h4>Praesent commodo</h4>
+									<p>Nullam Condimentum Nibh Etiam Sem</p>
+									<a class="btn btn-mini" href="#">» Read More</a>
+								</div>
+                            </div>
+                        </li>
+                        <li class="col-sm-3">
+							<div class="fff">
+								<div class="thumbnail">
+									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+								</div>
+								<div class="caption">
+									<h4>Praesent commodo</h4>
+									<p>Nullam Condimentum Nibh Etiam Sem</p>
+									<a class="btn btn-mini" href="#">» Read More</a>
+								</div>
+                            </div>
+                        </li>
+                    </ul>
+              </div><!-- /Slide2 --> 
+            <div class="item">
+            		<h3>모집중인 강의</h3>
+                    <ul class="thumbnails">
+                        <li class="col-sm-3">	
+							<div class="fff">
+								<div class="thumbnail">
+									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+								</div>
+								<div class="caption">
+									<h4>Praesent commodo</h4>
+									<p>Nullam Condimentum Nibh Etiam Sem</p>
+									<a class="btn btn-mini" href="#">» Read More</a>
+								</div>
+                            </div>
+                        </li>
+                        <li class="col-sm-3">
+							<div class="fff">
+								<div class="thumbnail">
+									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+								</div>
+								<div class="caption">
+									<h4>Praesent commodo</h4>
+									<p>Nullam Condimentum Nibh Etiam Sem</p>
+									<a class="btn btn-mini" href="#">» Read More</a>
+								</div>
+                            </div>
+                        </li>
+                        <li class="col-sm-3">
+							<div class="fff">
+								<div class="thumbnail">
+									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+								</div>
+								<div class="caption">
+									<h4>Praesent commodo</h4>
+									<p>Nullam Condimentum Nibh Etiam Sem</p>
+									<a class="btn btn-mini" href="#">» Read More</a>
+								</div>
+                            </div>
+                        </li>
+                        <li class="col-sm-3">
+							<div class="fff">
+								<div class="thumbnail">
+									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
+								</div>
+								<div class="caption">
+									<h4>Praesent commodo</h4>
+									<p>Nullam Condimentum Nibh Etiam Sem</p>
+									<a class="btn btn-mini" href="#">» Read More</a>
+								</div>
+                            </div>
+                        </li>
+                    </ul>
+              </div><!-- /Slide3 --> 
+        </div>     
+       
+	   <nav>
+			<ul class="control-box pager">
+				<li><a data-slide="prev" href="#myCarousel2" class=""><i class="glyphicon glyphicon-chevron-left"></i></a></li>
+				<li><a data-slide="next" href="#myCarousel2" class=""><i class="glyphicon glyphicon-chevron-right"></i></li>
+			</ul>
+		</nav>
+	   <!-- /.control-box -->   
+                              
+    </div><!-- /#myCarousel -->
     
-     <!-- Page Features -->
-    <h4 style="margin-top: 30px;">#최신 프로젝트</h4>
-    <div class="row text-center">
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card h-100">
-          <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-          <div class="card-body">
-            <h4 class="card-title">프로젝트명</h4>
-            <p class="card-text">프로젝트 데이터부분</p>
-          </div>
+ </div>
+ 
+<div class="img">
+        <div class="content">
+            <h1>COME-IT 은...</h1>
+            <h2></h2>
         </div>
-      </div>
-
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card h-100">
-          <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-          <div class="card-body">
-            <h4 class="card-title">프로젝트명</h4>
-            <p class="card-text">프로젝트 데이터부분</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card h-100">
-          <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-          <div class="card-body">
-            <h4 class="card-title">프로젝트명</h4>
-            <p class="card-text">프로젝트 데이터부분</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card h-100">
-          <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-          <div class="card-body">
-            <h4 class="card-title">프로젝트명</h4>
-            <p class="card-text">프로젝트 데이터부분</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- /.row -->
-    
-    <!-- Page Features -->
-    <h4 style="margin-top: 30px;">#인기 강의</h4>
-    <div class="row text-center">
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card h-100">
-          <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-          <div class="card-body">
-            <h4 class="card-title">강의명</h4>
-            <p class="card-text">강의 데이터부분</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card h-100">
-          <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-          <div class="card-body">
-            <h4 class="card-title">강의명</h4>
-            <p class="card-text">강의 데이터부분</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card h-100">
-          <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-          <div class="card-body">
-            <h4 class="card-title">강의명</h4>
-            <p class="card-text">강의 데이터부분</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card h-100">
-          <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-          <div class="card-body">
-            <h4 class="card-title">강의명</h4>
-            <p class="card-text">강의 데이터부분</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- /.row -->
-    
-     <!-- Page Features -->
-    <h4 style="margin-top: 30px;">#인기 공간</h4>
-    <div class="row text-center">
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card h-100">
-          <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-          <div class="card-body">
-            <h4 class="card-title">공간명</h4>
-            <p class="card-text">공간 데이터부분</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card h-100">
-          <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-          <div class="card-body">
-            <h4 class="card-title">강의명</h4>
-            <p class="card-text">강의 데이터부분</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card h-100">
-          <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-          <div class="card-body">
-            <h4 class="card-title">강의명</h4>
-            <p class="card-text">강의 데이터부분</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card h-100">
-          <img class="card-img-top" src="http://placehold.it/500x325" alt="">
-          <div class="card-body">
-            <h4 class="card-title">강의명</h4>
-            <p class="card-text">강의 데이터부분</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- /.row -->
-    
-  </div>
-  <!-- /.container -->
+        <div class="img-cover"></div>
+</div>
 
 <%-- <jsp:include page="footer.jsp"></jsp:include> --%>
 <c:import url="footer.jsp"></c:import>

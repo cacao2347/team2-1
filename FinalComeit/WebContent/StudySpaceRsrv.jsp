@@ -13,7 +13,8 @@
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 <style>
-p {
+p 
+{
 	margin: 20px 0px;
 }
 </style>
