@@ -12,13 +12,11 @@
 	FROM VIEW_MEM_MY
 </select>
 
-<!-- 총 회원 수 조회 count() -->
+<!-- 총 멤버 회원 수 조회 count() -->
 <select id="count" resultType="java.lagn.Integer">
-	SELECT COUNT(*)
+	SELECT COUNT(*) AS COUNT
 	FROM TBL_MEM_JOIN
 </select>
-
-
 
 
 
