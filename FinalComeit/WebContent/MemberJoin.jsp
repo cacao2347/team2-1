@@ -18,6 +18,10 @@
 <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <script>
      $(function(){
+    	 
+    	 // AJAX 요청 및 응답 처리
+    	 ajaxRequest();
+    	 
          //모달을 전역변수로 선언
          var modalContents = $(".modal-contents");
          var modal = $("#defaultModal");

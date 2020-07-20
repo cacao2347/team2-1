@@ -1,1 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.sys.comeit.IMemberDAO">
+
+	<resultMap type="hashmap" id="memberJoin"></resultMap>
+	
+	<select id="memberJoin" statementType="CALLABLE">
+	{
+		CALL PRC_MEM_JOIN(
+			#{mem_id},
+			#{name},
+			#{email},
+			#{tel},
+			#{pwd},
+			#{idntt_cd},
+			#{img_url},
+			#{content},
+			#{spc_area_cd},
+			#{mem_cd, mode=OUT, resultMap=memberJoin},
+		)
+	}
+	</select>
+	
+</mapper>
