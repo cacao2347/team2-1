@@ -26,15 +26,15 @@
 
 .col-md-8 > .searchSel
 {
-	width: 200px;
-	height: 40px;
+	width: 150px;
+	height: 36px;
 	margin-right: 20px;
 }
 
 .col-md-8 > .searchBox
 {
-	width: 600px;
-	height: 40px;
+	width: 500px;
+	height: 36px;
 }
 
 .col-md-8 > .searchSel ,.col-md-8 > .searchBox

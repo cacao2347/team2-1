@@ -141,6 +141,7 @@ html, body
 .roomBtn
 {
 	margin-top: 50px;
+	margin-bottom: 20px;
 }
 
 .stuTitle > h1 , .jrBtn > .report
@@ -212,10 +213,7 @@ html, body
 	border-color: black;
 }
 
-.memImg
-{
-	width: 80px;
-}
+
 
 .name
 {
