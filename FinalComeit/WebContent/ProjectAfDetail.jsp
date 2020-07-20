@@ -210,14 +210,18 @@
 						<!-- <h3>프로젝트장</h3> -->
 						<div class="memLeader" id="member1">
 
-							<img src="<%=cp %>/assets/images/hjkim.PNG" alt="" class="img-circle memImg" />
-							<span class="glyphicon glyphicon-ok ok"></span>
-							<h4>Study Leader</h4>
-							<span class="name">김길동</span>
-							<input type="button" class="btn-sm btn-default infoBtn" id="" value="정보" />
+							<div class="leaderImg">
+								<img src="<%=cp %>/assets/images/hjkim.PNG" alt="" class="img-circle memImg" />
+							</div><!-- end .leaderImg -->
+							
+							<div class="leaderInfo">
+								<span class="glyphicon glyphicon-ok ok"></span>
+								<h4>Study Leader</h4><br>
+								<span class="name">김길동</span>
+								<input type="button" class="btn-xs btn-default infoBtn" id="" value="정보" />
+							</div><!-- end .leaderInfo -->
 							
 							<!-- 모달 -->
-							<!-- 검은 배경 -->
 							<div id="modal" class="searchModal">
 								<!-- 모달창 -->
 								<div class="search-modal-content">
@@ -268,35 +272,60 @@
 						
 						
 						
-						<div class="member" id="member2">
-							<img src="<%=cp %>/assets/images/khjang.PNG" alt="" class="img-circle memImg" />					
-							<h4>member</h4>
-							<span class="name">장길동</span>
-							<input type="button" class="btn-sm btn-default infoBtn" id="" value="정보" />
-						</div><!-- end .member -->
+						<div class="memLeader" id="">
+							
+							<div class="leaderImg">
+								<img src="<%=cp %>/assets/images/khjang.PNG" alt="" class="img-circle memImg" />
+							</div><!-- end .leaderImg -->
+							
+							<div class="leaderInfo">
+								<h4>Study Member</h4><br>
+								<span class="name">장길동</span>
+								<input type="button" class="btn-xs btn-default infoBtn" id="" value="정보" />
+							</div><!-- end .leaderInfo -->
+						</div><!-- end .memLeader -->
+						
+						<div class="memLeader" id="">
+							<div class="leaderImg">
+								<img src="<%=cp %>/assets/images/sjsong.PNG" alt="" class="img-circle memImg" />
+							</div><!-- end .leaderImg -->
+							
+							<div class="leaderInfo">
+								<h4>Study Member</h4><br>
+								<span class="name">송길동</span>
+								<input type="button" class="btn-xs btn-default infoBtn" id="" value="정보" />
+							</div><!-- end .leaderInfo -->
+						</div><!-- end .memLeader -->
 						
 						
-						<div class="member">
-							<img src="<%=cp %>/assets/images/sjsong.PNG" alt="" class="img-circle memImg" />
-							<h4>member</h4>
-							<span class="name">송길동</span>
-							<input type="button" class="btn-sm btn-default infoBtn" id="" value="정보" />
-						</div>
-						<div class="member">
-							<img src="<%=cp %>/assets/images/jmshin.PNG" alt="" class="img-circle memImg" />
-							<h4>member</h4>
-							<span class="name">신길동</span>
-							<input type="button" class="btn-sm btn-default infoBtn" id="" value="정보" />
-						</div>
-						<div class="member">
-							<img src="<%=cp %>/assets/images/hschoi.PNG" alt="" class="img-circle memImg" />
-							<h4>member</h4>
-							<span class="name">최길동</span>
-							<input type="button" class="btn-sm btn-default infoBtn" id="" value="정보" />
-						</div>
+						
+						<div class="memLeader" id="">
+							<div class="leaderImg">
+								<img src="<%=cp %>/assets/images/jmshin.PNG" alt="" class="img-circle memImg" />
+							</div><!-- end .leaderImg -->
+							
+							<div class="leaderInfo">
+								<h4>Study Member</h4><br>
+								<span class="name">신길동</span>
+								<input type="button" class="btn-xs btn-default infoBtn" id="" value="정보" />
+							</div><!-- end .leaderInfo -->
+						</div><!-- end .memLeader -->
+						
+						
+						
+						<div class="memLeader" id="">
+							<div class="leaderImg">
+								<img src="<%=cp %>/assets/images/hschoi.PNG" alt="" class="img-circle memImg" />
+							</div><!-- end .leaderImg -->
+							
+							<div class="leaderInfo">
+								<h4>Study Member</h4><br>
+								<span class="name">최길동</span>
+								<input type="button" class="btn-xs btn-default infoBtn" id="" value="정보" />
+							</div><!-- end .leaderInfo -->
+						</div><!-- end .memLeader -->
 						
 					</div><!-- end .stuMem -->
-				
 					
 					<!-- 프로젝트장에게만 보일 수정 / 폐쇄 버튼 -->
 					<div class="roomBtn">

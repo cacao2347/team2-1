@@ -1,12 +1,5 @@
 @charset "UTF-8";
 
-html, body
-{
-   overflow-x:hidden;
-   overflow-y:auto;
-}
-
-
 .stuTitle
 {
 	width: 100%;
@@ -14,11 +7,16 @@ html, body
 	border-bottom: 1px solid #D8D8D8;
 }
 
+
+.stuTitle > h1
+{
+	text-align: left;
+}
+
 .stuTitle > .title
 {
 	float: left;
 }
-
 
 .closeD
 {
@@ -148,8 +146,8 @@ html, body
 }
 
 
-.title > h1 , .stuArea > h3 , .stuMem > h3 , .memLeader > h4
-, .member > h4 , .stuTerm > h3 , .stuKey > h3 , .stuLevel > h3
+.title > h1 , .stuArea > h3 , .stuMem > h3 , .leaderInfo > h4
+, .stuTerm > h3 , .stuKey > h3 , .stuLevel > h3
 , .stuCurr > h3
 {
 	font-weight: bold;
@@ -165,12 +163,17 @@ html, body
 
 
 .term ,.day, .area, .keword , .level , .curr
-, .name , .manPencil , .position , .keyword ,.oneInt
+, .manPencil , .position , .keyword ,.oneInt
 , .joinStu ,.joinPro , .stuTerm > .icon
 , .stuArea > .icon , .stuKey > .icon
 , .stuLevel > .icon , .stuCurr > .icon
 {
 	font-size: 17pt;
+}
+
+.leaderInfo > .name 
+{
+	font-size: 13pt;
 }
 
 .col-md-4
@@ -179,51 +182,57 @@ html, body
 	border-color: black;
 }
 
-.memImg
+.leaderImg > .memImg
 {
-	width: 80px;
+	width: 75px;
 }
 
-.name
-{
-	margin-left: 30px;
-}
-
-.memLeader , .member
-{
-	margin-bottom: 20px;
-}
 
 .userName > h3, .userName > .name
 .userManner > .glyphicon ,.userManner > h3, .userManner > .pencil
 , .userPosi > h3 , .userPosi > .position , .userKey > h3 , .userKey > .keyword
-, .memLeader > img, .memLeader > h4, .memLeader > .infoBtn
-, .member > img , .member > h4
 , .stuTerm > .icon , .stuTerm > h3
 , .stuArea > .icon , .stuArea > h3
 , .stuKey > .icon , .stuKey > h3
 , .stuLevel > .icon , .stuLevel > h3
 , .stuCurr > .icon , .stuCurr > h3
-, .member > .infoBtn
+{
+	display: inline-block;
+}
+.memLeader > .leaderInfo
+{
+	margin-top: 10px;
+	width: 60%;
+	height: 80%;
+}
+
+.memLeader > .leaderImg
+{
+	width: 30%;
+	height: 80%;	
+}
+
+
+.leaderImg > img, .leaderInfo > h4, .leaderInfo > .infoBtn, .leaderInfo > .name
 {
 	display: inline-block;
 }
 
-.memLeader > .infoBtn
+.memLeader > .leaderImg, .memLeader > .leaderInfo
 {
-	margin-left: 50px;
+	display: inline-block;
+}
+
+
+.leaderInfo > .infoBtn
+{
+	margin-left: 5px;
 	background-color: #0A0A2A;
 	color: white;
 }
 
-.member > .infoBtn
-{
-	margin-left: 115px;
-	background-color: #0A0A2A;
-	color: white;
-}
 
-.user , .pencil ,.ok
+.user , .pencil ,.leaderInfo > .ok
 {
 	font-size: 20px;
 	margin-right: 10px;
@@ -242,10 +251,10 @@ html, body
 
 .stuMem > .memLeader
 {
-	padding-top: 20px;
-	padding-left:10px;
-	width: 100%;
-	height: 100px;
+	margin-left: 20px;
+	padding: 0px;
+	width: 95%;
+	height: 120px;
 	/* border: 1px solid #e9e9e9; */
 	border-radius: 10px;
 	background-color: #FAFAFA;
@@ -253,30 +262,18 @@ html, body
 	/* font-family: Nanum Gothic; */
 }
 
-.stuMem > .member
+.memLeader
 {
-	padding-top: 10px;
-	padding-left:10px;
-	width: 100%;
-	height: 100px;
-	/* border: 1px solid #e9e9e9; */
-	border-radius: 10px;
-	background-color: #FAFAFA;
-	/* background: linear-gradient( to bottom, #E1B283, white ); */
-	/* font-family: Nanum Gothic; */
+	margin-bottom: 10px;
 }
 
-.member > h4
-{
-	margin-left: 15px;
-}
 
 .stuInfo > .stuTerm,
 .stuInfo > .stuArea,
 .stuInfo > .stuKey,
 .stuInfo > .stuLevel
 {
-	width: 800px;
+	width: 100%;
 	height: 130px;
 	border-bottom: 1px solid #D8D8D8;
 }
@@ -294,8 +291,3 @@ html, body
 {
 	margin-bottom: 40px;
 }
-
-
-
-
-
