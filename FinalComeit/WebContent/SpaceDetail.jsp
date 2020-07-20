@@ -20,6 +20,7 @@
 <link rel="stylesheet" href="<%=cp %>/assets/css/spafeedback.css">
 <script type="text/javascript">
 
+
 	/* 달력 */
 	$(document).ready(function(){
 	    var date_input=$('input[name="date"]'); //our date input has the name "date"
