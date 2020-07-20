@@ -147,7 +147,7 @@
 
 
 .title > h1 , .stuArea > h3 , .stuMem > h3 , .leaderInfo > h4
-, .member > h4 , .stuTerm > h3 , .stuKey > h3 , .stuLevel > h3
+, .stuTerm > h3 , .stuKey > h3 , .stuLevel > h3
 , .stuCurr > h3
 {
 	font-weight: bold;
@@ -171,8 +171,7 @@
 	font-size: 17pt;
 }
 
-.leaderInfo > .name ,
-.membInfo > .memName
+.leaderInfo > .name 
 {
 	font-size: 13pt;
 }
@@ -188,10 +187,6 @@
 	width: 75px;
 }
 
-.memImg
-{
-	width: 80px;
-}
 
 .userName > h3, .userName > .name
 .userManner > .glyphicon ,.userManner > h3, .userManner > .pencil
@@ -218,8 +213,7 @@
 }
 
 
-.leaderImg > img, .leaderInfo > h4, .leaderInfo > .infoBtn, .leaderInfo > .leaderInfo
-, .membInfo > .memName , .membInfo > .infoBtn , .membInfo > h4
+.leaderImg > img, .leaderInfo > h4, .leaderInfo > .infoBtn, .leaderInfo > .name
 {
 	display: inline-block;
 }
@@ -237,12 +231,6 @@
 	color: white;
 }
 
-.membInfo > .infoBtn
-{
-	margin-left: 10px;
-	background-color: #0A0A2A;
-	color: white;
-}
 
 .user , .pencil ,.leaderInfo > .ok
 {
@@ -279,10 +267,6 @@
 	margin-bottom: 10px;
 }
 
-.member > h4
-{
-	margin-left: 15px;
-}
 
 .stuInfo > .stuTerm,
 .stuInfo > .stuArea,

@@ -205,7 +205,7 @@
 				
 					
 					<div class="stuMem">
-						<!-- <h3>스터디장</h3> -->
+						<!-- 스터디장-->
 						<div class="memLeader" id="member1">
 							
 							<div class="leaderImg">
@@ -221,7 +221,6 @@
 							
 							
 							<!-- 모달 -->
-							<!-- 검은 배경 -->
 							<div id="modal" class="searchModal">
 								<!-- 모달창 -->
 								<div class="search-modal-content">
@@ -268,7 +267,7 @@
 						
 							
 						</div><!-- end .memLeader -->
-					<!-- 	<h3>스터디원</h3> -->
+					<!-- 스터디원 -->
 						<div class="memLeader" id="">
 							
 							<div class="leaderImg">
