@@ -5,6 +5,24 @@
   
 <mapper namespace="com.sys.comeit.IMemberDAO">
 
+<!-- 멤버 정보 조회 list() -->
+<select id="list" resultType="com.sys.comeit.MemberDTO">
+	SELECT ID, MEM_CD, NAME, EMAIL, TEL, 
+		   IDNTT, MEM_CONTENT, AREA_NAME, SPC_AREA_NAME, IMG_URL , JOINDATE , PWD
+	FROM VIEW_MEM_MY
+</select>
+
+<!-- 총 회원 수 조회 count() -->
+<select id="count" resultType="java.lagn.Integer">
+	SELECT COUNT(*)
+	FROM TBL_MEM_JOIN
+</select>
+
+
+
+
+
+<!-- 
 	<resultMap type="hashmap" id="memberJoin"></resultMap>
 	
 	<select id="memberJoin" statementType="CALLABLE">
@@ -23,5 +41,6 @@
 		)
 	}
 	</select>
-	
+	 -->
+	 
 </mapper>

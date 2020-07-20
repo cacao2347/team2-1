@@ -11,6 +11,7 @@ public class MemberDTO
 	private String img_url;											// 회원 이미지 url
 	private String pwd;												// 비밀번호
 	
+	
 	// getter / setter 구성
 	public String getId() 
 	{
