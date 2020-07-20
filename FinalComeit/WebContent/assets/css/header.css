@@ -1,4 +1,15 @@
 @charset "UTF-8";
+.navbar-inverse .navbar-nav>li>a {
+    color: white !important;
+    font-size: 13pt !important;
+}
+.navbar-inverse .navbar-nav>li>a:hover{
+    color: #4AA8D8 !important;
+    font-size: 13pt !important;
+}
+.navbar-inverse .navbar-brand {
+    color: white !important;
+}
 .mega-dropdown {
   position: static !important;
 }
