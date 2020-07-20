@@ -18,6 +18,7 @@
 <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
 <link rel="stylesheet" href="<%=cp %>/assets/css/spafeedback.css">
+
 <script type="text/javascript">
 
 
@@ -133,7 +134,7 @@
        $('#slider5 a').html('<label><span class="glyphicon glyphicon-chevron-left"></span>'+$spa5+'<span class="glyphicon glyphicon-chevron-right"></span></label>');
     } 
     
-    $(document).ready(function () { $('head').append('<style type="text/css">.modal .modal-body {max-height: ' + ($('body').height() * .8) + 'px;}.modal-open .modal{overflow-y: hidden !important;}</style>'); });
+    $(document).ready(function () { $('head').append('<style type="text/css">.modal .modal-body {max-height: ' + ($('body').height() * .8) + 'px;}.modal-open .modal{overflow-y: hidden !important;overflow-x: hidden !important;}</style>'); });
 
 </script>
  <style type="text/css">
@@ -467,8 +468,8 @@
 		
 
   <!-- Bootstrap core JavaScript -->
-  <script src="<%=cp %>/assets/js/jquery.min.js"></script>
-  <script src="<%=cp %>/assets/js/bootstrap.bundle.min.js"></script>
+<%--   <script src="<%=cp %>/assets/js/jquery.min.js"></script>
+  <script src="<%=cp %>/assets/js/bootstrap.bundle.min.js"></script> --%>
 
 </body>
 </html>
