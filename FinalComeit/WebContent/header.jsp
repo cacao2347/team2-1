@@ -41,7 +41,7 @@ $(document).ready(function(){
 	</div>
 	
 	<div class="collapse navbar-collapse js-navbar-collapse">
-		<ul class="nav navbar-nav" style="font-size: 14pt; color: white; font-weight: bold;">
+		<ul class="nav navbar-nav">
 			<li><a href="#">스터디</a></li>
 			<li><a href="#">프로젝트</a></li>
 			<li><a href="#">강의</a></li>
