@@ -2,7 +2,7 @@ package com.sys.comeit;
 
 public class AdminDTO
 {
-	private String admin_cd, adm_grds_cd, NAME, pwd, email, tel;
+	private String admin_cd, adm_grds_cd, name, pwd, email, tel;
 
 	public String getAdmin_cd()
 	{
@@ -24,14 +24,14 @@ public class AdminDTO
 		this.adm_grds_cd = adm_grds_cd;
 	}
 
-	public String getNAME()
+	public String getName()
 	{
-		return NAME;
+		return name;
 	}
 
-	public void setNAME(String nAME)
+	public void setName(String name)
 	{
-		NAME = nAME;
+		this.name = name;
 	}
 
 	public String getPwd()
