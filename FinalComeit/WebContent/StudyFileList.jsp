@@ -33,7 +33,7 @@
 				<option value="author">작성자</option>
 				</select>
 				<input type="text" id="" class="searchBox form-control" placeholder="검색어를 입력하세요."/>
-				<button type="button" class="search btn-sm btn-primary">검색</button>
+				<button type="button" class="search btn btn-primary">검색</button>
 			</div>
 		
 		
@@ -148,7 +148,7 @@
 				<li class="page-item"><a href="#" class="page-link">Next</a></li>
 				</ul>
 			</div>
-			<button type="button" class="add btn-sm btn-primary pull-right">등록</button>
+			<button type="button" class="add btn btn-primary pull-right">등록</button>
 		</div>
 	</div><!-- end .row -->
 </div><!-- end .container-fluid -->

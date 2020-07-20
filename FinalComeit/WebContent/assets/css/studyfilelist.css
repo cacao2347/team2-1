@@ -18,10 +18,14 @@
 	margin-bottom: 30px;
 }
 
-.col-md-12 > .searchSel,
-.col-md-12> .search
+.col-md-12 > .searchSel
 {
 	margin-top: 15px;
+}
+
+.col-md-12 > .search
+{
+	margin-left: 10px;
 }
 
 .col-md-12 > .searchSel
