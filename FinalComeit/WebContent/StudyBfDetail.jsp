@@ -27,6 +27,16 @@
 		$(".infoBtn").click(function() 
 		{
 			$("#modal").show();	
+			
+			// 스크롤 제어
+			$("html, body").css({"overflow":"hidden", "height":"100%"});
+			$("#modal").bind("touchmove", function(e) {
+				e.preventDefault();
+			});
+			$("#modal .searchModal").bind("touchmove", function(e) {
+				e.stopPropagation();
+			});
+			
 		});	
 		
 		
@@ -46,6 +56,11 @@
 	function closeModal() 
 	{
 		$('.searchModal').hide();
+	
+		// 스크롤 제어 해제
+		$("html, body").css({"overflow":"auto", "height":"auto"});
+		$('#modal').unbind('touchmove');
+		
 	};
 	
 
@@ -171,39 +186,39 @@
 									
 									<!-- 버튼 -->
 									<div class="closeD" onClick="closeModal();">
-										<span class="pop_bt modalCloseBtn" >X</span>
+										<span class="pop_bt modalCloseBtn pull-right" >X</span>
 									</div><!-- end .closeD -->
 									
 									<div class="userName">
-										<span class="glyphicon glyphicon-user user"></span><h3>이름 :</h3><span class="name">김길동</span>
+										<span class="glyphicon glyphicon-user user"></span><h4>이름 :</h4><span class="name">김길동</span>
 									</div><!-- end .userName -->
 									<div class="userManner">
-										<span class="glyphicon glyphicon-pencil pencil"></span><h3>매너연필 :</h3><span class="manPencil">5cm</span>
+										<span class="glyphicon glyphicon-pencil pencil"></span><h4>매너연필 :</h4><span class="manPencil">5cm</span>
 									</div><!-- userManner -->
 									<div class="userPosi">
-										<h3>신분 :</h3><span class="position">취업준비생</span>
+										<h4>신분 :</h4><span class="position">취업준비생</span>
 									</div><!-- end .userPosi -->
 									<div class="userKey">
-										<h3>관심키워드 :</h3><span class="keyword">Java / JSP / jQuery / SQL / Spring</span>
+										<h4>관심키워드 :</h4><span class="keyword">Java / JSP / jQuery / SQL / Spring</span>
 									</div><!-- end .userKey -->
 									<div class="userInt">
-										<h3>자기소개 :</h3><span class="oneInt">한 줄 자기소개 영역입니다.</span>
+										<h4>자기소개 :</h4><span class="oneInt">한 줄 자기소개 영역입니다.</span>
 									</div><!-- end .userInt -->
 									<div class="userStu">
-										<h3>참여중인 스터디 :</h3>
+										<h4>참여중인 스터디 :</h4>
 										<span class="joinStu">·F반 스터디방</span><br>
 										<span class="joinStu">·F반 취업준비방</span>
 									</div><!-- end .userStu -->
 									<div class="userPro">
-										<h3>참여중인 프로젝트 :</h3>
+										<h4>참여중인 프로젝트 :</h4>
 										<span class="joinPro">·F반 프로젝트방</span><br>
 										<span class="joinPro">·Come-It</span>
 									</div><!-- end .userPro -->
 									<div class="out">
 										<input type="button" value="방출" class="btn btn-sm outBtn" />
+										<input type="button" class="btn btn-sm btn-primary manBtn" value="위임" />
 									</div><!-- end .out -->
 							</div><!-- end .search-modal-content -->
-							
 							
 							
 							</div><!-- end .searchModal -->	

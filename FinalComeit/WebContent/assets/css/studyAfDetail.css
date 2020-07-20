@@ -1,5 +1,12 @@
 @charset "UTF-8";
 
+.search-modal-content > .userInt,
+.search-modal-content > .userStu,
+.search-modal-content > .userPro
+{
+	margin-bottom: 15px;
+}
+
 .stuTitle
 {
 	width: 100%;
@@ -25,8 +32,7 @@
 	text-align: center;
 	/* padding-bottom: 10px;
 	padding-top: 10px; */
-	width: 450px;
-	height: 30px;
+
 	margin-bottom: 5px;
 	text-align: right;
 }
@@ -36,16 +42,15 @@
 	font-size: 13pt;
 }
 
-.userName > h3, .userName > .name,
-.memPen > .pencil, .memPen > h3, .memPen > .manPencil
+.userName > h4, .userName > .name
 {
 	display: inline-block;
 }
 
-.userName > h3 , .userManner > h3
-, .userPosi > h3 , .userKey >  h3
-, .userInt > h3 , .userStu > h3
-, .userPro > h3
+.userName > h4 , .userManner > h4
+, .userPosi > h4 , .userKey >  h4
+, .userInt > h4 , .userStu > h4
+, .userPro > h4
 {
 	font-weight: bold;
 }
@@ -75,6 +80,8 @@
 	text-align: left;
 }
 
+
+
 	/* Modal Content/Box */
 .search-modal-content 
 {
@@ -86,8 +93,8 @@
 	padding-right: 20px;
 	padding-bottom: 20px;
 	border: 1px solid #888;
-	width: 500px; /* Could be more or less, depending on screen size */
-	height: 700px;
+	width: 400px; /* Could be more or less, depending on screen size */
+	height: 550px;
 	border-radius: 15px;
 	z-index: 11;
 }
@@ -148,7 +155,7 @@
 
 .title > h1 , .stuArea > h4 , .stuMem > h3 , .leaderInfo > h4
 , .stuTerm > h4 , .stuKey > h4 , .stuLevel > h4
-, .stuCurr > h4
+, .stuCurr > h4, .leaderInfo > .name
 {
 	font-weight: bold;
 }
@@ -171,7 +178,8 @@
 	font-size: 13pt;
 }
 
-.leaderInfo > .name 
+.leaderInfo > .name ,
+.userName > .name
 {
 	font-size: 13pt;
 }
@@ -189,9 +197,9 @@
 }
 
 
-.userName > h3, .userName > .name
-.userManner > .glyphicon ,.userManner > h3, .userManner > .pencil
-, .userPosi > h3 , .userPosi > .position , .userKey > h3 , .userKey > .keyword
+
+.userManner > .glyphicon ,.userManner > h4, .userManner > .pencil
+, .userPosi > h4 , .userPosi > .position 
 , .stuTerm > .icon , .stuTerm > h4
 , .stuArea > .icon , .stuArea > h4
 , .stuKey > .icon , .stuKey > h4
