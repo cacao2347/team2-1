@@ -26,9 +26,8 @@
 
 	<div class="row searchRow">
 	
-			<div class="col-md-2">
-			</div>
-			<div class="col-md-8">
+		
+			<div class="col-md-12">
 				<select name="" id="" class="form-control searchSel">
 				<option value="title">제목</option>
 				<option value="author">작성자</option>
@@ -36,12 +35,9 @@
 				<input type="text" id="" class="searchBox form-control" placeholder="검색어를 입력하세요."/>
 				<button type="button" class="search btn-sm btn-primary">검색</button>
 			</div>
-			<div class="col-md-2">
-			</div>
-			
+		
 		
 	</div><!-- end .row .searchRow -->
-	
 	
 	<div class="row">
 		
@@ -135,12 +131,7 @@
 		
 	</div><!-- end .row -->
 	<div class="row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-8">
-			<div class="col-md-2">
-			</div>
-			<div class="col-md-8">
+		<div class="col-md-12">
 			<div class="paging"> 
 				<ul class="pagination">
 				<li class="page-item"><a href="#" class="page-link">Previous</a></li>
@@ -157,14 +148,7 @@
 				<li class="page-item"><a href="#" class="page-link">Next</a></li>
 				</ul>
 			</div>
-			</div>
-			<div class="col-md-2">
-				<button type="button" class="add btn-sm btn-primary">등록</button>
-			</div>
-			
-			
-		</div>
-		<div class="col-md-2">
+			<button type="button" class="add btn-sm btn-primary pull-right">등록</button>
 		</div>
 	</div><!-- end .row -->
 </div><!-- end .container-fluid -->

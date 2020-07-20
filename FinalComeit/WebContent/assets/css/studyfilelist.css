@@ -18,32 +18,32 @@
 	margin-bottom: 30px;
 }
 
-.col-md-8 > .searchSel,
-.col-md-8 > .search
+.col-md-12 > .searchSel,
+.col-md-12> .search
 {
 	margin-top: 15px;
 }
 
-.col-md-8 > .searchSel
+.col-md-12 > .searchSel
 {
 	width: 150px;
 	height: 36px;
 	margin-right: 20px;
 }
 
-.col-md-8 > .searchBox
+.col-md-12> .searchBox
 {
 	width: 500px;
 	height: 36px;
 }
 
-.col-md-8 > .searchSel ,.col-md-8 > .searchBox
-, .col-md-8 > .search
+.col-md-12> .searchSel ,.col-md-12 > .searchBox
+, .col-md-12 > .search
 {
 	display: inline-block;
 }
 
-.col-md-8
+.col-md-12
 {
 	text-align: center;
 }
