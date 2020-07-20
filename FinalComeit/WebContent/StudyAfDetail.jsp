@@ -233,7 +233,7 @@
 								<span class="glyphicon glyphicon-ok ok"></span>
 								<h4>Study Leader</h4><br>
 								<span class="name">김길동</span>
-								<input type="button" class="btn-xs btn-default infoBtn" id="" value="정보" />
+								<input type="button" class="btn btn-xs btn-default infoBtn" id="" value="정보" />
 							</div><!-- end .leaderInfo -->
 							
 							
@@ -294,7 +294,7 @@
 							<div class="leaderInfo">
 								<h4>Study Member</h4><br>
 								<span class="name">장길동</span>
-								<input type="button" class="btn-xs btn-default infoBtn" id="" value="정보" />
+								<input type="button" class="btn btn-xs btn-default infoBtn" id="" value="정보" />
 							</div><!-- end .leaderInfo -->
 						</div><!-- end .memLeader -->
 						
@@ -306,7 +306,7 @@
 							<div class="leaderInfo">
 								<h4>Study Member</h4><br>
 								<span class="name">송길동</span>
-								<input type="button" class="btn-xs btn-default infoBtn" id="" value="정보" />
+								<input type="button" class="btn btn-xs btn-default infoBtn" id="" value="정보" />
 							</div><!-- end .leaderInfo -->
 						</div><!-- end .memLeader -->
 						
@@ -320,7 +320,7 @@
 							<div class="leaderInfo">
 								<h4>Study Member</h4><br>
 								<span class="name">신길동</span>
-								<input type="button" class="btn-xs btn-default infoBtn" id="" value="정보" />
+								<input type="button" class="btn btn-xs btn-default infoBtn" id="" value="정보" />
 							</div><!-- end .leaderInfo -->
 						</div><!-- end .memLeader -->
 						
@@ -334,7 +334,7 @@
 							<div class="leaderInfo">
 								<h4>Study Member</h4><br>
 								<span class="name">최길동</span>
-								<input type="button" class="btn-xs btn-default infoBtn" id="" value="정보" />
+								<input type="button" class="btn btn-xs btn-default infoBtn" id="" value="정보" />
 							</div><!-- end .leaderInfo -->
 						</div><!-- end .memLeader -->
 						
