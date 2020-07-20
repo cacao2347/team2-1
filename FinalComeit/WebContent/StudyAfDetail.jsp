@@ -25,32 +25,49 @@
 
 	$(document).ready(function () 
 	{
+		
+		// 정보 보기 버튼 클릭 시 회원 정보 모달창 오픈
 		$(".infoBtn").click(function() 
 		{
+			scrollDisable();
+			
 			$("#modal").show();	
+			/* 
+			$("html, body").css({"overflow":"hidden", "height":"100%"});
+			$("#pop").bind("touchmove", function(e) {
+				e.preventDefault();
+			});
+			$("#modal").bind("touchmove", function(e) {
+				e.stopPropagation();
+			});
+			 */			
 		});	
 		
 		
+		// 모달창에서 방출 버튼 클릭 시 경고창 띄우고, 방출 사유 받음
 		$(".outBtn").click(function() 
 		{
-				var outRsn = prompt("불합리한 방출은 사이트 이용에 제한이 있을 수 있습니다.\n방출 사유를 입력하세요.");
-				
+				var outRsn = prompt("불합리한 방출은 사이트 이용에 제한이 있을 수 있습니다.\n방출 사유를 입력하세요.");			
 		});
 		
+		// 퇴장 버튼 클릭 시 페널티에 대한 경고 메세지 안내
 		$(".leave").click(function() 
 		{
 			alert("퇴장버튼 클릭 시 날짜에 따라 페널티 경고 메세지 띄우기");	
 		});
-		
 	
 		
 	});
 		
+	// 모달창 닫기 버튼 클릭 시 
 	function closeModal() 
-	{
+	{	
 		$('.searchModal').hide();
+		/* 
+		$("html, body").css({"overflow":"auto", "height":"auto"});
+		$('#modal').unbind('touchmove');
+		 */
 	};
-	
 	
 	
 	/* 출석 차트 */
@@ -156,7 +173,7 @@
 						<!-- 활동 기간 -->
 						<div class="stuTerm">
 							<span class="glyphicon glyphicon-calendar icon"></span>
-							<h3>활동 기간</h3><br>
+							<h4>활동 기간</h4><br>
 							<span class="term">2020-01-16 ~ 2020-07-15&nbsp;&nbsp;&nbsp;&nbsp;6개월</span><br />
 							<span class="day">└ 월요일, 수요일</span>		
 						</div><!-- end stuTerm -->
@@ -164,30 +181,30 @@
 						<!-- 활동 지역 -->
 						<div class="stuArea">
 							<span class="glyphicon glyphicon-map-marker icon"></span>
-							<h3>활동 지역</h3><br />
+							<h4>활동 지역</h4><br />
 							<span class="area">서울시 마포구</span>
 						</div><!-- end .stuArea -->
 						
 						<!-- 키워드 -->
 						<div class="stuKey">
 							<span class="glyphicon glyphicon-tags icon"></span>
-							<h3>키워드</h3><br>
+							<h4>키워드</h4><br>
 							<span class="keword">Java / Oracle / JSP / Spring</span>
 						</div><!-- end .stuKey -->
 						
 						<!-- 예상 레벨 -->
 						<div class="stuLevel">
 							<span class="glyphicon glyphicon-blackboard icon"></span>
-							<h3>예상 레벨</h3><br>
+							<h4>예상 레벨</h4><br>
 							<span class="level">중급</span>
 						</div>
 						
 						<!-- 상세 설명 -->
 						<div class="stuCurr">
 							<span class="glyphicon glyphicon-bookmark icon"></span>
-							<h3>상세 설명</h3><br />
-							<span class="curr">스터디의 상세 설명 영역입니다.<br>
-										   스터디장이 수정할 수 있는 영역이며,<br>  우리 스터디가 어떤 공부를 하게 될 지<br> 
+							<h4>상세 설명</h4><br />
+							<span class="curr">스터디의 상세 설명 영역입니다.
+										   스터디장이 수정할 수 있는 영역이며, <br>우리 스터디가 어떤 공부를 하게 될 지 
 										   상세하게 작성할 수 있습니다.<br> 상세 커리큘럼이 적혀 있는 영역입니다.</span>
 						</div>
 					

@@ -146,9 +146,9 @@
 }
 
 
-.title > h1 , .stuArea > h3 , .stuMem > h3 , .leaderInfo > h4
-, .stuTerm > h3 , .stuKey > h3 , .stuLevel > h3
-, .stuCurr > h3
+.title > h1 , .stuArea > h4 , .stuMem > h3 , .leaderInfo > h4
+, .stuTerm > h4 , .stuKey > h4 , .stuLevel > h4
+, .stuCurr > h4
 {
 	font-weight: bold;
 }
@@ -168,7 +168,7 @@
 , .stuArea > .icon , .stuKey > .icon
 , .stuLevel > .icon , .stuCurr > .icon
 {
-	font-size: 17pt;
+	font-size: 13pt;
 }
 
 .leaderInfo > .name 
@@ -185,17 +185,18 @@
 .leaderImg > .memImg
 {
 	width: 75px;
+	height: 70px;
 }
 
 
 .userName > h3, .userName > .name
 .userManner > .glyphicon ,.userManner > h3, .userManner > .pencil
 , .userPosi > h3 , .userPosi > .position , .userKey > h3 , .userKey > .keyword
-, .stuTerm > .icon , .stuTerm > h3
-, .stuArea > .icon , .stuArea > h3
-, .stuKey > .icon , .stuKey > h3
-, .stuLevel > .icon , .stuLevel > h3
-, .stuCurr > .icon , .stuCurr > h3
+, .stuTerm > .icon , .stuTerm > h4
+, .stuArea > .icon , .stuArea > h4
+, .stuKey > .icon , .stuKey > h4
+, .stuLevel > .icon , .stuLevel > h4
+, .stuCurr > .icon , .stuCurr > h4
 {
 	display: inline-block;
 }
@@ -274,8 +275,9 @@
 .stuInfo > .stuLevel
 {
 	width: 100%;
-	height: 130px;
+	height: 120px;
 	border-bottom: 1px solid #D8D8D8;
+	margin-bottom: 20px;
 }
 
 .stuInfo > .stuTerm,
