@@ -1,5 +1,14 @@
 @charset "UTF-8";
-
+.joindiv
+{
+	margin-top: 60px;
+	margin-bottom: 60px;
+	
+}
+.joinBtn
+{
+	float: right;
+}
 
 .btn-primary {
   color: #fff;

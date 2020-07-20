@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
    request.setCharacterEncoding("UTF-8");
    String cp = request.getContextPath();
@@ -11,7 +12,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/join.css">
 <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/studyCreate.css">
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <script src="http://code.jquery.com/jquery.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -271,6 +272,9 @@
  </script>
     </head>
     <body>
+<div class="headerrow">
+		<c:import url="header.jsp"></c:import>
+</div>
         <div class="container"><!-- 좌우측의 공간 확보 -->
             <!-- 헤더 들어가는 부분 -->
             
@@ -330,7 +334,7 @@
                 <div class="form-group " id="divId">
                     <label for="inputId" class="col-lg-2 control-label">아이디</label>
                     <div class="col-lg-10 form-inline" >
-                        <input type="text" class="form-control onlyAlphabetAndNumber" id="id" data-rule-required="true" placeholder="30자이내의 알파벳, 언더스코어(_), 숫자만 입력 가능합니다." maxlength="30"
+                        <input type="text" class="form-control onlyAlphabetAndNumber" id="id" data-rule-required="true" placeholder="7~10자리 알파벳,숫자만 입력 가능합니다." maxlength="30"
                         style="width: 85%;">
                         &nbsp;
                         <button type="button" class="btn btn-primary">중복확인</button>
@@ -339,7 +343,7 @@
                 <div class="form-group" id="divPassword">
                     <label for="inputPassword" class="col-lg-2 control-label">패스워드</label>
                     <div class="col-lg-10 form-inline">
-                        <input type="password" class="form-control" id="password" name="excludeHangul" style="width: 85%;" data-rule-required="true" placeholder="패스워드" maxlength="30">
+                        <input type="password" class="form-control" id="password" name="excludeHangul" style="width: 85%;" data-rule-required="true" placeholder="7~10자리 알파벳, 숫자, 특수문자를 섞어 입력해야합니다." maxlength="30">
                     </div>
                 </div>
                 <div class="form-group" id="divPasswordCheck">
@@ -361,8 +365,9 @@
                     </div>
                 </div>
                 
-                <label for="inputsinboon" class="col-lg-2 control-label">신분</label>
+                
 				<div class="form-group" id="divPosition">
+				<label for="inputsinboon" class="col-lg-2 control-label">신분</label>
 					<div class="col-lg-10">
 					<select name="week" id="week" class="posiSel form-control" style="width: 450px;">
 						<option value="0">신분 선택</option>
@@ -374,8 +379,9 @@
 				</div><!-- end .position -->
 					
 					
-				<label for="areaMemNum" class="col-lg-2 control-label" >지역</label>	
+				
 				<div class="form-group" id="areaMemNum">
+				<label for="areaMemNum" class="col-lg-2 control-label" >지역</label>	
 					<div class="col-lg-10" style="float: left; width: 225px;" >
 						<select name="area" id="area" class="area form-control">
 							<option value="0">지역</option>
@@ -390,9 +396,7 @@
 							<option value="seogu">서구</option>
 						</select>
 					</div>
-					<div class="col-lg-10 stuKeyBtn">
 						<input type="button" value="등록" class="keyBtn btn btn-primary" />
-					</div>
 				</div><!-- end .areaMemNum -->
 				
 				
@@ -407,18 +411,18 @@
                 <div class="form-group" id="divPhoneNumber">
                     <label for="inputPhoneNumber" class="col-lg-2 control-label">인증 번호</label>
                     <div class="col-lg-10 form-inline">
-                        <input type="tel" class="form-control onlyNumber" id="phoneNumber" data-rule-required="true" placeholder="-를 제외하고 숫자만 입력하세요." maxlength="11" style="width: 85%;">
+                        <input type="tel" class="form-control onlyNumber" id="phoneNumber" data-rule-required="true"  maxlength="11" style="width: 85%;">
                         &nbsp;
                         <button type="button" class="btn btn-primary">확인</button>
                     </div>
                 </div>
                 
-                <div class="image">
+                <div class="image form-group">
 				<label for="inputPhoneNumber" class="col-lg-2 control-label">프로필 이미지</label>
                      <div class="col-lg-10 form-inline">
-	                     	<input type="text" required="required" name="housing" id="aa2" class="aa2 aa form-control" style="width: 85%;" />
+	                     	<input type="text" required="required" name="housing" id="aa2" class="form-control" style="width: 85%;"/>
 	                		&nbsp;
-	                		<button class="btn btn-primary nextBtn pull-right aa2" type="button" >등록</button>
+	                		<button class="btn btn-primary" type="button" >등록</button>
                 	 </div>
                 </div>
 				
@@ -430,8 +434,9 @@
                 </div>
                 
 			    <!-- 키워드 -->
+			    <div class="form-group">
 				<div class="stuKeyword">
-					<label for="inputPhoneNumber" class="col-lg-12 control-label">관심 키워드(최대 5개까지 선택)</label>
+					<label for="inputPhoneNumber" class="col-lg-2 control-label">관심 키워드(최대 5개까지 선택)</label>
 					
 				</div>
 				<div class="stuKey1">
@@ -455,7 +460,7 @@
 					
 					<br>
 					
-					<div class="stuKeyBox">
+					<div>
 					<div class="tagStyle">
 						<span class="keyTag">
 							# 자바
@@ -483,13 +488,18 @@
 				</div><!-- end .stuKeyBox -->
 					
 				</div><!-- end .stuKey -->
+				</div>
                 <div class="form-group">
                     <div class="col-lg-offset-2 col-lg-10">
-                        <button type="submit" class="btn btn-primary">가입하기</button>
+                        <button type="submit" class="btn btn-primary joinBtn">가입하기</button>
                     </div>
                 </div>
             </form>
             </div>
-
+<div class="row">
+	<div class="col-md-12">
+	<c:import url="footer.jsp"></c:import>
+	</div>
+</div>
 </body>
 </html>

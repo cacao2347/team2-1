@@ -10,6 +10,8 @@
 <head>
 <meta charset="UTF-8">
 <title>StudyFileList.jsp</title>
+<link rel="shortcut icon" href="<%=cp %>/assets/images/pen_1.ico" type="image/x-icon">
+<link rel="icon" href="<%=cp %>/assets/images/pen_1.ico" type="image/x-icon">
 <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/bootstrap.min.css" >
 <link rel="stylesheet"  href="<%=cp %>/assets/css/blog-post.css" >
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">

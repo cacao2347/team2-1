@@ -10,6 +10,8 @@
 <head>
 <meta charset="UTF-8">
 <title>StudyFileAdd.jsp</title>
+<link rel="shortcut icon" href="<%=cp %>/assets/images/pen_1.ico" type="image/x-icon">
+<link rel="icon" href="<%=cp %>/assets/images/pen_1.ico" type="image/x-icon">
 <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/studyfileadd.css" >
 
 <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/bootstrap/bootstrap.min.css">
