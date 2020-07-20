@@ -13,5 +13,6 @@ public interface IMemberDAO
 	public ArrayList<MemberDTO> list();	// 회원 리스트	
 	public int modify(MemberDTO dto);	// 회원이 자기 정보 수정 update
 	public int remove(int mid); 		// 회원탈퇴(프로시저로 탈퇴될텐데?)
-	
+	public MemberDTO login(MemberDTO dto); //로그인
+
 }

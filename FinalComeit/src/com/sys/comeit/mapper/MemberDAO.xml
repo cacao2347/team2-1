@@ -18,6 +18,13 @@
 	FROM TBL_MEM_JOIN
 </select>
 
+<!-- 로그인 -->
+<select id="login" resultType="com.sys.comeit.MemberDTO">
+      SELECT ID, PWD
+      FROM VIEW_MEM_MY
+      WHERE ID=#{id}
+      AND PWD=#{pwd}
+</select>
 
 
 <!-- 

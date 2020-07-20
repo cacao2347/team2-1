@@ -10,4 +10,5 @@ public interface ISpaDAO
 	
 	public int modify(SpaDTO dto);	// 업체 회원이 자기 정보 수정 update
 	public int remove(int sid); 		// 업체 회원탈퇴요청
+	public SpaDTO login(SpaDTO dto); //로그인
 }

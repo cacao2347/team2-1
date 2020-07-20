@@ -17,7 +17,13 @@
 	FROM TBL_SPA_JOIN
 </select>
 
-
+<!-- 로그인 -->
+	<select id="login" resultType="com.sys.comeit.SpaDTO">
+     	SELECT ID,PWD  
+		FROM VIEW_SPA_MY
+      	WHERE ID=#{id}
+      	  AND PWD=#{pwd}
+	</select>
 
 
 <!-- 

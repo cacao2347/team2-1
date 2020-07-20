@@ -6,4 +6,5 @@ public interface IAdminDAO
 {
 	public int count();					// 관리자 수
 	public ArrayList<AdminDTO> list();	// 관리자 리스트	
+	public AdminDTO login(AdminDTO dto); //로그인
 }
