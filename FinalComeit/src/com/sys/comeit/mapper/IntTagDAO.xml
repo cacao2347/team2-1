@@ -5,7 +5,7 @@
   
 <mapper namespace="com.sys.comeit.IIntTagDAO">
 
-	<select id="intTagList" resultType="com.test.mybatis.IntTagDTO">
+	<select id="intTagList" resultType="com.sys.comeit.IntTagDTO">
 		SELECT INT_TAG_CD, INT_TAG
 		FROM TBL_INT_TAG
 	</select>

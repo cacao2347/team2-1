@@ -5,7 +5,7 @@
   
 <mapper namespace="com.sys.comeit.ISpcAreaDAO">
 
-	<select id="spcAreaList" resultType="com.test.mybatis.SpcAreaDTO">
+	<select id="spcAreaList" resultType="com.sys.comeit.SpcAreaDTO">
 		SELECT SPC_AREA_CD, AREA_CD, SPC_AREA_NAME
 		FROM TBL_SPC_AREA
 	</select>

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class JoinController
 {
 	@Autowired
-	// private SqlSession sqlSession;
+	private SqlSession sqlSession;
 	
 	/*
 	 * @RequestMapping(value = "/memberinsert.action", method = RequestMethod.POST)
@@ -38,16 +38,17 @@ public class JoinController
 	{
 		String view = null;
 		
-		/*
-		 * IIdnttDAO idnttDao = sqlSession.getMapper(IIdnttDAO.class); IAreaDAO areaDao
-		 * = sqlSession.getMapper(IAreaDAO.class); ISpcAreaDAO spcAreaDao =
-		 * sqlSession.getMapper(ISpcAreaDAO.class); IIntTagDAO intTagDao =
-		 * sqlSession.getMapper(IIntTagDAO.class);
-		 * 
-		 * model.addAttribute("idntt", idnttDao.idnttList()); model.addAttribute("area",
-		 * areaDao.areaList()); model.addAttribute("spcArea", spcAreaDao.spcAreaList());
-		 * model.addAttribute("intTag", intTagDao.intTagList());
-		 */
+		
+		IIdnttDAO idnttDao = sqlSession.getMapper(IIdnttDAO.class); 
+		IAreaDAO areaDao = sqlSession.getMapper(IAreaDAO.class); 
+		ISpcAreaDAO spcAreaDao = sqlSession.getMapper(ISpcAreaDAO.class); 
+		IIntTagDAO intTagDao = sqlSession.getMapper(IIntTagDAO.class);
+		  
+		model.addAttribute("idntt", idnttDao.idnttList()); 
+		model.addAttribute("area", areaDao.areaList()); 
+		model.addAttribute("spcArea", spcAreaDao.spcAreaList());
+		model.addAttribute("intTag", intTagDao.intTagList());
+		 
 		
 		view = "/WEB-INF/views/member/MemberJoin.jsp";
 		

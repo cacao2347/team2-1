@@ -13,7 +13,7 @@
 </select>
 
 <!-- 총 멤버 회원 수 조회 count() -->
-<select id="count" resultType="java.lagn.Integer">
+<select id="count" resultType="java.lang.Integer">
 	SELECT COUNT(*) AS COUNT
 	FROM TBL_MEM_JOIN
 </select>
@@ -26,26 +26,5 @@
       AND PWD=#{pwd}
 </select>
 
-
-<!-- 
-	<resultMap type="hashmap" id="memberJoin"></resultMap>
-	
-	<select id="memberJoin" statementType="CALLABLE">
-	{
-		CALL PRC_MEM_JOIN(
-			#{mem_id},
-			#{name},
-			#{email},
-			#{tel},
-			#{pwd},
-			#{idntt_cd},
-			#{img_url},
-			#{content},
-			#{spc_area_cd},
-			#{mem_cd, mode=OUT, resultMap=memberJoin},
-		)
-	}
-	</select>
-	 -->
 	 
 </mapper>

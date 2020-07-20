@@ -5,7 +5,7 @@
   
 <mapper namespace="com.sys.comeit.IAreaDAO">
 
-	<select id="areaList" resultType="com.test.mybatis.AreaDTO">
+	<select id="areaList" resultType="com.sys.comeit.AreaDTO">
 		SELECT AREA_CD, AREA_NAME 
 		FROM TBL_AREA
 	</select>
