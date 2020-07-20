@@ -1,1 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.sys.comeit.ISpaDAO">
+
+	<resultMap type="hashmap" id="spaJoin"></resultMap>
+	
+	<select id="spaJoin" statementType="CALLABLE">
+	{
+		CALL PRC_SPA_JOIN(
+			#{spa_id},
+			#{name},
+			#{email},
+			#{tel},
+			#{pwd},
+			#{spa_cd, mode=OUT, resultMap=spaJoin}
+		)
+	}
+	</select>
+</mapper>
