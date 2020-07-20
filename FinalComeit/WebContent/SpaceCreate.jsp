@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <%
+<%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
-%>   
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,9 +14,7 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/spacecreate.css">
 <style type="text/css">
-
  body {
-    margin-top:30px;
     background-image: url('assets/images/199.jpg');
 }
 </style>
@@ -77,9 +75,8 @@
 </head>
 <body>
 
-
 <div class="container spadiv spawh">
-	<h5>공간 등록</h5>
+	<br><h5>공간 등록</h5>
 	<br><br>
     <div class="stepwizard">
     
@@ -98,14 +95,10 @@
             </div>
             <div class="stepwizard-step col-xs-3"> 
                 <a href="#step-4" type="button" class="btn btn-default btn-circle">4</a>
-                <p><small>영업정보</small></p>
-            </div>
-            <div class="stepwizard-step col-xs-3"> 
-                <a href="#step-5" type="button" class="btn btn-default btn-circle">5</a>
                 <p><small>사업주정보 & 이미지</small></p>
             </div>
             <div class="stepwizard-step col-xs-3"> 
-                <a href="#step-6" type="button" class="btn btn-default btn-circle"">6</a>
+                <a href="#step-5" type="button" class="btn btn-default btn-circle">5</a>
                 <p><small>위치 & 사이트주소</small></p>
             </div>
         </div>
@@ -190,40 +183,9 @@
                 <button class="btn btn-primary nextBtn pull-right" type="button">Next</button>
             </div>
         </div>
-        
+
         
         <div class="panel panel-primary setup-content" id="step-4">
-            <div class="panel-heading">
-                 <h4 class="panel-title">"영업 정보"</h4>
-            </div>
-            <div class="panel-body">
-                <div class="form-group">
-                    <label class="control-label">영업 요일</label>
-                    <div class="form-inline">
-                    	<input maxlength="500" type="text" required="required" class="form-control key" placeholder="예) 일요일 월요일 ..." />
-                    	<button class="btn btn-primary nextBtn pull-right" type="button" style="margin-left: 10px;" >등록</button>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label">영업 시간</label>
-                    <div class="form-inline">
-                    <div class="selects">
-                	<label for="mm">시간</label>
-	    				<select id="mm" title="select mm">
-				    	    <option selected="selected">오전</option>
-				        	<option>오후</option>
-	    				</select>
-					</div>
-                    	<input maxlength="50" type="text" required="required" class="form-control key" placeholder="예) 1시" /> ~
-                    	<input maxlength="50" type="text" required="required" class="form-control key" placeholder="예) 10시" style="margin-right: 10pt;" /> 최대이용시간
-                    	<input maxlength="50" type="text" required="required" class="form-control key" placeholder="예) 3" />시간
-                    </div>
-                </div>
-                <button class="btn btn-primary nextBtn pull-right" type="button">Next</button>
-            </div>
-        </div>
-        
-        <div class="panel panel-primary setup-content" id="step-5">
             <div class="panel-heading">
                  <h4 class="panel-title">"사업주정보 & 이미지"</h4>
             </div>
@@ -252,7 +214,7 @@
             </div>
         </div>
         
-        <div class="panel panel-primary setup-content" id="step-6">
+        <div class="panel panel-primary setup-content" id="step-5">
             <div class="panel-heading">
                  <h4 class="panel-title" style="margin-bottom: 10px;">"위치"</h4>
             </div>
@@ -292,8 +254,7 @@
         </div>
     </form>
 </div>
-
-<script src="js/spa.scripts.js"></script>
+<script src="<%=cp %>/assets/js/spa.scripts.js"></script>
 
 </body>
 </html>
