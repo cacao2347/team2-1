@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class JoinController
 {
 	@Autowired
-	//private SqlSession sqlSession;
+	// private SqlSession sqlSession;
 	
 	/*
 	 * @RequestMapping(value = "/memberinsert.action", method = RequestMethod.POST)

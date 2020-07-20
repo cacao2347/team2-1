@@ -14,7 +14,7 @@
    
    <!--    → 『base-package』 속성에 -->
    <!--       Controller 객체가 포함된 패키지 경로를 지정한다. -->
-   <context:component-scan   base-package="com.sys.comeit" />
+   <context:component-scan base-package="com.sys.comeit" />
    
    
    <!-- ! 07/20 jsp 파일명 자르기 -->
