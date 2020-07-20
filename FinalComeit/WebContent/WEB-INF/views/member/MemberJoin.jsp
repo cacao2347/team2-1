@@ -20,7 +20,7 @@
      $(function(){
     	 
     	 // AJAX 요청 및 응답 처리
-    	 ajaxRequest();
+    	 //ajaxRequest();
     	 
          //모달을 전역변수로 선언
          var modalContents = $(".modal-contents");
@@ -277,7 +277,7 @@
     </head>
     <body>
 <div class="headerrow">
-		<c:import url="header.jsp"></c:import>
+		<%-- <c:import url="header.jsp"></c:import> --%>
 </div>
         <div class="container"><!-- 좌우측의 공간 확보 -->
             <!-- 헤더 들어가는 부분 -->
@@ -502,7 +502,7 @@
             </div>
 <div class="row">
 	<div class="col-md-12">
-	<c:import url="footer.jsp"></c:import>
+	<%-- <c:import url="footer.jsp"></c:import> --%>
 	</div>
 </div>
 </body>
