@@ -21,10 +21,9 @@
 <!-- 로그인 -->
 <select id="memberLogin" resultType="java.lang.String">
       SELECT NAME
-      FROM VIEW_MEM_MY
-      WHERE ID=#{id}
-       AND PWD=#{pwd}
-
+      FROM TBL_MEM_JOIN
+      WHERE MEM_ID=#{id}
+      AND PWD=CRYPTPACK.ENCRYPT(#{pwd},#{pwd})
 </select>
 
 	 

@@ -36,34 +36,76 @@ public class LoginController
          
       String result = null;
       
-      IMemberDAO dao = sqlSession.getMapper(IMemberDAO.class);
+      IMemberDAO memDao = sqlSession.getMapper(IMemberDAO.class);
+      ISpaDAO spaDao = sqlSession.getMapper(ISpaDAO.class);
+      IAdminDAO admDao = sqlSession.getMapper(IAdminDAO.class);
       
       String id = request.getParameter("formUsername");
       String pwd = request.getParameter("formPassword");
+      String loginType = request.getParameter("loginType");
+      String name = null;
       
-      MemberDTO dto = new MemberDTO();
+		/*
+		 * String memType=request.getParameter("memType"); String
+		 * spaType=request.getParameter("spaType"); String
+		 * admType=request.getParameter("admType");
+		 */
+
       
-      dto.setId(id);
-      dto.setPwd(pwd);  
-      
-      String name = dao.memberLogin(dto);
-      
-      if (name == "" ) 
+      // ·Î±×ÀÎ Á¤º¸°¡ ¸ÂÀ¸¸é name À» °¡Á®¿È
+      //! loginType = "0" ÀÌ¸é ÀÏ¹İ È¸¿ø , "1" ÀÌ¸é ¾÷Ã¼ È¸¿ø , "2"ÀÌ¸é °ü¸®ÀÚ
+      if (loginType.equals("0")) 
       {
-         /* mav.setViewName("redirect:memberlogin.action"); */
-         request.setAttribute("msg", "ì•„ì•„ë”” ë˜ëŠ” íŒ¨ìŠ¤ì›Œë“œê°€ ë§ì§€ ì•ŠìŠµë‹ˆë‹¤.");
-         result = "redirect:memberlogin.action";
-         return result;
-         
+    	  MemberDTO dto = new MemberDTO();
+
+          dto.setId(id);
+          dto.setPwd(pwd);  
+          
+          name = memDao.memberLogin(dto);
       }
-      else 
+      else if(loginType.equals("1")) 
+      {
+    	  SpaDTO dto = new SpaDTO();
+    	  
+    	  dto.setSpa_id(id);
+    	  dto.setPwd(pwd);
+    	  
+    	  name = spaDao.spaLogin(dto);
+      }
+      else if(loginType.equals("2"))
+      {
+    	  AdminDTO dto = new AdminDTO();
+    	  
+    	  dto.setAdmin_cd(id);
+    	  dto.setPwd(pwd);
+    	  
+    	  name = admDao.adminLogin(dto);
+      }
+      
+     
+      // ·Î±×ÀÎ ½ÇÆĞ ½Ã 
+      if (name == null||name=="" ) 
+      {
+         request.setAttribute("msg", "¾ÆÀÌµğ ¶Ç´Â ÆĞ½º¿öµå°¡ ¸ÂÁö ¾Ê½À´Ï´Ù.");
+         result = "redirect:memberlogin.action";
+      }
+      else 			// ·Î±×ÀÎ ¼º°ø ½Ã
       {
          HttpSession session = request.getSession();
+         
          session.setAttribute("name", name);
-         result = "/WEB-INF/views/MainPage.jsp";
+         session.setAttribute("id", id);
+         session.setAttribute("pwd", pwd); 	 
+         session.setAttribute("loginType", loginType);
+         
+         if (loginType.equals("2")) 						// °ü¸®ÀÚ·Î ·Î±×ÀÎ ÇÑ °æ¿ì
+        	 result = "";
+         else 												// ÀÏ¹İ È¸¿øÀÌ³ª ¾÷Ã¼ È¸¿øÀÎ °æ¿ì
+        	 result = "/WEB-INF/views/MainPage.jsp";
       }
       
-      System.out.println(id+pwd);
+      // Å×½ºÆ®
+		/* System.out.println(name+id+pwd+loginType); */
       
       return result;
       

@@ -89,13 +89,13 @@
                     </div>
                     <div class="col-md-9 register-right">
                         <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
-                            <li class="nav-item">
+                            <li class="nav-item" value="1">
                                 <a class="nav-link active" id="mem-tab" data-toggle="tab" href="#mem" role="tab" aria-controls="mem" aria-selected="true">회원</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item" value="2">
                                 <a class="nav-link" id="spa-tab" data-toggle="tab" href="#spa" role="tab" aria-controls="spa" aria-selected="false">업체</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item" value="3">
                                 <a class="nav-link" id="adm-tab" data-toggle="tab" href="#adm" role="tab" aria-controls="adm" aria-selected="false">관리자</a>
                             </li>
                         </ul>
@@ -113,11 +113,12 @@
                                  <div class="form-bottom">
 				                    <form role="form" action="login.action" method="post" class="login-form">
 				                    	<div class="form-group">
-				                    		<label class="sr-only" for="form-username">Username</label>
+				                    		<input type="hidden" id="memType" name="loginType" value="0"> 
+				                    		<label class="sr-only" for="formUsername">Username</label>
 				                        	<input type="text" name="formUsername" placeholder="Username..." class="form-username form-control" id="formUsername">
 				                        </div>
 				                        <div class="form-group">
-				                        	<label class="sr-only" for="form-password">Password</label>
+				                        	<label class="sr-only" for="formPassword">Password</label>
 				                        	<input type="password" name="formPassword" placeholder="Password..." class="form-password form-control" id="formPassword">
 				                        </div>
 				                        <button type="submit" class="btn">Sign in!</button>
@@ -136,14 +137,15 @@
 		                        		</div>
 		                            </div>
                                  <div class="form-bottom">
-				                    <form role="form" action="" method="post" class="login-form">
+				                    <form role="form" action="login.action" method="post" class="login-form">
 				                    	<div class="form-group">
-				                    		<label class="sr-only" for="form-username">Username</label>
-				                        	<input type="text" name="form-username" placeholder="Username..." class="form-username form-control" id="form-username">
+				                    		<label class="sr-only" for="formSpaName">Username</label>
+				                    		<input type="hidden" id="spaType" name="loginType" value="1"> 
+				                        	<input type="text" name="formUsername" placeholder="Username..." class="form-username form-control" id="formSpaName">
 				                        </div>
 				                        <div class="form-group">
-				                        	<label class="sr-only" for="form-password">Password</label>
-				                        	<input type="password" name="form-password" placeholder="Password..." class="form-password form-control" id="form-password">
+				                        	<label class="sr-only" for="formSpaPassword">Password</label>
+				                        	<input type="password" name="formPassword" placeholder="Password..." class="form-password form-control" id="formSpaPassword">
 				                        </div>
 				                        <button type="submit" class="btn">Sign in!</button>
 				                    </form>
@@ -161,14 +163,15 @@
 		                        		</div>
 		                            </div>
                                  <div class="form-bottom">
-				                    <form role="form" action="" method="post" class="login-form">
+				                    <form role="form" action="login.action" method="post" class="login-form">
 				                    	<div class="form-group">
-				                    		<label class="sr-only" for="form-username">Username</label>
-				                        	<input type="text" name="form-username" placeholder="Username..." class="form-username form-control" id="form-username">
+				                    		<label class="sr-only" for="formAdminName">Username</label>
+				                    		<input type="hidden" id="admType" name="loginType" value="2"> 
+				                        	<input type="text" name="formUsername" placeholder="Username..." class="form-username form-control" id="formAdminName">
 				                        </div>
 				                        <div class="form-group">
-				                        	<label class="sr-only" for="form-password">Password</label>
-				                        	<input type="password" name="form-password" placeholder="Password..." class="form-password form-control" id="form-password">
+				                        	<label class="sr-only" for="formAdmPassword">Password</label>
+				                        	<input type="password" name="formPassword" placeholder="Password..." class="form-password form-control" id="formAdmPassword">
 				                        </div>
 				                        <button type="submit" class="btn">Sign in!</button>
 				                    </form>
