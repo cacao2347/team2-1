@@ -280,7 +280,7 @@
      function sendSms()
 	 {
     	
-    	phoneCheck() = "";
+    	phoneCheck = "";
     	alert("phoneCheck_bf : "+ phoneCheck);
     	 
 		$.ajax({
@@ -458,7 +458,7 @@
                     <div class="col-lg-10 form-inline">
                         <input type="tel" class="form-control onlyNumber" id="phoneNumber" data-rule-required="true" placeholder="-를 제외하고 숫자만 입력하세요." maxlength="11" style="width: 85%;">
                         &nbsp;
-                        <button type="button" id="phoneAuth" class="btn btn-primary">휴대폰 인증</button>
+                        <button type="button" id="phoneAuth" class="btn btn-primary" onclick="sendSms()">휴대폰 인증</button>
                     </div>
                 </div>
                 <div class="form-group" id="divPhoneNumber">

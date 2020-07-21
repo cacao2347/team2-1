@@ -16,13 +16,15 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
-
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet"><style type="text/css">
+body{font-family: 'Noto Sans KR', sans-serif;}
+</style>
 
 </head>
 <body>
 <div class="row">
 	<div class="col-md-12">
-	<c:import url="header.jsp"></c:import>
+	<%-- <c:import url="header.jsp"></c:import> --%>
 	</div>
 </div>
 			
@@ -318,7 +320,7 @@
 </div>
 <div class="row">
 	<div class="col-md-12">
-	<c:import url="footer.jsp"></c:import>
+	<%-- <c:import url="footer.jsp"></c:import> --%>
 	</div>
 </div>
 </body>
