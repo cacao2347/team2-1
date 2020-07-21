@@ -85,7 +85,7 @@
                         <img src="<%=cp %>/assets/images/data.png" alt=""/>
                         <h3>Welcome</h3>
                         <p>You are 30 seconds away from earning your own money!</p>
-                        <input type="submit" name="" value="Login"/><br/>
+                        <input type="submit" name="" value="메인페이지" onClick="location.href='mainPage.action'"/><br/>
                     </div>
                     <div class="col-md-9 register-right">
                         <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
@@ -123,6 +123,22 @@
 				                        </div>
 				                        <button type="submit" class="btn">Sign in!</button>
 				                    </form>
+				                    <div class="row2 login-form">
+				                        	<div >
+					                        	<a class="long-form-btn">
+					                        	<input type="hidden" id="admType" name="loginType" value="memIpSearch"> 
+					                        		<button type="submit" class="btn" style="background: none; color: gray;" onClick="location.href='SearchId.action'">ID찾기</button>
+					                        	</a>
+					                        	<a class="long-form-btn">
+					                        	<input type="hidden" id="admType" name="loginType" value="memPwdSearch"> 
+					                        		<button type="submit" class="btn" style="background: none; color: gray;" onClick="location.href='SearchPwd.action'">PW 찾기</button>
+					                        	</a>
+					                        	<a class="long-form-btn">
+					                        	<input type="hidden" id="admType" name="loginType" value="join"> 
+					                        		 <button type="submit" class="btn" style="background: none; color: gray;" onClick="location.href='memberjoin.action'">ID회원가입</button>
+					                        	</a>
+				                        	</div>
+				                        </div>
 		                   		 </div>
                             </div>
                             </div>
@@ -148,7 +164,23 @@
 				                        	<input type="password" name="formPassword" placeholder="Password..." class="form-password form-control" id="formSpaPassword">
 				                        </div>
 				                        <button type="submit" class="btn">Sign in!</button>
-				                    </form>
+				                       </form>
+				                        <div class="row2 login-form">
+				                        	<div >
+					                        	<a class="long-form-btn">
+					                        	<input type="hidden" id="admType" name="loginType" value="memIpSearch"> 
+					                        		<button type="submit" class="btn" style="background: none; color: gray;" onClick="location.href='SearchId.action'">ID찾기</button>
+					                        	</a>
+					                        	<a class="long-form-btn">
+					                        	<input type="hidden" id="admType" name="loginType" value="memPwdSearch"> 
+					                        		<button type="submit" class="btn" style="background: none; color: gray;" onClick="location.href='SearchPwd.action'">PW 찾기</button>
+					                        	</a>
+					                        	<a class="long-form-btn">
+					                        	<input type="hidden" id="admType" name="loginType" value="join"> 
+					                        		 <button type="submit" class="btn" style="background: none; color: gray;" onClick="location.href='spajoin.action'">ID회원가입</button>
+					                        	</a>
+				                        	</div>
+				                        </div>
 		                   		 </div>
                             </div>
                             </div>
@@ -182,19 +214,7 @@
                     </div>
                     
                 </div>
-						<div class="row2 login-form">
-                        	<div >
-	                        	<a class="long-form-btn " href="#">
-	                        		ID찾기
-	                        	</a>
-	                        	<a class="long-form-btn" href="#">
-	                        		PW 찾기
-	                        	</a>
-	                        	<a class="long-form-btn" href="#">
-	                        		 회원가입
-	                        	</a>
-                        	</div>
-                        </div>
+                
             </div>
     </body>
 

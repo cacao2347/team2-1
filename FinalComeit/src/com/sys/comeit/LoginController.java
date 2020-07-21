@@ -20,8 +20,10 @@ public class LoginController
    @Autowired
    private SqlSession sqlSession;
    
+   
+   // ë¡œê·¸ì¸ í˜ì´ì§€(ë·°)
    @RequestMapping(value = "/memberlogin.action", method = RequestMethod.GET)
-   public String memberLogin(Model model)
+   public String memberLogin()
    {
       String view = null;
       
@@ -30,6 +32,18 @@ public class LoginController
       return view;
    }
    
+   // ë©”ì¸í˜ì´ì§€
+   @RequestMapping(value = "/mainPage.action", method = RequestMethod.GET)
+   public String mainPage()
+   {
+      String view = null;
+      
+      view = "/WEB-INF/views/MainPage.jsp";
+      
+      return view;
+   }
+   
+   // ë¡œê·¸ì¸ ì²˜ë¦¬
    @RequestMapping(value = "/login.action", method = RequestMethod.POST)
    public String memberLoginCheck(HttpServletRequest request)
    {
@@ -52,8 +66,8 @@ public class LoginController
 		 */
 
       
-      // ·Î±×ÀÎ Á¤º¸°¡ ¸ÂÀ¸¸é name À» °¡Á®¿È
-      //! loginType = "0" ÀÌ¸é ÀÏ¹İ È¸¿ø , "1" ÀÌ¸é ¾÷Ã¼ È¸¿ø , "2"ÀÌ¸é °ü¸®ÀÚ
+      // ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ name ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+      //! loginType = "0" ï¿½Ì¸ï¿½ ï¿½Ï¹ï¿½ È¸ï¿½ï¿½ , "1" ï¿½Ì¸ï¿½ ï¿½ï¿½Ã¼ È¸ï¿½ï¿½ , "2"ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
       if (loginType.equals("0")) 
       {
     	  MemberDTO dto = new MemberDTO();
@@ -83,13 +97,13 @@ public class LoginController
       }
       
      
-      // ·Î±×ÀÎ ½ÇÆĞ½Ã
+      // ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ğ½ï¿½
       if (name == null||name=="" ) 
       {
-         request.setAttribute("msg", "¾ÆÀÌµğ ¶Ç´Â ÆĞ½º¿öµå°¡ ¸ÂÁö ¾Ê½À´Ï´Ù.");
+         request.setAttribute("msg", "ï¿½ï¿½ï¿½Ìµï¿½ ï¿½Ç´ï¿½ ï¿½Ğ½ï¿½ï¿½ï¿½ï¿½å°¡ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê½ï¿½ï¿½Ï´ï¿½.");
          result = "redirect:memberlogin.action";
       }
-      else 			// ·Î±×ÀÎ ¼º°ø½Ã
+      else 			// ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
       {
          HttpSession session = request.getSession();
          
@@ -98,16 +112,46 @@ public class LoginController
          session.setAttribute("pwd", pwd); 	 
          session.setAttribute("loginType", loginType);
          
-         if (loginType.equals("2")) 						// °ü¸®ÀÚ·Î ·Î±×ÀÎ ÇÑ °æ¿ì
+         if (loginType.equals("2")) 						// ï¿½ï¿½ï¿½ï¿½ï¿½Ú·ï¿½ ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½
         	 result = "";
-         else 												// ÀÏ¹İ È¸¿øÀÌ³ª ¾÷Ã¼ È¸¿øÀÎ °æ¿ì
+         else 												// ï¿½Ï¹ï¿½ È¸ï¿½ï¿½ï¿½Ì³ï¿½ ï¿½ï¿½Ã¼ È¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         	 result = "/WEB-INF/views/MainPage.jsp";
       }
       
-      // Å×½ºÆ®
+      // ï¿½×½ï¿½Æ®
 		/* System.out.println(name+id+pwd+loginType); */
       
       return result;
-      
    }
+   
+   // ì•„ì´ë”” ì°¾ê¸°
+   @RequestMapping(value = "/SearchId.action", method = RequestMethod.GET)
+   public String searchId(HttpServletRequest request)
+   {
+		/* String loginType = request.getParameter("loginType"); */
+	   
+	   String view = null;
+	   
+		/* if(!loginType.equals("2")) */
+	   view = "/WEB-INF/views/SearchId.jsp";
+	      
+	   return view;
+   }
+   
+   // íŒ¨ìŠ¤ì›Œë“œ ì°¾ê¸°
+   @RequestMapping(value = "/SearchPwd.action", method = RequestMethod.GET)
+   public String searchPwd(HttpServletRequest request)
+   {
+		/* String loginType = request.getParameter("loginType"); */
+	   
+	   String view = null;
+	   
+		/* if(!loginType.equals("2")) */
+	   view = "/WEB-INF/views/SearchPwd.jsp";
+	      
+	   return view;
+   }
+   
+   
+   
 }

@@ -37,7 +37,7 @@
 				<img src="<%=cp %>/assets/images/data.png" alt="" />
 				<h3>Welcome</h3>
 				<p>COME-IT에 가입하세요!</p>
-				<input type="submit" name="" value="로그인하기" /><br />
+				<input type="submit" name="" value="메인페이지" /><br />
 			</div>
 			<div class="col-md-9 register-right">
 				<div class="tab-content" id="myTabContent">
@@ -125,12 +125,24 @@
 			</div>
 
 		</div>
-		<div class="row2 login-form">
-			<div>
-				<a class="long-form-btn" href="#"> PW 찾기 </a> 
-				<a class="long-form-btn" href="#"> 회원가입 </a>
-			</div>
-		</div>
+		<form role="form" action="Search.action" method="post" class="login-form">
+						<div class="row2 login-form">
+                        	<div >
+	                        	<a class="long-form-btn">
+	                        	<input type="hidden" id="admType" name="loginType" value="ipSearch"> 
+	                        		<button type="submit" class="btn" style="background: none; color: white;">로그인</button>
+	                        	</a>
+	                        	<a class="long-form-btn">
+	                        	<input type="hidden" id="admType" name="loginType" value="pwdSearch"> 
+	                        		<button type="submit" class="btn" style="background: none; color: white;">PW 찾기</button>
+	                        	</a>
+	                        	<a class="long-form-btn">
+	                        	<input type="hidden" id="admType" name="loginType" value="join"> 
+	                        		 <button type="submit" class="btn" style="background: none; color: white;">ID회원가입</button>
+	                        	</a>
+                        	</div>
+                        </div>
+                    </form>
 	</div>
 </body>
 
