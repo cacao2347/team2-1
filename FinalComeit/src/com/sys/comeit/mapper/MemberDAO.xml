@@ -44,6 +44,10 @@
 </select>
 
 <!-- 항소 승인 회원 조회 -->
-
+<select id="memAppeal" resultType="java.lang.Integer">
+	SELECT COUNT(*) AS COUNT
+	FROM VIEW_MEM_APL
+	WHERE STOP_CD=#{stop_cd}
+</select>
 	 
 </mapper>

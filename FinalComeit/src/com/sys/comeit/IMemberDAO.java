@@ -17,5 +17,6 @@ public interface IMemberDAO
 	public String memberLogin(MemberDTO dto); //로그인
 	public String memStop(String id);		// 정지 여부 확인
 	public int memBlock(String id);			// 블락 여부 확인
-
+	public int memAppeal(String stop_cd);		// 항소 승인 여부 확인
+	
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 
+
 @Controller
 public class LoginController
 {
@@ -44,6 +45,7 @@ public class LoginController
       String name = null;
       String stopCode = null;
       int blockCount = 0;
+      int aplCount = 0;
       
       
       // 로그인 정보 확인 및 정지 여부 조회
@@ -57,6 +59,7 @@ public class LoginController
           
           name = memDao.memberLogin(dto);
           stopCode = memDao.memStop(id);
+          aplCount = memDao.memAppeal(stopCode);
           blockCount = memDao.memBlock(id);
       }
       else if(loginType.equals("1")) 
@@ -87,13 +90,16 @@ public class LoginController
       }
       else if(blockCount != 0) // 블락된 내역이 있을시
       {
-    	  
     	  result = "/WEB-INF/views/header.jsp";
       }
       else if(stopCode != null)		// 정지된 내역이 있을시
       {
-    	      	  
-    	  result = "/WEB-INF/views/header.jsp";
+    	  if (aplCount != 0) 
+    	  {
+    		  result = "/WEB-INF/views/header.jsp";
+    	  }
+    	  
+    	  
       }
       else 			// 로그인 성공시
       {
@@ -145,7 +151,7 @@ public class LoginController
 	   session.setAttribute("searchPwd", searchPwd);
 	   
 	   view = "/WEB-INF/views/SearchPw.jsp";
-	      
+	   
 	   return view;
    }
 }
