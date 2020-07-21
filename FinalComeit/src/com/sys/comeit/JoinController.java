@@ -63,7 +63,7 @@ public class JoinController
 		model.addAttribute("intTag", intTagDao.intTagList());
 		 
 		
-		view = "/WEB-INF/views/member/MemberJoin.jsp";
+		view = "WEB-INF/views/member/MemberJoin.jsp";
 		
 		return view;
 	}
@@ -81,7 +81,7 @@ public class JoinController
 		
 		model.addAttribute("spcAreaList", list);
 
-		view = "/WEB-INF/views/member/AjaxJoinSpcArea.jsp";
+		view = "WEB-INF/views/member/AjaxJoinSpcArea.jsp";
 		
 		return view;
 		
@@ -148,14 +148,16 @@ public class JoinController
 	}
 
 	// 업체 회원가입 찾기
+	
 	@RequestMapping(value = "/spajoin.action", method = RequestMethod.GET)
 	public String spaJoin()
 	{
 		String view = null;
 
-		view = "/WEB-INF/views/space/ComJoin.jsp";
+		view = "WEB-INF/views/space/ComJoin.jsp";
 
 		return view;
 	}
+	
 
 }
