@@ -22,16 +22,16 @@
    <!-- ! 07/20 jsp 파일명 자르기 -->
    <!-- ! 강사님꺼 추가 ================== -->
    <!-- 『BeanNameUrlHandlerMapping』 --> 
-   <!-- <bean id="beanNameUrlMapping" class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping">
+   <bean id="beanNameUrlMapping" class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping">
       <property name="alwaysUseFullPath" value="true"></property>
       <property name="order" value="1"></property>
    </bean>
    
-   『InternalResourceViewResolver』
+   <!-- 『InternalResourceViewResolver』 -->
    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
       <property name="prefix" value="/WEB-INF/views/"></property>
       <property name="suffix" value=".jsp"></property>
-   </bean> -->
+   </bean>
    
    <!-- ! ================== 강사님꺼 추가 -->
    
