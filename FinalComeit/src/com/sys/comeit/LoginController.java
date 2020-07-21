@@ -83,13 +83,13 @@ public class LoginController
       }
       
      
-      // 로그인 실패 시 
+      // 로그인 실패시
       if (name == null||name=="" ) 
       {
          request.setAttribute("msg", "아이디 또는 패스워드가 맞지 않습니다.");
          result = "redirect:memberlogin.action";
       }
-      else 			// 로그인 성공 시
+      else 			// 로그인 성공시
       {
          HttpSession session = request.getSession();
          
