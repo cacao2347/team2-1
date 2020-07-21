@@ -15,4 +15,5 @@ public interface IMemberDAO
 	public int memberRemove(int mid); 		// 회원 탈퇴
 	public String memberLogin(MemberDTO dto); //로그인
 	
+	public int stopSearch(String id);		// 정지 여부 확인
 }
