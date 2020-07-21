@@ -50,4 +50,11 @@
 	WHERE STOP_CD=#{stop_cd}
 </select>
 	 
+<!-- 일반 회원 id 찾기 -->
+<select id="memId" resultType="java.lang.String">
+	SELECT MEM_ID
+	FROM TBL_MEM_JOIN
+	WHERE NAME=#{name}
+	AND TEL=#{tel}
+</select>	 
 </mapper>

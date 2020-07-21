@@ -131,16 +131,16 @@ public class LoginController
       }
       
       // 테스트
-	  System.out.println(name+id+pwd+loginType+stopCode);
+	  //System.out.println(name+id+pwd+loginType+stopCode);
       
       return result;
       
    }
    
    
-   // 아이디 찾기
+   // 아이디 찾기 뷰
    @RequestMapping(value = "/searchId.action", method = RequestMethod.GET)
-   public String searchId(HttpServletRequest request)
+   public String searchIdView(HttpServletRequest request)
    {
 	   HttpSession session = request.getSession();
 	   
@@ -153,9 +153,63 @@ public class LoginController
 	   return view;
    }
    
-   // 패스워드 찾기
+   // 
+   @RequestMapping(value = "/searchIdCheck.action", method = RequestMethod.POST)
+   public String loginSearchId(HttpServletRequest request)
+   {
+      String result = null;
+      //HttpSession session = null;
+      
+      IMemberDAO memDao = sqlSession.getMapper(IMemberDAO.class);
+      //ISpaDAO spaDao = sqlSession.getMapper(ISpaDAO.class);
+
+      String name = request.getParameter("form-username");
+      String tel = request.getParameter("form-tel");
+      String search_id = null;
+		/*
+		 * String type = (String)session.getAttribute("type");
+		 */
+      // 일반 회원 검색
+		/*
+		 * if (type.equals("memIdSearch")) {
+		 */
+		
+		  MemberDTO dto = new MemberDTO();
+		  
+		  dto.setName(name);
+		  dto.setTel(tel);
+		 
+          search_id = memDao.memId(dto);
+     /* }
+      else if(type.equals("spaIdSearch")) 
+      {
+    	  SpaDTO dto = new SpaDTO();
+    	  
+    	  dto.setName(name);
+    	  dto.setTel(tel);;
+    	  
+    	  search_id = spaDao.spaLogin(dto);
+      }
+    */ 
+      // 아이디 찾기 실패시
+      if (search_id == null||search_id=="" ) 
+      {
+         request.setAttribute("msg", "정보가 존재하지 않습니다.");
+         result = "redirect:searchId.action";
+      }
+      else // 아이디 찾기 성공시
+      {
+    	  request.setAttribute("search_id", search_id);
+    	  result = "redirect:searchId.action";
+      }
+      
+      return result;
+   }
+
+   
+   // 패스워드 찾기 뷰
    @RequestMapping(value = "/searchPwd.action", method = RequestMethod.GET)
-   public String searchPwd(HttpServletRequest request)
+   public String searchPwdView(HttpServletRequest request)
    {
 	   HttpSession session = request.getSession();
 	   

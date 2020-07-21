@@ -8,6 +8,7 @@
 <%
 	String searchId = (String)session.getAttribute("searchId");
 	session.setAttribute("searchId", searchId);
+	String search_id=(String)session.getAttribute("search_id");
 %>
 <!DOCTYPE html>
 <html>
@@ -61,12 +62,12 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 								 </c:when>
 								 </c:choose>
 									<br>
-									<p>가입시 입력한 실명과 전화번호를 입력해 주세요.</p>
+									<p>가입시 입력한 실명과 전화번호를 입력해 주세요. 당신의 아이디는 <%=search_id %>입니다.</p>
 								</div>
 								<div class="form-top-right"></div>
 							</div>
 							<div class="form-bottom">
-								<form role="form" action="" method="post" class="login-form">
+								<form role="form" action="searchIdCheck.action" method="post" class="login-form">
 									<!-- <div class="form-group form-inline">
 										<label class="sr-only" for="form-username">Username</label> <span>실명</span>
 										<input type="text" name="form-username"
@@ -100,10 +101,10 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 										<tr>
 											<th>전화번호</th>
 											<td>
-											<label class="sr-only" for="form-password">Password</label>
-											<input type="text" name="form-password"
+											<label class="sr-only" for="form-tel">Password</label>
+											<input type="text" name="form-tel"
 											placeholder="가입시 입력한 전화번호" class="form-password form-control"
-											id="form-password">
+											id="form-tel">
 											</td>
 											<td>
 											<button type="submit" class="btn">문자발송</button>
@@ -127,7 +128,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 										<div class="resultMsg">
 										인증이 성공되었습니다. 
 										</div>
-										<button type="submit" class="btn btn-primary searchBtn">ID 받기</button>
+										<button type="submit" class="btn btn-primary searchBtn" >ID 받기</button>
 									</div>
 								</form>
 								<div class="row2 login-form">
