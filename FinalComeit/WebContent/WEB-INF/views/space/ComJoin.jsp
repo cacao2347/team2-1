@@ -15,6 +15,15 @@
 <script src="http://code.jquery.com/jquery.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<!-- 파비콘 -->
+<link rel="shortcut icon" href="<%=cp %>/assets/images/pen_1.ico" type="image/x-icon">
+<link rel="icon" href="<%=cp %>/assets/images/pen_1.ico" type="image/x-icon">
+
+<!-- 글꼴 -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
+<style type="text/css">
+body{font-family: 'Noto Sans KR', sans-serif;}
+</style>
 <script>
      $(function(){
          //모달을 전역변수로 선언

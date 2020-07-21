@@ -18,10 +18,11 @@
 <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
 <link rel="stylesheet" href="<%=cp %>/assets/css/spafeedback.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet"><style type="text/css">
+body{font-family: 'Noto Sans KR', sans-serif;}
+</style>
 
 <script type="text/javascript">
-
-
 	/* 달력 */
 	$(document).ready(function(){
 	    var date_input=$('input[name="date"]'); //our date input has the name "date"
@@ -162,7 +163,7 @@
 <!-- 헤더 -->
 <div class="row">
 	<div class="col-md-12">
-	<c:import url="header.jsp"></c:import>
+	<c:import url="WEB-INF/views/header.jsp"></c:import>
 	</div>
 </div>
 			
@@ -460,7 +461,7 @@
 
 <div class="row">
 	<div class="col-md-12">
-	<c:import url="footer.jsp"></c:import>
+	<c:import url="WEB-INF/views/footer.jsp"></c:import>
 	</div>
 </div>
 
