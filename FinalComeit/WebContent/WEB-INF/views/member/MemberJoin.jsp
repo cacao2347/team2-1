@@ -128,13 +128,6 @@
              }
          });
          
-         $('#phoneAuth').click(function()
-		 {
-			
-        	 alert('test');
-        	 
-		 });
-         
          //------- validation 검사
          $( "form" ).submit(function( event ) {
              
@@ -286,18 +279,20 @@
      
      function sendSms()
 	 {
+    	
+    	phoneCheck() = "";
+    	alert("phoneCheck_bf : "+ phoneCheck);
+    	 
 		$.ajax({
-			url: "/sendsms.action",
+			url: "<%= cp%>/sendsms.action",
 			data: {
 				receiver: $("#divPhoneNumber").val()
 			},
 			type: "post",
 			success: function(result){
-				if(result == "true"){
-					alert("인증번호가 발송됐습니다.");
-				} else {
-					alert("인증번호 전송 실패");
-				}
+				phoneCheck = result;
+				alert("result : " + result);
+				alert("phoneCheck_af : " + phoneCheck);
 			}
 		});	
 	 }
