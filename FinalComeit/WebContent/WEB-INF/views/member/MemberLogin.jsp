@@ -4,6 +4,12 @@
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
 %>
+<%
+	String searchId = (String)session.getAttribute("searchId");
+	String searchPwd = (String)session.getAttribute("searchPwd");
+	session.setAttribute("searchId", searchId);
+	session.setAttribute("searchPwd", searchPwd);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -74,6 +80,51 @@
 	    });
 	});
 	
+	$(document).ready(function () {
+
+		// 회원 아이디
+        $("#memSearchIdBtn").click(function() 
+        {
+				$("#LoginMemForm").attr("action", "searchId.action");
+		});
+		
+    	// 회원 비밀번호
+        $("#memSearchPwdBtn").click(function() 
+        {
+				$("#LoginMemForm").attr("action", "searchPwd.action");
+		});
+		
+    	// 일반 회원가입
+        $("#memJoinBtn").click(function() 
+        {
+				$("#LoginMemForm").attr("action", "memberjoin.action");
+		});
+        
+		// 업체 아이디
+        $("#spaSearchIdBtn").click(function() 
+        {
+				$("#LoginSpaForm").attr("action", "searchId.action");
+		});
+		
+    	// 업체 비밀번호
+        $("#spaSearchPwdBtn").click(function() 
+        {
+				$("#LoginSpaForm").attr("action", "searchPwd.action");
+		});
+		
+    	// 업체 회원가입
+        $("#spaJoinBtn").click(function() 
+        {
+				$("#LoginSpaForm").attr("action", "spajoin.action");
+		});
+        
+        
+        
+        
+    });
+
+
+
 </script>
  </head>
 
@@ -123,22 +174,24 @@
 				                        </div>
 				                        <button type="submit" class="btn">Sign in!</button>
 				                    </form>
+				                    <form name="LoginMemForm" id="LoginMemForm">
 				                    <div class="row2 login-form">
 				                        	<div >
 					                        	<a class="long-form-btn">
-					                        	<input type="hidden" id="admType" name="loginType" value="memIpSearch"> 
-					                        		<button type="submit" class="btn" style="background: none; color: gray;" onClick="location.href='SearchId.action'">ID찾기</button>
+					                        	 <input type="hidden" id="memSearchId" name="searchId" value="memIdSearch">
+					                        		<button type="submit" class="btn" id="memSearchIdBtn"  style="background: none; color: gray;" >ID찾기</button>
 					                        	</a>
 					                        	<a class="long-form-btn">
-					                        	<input type="hidden" id="admType" name="loginType" value="memPwdSearch"> 
-					                        		<button type="submit" class="btn" style="background: none; color: gray;" onClick="location.href='SearchPwd.action'">PW 찾기</button>
+					                        	<input type="hidden" id="memSearchPwd" name="searchPwd" value="memPwdSearch"> 
+					                        		<button type="submit" class="btn" id="memSearchPwdBtn" style="background: none; color: gray;">PW 찾기</button>
 					                        	</a>
 					                        	<a class="long-form-btn">
-					                        	<input type="hidden" id="admType" name="loginType" value="join"> 
-					                        		 <button type="submit" class="btn" style="background: none; color: gray;" onClick="location.href='memberjoin.action'">ID회원가입</button>
+					                        	<input type="hidden" id="memJoin" name="joinType" value="memJoin"> 
+					                        		 <button type="submit" class="btn" id="memJoinBtn" style="background: none; color: gray;">회원가입</button>
 					                        	</a>
 				                        	</div>
 				                        </div>
+				                        </form>
 		                   		 </div>
                             </div>
                             </div>
@@ -165,22 +218,24 @@
 				                        </div>
 				                        <button type="submit" class="btn">Sign in!</button>
 				                       </form>
+				                       <form name="LoginSpaForm" id="LoginSpaForm">
 				                        <div class="row2 login-form">
 				                        	<div >
 					                        	<a class="long-form-btn">
-					                        	<input type="hidden" id="admType" name="loginType" value="memIpSearch"> 
-					                        		<button type="submit" class="btn" style="background: none; color: gray;" onClick="location.href='SearchId.action'">ID찾기</button>
+					                        	<input type="hidden" id="spaSearchId" name="searchId" value="spaIdSearch"> 
+					                        		<button type="submit" class="btn" id="spaSearchIdBtn" style="background: none; color: gray;">ID찾기</button>
 					                        	</a>
 					                        	<a class="long-form-btn">
-					                        	<input type="hidden" id="admType" name="loginType" value="memPwdSearch"> 
-					                        		<button type="submit" class="btn" style="background: none; color: gray;" onClick="location.href='SearchPwd.action'">PW 찾기</button>
+					                        	<input type="hidden" id="spaSearchPwd" name="searchPwd" value="spaPwdSearch"> 
+					                        		<button type="submit" class="btn" id="spaSearchPwdBtn" style="background: none; color: gray;">PW 찾기</button>
 					                        	</a>
 					                        	<a class="long-form-btn">
-					                        	<input type="hidden" id="admType" name="loginType" value="join"> 
-					                        		 <button type="submit" class="btn" style="background: none; color: gray;" onClick="location.href='spajoin.action'">ID회원가입</button>
+					                        	<input type="hidden" id="spaJoin" name="joinType" value="spaJoin"> 
+					                        		 <button type="submit" class="btn" id="spaJoinBtn" style="background: none; color: gray;">회원가입</button>
 					                        	</a>
 				                        	</div>
 				                        </div>
+				                       </form>
 		                   		 </div>
                             </div>
                             </div>

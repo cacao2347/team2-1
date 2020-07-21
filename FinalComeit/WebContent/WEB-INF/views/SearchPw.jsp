@@ -1,8 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
+%>
+<%
+	String searchPwd = (String)session.getAttribute("searchPwd");
+	session.setAttribute("searchPwd", searchPwd);
 %>
 <!DOCTYPE html>
 <html>
@@ -47,7 +52,16 @@
 				<div class="col-sm-6 col-sm-offset-3 form-box login">
 					<div class="form-top">
 						<div class="form-top-left">
+						<c:set var = "type" scope = "session" value = "<%=searchPwd %>"/>
+		           		 <c:choose>
+		           		 <c:when  test="${type eq 'memPwdSearch'}">
 							<h3>회원 PW 찾기</h3>
+						 </c:when>
+						 <c:when  test="${type eq 'spaPwdSearch'}">
+						    <h3>업체 PW 찾기</h3>
+						 </c:when>
+						 </c:choose>
+							
 							<br>
 							<p>가입시 입력한 실명, 아이디, 전화번호를 입력해 주세요.</p>
 						</div>
@@ -126,15 +140,32 @@
 								<button type="submit" class="btn btn-primary searchBtn">PW 받기</button>
 							</div>
 						</form>
+						<div class="row2 login-form">
+				          	<div >
+				           	<a class="long-form-btn">
+				           	<input type="hidden" id="admType" name="loginType" value="memIpSearch"> 
+				           		<button type="submit" class="btn" style="background: none; color: gray;" onClick="location.href='memberlogin.action'">로그인</button>
+				           	</a>
+<!-- 				           	<a class="long-form-btn">
+				           	<input type="hidden" id="admType" name="loginType" value="memPwdSearch"> 
+				           		<button type="submit" class="btn" style="background: none; color: gray;" onClick="location.href='searchId.action'">ID 찾기</button>
+				           	</a> -->
+				           	<a class="long-form-btn">
+				           	<input type="hidden" id="admType" name="loginType" value="join"> 
+				           		 <c:set var = "type" scope = "session" value = "<%=searchPwd %>"/>
+				           		 <c:choose>
+				           		 <c:when  test="${type eq 'memPwdSearch'}">
+				           		 <button type="submit" class="btn" style="background: none; color: gray;" onClick="location.href='memberjoin.action'">회원가입</button>
+				           		 </c:when >
+				           		 <c:when  test="${type eq 'spaPwdSearch'}">
+				           		 <button type="submit" class="btn" style="background: none; color: gray;" onClick="location.href='spajoin.action'">회원가입</button>
+				           		 </c:when>
+				           		 </c:choose>
+				           	</a>
+				          	</div>
+				        </div>
 					</div>
 			</div>
-			</div>
-
-		</div>
-		<div class="row2 login-form">
-			<div>
-				<a class="long-form-btn" href="#"> ID 찾기 </a> 
-				<a class="long-form-btn" href="#"> 회원가입 </a>
 			</div>
 		</div>
 	</div>

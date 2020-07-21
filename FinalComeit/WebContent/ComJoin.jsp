@@ -272,7 +272,6 @@
 </head>
 <body>
 	<c:import url="header.jsp"></c:import>
-
         <div class="container"><!-- 좌우측의 공간 확보 -->
             <!-- 헤더 들어가는 부분 -->
             

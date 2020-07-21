@@ -110,5 +110,35 @@ public class LoginController
       return result;
       
    }
+   // 아이디 찾기
+   @RequestMapping(value = "/searchId.action", method = RequestMethod.GET)
+   public String searchId(HttpServletRequest request)
+   {
+	   HttpSession session = request.getSession();
+	   
+	   String searchId = request.getParameter("searchId"); 
+	   String view = null;
+	   
+	   session.setAttribute("searchId", searchId);
+	   view = "/WEB-INF/views/SearchId.jsp";
+	      
+	   return view;
+   }
+   
+   // 패스워드 찾기
+   @RequestMapping(value = "/searchPwd.action", method = RequestMethod.GET)
+   public String searchPwd(HttpServletRequest request)
+   {
+	   HttpSession session = request.getSession();
+	   
+	   String searchPwd = request.getParameter("searchPwd"); 
+	   String view = null;
+	   
+	   session.setAttribute("searchPwd", searchPwd);
+	   
+	   view = "/WEB-INF/views/SearchPw.jsp";
+	      
+	   return view;
+   }
 }
 */

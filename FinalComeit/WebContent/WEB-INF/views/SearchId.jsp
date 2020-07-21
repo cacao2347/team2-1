@@ -1,8 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
+%>
+<%
+	String searchId = (String)session.getAttribute("searchId");
+	session.setAttribute("searchId", searchId);
 %>
 <!DOCTYPE html>
 <html>
@@ -17,7 +22,6 @@
 	rel="stylesheet" id="bootstrap-css">
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-
 
 <!-- CSS -->
 <!-- <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
@@ -37,7 +41,7 @@
 				<img src="<%=cp %>/assets/images/data.png" alt="" />
 				<h3>Welcome</h3>
 				<p>COME-IT에 가입하세요!</p>
-				<input type="submit" name="" value="메인페이지" /><br />
+				<input type="submit" name="mainPage" value="메인페이지"  onClick="location.href='mainPage.action'"/><br />
 			</div>
 			<div class="col-md-9 register-right">
 				<div class="tab-content" id="myTabContent">
@@ -46,7 +50,15 @@
 						<div class="col-sm-6 col-sm-offset-3 form-box login">
 							<div class="form-top">
 								<div class="form-top-left">
+								<c:set var = "type" scope = "session" value = "<%=searchId %>"/>
+				           		 <c:choose>
+				           		 <c:when  test="${type eq 'memIdSearch'}">
 									<h3>회원 ID 찾기</h3>
+								 </c:when>
+								 <c:when  test="${type eq 'spaIdSearch'}">
+								    <h3>업체 ID 찾기</h3>
+								 </c:when>
+								 </c:choose>
 									<br>
 									<p>가입시 입력한 실명과 전화번호를 입력해 주세요.</p>
 								</div>
@@ -117,32 +129,32 @@
 										<button type="submit" class="btn btn-primary searchBtn">ID 받기</button>
 									</div>
 								</form>
+								<div class="row2 login-form">
+						          	<div >
+							           	<a class="long-form-btn">
+							           	<input type="hidden" id="admType" name="loginType" value="memIpSearch"> 
+							           		<button type="submit" class="btn" style="background: none; color: gray;" onClick="location.href='memberlogin.action'">로그인</button>
+							           	</a>
+							           	<a class="long-form-btn">
+							           	<input type="hidden" id="admType" name="loginType" value="join"> 
+							           	<c:set var = "type" scope = "session" value = "<%=searchId %>"/>
+							           		 <c:choose>
+							           		 <c:when  test="${type eq 'memIdSearch'}">
+							           		 <button type="submit" class="btn" style="background: none; color: gray;" onClick="location.href='memberjoin.action'">회원가입</button>
+							           		 </c:when >
+							           		 <c:when  test="${type eq 'spaIdSearch'}">
+							           		 <button type="submit" class="btn" style="background: none; color: gray;" onClick="location.href='spajoin.action'">회원가입</button>
+							           		 </c:when>
+							           		 </c:choose>
+							           	</a>
+						          	</div>
+						        </div>
 							</div>
 						</div>
 					</div>
-					
 				</div>
 			</div>
-
 		</div>
-		<form role="form" action="Search.action" method="post" class="login-form">
-						<div class="row2 login-form">
-                        	<div >
-	                        	<a class="long-form-btn">
-	                        	<input type="hidden" id="admType" name="loginType" value="ipSearch"> 
-	                        		<button type="submit" class="btn" style="background: none; color: white;">로그인</button>
-	                        	</a>
-	                        	<a class="long-form-btn">
-	                        	<input type="hidden" id="admType" name="loginType" value="pwdSearch"> 
-	                        		<button type="submit" class="btn" style="background: none; color: white;">PW 찾기</button>
-	                        	</a>
-	                        	<a class="long-form-btn">
-	                        	<input type="hidden" id="admType" name="loginType" value="join"> 
-	                        		 <button type="submit" class="btn" style="background: none; color: white;">ID회원가입</button>
-	                        	</a>
-                        	</div>
-                        </div>
-                    </form>
 	</div>
 </body>
 
