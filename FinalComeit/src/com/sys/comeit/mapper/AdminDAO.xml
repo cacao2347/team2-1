@@ -6,19 +6,19 @@
 <mapper namespace="com.sys.comeit.IAdminDAO">
 	
 	<!-- 관리자 정보 조회 list() -->
-	<select id="list" resultType="com.sys.comeit.AdminDTO">
+	<select id="adminList" resultType="com.sys.comeit.AdminDTO">
 		SELECT ADMIN_CD, ADM_GRDS_CD, NAME, PWD, EMAIL, TEL
 		FROM TBL_ADMIN		
 	</select>
 
-	<!-- 총 관리자 회원 수 조회 count() -->
-	<select id="count" resultType="java.lang.Integer">
+	<!-- 총 관리자 회원 수 조회 adminCount() -->
+	<select id="adminCount" resultType="java.lang.Integer">
 		SELECT COUNT(*) AS COUNT
 		FROM TBL_ADMIN
 	</select>
 	
 	<!-- 로그인 -->
-	<select id="login" resultType="com.sys.comeit.AdminDTO">
+	<select id="adminLogin" resultType="com.sys.comeit.AdminDTO">
      	SELECT ADMIN_CD, PWD
 		FROM TBL_ADMIN
       	WHERE ADMIN_CD=#{admin_cd}

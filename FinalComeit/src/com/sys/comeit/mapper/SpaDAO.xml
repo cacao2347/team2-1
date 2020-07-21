@@ -6,19 +6,19 @@
 <mapper namespace="com.sys.comeit.ISpaDAO">
 
 <!-- 업체 로그인 정보 조회 list() -->
-<select id="list" resultType="com.sys.comeit.SpaDTO">
+<select id="spaList" resultType="com.sys.comeit.SpaDTO">
 	SELECT ID, SPA_CD, NAME, JOIN_TEL, JOIN_EMAIL, PWD, JOINDATE
 	FROM VIEW_SPA_MY
 </select>
 
 <!-- 총 업체 회원 수 조회 count() -->
-<select id="count" resultType="java.lang.Integer">
+<select id="spaCount" resultType="java.lang.Integer">
 	SELECT COUNT(*) AS COUNT
 	FROM TBL_SPA_JOIN
 </select>
 
 <!-- 로그인 -->
-	<select id="login" resultType="com.sys.comeit.SpaDTO">
+	<select id="spaLogin" resultType="com.sys.comeit.SpaDTO">
      	SELECT ID,PWD  
 		FROM VIEW_SPA_MY
       	WHERE ID=#{id}
