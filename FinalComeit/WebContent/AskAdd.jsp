@@ -23,7 +23,7 @@
 <body>
 <div class="row">
    <div class="col-md-12">
-   <c:import url="header.jsp"></c:import>
+   <c:import url="WEB-INF/views/header.jsp"></c:import>
    </div>
 </div>
 <div class="container-fluid">
@@ -89,7 +89,7 @@
 </div>
 <div class="row">
 	<div class="col-md-12">
-	<c:import url="footer.jsp"></c:import>
+	<c:import url="WEB-INF/views/footer.jsp"></c:import>
 	</div>
 </div>
 </body>

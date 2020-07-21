@@ -1,14 +1,54 @@
 @charset "UTF-8";
-.navbar-inverse .navbar-nav>li>a {
-    color: white !important;
-    font-size: 13pt !important;
+.dropdown-menu>li>a
+{
+	color: #4AA8D8 !important;	
 }
-.navbar-inverse .navbar-nav>li>a:hover{
+.navbar-inverse .navbar-nav>li>a {
     color: #4AA8D8 !important;
     font-size: 13pt !important;
+    background: white !important;
+}
+.navbar-inverse
+{
+	border-bottom-color: #4AA8D8 !important;
+	border-left: none;
+	border-right: none;
+	background-color:white !important;
+	border-top: none;
+}
+.navbar-inverse .navbar-toggle
+{
+	border-color: #4AA8D8 !important;
+}
+.navbar-inverse .navbar-toggle .icon-bar
+{
+	background-color: #4AA8D8 !important;
+}
+.navbar-inverse .navbar-toggle:hover .icon-bar
+{
+	background-color: white !important;
+}
+.navbar-toggle
+{
+	background: white !important;
+	
+}
+.navbar-toggle:hover
+{
+	background: #4AA8D8 !important;
+}
+.navbar-collapse.collapse {
+	background: white !important;	
+	border: none !important;
+}
+.navbar-inverse .navbar-nav>li>a:hover{
+    color: white !important;
+    font-size: 13pt !important;
+    background: #4AA8D8 !important;
 }
 .navbar-inverse .navbar-brand {
-    color: white !important;
+    color: #4AA8D8 !important;
+    background: white !important;
 }
 .mega-dropdown {
   position: static !important;
@@ -64,7 +104,7 @@
 .header
 {
 	width: 100%;
-	background-color: #183350 !important;
+	border: none !important;
 	color: white;
 }
 .navbar-header
