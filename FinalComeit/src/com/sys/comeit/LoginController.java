@@ -34,6 +34,7 @@ public class LoginController
    {
          
       String result = null;
+      HttpSession session = null;
       
       IMemberDAO memDao = sqlSession.getMapper(IMemberDAO.class);
       ISpaDAO spaDao = sqlSession.getMapper(ISpaDAO.class);
@@ -59,7 +60,10 @@ public class LoginController
           
           name = memDao.memberLogin(dto);
           stopCode = memDao.memStop(id);
-          aplCount = memDao.memAppeal(stopCode);
+          
+          if (stopCode != null) 
+        	  aplCount = memDao.memAppeal(stopCode);
+          
           blockCount = memDao.memBlock(id);
       }
       else if(loginType.equals("1")) 
@@ -90,20 +94,30 @@ public class LoginController
       }
       else if(blockCount != 0) // 블락된 내역이 있을시
       {
-    	  result = "/WEB-INF/views/header.jsp";
+    	  result = "/WEB-INF/views/MemStop.jsp";
       }
       else if(stopCode != null)		// 정지된 내역이 있을시
       {
-    	  if (aplCount != 0) 
+    	  if (aplCount == 0) 		// 항소 요청해서 승인 받은 내역이 없을시
     	  {
-    		  result = "/WEB-INF/views/header.jsp";
+    		  result = "/WEB-INF/views/MemStop.jsp";
     	  }
-    	  
+    	  else						// 항소 요청해서 승인 받은 내역이 있을시 일반 로그인 가능
+    	  {
+    		  session = request.getSession();
+    	         
+    	      session.setAttribute("name", name);
+    	      session.setAttribute("id", id);
+    	      session.setAttribute("pwd", pwd); 	 
+    	      session.setAttribute("loginType", loginType);
+    	      
+    	      result = "/WEB-INF/views/MainPage.jsp";
+    	  }
     	  
       }
       else 			// 로그인 성공시
       {
-         HttpSession session = request.getSession();
+         session = request.getSession();
          
          session.setAttribute("name", name);
          session.setAttribute("id", id);
@@ -117,7 +131,7 @@ public class LoginController
       }
       
       // 테스트
-		/* System.out.println(name+id+pwd+loginType); */
+	  System.out.println(name+id+pwd+loginType+stopCode);
       
       return result;
       

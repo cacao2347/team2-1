@@ -57,7 +57,9 @@
 			<table class="stopContent">
 				<tr>
 					<td rowspan="3">
-					<img class="img-fluid rounded stopImg" src="assets/images/exclamation.png" alt="exclamation">
+					<span class="image blinking">
+               		<img class="img-fluid rounded stopImg" src="assets/images/exclamation.png" alt="exclamation">
+               		</span>
 					</td>
 					<td> 홍길동님의 계정은</td>
 				</tr>
