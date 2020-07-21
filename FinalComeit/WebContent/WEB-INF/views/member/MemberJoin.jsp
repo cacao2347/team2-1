@@ -279,6 +279,24 @@
          
      });
      
+     function sendSms()
+	 {
+		$.ajax({
+			url: "/sendsms.action",
+			data: {
+				receiver: $("#divPhoneNumber").val()
+			},
+			type: "post",
+			success: function(result){
+				if(result == "true"){
+					alert("인증번호가 발송됐습니다.");
+				} else {
+					alert("인증번호 전송 실패");
+				}
+			}
+		});	
+	 }
+     
  </script>
     </head>
     <body>
