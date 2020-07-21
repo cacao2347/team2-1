@@ -32,10 +32,9 @@ public class LoginController
    @RequestMapping(value = "/login.action", method = RequestMethod.POST)
    public String memberLoginCheck(HttpServletRequest request)
    {
-         
+	   HttpSession session = request.getSession();   
       String result = null;
-      HttpSession session = null;
-      
+     
       IMemberDAO memDao = sqlSession.getMapper(IMemberDAO.class);
       ISpaDAO spaDao = sqlSession.getMapper(ISpaDAO.class);
       IAdminDAO admDao = sqlSession.getMapper(IAdminDAO.class);
@@ -44,9 +43,8 @@ public class LoginController
       String pwd = request.getParameter("formPassword");
       String loginType = request.getParameter("loginType");
       String name = null;
-      String stopCode = null;
+      String stopDate = null;
       int blockCount = 0;
-      int aplCount = 0;
       
       
       // 로그인 정보 확인 및 정지 여부 조회
@@ -56,15 +54,17 @@ public class LoginController
     	  MemberDTO dto = new MemberDTO();
 
           dto.setId(id);
-          dto.setPwd(pwd);  
+          dto.setPwd(pwd);   
           
+          // 멤버 이름 조회
           name = memDao.memberLogin(dto);
-          stopCode = memDao.memStop(id);
           
-          if (stopCode != null) 
-        	  aplCount = memDao.memAppeal(stopCode);
+          // 멤버 정지 내역 조회
+          stopDate = memDao.memStop(id);
           
+          // 멤버 블락 조회
           blockCount = memDao.memBlock(id);
+          
       }
       else if(loginType.equals("1")) 
       {
@@ -73,7 +73,15 @@ public class LoginController
     	  dto.setSpa_id(id);
     	  dto.setPwd(pwd);
     	  
+    	  // 업체 이름 조회
     	  name = spaDao.spaLogin(dto);
+    	  
+    	  // 업체 정지 내역 조회
+    	  stopDate = spaDao.spaStop(id);
+    	  
+    	  // 업체 블락 조회
+    	  blockCount = spaDao.spaBlock(id);
+    	  
       }
       else if(loginType.equals("2"))
       {
@@ -92,37 +100,13 @@ public class LoginController
          request.setAttribute("msg", "아이디와 패스워드가 일치하지 않습니다.");
          result = "redirect:memberlogin.action";
       }
-      else if(blockCount != 0) // 블락된 내역이 있을시
+      else if(blockCount != 0 || stopDate != null) // 블락된 내역, 정지 내역이 있을시
       {
-    	  result = "/WEB-INF/views/MemStop.jsp";
-      }
-      else if(stopCode != null)		// 정지된 내역이 있을시
-      {
-    	  if (aplCount == 0) 		// 항소 요청해서 승인 받은 내역이 없을시
-    	  {
-    		  result = "/WEB-INF/views/MemStop.jsp";
-    	  }
-    	  else						// 항소 요청해서 승인 받은 내역이 있을시 일반 로그인 가능
-    	  {
-    		  session = request.getSession();
-    	         
-    	      session.setAttribute("name", name);
-    	      session.setAttribute("id", id);
-    	      session.setAttribute("pwd", pwd); 	 
-    	      session.setAttribute("loginType", loginType);
-    	      
-    	      result = "/WEB-INF/views/MainPage.jsp";
-    	  }
-    	  
+    	  session.setAttribute("stopDate", stopDate);
+          result = "/WEB-INF/views/MemStop.jsp";
       }
       else 			// 로그인 성공시
       {
-         session = request.getSession();
-         
-         session.setAttribute("name", name);
-         session.setAttribute("id", id);
-         session.setAttribute("pwd", pwd); 	 
-         session.setAttribute("loginType", loginType);
          
          if (loginType.equals("2")) 						// 관리자 로그인
         	 result = "";
@@ -130,8 +114,13 @@ public class LoginController
         	 result = "/WEB-INF/views/MainPage.jsp";
       }
       
+      session.setAttribute("name", name);
+      session.setAttribute("id", id);
+      session.setAttribute("pwd", pwd); 	 
+      session.setAttribute("loginType", loginType);
+      
       // 테스트
-	  //System.out.println(name+id+pwd+loginType+stopCode);
+	  // System.out.println(name+id+pwd+loginType+stopDate);
       
       return result;
       

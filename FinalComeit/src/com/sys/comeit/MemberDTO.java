@@ -9,9 +9,9 @@ public class MemberDTO
 	private String area_name, spc_area_name;						// 세부지역명, 지역명
 	private ArrayList<String> int_tag, etc_tag;						// 관심키워드, 기타관심키워드
 	private String img_url;											// 회원 이미지 url
-	private String pwd;												// 비밀번호
+	private String pwd;												// 비밀번호							
 	
-	
+
 	// getter / setter 구성
 	public String getId() 
 	{
@@ -152,5 +152,5 @@ public class MemberDTO
 	{
 		this.pwd = pwd;
 	}
-	
+
 }

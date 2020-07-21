@@ -11,4 +11,6 @@ public interface ISpaDAO
 	public int spaRemove(int sid); 		// 업체 회원탈퇴요청
 	
 	public String spaLogin(SpaDTO dto); //로그인
+	public String spaStop(String id);	// 정지 여부 확인
+	public int spaBlock(String id);		// 블락 여부 확인
 }

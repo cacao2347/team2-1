@@ -25,6 +25,24 @@
  	  AND PWD=CRYPTPACK.ENCRYPT(#{pwd},#{pwd})
 	</select>
 
+<!-- 로그인시 조회될 정지여부 -->
+<select id="spaStop" resultType="java.lang.String">
+	SELECT STOP_DATE
+	FROM VIEW_SPA_STOP
+	WHERE ID = #{id}
+</select>
+
+<!-- 블락회원 조회 -->
+<select id="spaBlock" resultType="java.lang.Integer">
+	SELECT COUNT(*) AS COUNT
+	FROM VIEW_SPA_BLK
+	WHERE ID = (SELECT ID
+           FROM VIEW_SPA_STOP
+           WHERE ID = #{id})
+</select>
+
+
+
 
 <!-- 
 	<resultMap type="hashmap" id="spaJoin"></resultMap>

@@ -15,13 +15,19 @@
 
 <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/bootstrap/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+<link rel="shortcut icon" href="<%=cp %>/assets/images/pen_1.ico" type="image/x-icon">
+<link rel="icon" href="<%=cp %>/assets/images/pen_1.ico" type="image/x-icon">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
+<style type="text/css">
+body{font-family: 'Noto Sans KR', sans-serif;}
+</style>
+
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
 
 <style type="text/css">
-.modal {
-        text-align: center;
-}
+
  
 @media screen and (min-width: 768px) { 
         .modal:before {
@@ -32,11 +38,25 @@
         }
 }
  
-.modal-dialog {
-        display: inline-block;
-        text-align: left;
-        vertical-align: middle;
+
+.row .blinking{
+   -webkit-animation:blink 0.5s ease-in-out infinite alternate;
+    -moz-animation:blink 0.5s ease-in-out infinite alternate;
+    animation:blink 0.5s ease-in-out infinite alternate;
 }
+@-webkit-keyframes blink{
+    0% {opacity:0;}
+    100% {opacity:1;}
+}
+@-moz-keyframes blink{
+    0% {opacity:0;}
+    100% {opacity:1;}
+}
+@keyframes blink{
+    0% {opacity:0;}
+    100% {opacity:1;}
+}
+
 
  </style>
 </head>
@@ -61,21 +81,24 @@
                		<img class="img-fluid rounded stopImg" src="assets/images/exclamation.png" alt="exclamation">
                		</span>
 					</td>
-					<td> 홍길동님의 계정은</td>
+					<td> 
+					<c:if test="${!empty sessionScope.name }">
+					 ${sessionScope.name }님의 계정은
+					</c:if>
+					</td>
 				</tr>
 				<tr>
-					<td> 2020-07-18 일 부로</td>
+					<td>
+					<c:if test="${!empty sessionScope.stopDate }">
+					 ${sessionScope.stopDate } 일 부로 
+					</c:if>
+					</td>
 				</tr>
 				<tr>
-					<td> 정지 처리 되었습니다.</td>
+					<td> 7일간 정지 처리 되었습니다.</td>
 				</tr>
 			</table>
 			</div>
-			<div class="reqBtn">
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">항소하기</button>
-			</div>
-			
-			
 		</div>
 		<div class="col-md-2">
 		</div>
@@ -88,27 +111,7 @@
 	</div>
 </div>
 
-<!-- 모달 -->
-<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header head">
-        <h5 class="modal-title mTit" id="staticBackdropLabel">항소신청 사유</h5>
-        <button type="button" class="close xBtn" data-dismiss="modal" aria-label="Close">
-        X
-        </button>
-      </div>
-      <div class="modal-body mbody">
-		<div class="rsnTit">사유 입력</div>
-		<input type="text" class="form-control content">
 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">확인</button>
-      </div>
-    </div>
-  </div>
-</div><!-- 모달 끝  -->
 
 </body>
 </html>

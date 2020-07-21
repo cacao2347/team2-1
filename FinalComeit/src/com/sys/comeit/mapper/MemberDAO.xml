@@ -29,7 +29,7 @@
 
 <!-- 로그인시 조회될 정지여부 -->
 <select id="memStop" resultType="java.lang.String">
-	SELECT STOP_CD
+	SELECT STOP_DATE
 	FROM VIEW_MEM_STOP
 	WHERE ID = #{id}
 </select>
@@ -43,12 +43,6 @@
            		WHERE ID = #{id})
 </select>
 
-<!-- 항소 승인 회원 조회 -->
-<select id="memAppeal" resultType="java.lang.Integer">
-	SELECT COUNT(*) AS COUNT
-	FROM VIEW_MEM_APL
-	WHERE STOP_CD=#{stop_cd}
-</select>
 	 
 <!-- 일반 회원 id 찾기 -->
 <select id="memId" resultType="java.lang.String">
