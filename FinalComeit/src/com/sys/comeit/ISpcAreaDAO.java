@@ -9,5 +9,5 @@ import java.util.ArrayList;
 
 public interface ISpcAreaDAO
 {
-	public ArrayList<SpcAreaDTO> spcAreaList();	// 세부지역 리스트
+	public ArrayList<SpcAreaDTO> spcAreaList(String area_cd);	// 세부지역 리스트
 }

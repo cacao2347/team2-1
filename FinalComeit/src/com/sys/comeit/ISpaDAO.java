@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 public interface ISpaDAO
 {
-	public int spaAdd(SpaDTO dto);	// �떎�젣 �쉶�썝 媛��엯 insert
-	public int spaCount();				// �쉶�썝 �닔
-	public ArrayList<SpaDTO> spaList();	// �쉶�썝 由ъ뒪�듃
+	public int add(SpaDTO dto);	// 실제 회원 가입 insert
+	public int count();				// 회원 수
+	public ArrayList<SpaDTO> list();	// 회원 리스트
 	
-	public int spaModify(SpaDTO dto);	// �뾽泥� �쉶�썝�씠 �옄湲� �젙蹂� �닔�젙 update
-	public int spaRemove(int sid); 		// �뾽泥� �쉶�썝�깉�눜�슂泥�
-	public String spaLogin(SpaDTO dto); //濡쒓렇�씤
+	public int modify(SpaDTO dto);	// 업체 회원이 자기 정보 수정 update
+	public int remove(int sid); 		// 업체 회원탈퇴요청
+	public SpaDTO login(SpaDTO dto); //로그인
 }

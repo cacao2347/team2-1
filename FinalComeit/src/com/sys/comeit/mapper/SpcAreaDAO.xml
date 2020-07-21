@@ -6,8 +6,9 @@
 <mapper namespace="com.sys.comeit.ISpcAreaDAO">
 
 	<select id="spcAreaList" resultType="com.sys.comeit.SpcAreaDTO">
-		SELECT SPC_AREA_CD, AREA_CD, SPC_AREA_NAME
+		SELECT SPC_AREA_CD, SPC_AREA_NAME
 		FROM TBL_SPC_AREA
+		WHERE AREA_CD=#{area_cd}
 	</select>
 	
 </mapper>

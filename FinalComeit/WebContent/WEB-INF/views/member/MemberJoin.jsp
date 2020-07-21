@@ -20,7 +20,7 @@
      $(function(){
     	 
     	 // AJAX 요청 및 응답 처리
-    	 //ajaxRequest();
+    	 ajaxRequest();
     	 
          //모달을 전역변수로 선언
          var modalContents = $(".modal-contents");
@@ -277,6 +277,11 @@
          
          });
          
+         $("#area").change(function()
+		 {
+			 ajaxRequest();
+		 })
+         
      });
      
      function sendSms()
@@ -296,6 +301,19 @@
 			}
 		});	
 	 }
+     
+     
+     function ajaxRequest()
+ 	{
+ 		
+ 		$.post("areaajax.action", {area_cd : $("#area").children("option:selected").val() }, function(data)
+ 		{
+ 			//alert(data);
+ 			$("#spcAreaDiv").html(data);
+ 		});
+ 	}
+     
+     
      
  </script>
     </head>
@@ -397,12 +415,19 @@
 				<div class="form-group" id="divPosition">
 				<label for="inputsinboon" class="col-lg-2 control-label">신분</label>
 					<div class="col-lg-10">
+					
 					<select name="week" id="week" class="posiSel form-control" style="width: 450px;">
 						<option value="0">신분 선택</option>
-						<option value="1">취준생</option>
+						<!-- <option value="1">취준생</option>
 						<option value="2">대학생</option>
-						<option value="3">직장인</option>
+						<option value="3">직장인</option> -->
+						<c:forEach var="idntts" items="${idntt }">
+	                    	<option value="${idntts.idntt_cd }">
+	                    		${idntts.idntt_type }
+	                    	</option>
+	                  </c:forEach>
 					</select>
+					
 					</div>
 				</div><!-- end .position -->
 					
@@ -411,18 +436,23 @@
 				<div class="form-group" id="areaMemNum">
 				<label for="areaMemNum" class="col-lg-2 control-label" >지역</label>	
 					<div class="col-lg-10" style="float: left; width: 225px;" >
+					
 						<select name="area" id="area" class="area form-control">
-							<option value="0">지역</option>
-							<option value="seoul">서울</option>
-							<option value="incheon">인천</option>
+						<option value="0">지역 선택</option>
+							<c:forEach var="areas" items="${area }">
+		                        <option value="${areas.area_cd }" 
+		                        ${areas.area_cd == spcArea.area_cd ? "selected= \"selected\"" : ""}>
+		                           ${areas.area_name }
+		                        </option>
+		                     </c:forEach>
 						</select>
+						
 					</div>
-					<div class="col-lg-10" style="float: left; width: 225px;" >
-						<select name="spcArea" id="spcArea" class="spcArea form-control" >
-							<option value="0">상세 지역</option>
-							<option value="mapogu">마포구</option>
-							<option value="seogu">서구</option>
-						</select>
+					
+					
+					<!-- div 안에있는 select 문은 AjaxJoinSpcArea.jsp에서 가져온다 -->
+					<div id="spcAreaDiv" class="col-lg-10" style="float: left; width: 225px;" >
+					
 					</div>
 						<input type="button" value="등록" class="keyBtn btn btn-primary" />
 				</div><!-- end .areaMemNum -->
@@ -470,13 +500,23 @@
 				<div class="stuKey1">
 					<div class="stuKeySel">
 						<div class="col-lg-10 form-inline">
-							<select name="keySelect" id="keySelect" class="form-control keySelect">
+							<!-- <select name="keySelect" id="keySelect" class="form-control keySelect">
 								<option value="key1">java</option>
 								<option value="key2">oracle</option>
 								<option value="key3">jsp</option>
 								<option value="key4">spring</option>
 								<option value="key5">기타</option>
+							</select> -->
+							
+							<select name="keySelect" id="keySelect" class="form-control keySelect">
+								<c:forEach var="intTag" items="${intTag }">
+			                        <option value="${intTag.int_tag_cd }" >
+			                           ${intTag.int_tag }
+			                        </option>
+			                    </c:forEach>
 							</select>
+							
+							
 							&nbsp;
 							<input type="text" class="keyInput form-control" id="keyInput" 
 								placeholder="관심 키워드를 입력해 주세요." style="width:30%"/>

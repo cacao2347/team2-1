@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public interface IAdminDAO
 {
-	public int adminCount();					// 愿�由ъ옄 �닔
-	public ArrayList<AdminDTO> adminList();	// 愿�由ъ옄 由ъ뒪�듃	
-	public String adminLogin(AdminDTO dto); //濡쒓렇�씤
+	public int count();					// 관리자 수
+	public ArrayList<AdminDTO> list();	// 관리자 리스트	
+	public AdminDTO login(AdminDTO dto); //로그인
 }
