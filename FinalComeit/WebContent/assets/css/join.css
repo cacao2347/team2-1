@@ -1,4 +1,38 @@
 @charset "UTF-8";
+.topHeader .home, .topHeader .goLogin
+{
+	display: inline-block;
+}
+.goLogin
+{
+	float: right;
+}
+.bottom
+{
+	margin: auto;
+	text-align: center;
+}
+.bottom #err
+{
+	color: red; 
+	font-weight: bold; 
+	display: none;
+	float: center;
+	font-size: 12pt;
+}
+.bottom .errMsg
+{
+	margin-top: 5%;
+}
+.must
+{
+	color: red;
+	margin-left: 3%;
+}
+#provision .authTextarea
+{
+	background: white;
+}
 .joindiv
 {
 	margin-top: 60px;
@@ -7,7 +41,8 @@
 }
 .joinBtn
 {
-	float: right;
+	float: center;
+	margin-top: 7%;
 }
 
 .btn-primary {

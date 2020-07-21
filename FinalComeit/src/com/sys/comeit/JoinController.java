@@ -30,21 +30,20 @@ public class JoinController
 {
 	@Autowired
 	private SqlSession sqlSession;
-	
-	/*
-	 * @RequestMapping(value = "/memberinsert.action", method = RequestMethod.POST)
-	 * public String memberInsert(MemberDTO m) { String view =
-	 * "redirect:memberlist.action";
-	 * 
-	 * IMemberDAO dao = sqlSession.getMapper(IMemberDAO.class);
-	 * 
-	 * dao.add(m);
-	 * 
-	 * return view;
-	 * 
-	 * }
-	 */
-	
+
+	@RequestMapping(value = "/memberinsert.action", method = RequestMethod.POST)
+	public String memberInsert(MemberDTO m)
+	{
+		String view = "redirect:mainpage.action";
+
+		IMemberDAO dao = sqlSession.getMapper(IMemberDAO.class);
+
+		
+
+		return view;
+
+	}
+
 	// 회원가입 FORM에서 신분, 지역, 세부지역, 관심키워드 리스트 던져주기
 	@RequestMapping(value = "/memberjoin.action", method = RequestMethod.GET)
 	public String memberJoin(Model model)

@@ -206,9 +206,8 @@
 					    <div class="modal-content">
 					      <div class="modal-header head">
 					        <h5 class="modal-title mTit" id="staticBackdropLabel">환불신청 사유</h5>
-					        <button type="button" class="close xBtn" data-dismiss="modal" aria-label="Close">
-					        X
-					        </button>
+					        
+					        <button type="button" class="close xBtn" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					      </div>
 					      <div class="modal-body mbody">
 					      	<div class="rsnTit">사유 입력</div>
@@ -249,43 +248,7 @@
 						환불신청
 					</button>
 					
-					<!-- 모달 -->
-					<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-					  <div class="modal-dialog modal-dialog-centered">
-					    <div class="modal-content">
-					      <div class="modal-header head">
-					        <h5 class="modal-title mTit" id="staticBackdropLabel">환불신청 사유</h5>
-					        <button type="button" class="close xBtn" data-dismiss="modal" aria-label="Close">
-					        X
-					        </button>
-					      </div>
-					      <div class="modal-body mbody">
-					      	<div class="rsnTit">사유 입력</div>
-					      	<input type="text" class="form-control content">
-					      	<div class="rsnTit">환불 계좌 입력</div>
-					      	
-					      	<table class="table bankSel">
-					      		<tr>
-					      			<td>
-					      			<select name="bank" class="form-control">
-							      		<option value="신한은행">신한은행</option>
-							      		<option value="국민은행">국민은행</option>
-							      		<option value="우리은행">우리은행</option>
-							      	</select>
-					      			</td>
-					      			<td>
-					      				<input type="text" class="form-control">
-					      			</td>
-					      		</tr>
-					      	</table>
-					      	
-					      </div>
-					      <div class="modal-footer">
-					        <button type="button" class="btn btn-primary">확인</button>
-					      </div>
-					    </div>
-					  </div>
-					</div><!-- 모달 끝  -->
+					
 					</td>
 				</tr>
 				<tr class="detail">
