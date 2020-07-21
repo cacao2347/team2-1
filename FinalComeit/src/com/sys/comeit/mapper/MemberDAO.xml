@@ -28,10 +28,22 @@
 
 
 <!-- 로그인시 조회될 정지여부 -->
-<select id="stopSearch" resultType="java.lang.Integer">
-	SELECT COUNT(*) AS COUNT
+<select id="memStop" resultType="java.lang.String">
+	SELECT STOP_CD
 	FROM VIEW_MEM_STOP
 	WHERE ID = #{id}
 </select>
+
+<!-- 블락회원 조회 -->
+<select id="memBlock" resultType="java.lang.Integer">
+	SELECT COUNT(*) AS COUNT
+	FROM VIEW_MEM_BLK
+	WHERE ID = (SELECT ID
+           		FROM VIEW_MEM_STOP
+           		WHERE ID = #{id})
+</select>
+
+<!-- 항소 승인 회원 조회 -->
+
 	 
 </mapper>
