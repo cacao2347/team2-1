@@ -5,49 +5,49 @@
   
 <mapper namespace="com.sys.comeit.ISpaDAO">
 
-<!-- 업체 로그인 정보 조회 list() -->
-<select id="spaList" resultType="com.sys.comeit.SpaDTO">
-	SELECT ID, SPA_CD, NAME, JOIN_TEL, JOIN_EMAIL, PWD, JOINDATE
-	FROM VIEW_SPA_MY
-</select>
-
-<!-- 총 업체 회원 수 조회 count() -->
-<select id="spaCount" resultType="java.lang.Integer">
-	SELECT COUNT(*) AS COUNT
-	FROM TBL_SPA_JOIN
-</select>
-
-<!-- 로그인 -->
-	<select id="spaLogin" resultType="java.lang.String">
-    SELECT NAME
-	FROM TBL_SPA_JOIN
-	WHERE SPA_ID=#{spa_id}
- 	  AND PWD=CRYPTPACK.ENCRYPT(#{pwd},#{pwd})
+	<!-- 업체 로그인 정보 조회 list() -->
+	<select id="spaList" resultType="com.sys.comeit.SpaDTO">
+		SELECT ID, SPA_CD, NAME, JOIN_TEL, JOIN_EMAIL, PWD, JOINDATE
+		FROM VIEW_SPA_MY
 	</select>
-
-<!-- 로그인시 조회될 정지여부 -->
-<select id="spaStop" resultType="java.lang.String">
-	SELECT STOP_DATE
-	FROM VIEW_SPA_STOP
-	WHERE ID = #{id}
-</select>
-
-<!-- 블락회원 조회 -->
-<select id="spaBlock" resultType="java.lang.Integer">
-	SELECT COUNT(*) AS COUNT
-	FROM VIEW_SPA_BLK
-	WHERE ID = (SELECT ID
-           FROM VIEW_SPA_STOP
-           WHERE ID = #{id})
-</select>
-
-<!-- 업체 회원 id 찾기 -->
-<select id="sapId" resultType="java.lang.String">
-	SELECT SPA_ID
-	FROM TBL_SPA_JOIN
-	WHERE NAME=#{name}
-  	  AND TEL=#{tel}
-</select>
+	
+	<!-- 총 업체 회원 수 조회 count() -->
+	<select id="spaCount" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS COUNT
+		FROM TBL_SPA_JOIN
+	</select>
+	
+	<!-- 로그인 -->
+		<select id="spaLogin" resultType="java.lang.String">
+	    SELECT NAME
+		FROM TBL_SPA_JOIN
+		WHERE SPA_ID=#{spa_id}
+	 	  AND PWD=CRYPTPACK.ENCRYPT(#{pwd},#{pwd})
+		</select>
+	
+	<!-- 로그인시 조회될 정지여부 -->
+	<select id="spaStop" resultType="java.lang.String">
+		SELECT STOP_DATE
+		FROM VIEW_SPA_STOP
+		WHERE ID = #{id}
+	</select>
+	
+	<!-- 블락회원 조회 -->
+	<select id="spaBlock" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS COUNT
+		FROM VIEW_SPA_BLK
+		WHERE ID = (SELECT ID
+	           FROM VIEW_SPA_STOP
+	           WHERE ID = #{id})
+	</select>
+	
+	<!-- 업체 회원 id 찾기 -->
+	<select id="sapId" resultType="java.lang.String">
+		SELECT SPA_ID
+		FROM TBL_SPA_JOIN
+		WHERE NAME=#{name}
+	  	  AND TEL=#{tel}
+	</select>
 
 
 	<!-- 업체 회원 pwd 찾기 비밀번호 변경 -->
@@ -69,26 +69,25 @@
 	</select>
 
 
-
-
-
-
-<!-- 
-	<resultMap type="hashmap" id="spaJoin"></resultMap>
-	
-	<select id="spaJoin" statementType="CALLABLE">
-	{
-		CALL PRC_SPA_JOIN(
-			#{spa_id},
-			#{name},
-			#{email},
-			#{tel},
-			#{pwd},
-			#{spa_cd, mode=OUT, resultMap=spaJoin}
-		)
-	}
+	<!-- 아이디와 같은 회원 수 조회 spaCheckCount() -->
+	<select resultType="java.lang.Integer" id="spaCheckCount">
+	   SELECT COUNT(*) AS COUNT
+	   FROM TBL_SPA_JOIN
+	   WHERE SPA_ID = #{id} 
 	</select>
 	
- -->	
+	<!-- 업체 회원 가입 public int spaAdd(SpaDTO dto); -->
+	<select id="spaAdd" parameterType="com.sys.comeit.SpaDTO" statementType="CALLABLE">
+	   { CALL PRC_SPA_JOIN
+	      (
+	         #{spa_id}
+	         , #{email}
+	         , #{name}
+	         , #{tel}
+	         , #{pwd}
+	         , #{spa_cd, mode=OUT, jdbcType=VARCHAR}
+	      )
+	   }
+	</select>
 	
 </mapper>

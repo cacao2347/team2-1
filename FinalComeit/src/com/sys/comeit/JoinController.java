@@ -5,7 +5,6 @@
 
 package com.sys.comeit;
 
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -50,7 +49,7 @@ public class JoinController
 		String img_url = request.getParameter("prfImg"); // 프로필 이미지
 		String mem_content = request.getParameter("content"); // 본인소개
 		String spc_area_cd = request.getParameter("spcArea"); // 세부지역 코드
-		
+
 		// 추가 부분 - 회원관심 키워드
 		String[] int_tag = request.getParameterValues("intTagList");
 		String[] etc_tag = request.getParameterValues("etcTagList");
@@ -123,108 +122,106 @@ public class JoinController
 	public String memberJoin(Model model)
 	{
 		String view = null;
-		
-		
-		IIdnttDAO idnttDao = sqlSession.getMapper(IIdnttDAO.class); 
-		IAreaDAO areaDao = sqlSession.getMapper(IAreaDAO.class); 
+
+		IIdnttDAO idnttDao = sqlSession.getMapper(IIdnttDAO.class);
+		IAreaDAO areaDao = sqlSession.getMapper(IAreaDAO.class);
 		/* ISpcAreaDAO spcAreaDao = sqlSession.getMapper(ISpcAreaDAO.class); */
 		IIntTagDAO intTagDao = sqlSession.getMapper(IIntTagDAO.class);
-		  
-		model.addAttribute("idntt", idnttDao.idnttList()); 
-		model.addAttribute("area", areaDao.areaList()); 
+
+		model.addAttribute("idntt", idnttDao.idnttList());
+		model.addAttribute("area", areaDao.areaList());
 		/* model.addAttribute("spcArea", spcAreaDao.spcAreaList()); */
 		model.addAttribute("intTag", intTagDao.intTagList());
-		 
-		
+
 		view = "WEB-INF/views/member/MemberJoin.jsp";
-		
+
 		return view;
 	}
-	
+
 	// 지역에 맞는 세부지역 뿌려주는 AJAX 처리
 	@RequestMapping(value = "/areaajax.action", method = RequestMethod.POST)
 	public String selectAjax(HttpServletRequest request, Model model)
 	{
-		
+
 		String view = null;
-		
+
 		ISpcAreaDAO spcAreaDao = sqlSession.getMapper(ISpcAreaDAO.class);
-		
+
 		ArrayList<SpcAreaDTO> list = spcAreaDao.spcAreaList(request.getParameter("area_cd"));
-		
+
 		model.addAttribute("spcAreaList", list);
 
 		view = "WEB-INF/views/member/AjaxJoinSpcArea.jsp";
-		
+
 		return view;
-		
+
 	}
-	
+
 	// 휴대폰 인증 버튼 눌렀을때 문자발송하기
-		@ResponseBody
-		@RequestMapping(value = "/sendsms.action", method = RequestMethod.POST)
-		public String sendSms(@RequestParam(value = "receiver") String receiver) throws CoolsmsException
+	@ResponseBody
+	@RequestMapping(value = "/sendsms.action", method = RequestMethod.POST)
+	public String sendSms(@RequestParam(value = "receiver") String receiver) throws CoolsmsException
+	{
+		String api_key = "NCSKB3F0JFPNVSIF";
+		String api_secret = "K2T9Z6CWXWQST5QAL1KJND9LGEUARTXJ";
+		String authNum = "";
+
+		System.out.println(receiver);
+
+		Message coolsms = new Message(api_key, api_secret);
+
+		System.out.println("Hello");
+		authNum = sendString();
+
+		// 4 params(to, from, type, text) are mandatory. must be filled
+		HashMap<String, String> params = new HashMap<String, String>();
+		params.put("to", receiver);
+		params.put("from", "010668064811"); // 무조건 자기번호 (인증)
+		params.put("type", "SMS");
+		params.put("text", "[COME-IT] 인증번호 : " + authNum);
+		params.put("app_version", "test app 1.2"); // application name and version
+
+		try
 		{
-			String api_key = "NCSKB3F0JFPNVSIF";
-			String api_secret = "K2T9Z6CWXWQST5QAL1KJND9LGEUARTXJ";
-			String authNum = "";
+			// send() 는 메시지를 보내는 함수
+			JSONObject obj = (JSONObject) coolsms.send(params);
+			System.out.println(obj.get("error_count"));
 
-			System.out.println(receiver);
-
-			Message coolsms = new Message(api_key, api_secret);
-
-			System.out.println("Hello");
-			authNum = sendString();
-
-			// 4 params(to, from, type, text) are mandatory. must be filled
-			HashMap<String, String> params = new HashMap<String, String>();
-			params.put("to", receiver);
-			params.put("from", "010668064811"); // 무조건 자기번호 (인증)
-			params.put("type", "SMS");
-			params.put("text", "[COME-IT] 인증번호 : " + authNum);
-			params.put("app_version", "test app 1.2"); // application name and version
-
-			try
-			{
-				// send() 는 메시지를 보내는 함수
-				JSONObject obj = (JSONObject) coolsms.send(params);
-				System.out.println(obj.get("error_count"));
-
-			} catch (CoolsmsException e)
-			{
-				System.out.println(e.getMessage());
-				System.out.println(e.getCode());
-			}
-
-			return authNum;
-
+		} catch (CoolsmsException e)
+		{
+			System.out.println(e.getMessage());
+			System.out.println(e.getCode());
 		}
 
-		public String sendString()
-		{
-			StringBuffer temp = new StringBuffer();
-			Random rnd = new Random();
+		return authNum;
 
-			for (int i = 0; i < 6; i++)
+	}
+
+	public String sendString()
+	{
+		StringBuffer temp = new StringBuffer();
+		Random rnd = new Random();
+
+		for (int i = 0; i < 6; i++)
+		{
+			int rIndex = rnd.nextInt(2);
+			switch (rIndex)
 			{
-				int rIndex = rnd.nextInt(2);
-				switch (rIndex)
-				{
-				case 0:
-					// A-Z
-					temp.append((char) ((int) (rnd.nextInt(26)) + 65)); // +97이면 소문자 +65면 대문자
-					break;
-				case 1:
-					// 0-9
-					temp.append((rnd.nextInt(10)));
-					break;
-				}
+			case 0:
+				// A-Z
+				temp.append((char) ((int) (rnd.nextInt(26)) + 65)); // +97이면 소문자 +65면 대문자
+				break;
+			case 1:
+				// 0-9
+				temp.append((rnd.nextInt(10)));
+				break;
 			}
-			return temp.toString();
 		}
+		return temp.toString();
+	}
 
 	// 업체 회원가입 찾기
-	
+
 	@RequestMapping(value = "/spajoin.action", method = RequestMethod.GET)
 	public String spaJoin()
 	{
@@ -234,7 +231,7 @@ public class JoinController
 
 		return view;
 	}
-	
+
 	// 아이디가 맞는지 확인해주고 알려주는 AJAX 처리
 	@ResponseBody
 	@RequestMapping(value = "/checkidajax.action", method = RequestMethod.POST)
@@ -264,22 +261,96 @@ public class JoinController
 		// return view;
 
 	}
-	
-	// 전화번호 중복  AJAX 처리
-    @ResponseBody
+
+	// 전화번호 중복 AJAX 처리
+	@ResponseBody
 	@RequestMapping(value = "/checkpwdajax.action", method = RequestMethod.POST)
-	 public String checkTelAjax(HttpServletRequest request, Model model)
-	 {
-	   
-	      // String view = null;
-	   
-	      IMemberDAO memberDao = sqlSession.getMapper(IMemberDAO.class);
-	   
-	      String tel = request.getParameter("phoneNumber");
-	   
-	      int result = memberDao.memTelcheckCount(tel);
-	   
-	      return String.valueOf(result);
-	  }
+	public String checkTelAjax(HttpServletRequest request, Model model)
+	{
+
+		// String view = null;
+
+		IMemberDAO memberDao = sqlSession.getMapper(IMemberDAO.class);
+
+		String tel = request.getParameter("phoneNumber");
+
+		int result = memberDao.memTelcheckCount(tel);
+
+		return String.valueOf(result);
+	}
+
+	// 일반 회원 가입 끝
+	// --------------------------------------------------------------------------------------------------------
+
+	// 업체 회원 가입 시작
+	// ------------------------------------------------------------------------------------------------------
+
+	// 회원가입 FORM에서 신분, 지역, 세부지역, 관심키워드 리스트 던져주기
+	@RequestMapping(value = "/spacejoin.action", method = RequestMethod.GET)
+	public String spaJoin(Model model)
+	{
+		String view = null;
+
+		view = "WEB-INF/views/space/SpaceJoin.jsp";
+
+		return view;
+	}
+
+	// 아이디가 맞는지 확인해주고 알려주는 AJAX 처리
+	@ResponseBody
+	@RequestMapping(value = "/checkspaidajax.action", method = RequestMethod.POST)
+	public String checkSpaIdAjax(HttpServletRequest request, Model model)
+	{
+
+		ISpaDAO spaDao = sqlSession.getMapper(ISpaDAO.class);
+
+		String id = request.getParameter("id");
+		System.out.println(id);
+
+		int result = spaDao.spaCheckCount(request.getParameter("id"));
+		System.out.println(result);
+
+		return String.valueOf(result);
+
+	}
+
+	// 일반회원가입 처리. 회원가입 프로시저 호출
+	@RequestMapping(value = "/spaceinsert.action", method = RequestMethod.POST)
+	public String spaceInsert(Model model, HttpServletRequest request)
+	{
+		String view = null;
+
+		ISpaDAO spaDao = sqlSession.getMapper(ISpaDAO.class);
+
+		// 필수항목
+		String id = request.getParameter("id"); // 아이디
+		String name = request.getParameter("name"); // 이름
+		String email = request.getParameter("email"); // 이메일
+		String tel = request.getParameter("phoneNumber"); // 휴대폰번호
+		String pwd = request.getParameter("password"); // 비밀번호
+
+		SpaDTO dto = new SpaDTO();
+
+		dto.setSpa_id(id);
+		dto.setName(name);
+		dto.setEmail(email);
+		dto.setTel(tel);
+		dto.setPwd(pwd);
+
+		// 실제 회원가입 프로시저 호출
+		spaDao.spaAdd(dto);
+
+		String spa_cd = dto.getSpa_cd(); // OUT 변수인 PK를 담기
+
+		System.out.println(spa_cd);
+
+		if (spa_cd != null) // 회원 발급 코드 PK 가 NULL 이 아닐경우
+			view = "redirect:memberlogin.action"; // 회원가입 성공 시 로그인 페이지
+		else
+			view = "redirect:spacejoin.action";
+
+		return view;
+
+	}
 
 }

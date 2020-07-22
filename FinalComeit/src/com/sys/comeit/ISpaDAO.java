@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public interface ISpaDAO
 {
-	public int spaAdd(SpaDTO dto);	// 실제 회원 가입 insert
+	public String spaAdd(SpaDTO dto);	// 실제 회원 가입 insert
 	public int spaCount();				// 회원 수
 	public ArrayList<SpaDTO> spaList();	// 회원 리스트
 	public int spaModify(SpaDTO dto);	// 업체 회원이 자기 정보 수정 update
@@ -18,5 +18,7 @@ public interface ISpaDAO
 	
 	public int spaPwd(SpaDTO dto);	// 패스워드 찾기
 	public int pwdInfo(SpaDTO dto); // 패스워드 찾기 정보 조회
+	
+	public int spaCheckCount(String id);	// 아이디 중복확인
 	
 }
