@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class MemberDTO
 {
-	private String id, mem_cd, idntt, name, email, tel , joinDate;	// 아이디, 멤버코드, 신분, 이름, 이메일, 전화번호, 가입일
+	private String id, mem_cd, idntt, name, email, tel , join_date;	// 아이디, 멤버코드, 신분, 이름, 이메일, 전화번호, 가입일
 	private String mem_content;										// 본인소개
 	private String area_name, spc_area_name;						// 지역명, 세부지역명
 	private String int_tag, etc_tag;						// 관심키워드, 기타관심키워드
@@ -21,6 +21,16 @@ public class MemberDTO
 	public String getIdntt_cd()
 	{
 		return idntt_cd;
+	}
+
+	public String getJoin_date()
+	{
+		return join_date;
+	}
+
+	public void setJoin_date(String join_date)
+	{
+		this.join_date = join_date;
 	}
 
 	public String getInt_tag()
@@ -116,16 +126,6 @@ public class MemberDTO
 	public void setTel(String tel) 
 	{
 		this.tel = tel;
-	}
-	
-	public String getJoinDate() 
-	{
-		return joinDate;
-	}
-	
-	public void setJoinDate(String joinDate) 
-	{
-		this.joinDate = joinDate;
 	}
 	
 	public String getMem_content() 
