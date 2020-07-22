@@ -360,6 +360,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 			$("#keyResetBtn").removeAttr("disabled");
 			$("#uploadFile").removeAttr("disabled");
 			
+			
 			$("#err").css("display", "none");
 
 		});
@@ -399,6 +400,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 			$("#keyResetBtn").attr("disabled", true);
 			$("#uploadFile").attr("disabled", true);
 			
+			
 			$("#joinForm")[0].reset();
 			$("input:radio[name='provisionyn']:radio[value='N']").prop("checked", true);
 			$("#err").css("display", "none");
@@ -417,7 +419,8 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 						|| $("#area").val() == 0
 						|| $("#spcArea").val() == 0
 						|| $("#phoneNumber").val() == ""
-						|| $("#phoneNumberCheck").val() == "")
+						|| $("#phoneNumberCheck").val() == ""
+						)
 				{
 					$("#err").html("필수 입력 항목이 누락되었습니다.");
 					$("#err").css("display", "inline");
@@ -1027,7 +1030,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 				<div class="form-group">
 				<label for="inputPhoneNumber" class="col-lg-2 control-label"></label>
 				<div class="col-lg-10 form-inline">
-					<div class="stuKeyBox" style="width: 85%;">
+					<div id="stuKeyBox" class="stuKeyBox" style="width: 85%;">
 					</div>
 					<!-- end .stuKeyBox -->
 				</div>
