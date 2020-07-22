@@ -131,7 +131,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
             <img src="<%=cp %>/assets/images/data.png" alt="" />
             <h3>Welcome</h3>
             <p>COME-IT에 가입하세요!</p>
-            <input type="submit" name="" value="로그인하기" /><br />
+            <input type="submit" name="loginview" value="로그인하기" onClick="location.href='memberlogin.action'" /><br />
          </div>
          <div class="col-md-9 register-right">
             <div class="col-sm-6 col-sm-offset-3 form-box login">

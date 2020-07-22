@@ -132,7 +132,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                         <img src="<%=cp %>/assets/images/data.png" alt=""/>
                         <h3>Welcome</h3>
                         <p>You are 30 seconds away from earning your own money!</p>
-                        <input type="submit" name="" value="메인페이지" onClick="location.href='mainPage.action'"/><br/>
+                        <input type="submit" name="" value="메인페이지" onClick="location.href='comeit.action'"/><br/>
                     </div>
                     <div class="col-md-9 register-right">
                         <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">

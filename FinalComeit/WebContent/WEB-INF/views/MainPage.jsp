@@ -38,7 +38,9 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 
 </head>
 <body>
-<c:import url="header.jsp"></c:import>
+<c:import url="header.jsp">
+	<c:param name="loginCheck" value="${id}"></c:param>
+</c:import>
 <%-- <jsp:include page="header.jsp"></jsp:include> --%>
   <!-- Page Content -->
   <div class="main_image">
