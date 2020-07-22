@@ -25,7 +25,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
      $(function(){
     	 
     	 // AJAX 요청 및 응답 처리
-    	 ajaxRequest();
+    	 ajaxSpcAreaRequest();
     	 
          //모달을 전역변수로 선언
          var modalContents = $(".modal-contents");
@@ -132,6 +132,47 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                  divPhoneNumber.addClass("has-success");
              }
          });
+         
+         $('#proImgBtn').click(function()
+		{
+			alert("파일 등록하고 싶습니다");
+			
+			//$("#proImgBtn").submit();
+		})
+         
+         // 중복확인 버튼을 클릭했을때의 처리
+         $('#dupBtn').click(function()
+  		 {
+        	 
+  			 if(!$('#id').val())
+  			 {
+  				 alert("아이디를 입력해주세요");
+  				 $('#id').focus();
+  				 
+  			 }
+  			 else
+  			 {
+  				$.ajax({ type: 'POST', url: 'checkidajax.action', data: { "id" : $('#id').val() }
+          		, success: function(data)
+          		
+	          		{ //alert(data); 
+			           	if($.trim(data) == 0 && $('#id').val() != null)
+			           	{ 
+			           		//$('#checkMsg').html('<p style="color:blue">사용가능</p>');
+			           		alert("사용가능합니다.");
+			           	}
+			           	else 
+			           	{ 
+			           		//$('#checkMsg').html('<p style="color:red">사용불가능</p>');
+			           		alert("사용불가능합니다.");
+			           	}
+			           	
+	        		} 
+   				}); //end ajax
+  			 }
+          	 //alert('뭐');
+          	
+  		});
          
          //------- validation 검사
          $( "form" ).submit(function( event ) {
@@ -275,10 +316,11 @@ body{font-family: 'Noto Sans KR', sans-serif;}
          
          });
          
-
+		
+        // 지역명이 바뀌면 상세지역 ajax 호출
 		$("#area").change(function()
 		{
-			ajaxRequest();
+			ajaxSpcAreaRequest();
 			
 		})
 
@@ -415,38 +457,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 	
 			});
 		
-		/*
-		// 관심 키워드 추가 버튼
-        $("#keyAddBtn").click(function() 
-         {
-             var tmpHtml = "";
-             var selectedKey = "";
-             tmpHtml = tmpHtml + "";
-             
-             selectedKey = $("#keySelect option:checked").text();
-             alert(selectedKey);
-             $(".stuKeyBox").append("<div class='tagStyle'><span class='keyTag' name='intTagList'>"+ selectedKey +"<a href='' class='tag_delete'>X</a></span></div>");
-             
-        });
-       
-        $("#keySelect").change(function() 
-        {
-              var selectedKey = "";
-              // alert("셀렉트값 변경");
-              
-              selectedKey = $("#keySelect option:checked").val();
-           
-             if(selectedKey == "INT1057")
-             {
-                alert("기타");
-                $("#keyInput").attr("readonly", "disabled");
-             }
-             else
-             {
-                // alert("기타아님");
-             }
-        });
-        */
+		
 
 	});
 
@@ -474,7 +485,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
      
      
   	// 지역에 따른 세부지역 불러오는 ajax
- 	function ajaxRequest()
+ 	function ajaxSpcAreaRequest()
  	{
 
  		$.post("areaajax.action",
@@ -488,6 +499,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
  		});
  	}
   	
+
  	
      
   	
@@ -537,7 +549,8 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                 
  
  
-            <form id="joinForm" class="form-horizontal" role="form" method="post" action="memberinsert.action">
+            <form id="joinForm" class="form-horizontal" role="form" method="post" action="memberinsert.action" 
+            enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="provision" class="col-lg-2 control-label">회원가입약관</label>
                     <div class="col-lg-10" id="provision">
@@ -789,7 +802,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                 <div class="form-group" id="divPhoneNumber">
                     <label for="inputPhoneNumber" class="col-lg-2 control-label">휴대폰 번호<span class="must">*</span></label>
                     <div class="col-lg-10 form-inline">
-                        <input type="tel" required="required" class="form-control onlyNumber" name="phoneNumber" id="phoneNumber" data-rule-required="true" placeholder="-를 제외하고 숫자만 입력하세요." maxlength="11" style="width: 85%;">
+                        <input type="tel" required="required" class="form-control onlyNumber" name="name" id="phoneNumber" data-rule-required="true" placeholder="-를 제외하고 숫자만 입력하세요." maxlength="11" style="width: 85%;">
                         &nbsp;
                         <button type="button" id="phoneAuth" class="btn btn-primary" onclick="sendSms()">휴대폰 인증</button>
                     </div>
@@ -804,18 +817,19 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                 </div>
                 
                 <div class="image form-group">
-				<label for="inputPhoneNumber" class="col-lg-2 control-label">프로필 이미지</label>
+				<label for="profileimage" class="col-lg-2 control-label">프로필 이미지</label>
                      <div class="col-lg-10 form-inline">
-	                     	<input type="text" name="housing" name="prfImg" id="prfImg" class="form-control" style="width: 85%;"/>
-	                		&nbsp;
-	                		<button class="btn btn-primary" id="proImgBtn" type="button" >등록</button>
+                     	<!-- <form action="Test_ok.jsp" method="post" enctype="multipart/form-data"> -->
+	                     	<input type="file" name="uploadFile" id="uploadFile" class="form-control" style="width: 85%;"/>
+	                     	&nbsp;
+	                		<button class="btn btn-primary" id="proImgBtn" type="submit" >등록</button>
                 	 </div>
                 </div>
 				
 				<div class="form-group">
-                    <label for="inputPhoneNumber" class="col-lg-2 control-label">본인 소개</label>
+                    <label for="selfintro" class="col-lg-2 control-label">본인 소개</label>
                     <div class="col-lg-10 form-inline">
-                    <input type="text" id="intro" name="content" class="form-control" placeholder="예) 자바개발자가 되고싶은 학생입니다." maxlength="11" style="width: 85%;"/>
+                    <input type="text" id="intro" name="intro" class="form-control" placeholder="예) 자바개발자가 되고싶은 학생입니다." maxlength="11" style="width: 85%;"/>
                     </div>
                 </div>
                 
@@ -849,29 +863,42 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 							<input type="text" class="keyInput form-control" name="keyInput" id="keyInput" 
 								placeholder="관심 키워드를 입력해 주세요." style="width:30%"/>
 							&nbsp;	
-							<input type="button" id="keyAddBtn" value="추가" class="keyBtn btn btn-primary" />
+							<input type="button" id="tagAddBtn" value="추가" class="keyBtn btn btn-primary" />
 							
 						</div>
 					</div>
 					
+					<br>
+					
+					<div>
+					<div class="tagStyle">
+						<span class="keyTag">
+							# 자바
+							<a href="" class="tag_delete">
+							X
+							</a>
+						</span>
+					</div>
+					<div class="tagStyle">
+						<span class="keyTag">
+							# 오라클
+							<a href="" class="tag_delete">
+							X
+							</a>
+						</span>
+					</div>
+					<div class="tagStyle">
+						<span class="keyTag">
+							# 정보처리기사
+							<a href="" class="tag_delete">
+							X
+							</a>
+						</span>
+					</div>
+				</div><!-- end .stuKeyBox -->
 					
 				</div><!-- end .stuKey -->
 				</div>
-				<div class="form-group">
-		            <label for="inputPhoneNumber" class="col-lg-2 control-label"></label>
-		            <div class="col-lg-10 form-inline">
-		               <div class="stuKeyBox" style="width: 85%;">
-		               
-		               <div class="tagStyle form-inline">
-		               <input type="text" name="intTagList" value="자바">
-		               <input type="text" name="intTagList" value=".Net">
-		               </div>
-		               
-		               </div>
-		               <!-- end .stuKeyBox -->
-		            </div>
-		        </div>
-				
                 <div class="form-group">
                     <div class="col-lg-offset-2 col-lg-10 bottom">
                     	<div class="errMsg">
