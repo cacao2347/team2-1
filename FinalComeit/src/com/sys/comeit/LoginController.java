@@ -147,7 +147,7 @@ public class LoginController
    public String loginSearchId(HttpServletRequest request)
    {
       String result = null;
-      //HttpSession session = null;
+      HttpSession session = request.getSession();
       
       IMemberDAO memDao = sqlSession.getMapper(IMemberDAO.class);
       //ISpaDAO spaDao = sqlSession.getMapper(ISpaDAO.class);
@@ -183,12 +183,13 @@ public class LoginController
       // 아이디 찾기 실패시
       if (search_id == null||search_id=="" ) 
       {
-         request.setAttribute("msg", "정보가 존재하지 않습니다.");
+    	  session.setAttribute("msg", "정보가 존재하지 않습니다.");
          result = "redirect:searchId.action";
       }
       else // 아이디 찾기 성공시
       {
-    	  request.setAttribute("search_id", search_id);
+    	  System.out.println(search_id);
+    	  session.setAttribute("search_id", search_id);
     	  result = "redirect:searchId.action";
       }
       
