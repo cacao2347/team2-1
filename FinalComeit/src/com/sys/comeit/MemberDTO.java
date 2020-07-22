@@ -11,6 +11,38 @@ public class MemberDTO
 	private String img_url;											// 회원 이미지 url
 	private String pwd;												// 비밀번호							
 	
+	// 수진 추가
+	private String idntt_cd, content, spc_area_cd;		// 신분코드, 본인소개, 세부지역코드
+
+	public String getIdntt_cd()
+	{
+		return idntt_cd;
+	}
+
+	public void setIdntt_cd(String idntt_cd)
+	{
+		this.idntt_cd = idntt_cd;
+	}
+
+	public String getContent()
+	{
+		return content;
+	}
+
+	public void setContent(String content)
+	{
+		this.content = content;
+	}
+
+	public String getSpc_area_cd()
+	{
+		return spc_area_cd;
+	}
+
+	public void setSpc_area_cd(String spc_area_cd)
+	{
+		this.spc_area_cd = spc_area_cd;
+	}
 
 	// getter / setter 구성
 	public String getId() 

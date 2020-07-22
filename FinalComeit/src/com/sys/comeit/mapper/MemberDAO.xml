@@ -50,5 +50,24 @@
 	FROM TBL_MEM_JOIN
 	WHERE NAME=#{name}
 	AND TEL=#{tel}
-</select>	 
+</select>
+
+<!-- 일반 회원 가입 -->
+<insert id="memberAdd" parameterType="com.sys.comeit.MemberDTO" statementType="CALLABLE">
+   { CALL PRC_MEM_JOIN
+      (
+         #{mem_id, mode=IN, jdbcType=VARCHAR, javaType=string}
+         , #{name, mode=IN, jdbcType=VARCHAR, javaType=string}
+         , #{email, mode=IN, jdbcType=VARCHAR, javaType=string}
+         , #{tel, mode=IN, jdbcType=VARCHAR, javaType=string}
+         , #{pwd, mode=IN, jdbcType=VARCHAR, javaType=string}
+         , #{idntt_cd, mode=IN, jdbcType=VARCHAR, javaType=string}
+         , #{img_url, mode=IN, jdbcType=VARCHAR, javaType=string}
+         , #{content, mode=IN, jdbcType=VARCHAR, javaType=string}
+         , #{spc_area_cd, mode=IN, jdbcType=VARCHAR, javaType=string}
+         , #{mem_cd_out, mode=OUT, jdbcType=VARCHAR, javaType=string}
+      )
+   }
+</insert>
+
 </mapper>

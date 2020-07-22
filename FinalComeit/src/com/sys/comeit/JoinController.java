@@ -19,7 +19,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import net.nurigo.java_sdk.api.Message;
@@ -38,8 +37,19 @@ public class JoinController
 
 		IMemberDAO dao = sqlSession.getMapper(IMemberDAO.class);
 
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		
-
+		map.put("mem_id", m.getId());
+		map.put("name", m.getName());
+		map.put("email", m.getEmail());
+		map.put("tel", m.getTel());
+		map.put("pwd", m.getPwd());
+		map.put("idntt_cd", m.getIdntt_cd());
+		map.put("img_url", m.getImg_url());
+		map.put("content", m.getContent());
+		map.put("spc_area_cd", m.getSpc_area_cd());
+		
+		
 		return view;
 
 	}

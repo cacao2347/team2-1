@@ -678,7 +678,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                 <div class="form-group " id="divId">
                     <label for="inputId" class="col-lg-2 control-label">아이디<span class="must">*</span></label>
                     <div class="col-lg-10 form-inline" >
-                        <input type="text" required="required" class="form-control onlyAlphabetAndNumber" id="id" data-rule-required="true" placeholder="7~10자리 알파벳, 숫자, 특수문자(_)만 입력 가능합니다." maxlength="30"
+                        <input type="text" required="required" class="form-control onlyAlphabetAndNumber" id="id" name="id" data-rule-required="true" placeholder="7~10자리 알파벳, 숫자, 특수문자(_)만 입력 가능합니다." maxlength="30"
                         style="width: 85%;">
                         &nbsp;
                         <button type="button" id="dupBtn" class="btn btn-primary">중복확인</button>
@@ -687,25 +687,25 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                 <div class="form-group" id="divPassword">
                     <label for="inputPassword" class="col-lg-2 control-label">패스워드<span class="must">*</span></label>
                     <div class="col-lg-10 form-inline">
-                        <input type="password" required="required" maxlength="20" class="form-control" id="password" name="excludeHangul" style="width: 85%;" data-rule-required="true" placeholder="영문, 숫자, 특수문자 2가지 이상 10~20자 조합으로 입력해주세요.">
+                        <input type="password" required="required" maxlength="20" class="form-control" id="password" name="password" style="width: 85%;" data-rule-required="true" placeholder="영문, 숫자, 특수문자 2가지 이상 10~20자 조합으로 입력해주세요.">
                     </div>
                 </div>
                 <div class="form-group" id="divPasswordCheck">
                     <label for="inputPasswordCheck" class="col-lg-2 control-label">패스워드 확인<span class="must">*</span></label>
                     <div class="col-lg-10 form-inline">
-                        <input type="password" required="required" maxlength="20" class="form-control" id="passwordCheck" data-rule-required="true" placeholder="패스워드 확인"style="width: 85%;">
+                        <input type="password" required="required" maxlength="20" class="form-control" id="passwordCheck" name="password" data-rule-required="true" placeholder="패스워드 확인"style="width: 85%;">
                     </div>
                 </div>
                 <div class="form-group" id="divName">
                     <label for="inputName" class="col-lg-2 control-label">이름<span class="must">*</span></label>
                     <div class="col-lg-10 form-inline">
-                        <input type="text" required="required" class="form-control onlyHangul" id="name" data-rule-required="true" placeholder="한글만 입력 가능합니다." maxlength="15" style="width: 85%;">
+                        <input type="text" required="required" class="form-control onlyHangul" id="name" name="name" data-rule-required="true" placeholder="한글만 입력 가능합니다." maxlength="15" style="width: 85%;">
                     </div>
                 </div>
                 <div class="form-group" id="divEmail">
                     <label for="inputEmail" class="col-lg-2 control-label">이메일<span class="must">*</span></label>
                     <div class="col-lg-10">
-                        <input type="email" required="required" class="form-control form-inline" id="email" data-rule-required="true" placeholder="@가 포함된 올바른 이메일 형식으로 입력해주세요." maxlength="40" style="width: 85%;">
+                        <input type="email" required="required" class="form-control form-inline" id="email" name="email" data-rule-required="true" placeholder="@가 포함된 올바른 이메일 형식으로 입력해주세요." maxlength="40" style="width: 85%;">
                     </div>
                 </div>
                 
@@ -758,7 +758,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                 <div class="form-group" id="divPhoneNumber">
                     <label for="inputPhoneNumber" class="col-lg-2 control-label">휴대폰 번호<span class="must">*</span></label>
                     <div class="col-lg-10 form-inline">
-                        <input type="tel" required="required" class="form-control onlyNumber" id="phoneNumber" data-rule-required="true" placeholder="-를 제외하고 숫자만 입력하세요." maxlength="11" style="width: 85%;">
+                        <input type="tel" required="required" class="form-control onlyNumber" name="name" id="phoneNumber" data-rule-required="true" placeholder="-를 제외하고 숫자만 입력하세요." maxlength="11" style="width: 85%;">
                         &nbsp;
                         <button type="button" id="phoneAuth" class="btn btn-primary" onclick="sendSms()">휴대폰 인증</button>
                     </div>
@@ -766,7 +766,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                 <div class="form-group" id="divPhoneNumber">
                     <label for="inputPhoneNumber" class="col-lg-2 control-label">인증 번호<span class="must">*</span></label>
                     <div class="col-lg-10 form-inline">
-                        <input type="tel" required="required" maxlength="6" class="form-control onlyAlphabetAndNumber" id="phoneNumberCheck" data-rule-required="true"  maxlength="11" style="width: 85%;">
+                        <input type="tel" required="required" maxlength="6" class="form-control onlyAlphabetAndNumber" name="phoneNumberCheck" id="phoneNumberCheck" data-rule-required="true"  maxlength="11" style="width: 85%;">
                         &nbsp;
                         <button type="button" id="authCheck" class="btn btn-primary">확인</button>
                     </div>
@@ -775,7 +775,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                 <div class="image form-group">
 				<label for="inputPhoneNumber" class="col-lg-2 control-label">프로필 이미지</label>
                      <div class="col-lg-10 form-inline">
-	                     	<input type="text" name="housing" id="prfImg" class="form-control" style="width: 85%;"/>
+	                     	<input type="text" name="housing" name="prfImg" id="prfImg" class="form-control" style="width: 85%;"/>
 	                		&nbsp;
 	                		<button class="btn btn-primary" id="proImgBtn" type="button" >등록</button>
                 	 </div>
@@ -784,7 +784,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 				<div class="form-group">
                     <label for="inputPhoneNumber" class="col-lg-2 control-label">본인 소개</label>
                     <div class="col-lg-10 form-inline">
-                    <input type="text" id="intro" class="form-control" placeholder="예) 자바개발자가 되고싶은 학생입니다." maxlength="11" style="width: 85%;"/>
+                    <input type="text" id="intro" name="intro" class="form-control" placeholder="예) 자바개발자가 되고싶은 학생입니다." maxlength="11" style="width: 85%;"/>
                     </div>
                 </div>
                 
@@ -815,7 +815,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 							
 							
 							&nbsp;
-							<input type="text" class="keyInput form-control" id="keyInput" 
+							<input type="text" class="keyInput form-control" name="keyInput" id="keyInput" 
 								placeholder="관심 키워드를 입력해 주세요." style="width:30%"/>
 							&nbsp;	
 							<input type="button" id="tagAddBtn" value="추가" class="keyBtn btn btn-primary" />
