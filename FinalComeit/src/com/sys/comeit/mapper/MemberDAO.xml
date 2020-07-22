@@ -87,8 +87,15 @@
 	</select>
    
 	<!-- 회원 관심 키워드 -->
-	<insert id="">
-		
+	<insert id="memIntTagInsert">
+		INSERT INTO TBL_MEM_INT_TAG(MEM_INT_TAG_CD, MEM_CD, INT_TAG_CD)
+		VALUES('MEIT'||SEQ_MEM_INT_TAG.NEXTVAL, #{mem_cd}, #{int_tag})
+	</insert>
+	
+	<!-- 회원 관심 기타 키워드 -->
+	<insert id="memEtcTagInsert">
+		INSERT INTO TBL_MEM_INT_ETC_TAG(MEM_INT_ETC_TAG_CD, MEM_CD, ETC_TAG)
+		VALUES('MEIET'||SEQ_MEM_INT_ETC_TAG.NEXTVAL, #{mem_cd}, #{etc_tag})
 	</insert>
    
 </mapper>

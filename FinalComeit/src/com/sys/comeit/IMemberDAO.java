@@ -22,4 +22,7 @@ public interface IMemberDAO
 	
 	public int memcheckCount(String id);	// 아이디 중복확인
 	
+	public int memIntTagInsert(MemberDTO dto);	// 회원 관심 키워드
+	public int memEtcTagInsert(MemberDTO dto);	// 회원 관심 기타 키워드
+	
 }

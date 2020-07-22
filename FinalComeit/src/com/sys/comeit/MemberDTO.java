@@ -7,7 +7,7 @@ public class MemberDTO
 	private String id, mem_cd, idntt, name, email, tel , joinDate;	// 아이디, 멤버코드, 신분, 이름, 이메일, 전화번호, 가입일
 	private String mem_content;										// 본인소개
 	private String area_name, spc_area_name;						// 지역명, 세부지역명
-	private ArrayList<String> int_tag, etc_tag;						// 관심키워드, 기타관심키워드
+	private String int_tag, etc_tag;						// 관심키워드, 기타관심키워드
 	private String img_url;											// 회원 이미지 url
 	private String pwd;												// 비밀번호							
 	
@@ -16,9 +16,31 @@ public class MemberDTO
 	
 	
 	// getter / setter 구성
+
+
 	public String getIdntt_cd()
 	{
 		return idntt_cd;
+	}
+
+	public String getInt_tag()
+	{
+		return int_tag;
+	}
+
+	public void setInt_tag(String int_tag)
+	{
+		this.int_tag = int_tag;
+	}
+
+	public String getEtc_tag()
+	{
+		return etc_tag;
+	}
+
+	public void setEtc_tag(String etc_tag)
+	{
+		this.etc_tag = etc_tag;
 	}
 
 	public void setIdntt_cd(String idntt_cd)
@@ -134,26 +156,6 @@ public class MemberDTO
 	public void setSpc_area_name(String spc_area_name) 
 	{
 		this.spc_area_name = spc_area_name;
-	}
-	
-	public ArrayList<String> getInt_tag() 
-	{
-		return int_tag;
-	}
-	
-	public void setInt_tag(ArrayList<String> int_tag) 
-	{
-		this.int_tag = int_tag;
-	}
-	
-	public ArrayList<String> getEtc_tag() 
-	{
-		return etc_tag;
-	}
-	
-	public void setEtc_tag(ArrayList<String> etc_tag) 
-	{
-		this.etc_tag = etc_tag;
 	}
 	
 	public String getImg_url() 

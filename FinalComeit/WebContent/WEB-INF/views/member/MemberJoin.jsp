@@ -879,9 +879,12 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 		               <div class="stuKeyBox" style="width: 85%;">
 
 		               <div class="tagStyle form-inline">
-		               <input type="text" name="intTagList" value="자바">
-		               <span name="intT" value="dd"></span>
-		               <input type="text" name="intTagList" value=".Net">
+		               <input type="text" name="intTagList" value="관심자바">
+		               <input type="text" name="intTagList" value="관심오라클">
+		               <input type="text" name="intTagList" value="관심파이썬">
+		               
+		               <input type="text" name="etcTagList" value="기타어쩌구">
+		               <input type="text" name="etcTagList" value="기타저쩌구">
 		               </div>
 
 		               </div>
