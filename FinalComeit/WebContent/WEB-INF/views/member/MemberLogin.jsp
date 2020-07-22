@@ -4,12 +4,6 @@
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
 %>
-<%
-	String searchId = (String)session.getAttribute("searchId");
-	String searchPwd = (String)session.getAttribute("searchPwd");
-	session.setAttribute("searchId", searchId);
-	session.setAttribute("searchPwd", searchPwd);
-%>
 <!DOCTYPE html>
 <html>
 <head>

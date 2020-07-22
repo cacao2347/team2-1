@@ -5,11 +5,8 @@
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
 %>
-<%
-	String searchId = (String)session.getAttribute("searchId");
-	session.setAttribute("searchId", searchId);
-	String search_id=(String)session.getAttribute("search_id");
-%>
+<!-- searchId : 회원인지 업체인지(어떠한 회원 유형의 아이디를 찾을건지) -->
+<!-- search_id : 찾은 회원 아이디  -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,10 +30,12 @@
 <style type="text/css">
 body{font-family: 'Noto Sans KR', sans-serif;}
 </style>
+
 </head>
 
 <body>
-
+<c:set var = "searchId" scope = "session" value = "${sessionScope.searchId }"/>
+<c:set var = "search_id" scope = "session" value = "${sessionScope.search_id }"/>
 	<div class="container register">
 		<div class="row">
 			<div class="col-md-3 register-left">
@@ -52,7 +51,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 						<div class="col-sm-6 col-sm-offset-3 form-box login">
 							<div class="form-top">
 								<div class="form-top-left">
-								<c:set var = "type" scope = "session" value = "<%=searchId %>"/>
+								
 				           		 <c:choose>
 				           		 <c:when  test="${type eq 'memIdSearch'}">
 									<h3>회원 ID 찾기</h3>
@@ -61,33 +60,16 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 								    <h3>업체 ID 찾기</h3>
 								 </c:when>
 								 </c:choose>
-									<br>
-									<p>가입시 입력한 실명과 전화번호를 입력해 주세요. 당신의 아이디는 <%=search_id %>입니다.</p>
+									
 								</div>
 								<div class="form-top-right"></div>
 							</div>
 							<div class="form-bottom">
 								<form role="form" action="searchIdCheck.action" method="post" class="login-form">
-									<!-- <div class="form-group form-inline">
-										<label class="sr-only" for="form-username">Username</label> <span>실명</span>
-										<input type="text" name="form-username"
-											placeholder="가입시 입력한 실명" class="form-username form-control"
-											id="form-username">
-									</div>
-									<div class="form-group form-inline">
-										<label class="sr-only" for="form-password">Password</label> <span>전화번호</span>
-										<input type="password" name="form-password"
-											placeholder="가입시 입력한 전화번호" class="form-password form-control"
-											id="form-password">
-										<button type="submit" class="btn">문자발송</button>
-									</div>
-									<div class="form-group form-inline">
-										<label class="sr-only" for="form-oknumber">Oknumber</label> <span>인증번호</span>
-										<input type="text" name="form-oknumber"
-											placeholder="인증번호" class="form-oknumber form-control"
-											id="form-oknumber">
-										<button type="submit" class="btn">문자발송</button>
-									</div> -->
+								<c:choose>
+								<c:when test="${empty search_id}">
+								<br>
+									<p>가입시 입력한 실명과 전화번호를 입력해 주세요. </p>
 									<table class="inputForm">
 										<tr>
 											<th>실명</th>
@@ -124,11 +106,19 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 										</tr>
 										
 									</table>
+									</c:when>
+									<c:when test="${not empty search_id}">
+									<br><br>
+									당신의 아이디는 ${sessionScope.search_id }입니다.
+									</c:when>
+									</c:choose>
 									<div class="resultArea">
 										<div class="resultMsg">
 										인증이 성공되었습니다. 
 										</div>
+										<c:if test="${empty search_id}" >
 										<button type="submit" class="btn btn-primary searchBtn" >ID 받기</button>
+										</c:if>
 									</div>
 								</form>
 								<div class="row2 login-form">
@@ -139,12 +129,11 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 							           	</a>
 							           	<a class="long-form-btn">
 							           	<input type="hidden" id="admType" name="loginType" value="join"> 
-							           	<c:set var = "type" scope = "session" value = "<%=searchId %>"/>
 							           		 <c:choose>
-							           		 <c:when  test="${type eq 'memIdSearch'}">
+							           		 <c:when  test="${searchId eq 'memIdSearch'}">
 							           		 <button type="submit" class="btn" style="background: none; color: gray;" onClick="location.href='memberjoin.action'">회원가입</button>
 							           		 </c:when >
-							           		 <c:when  test="${type eq 'spaIdSearch'}">
+							           		 <c:when  test="${searchId eq 'spaIdSearch'}">
 							           		 <button type="submit" class="btn" style="background: none; color: gray;" onClick="location.href='spajoin.action'">회원가입</button>
 							           		 </c:when>
 							           		 </c:choose>
