@@ -107,7 +107,6 @@ public class LoginController
       
       if (name == null||name=="" ) 							// 로그인 실패시
       {
-         request.setAttribute("msg", "아이디와 패스워드가 일치하지 않습니다.");
          result = "redirect:memberlogin.action";
       }
       else if(blockCount != 0 || stopDate != null) 			// 블락된 내역, 정지 내역이 있을시
@@ -194,7 +193,7 @@ public class LoginController
       if (search_id == null||search_id=="" ) 		// 아이디 찾기 실패시
       {
     	  mav.addObject("msg", "정보가 존재하지 않습니다.");
-          mav.setViewName("redirect:searchid.action");
+          mav.setViewName("/WEB-INF/views/SearchId.jsp");
       }
       else 											// 아이디 찾기 성공시
       {

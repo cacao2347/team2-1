@@ -181,7 +181,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 									</c:choose>
 									<div class="resultArea">
 										<div class="resultMsg">
-											<input type="text" id="okNumRslt" value="" class="okNumBox" readonly="readonly"/>
+											<input type="text" id="okNumRslt" value="${msg }" class="okNumBox" readonly="readonly"/>
 										</div>
 										<input type="hidden" name="searchId" value="${searchId }"/>
 										<c:if test="${empty search_id}" >
