@@ -868,37 +868,27 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 						</div>
 					</div>
 					
-					<br>
-					
-					<div>
-					<div class="tagStyle">
-						<span class="keyTag">
-							# 자바
-							<a href="" class="tag_delete">
-							X
-							</a>
-						</span>
-					</div>
-					<div class="tagStyle">
-						<span class="keyTag">
-							# 오라클
-							<a href="" class="tag_delete">
-							X
-							</a>
-						</span>
-					</div>
-					<div class="tagStyle">
-						<span class="keyTag">
-							# 정보처리기사
-							<a href="" class="tag_delete">
-							X
-							</a>
-						</span>
-					</div>
-				</div><!-- end .stuKeyBox -->
+
 					
 				</div><!-- end .stuKey -->
 				</div>
+				
+				<div class="form-group">
+		            <label for="inputPhoneNumber" class="col-lg-2 control-label"></label>
+		            <div class="col-lg-10 form-inline">
+		               <div class="stuKeyBox" style="width: 85%;">
+
+		               <div class="tagStyle form-inline">
+		               <input type="text" name="intTagList" value="자바">
+		               <span name="intT" value="dd"></span>
+		               <input type="text" name="intTagList" value=".Net">
+		               </div>
+
+		               </div>
+		               <!-- end .stuKeyBox -->
+		            </div>
+		        </div>
+		        
                 <div class="form-group">
                     <div class="col-lg-offset-2 col-lg-10 bottom">
                     	<div class="errMsg">

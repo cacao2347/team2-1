@@ -5,85 +5,90 @@
   
 <mapper namespace="com.sys.comeit.IMemberDAO">
 
-<!-- 멤버 정보 조회 list() -->
-<select id="memberList" resultType="com.sys.comeit.MemberDTO">
-	SELECT ID, MEM_CD, NAME, EMAIL, TEL, 
-		   IDNTT, MEM_CONTENT, AREA_NAME, SPC_AREA_NAME, IMG_URL , JOINDATE , PWD
-	FROM VIEW_MEM_MY
-</select>
-
-<!-- 총 멤버 회원 수 조회 count() -->
-<select id="memberCount" resultType="java.lang.Integer">
-	SELECT COUNT(*) AS COUNT
-	FROM TBL_MEM_JOIN
-</select>
-
-<!-- 로그인 -->
-<select id="memberLogin" resultType="java.lang.String">
-      SELECT NAME
-      FROM TBL_MEM_JOIN
-      WHERE MEM_ID=#{id}
-      AND PWD=CRYPTPACK.ENCRYPT(#{pwd},#{pwd})
-</select>
-
-
-<!-- 로그인시 조회될 정지여부 -->
-<select id="memStop" resultType="java.lang.String">
-	SELECT STOP_DATE
-	FROM VIEW_MEM_STOP
-	WHERE ID = #{id}
-</select>
-
-<!-- 블락회원 조회 -->
-<select id="memBlock" resultType="java.lang.Integer">
-	SELECT COUNT(*) AS COUNT
-	FROM VIEW_MEM_BLK
-	WHERE ID = (SELECT ID
-           		FROM VIEW_MEM_STOP
-           		WHERE ID = #{id})
-</select>
-
-	 
-<!-- 일반 회원 id 찾기 -->
-<select id="memId" resultType="java.lang.String">
-	SELECT MEM_ID
-	FROM TBL_MEM_JOIN
-	WHERE NAME=#{name}
-	AND TEL=#{tel}
-</select>
-
-<!-- 일반 회원 가입 public int memberAdd(MemberDTO dto); -->
-<select id="memberAdd" parameterType="com.sys.comeit.MemberDTO" statementType="CALLABLE">
-   { CALL PRC_MEM_JOIN
-      (
-         #{id}
-         , #{name}
-         , #{email}
-         , #{tel}
-         , #{pwd}
-         , #{idntt_cd}
-         , #{img_url, jdbcType=VARCHAR}
-         , #{mem_content, jdbcType=VARCHAR}
-         , #{spc_area_cd}
-         , #{mem_cd, mode=OUT, jdbcType=VARCHAR}
-      )
-   }
-</select>
-
-<!-- 일반 회원 pwd 찾기 -->
-<update id="memPwd">
-	UPDATE TBL_MEM_JOIN
-	SET PWD=CRYPTPACK.ENCRYPT(#{pwd},#{pwd})
-	WHERE NAME=#{name}
-	AND MEM_ID=#{id}
-	AND TEL=#{tel}
-</update>
-
-<!-- 아이디와 같은 회원 수 조회 adminCount() -->
-<select resultType="java.lang.Integer" id="memcheckCount">
-	SELECT COUNT(*) AS COUNT
-	FROM TBL_MEM_JOIN
-	WHERE MEM_ID = #{id} 
-</select>
+	<!-- 멤버 정보 조회 list() -->
+	<select id="memberList" resultType="com.sys.comeit.MemberDTO">
+	   SELECT ID, MEM_CD, NAME, EMAIL, TEL, 
+	         IDNTT, MEM_CONTENT, AREA_NAME, SPC_AREA_NAME, IMG_URL , JOINDATE , PWD
+	   FROM VIEW_MEM_MY
+	</select>
 	
+	<!-- 총 멤버 회원 수 조회 count() -->
+	<select id="memberCount" resultType="java.lang.Integer">
+	   SELECT COUNT(*) AS COUNT
+	   FROM TBL_MEM_JOIN
+	</select>
+	
+	<!-- 로그인 -->
+	<select id="memberLogin" resultType="java.lang.String">
+	      SELECT NAME
+	      FROM TBL_MEM_JOIN
+	      WHERE MEM_ID=#{id}
+	      AND PWD=CRYPTPACK.ENCRYPT(#{pwd},#{pwd})
+	</select>
+	
+	
+	<!-- 로그인시 조회될 정지여부 -->
+	<select id="memStop" resultType="java.lang.String">
+	   SELECT STOP_DATE
+	   FROM VIEW_MEM_STOP
+	   WHERE ID = #{id}
+	</select>
+	
+	<!-- 블락회원 조회 -->
+	<select id="memBlock" resultType="java.lang.Integer">
+	   SELECT COUNT(*) AS COUNT
+	   FROM VIEW_MEM_BLK
+	   WHERE ID = (SELECT ID
+	                 FROM VIEW_MEM_STOP
+	                 WHERE ID = #{id})
+	</select>
+	
+	    
+	<!-- 일반 회원 id 찾기 -->
+	<select id="memId" resultType="java.lang.String">
+	   SELECT MEM_ID
+	   FROM TBL_MEM_JOIN
+	   WHERE NAME=#{name}
+	   AND TEL=#{tel}
+	</select>
+	
+	<!-- 일반 회원 가입 public int memberAdd(MemberDTO dto); -->
+	<select id="memberAdd" parameterType="com.sys.comeit.MemberDTO" statementType="CALLABLE">
+	   { CALL PRC_MEM_JOIN
+	      (
+	         #{id}
+	         , #{name}
+	         , #{email}
+	         , #{tel}
+	         , #{pwd}
+	         , #{idntt_cd}
+	         , #{img_url, jdbcType=VARCHAR}
+	         , #{mem_content, jdbcType=VARCHAR}
+	         , #{spc_area_cd}
+	         , #{mem_cd, mode=OUT, jdbcType=VARCHAR}
+	      )
+	   }
+	</select>
+	
+	<!-- 일반 회원 pwd 찾기 -->
+	<update id="memPwd">
+	   UPDATE TBL_MEM_JOIN
+	   SET PWD=CRYPTPACK.ENCRYPT(#{pwd},#{pwd})
+	   WHERE NAME=#{name}
+	   AND MEM_ID=#{id}
+	   AND TEL=#{tel}
+	</update>
+	
+	<!-- 아이디와 같은 회원 수 조회 adminCount() -->
+	<select resultType="java.lang.Integer" id="memcheckCount">
+	   SELECT COUNT(*) AS COUNT
+	   FROM TBL_MEM_JOIN
+	   WHERE MEM_ID = #{id} 
+	</select>
+   
+	<!-- 회원 관심 키워드 -->
+	<insert id="">
+		
+	</insert>
+   
 </mapper>
