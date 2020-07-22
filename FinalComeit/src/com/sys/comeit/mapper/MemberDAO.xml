@@ -78,4 +78,12 @@
 	AND MEM_ID=#{id}
 	AND TEL=#{tel}
 </update>
+
+<!-- 아이디와 같은 회원 수 조회 adminCount() -->
+<select resultType="java.lang.Integer" id="memcheckCount">
+	SELECT COUNT(*) AS COUNT
+	FROM TBL_MEM_JOIN
+	WHERE MEM_ID = #{id} 
+</select>
+	
 </mapper>
