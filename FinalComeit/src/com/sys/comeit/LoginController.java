@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 
 
@@ -29,10 +30,11 @@ public class LoginController
       return view;
    }
    
+   // 로그인 처리
    @RequestMapping(value = "/login.action", method = RequestMethod.POST)
    public String memberLoginCheck(HttpServletRequest request)
    {
-	   HttpSession session = request.getSession();   
+	  HttpSession session = request.getSession();   
       String result = null;
      
       IMemberDAO memDao = sqlSession.getMapper(IMemberDAO.class);
@@ -94,18 +96,18 @@ public class LoginController
       }
       
      
-      // 로그인 실패시
-      if (name == null||name=="" ) 
+      
+      if (name == null||name=="" ) 							// 로그인 실패시
       {
          request.setAttribute("msg", "아이디와 패스워드가 일치하지 않습니다.");
          result = "redirect:memberlogin.action";
       }
-      else if(blockCount != 0 || stopDate != null) // 블락된 내역, 정지 내역이 있을시
+      else if(blockCount != 0 || stopDate != null) 			// 블락된 내역, 정지 내역이 있을시
       {
     	  session.setAttribute("stopDate", stopDate);
           result = "/WEB-INF/views/MemStop.jsp";
       }
-      else 			// 로그인 성공시
+      else 													// 로그인 성공시
       {
          
          if (loginType.equals("2")) 						// 관리자 로그인
@@ -127,6 +129,7 @@ public class LoginController
    }
    
    
+   
    // 아이디 찾기 뷰
    @RequestMapping(value = "/searchId.action", method = RequestMethod.GET)
    public String searchIdView(HttpServletRequest request)
@@ -136,64 +139,65 @@ public class LoginController
 	   String searchId = request.getParameter("searchId"); 
 	   String view = null;
 	   
+	   System.out.println(searchId);
+	   
 	   session.setAttribute("searchId", searchId);
 	   view = "/WEB-INF/views/SearchId.jsp";
+	   
 	      
 	   return view;
    }
    
-   // 
+   // 찾은 아이디 값
    @RequestMapping(value = "/searchIdCheck.action", method = RequestMethod.POST)
-   public String loginSearchId(HttpServletRequest request)
+   public ModelAndView loginSearchId(HttpServletRequest request)
    {
-      String result = null;
-      HttpSession session = request.getSession();
+      ModelAndView mav = new ModelAndView();  
       
       IMemberDAO memDao = sqlSession.getMapper(IMemberDAO.class);
-      //ISpaDAO spaDao = sqlSession.getMapper(ISpaDAO.class);
+      ISpaDAO spaDao = sqlSession.getMapper(ISpaDAO.class);
+      
+      String searchId = request.getParameter("searchId");		// 업체/ 회원 여부
+      String name = request.getParameter("formUserName");		// 이름
+      String tel = request.getParameter("formTel");				// 전화번호
+      String search_id = null;									// 찾은 아이디
 
-      String name = request.getParameter("form-username");
-      String tel = request.getParameter("form-tel");
-      String search_id = null;
-		/*
-		 * String type = (String)session.getAttribute("type");
-		 */
-      // 일반 회원 검색
-		/*
-		 * if (type.equals("memIdSearch")) {
-		 */
-		
-		  MemberDTO dto = new MemberDTO();
-		  
-		  dto.setName(name);
-		  dto.setTel(tel);
-		 
-          search_id = memDao.memId(dto);
-     /* }
-      else if(type.equals("spaIdSearch")) 
+      
+      if (searchId.equals("memIdSearch")) 			// 일반 회원 아이디 찾기일 때
+      {
+    	  MemberDTO dto = new MemberDTO();
+    	  
+    	  dto.setName(name);
+    	  dto.setTel(tel);
+    	  
+    	  search_id = memDao.memId(dto);
+	  }
+      else if (searchId.equals("spaIdSearch")) 		// 업체 회원 아이디 찾기일 때
       {
     	  SpaDTO dto = new SpaDTO();
     	  
     	  dto.setName(name);
-    	  dto.setTel(tel);;
-    	  
-    	  search_id = spaDao.spaLogin(dto);
+    	  dto.setTel(tel);
+
+    	  search_id = spaDao.sapId(dto);
       }
-    */ 
-      // 아이디 찾기 실패시
-      if (search_id == null||search_id=="" ) 
+    
+      
+      if (search_id == null||search_id=="" ) 		// 아이디 찾기 실패시
       {
-    	  session.setAttribute("msg", "정보가 존재하지 않습니다.");
-         result = "redirect:searchId.action";
+    	  mav.addObject("msg", "정보가 존재하지 않습니다.");
+          mav.setViewName("redirect:searchId.action");
       }
-      else // 아이디 찾기 성공시
+      else 											// 아이디 찾기 성공시
       {
-    	  System.out.println(search_id);
-    	  session.setAttribute("search_id", search_id);
-    	  result = "redirect:searchId.action";
+    	  // 테스트
+    	  //System.out.println(search_id + searchId);
+
+    	  mav.addObject("search_id", search_id);
+    	  mav.setViewName("/WEB-INF/views/SearchId.jsp");   	  
       }
       
-      return result;
+      return mav;
    }
 
    
@@ -212,4 +216,17 @@ public class LoginController
 	   
 	   return view;
    }
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
 }

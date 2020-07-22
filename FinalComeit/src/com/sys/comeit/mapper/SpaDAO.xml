@@ -41,7 +41,13 @@
            WHERE ID = #{id})
 </select>
 
-
+<!-- 업체 회원 id 찾기 -->
+<select id="sapId" resultType="java.lang.String">
+	SELECT SPA_ID
+	FROM TBL_SPA_JOIN
+	WHERE NAME=#{name}
+  	  AND TEL=#{tel}
+</select>
 
 
 <!-- 

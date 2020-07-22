@@ -35,7 +35,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 
 <body>
 <c:set var = "searchId" scope = "session" value = "${sessionScope.searchId }"/>
-<c:set var = "search_id" scope = "session" value = "${sessionScope.search_id }"/>
+<%-- <c:set var = "search_id" scope = "session" value = "${sessionScope.search_id }"/> --%>
 	<div class="container register">
 		<div class="row">
 			<div class="col-md-3 register-left">
@@ -53,10 +53,10 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 								<div class="form-top-left">
 								
 				           		 <c:choose>
-				           		 <c:when  test="${type eq 'memIdSearch'}">
+				           		 <c:when  test="${searchId eq 'memIdSearch'}">
 									<h3>회원 ID 찾기</h3>
 								 </c:when>
-								 <c:when  test="${type eq 'spaIdSearch'}">
+								 <c:when  test="${searchId eq 'spaIdSearch'}">
 								    <h3>업체 ID 찾기</h3>
 								 </c:when>
 								 </c:choose>
@@ -74,19 +74,19 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 										<tr>
 											<th>실명</th>
 											<td>
-											<label class="sr-only" for="form-username">Username</label>
-											<input type="text" name="form-username"
+											<label class="sr-only" for="formUserName">Username</label>
+											<input type="text" name="formUserName"
 											placeholder="가입시 입력한 실명" class="form-username form-control"
-											id="form-username">
+											id="formUserName">
 											</td>
 										</tr>
 										<tr>
 											<th>전화번호</th>
 											<td>
-											<label class="sr-only" for="form-tel">Password</label>
-											<input type="text" name="form-tel"
+											<label class="sr-only" for="formTel">Password</label>
+											<input type="text" name="formTel"
 											placeholder="가입시 입력한 전화번호" class="form-password form-control"
-											id="form-tel">
+											id="formTel">
 											</td>
 											<td>
 											<button type="submit" class="btn">문자발송</button>
@@ -109,13 +109,14 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 									</c:when>
 									<c:when test="${not empty search_id}">
 									<br><br>
-									당신의 아이디는 ${sessionScope.search_id }입니다.
+									당신의 아이디는 ${search_id }입니다.
 									</c:when>
 									</c:choose>
 									<div class="resultArea">
 										<div class="resultMsg">
 										인증이 성공되었습니다. 
 										</div>
+										<input type="hidden" name="searchId" value="${searchId }"/>
 										<c:if test="${empty search_id}" >
 										<button type="submit" class="btn btn-primary searchBtn" >ID 받기</button>
 										</c:if>
