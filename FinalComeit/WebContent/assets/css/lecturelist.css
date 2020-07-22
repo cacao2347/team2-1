@@ -1,5 +1,8 @@
 @charset "UTF-8";
-
+body .padding
+{
+	padding-top: 60px;
+}
 .sub
 {
 	text-align: right;

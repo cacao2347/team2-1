@@ -18,8 +18,13 @@
 <script type="text/javascript" src="<%=cp %>/assets/js/bootstrap.min.js"></script>
 
 </head>
-<body>
-
+<body class="padding">
+<!-- 헤더 -->
+<div class="row">
+	<div class="col-md-12">
+	<c:import url="WEB-INF/views/header.jsp"></c:import>
+	</div>
+</div><!-- row -->
 <div class="container-fluid">
 
 	<!-- 상세내용 영역 -->
@@ -81,6 +86,11 @@
 	
 	
 </div>
-
+<!-- 푸터 -->
+<div class="row">
+	<div class="col-md-12">
+	<c:import url="WEB-INF/views/footer.jsp"></c:import>
+	</div>
+</div>
 </body>
 </html>

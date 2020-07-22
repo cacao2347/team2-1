@@ -1,4 +1,8 @@
 @charset "UTF-8";
+body .padding
+{
+	padding-top: 60px;
+}
 .detail th
 {
 	text-align: center;
@@ -25,4 +29,9 @@
 {
 	background-color: #5f5f5f;
 	color: white;
+}
+.container-fluid
+{
+	margin-top: 50px;
+	margin-bottom: 50px;
 }

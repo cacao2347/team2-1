@@ -20,10 +20,11 @@
 
 
 </head>
-<body>
+<body class="padding">>
 <!-- 헤더 -->
 <div class="row">
 	<div class="col-md-12">
+	<c:import url="WEB-INF/views/header.jsp"></c:import>
 	</div>
 </div><!-- row -->
 
@@ -232,6 +233,7 @@
 <!-- 푸터 -->
 <div class="row">
 	<div class="col-md-12">
+	<c:import url="WEB-INF/views/footer.jsp"></c:import>
 	</div>
 </div>
 
