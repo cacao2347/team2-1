@@ -415,7 +415,38 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 	
 			});
 		
-		
+		/*
+		// 관심 키워드 추가 버튼
+        $("#keyAddBtn").click(function() 
+         {
+             var tmpHtml = "";
+             var selectedKey = "";
+             tmpHtml = tmpHtml + "";
+             
+             selectedKey = $("#keySelect option:checked").text();
+             alert(selectedKey);
+             $(".stuKeyBox").append("<div class='tagStyle'><span class='keyTag' name='intTagList'>"+ selectedKey +"<a href='' class='tag_delete'>X</a></span></div>");
+             
+        });
+       
+        $("#keySelect").change(function() 
+        {
+              var selectedKey = "";
+              // alert("셀렉트값 변경");
+              
+              selectedKey = $("#keySelect option:checked").val();
+           
+             if(selectedKey == "INT1057")
+             {
+                alert("기타");
+                $("#keyInput").attr("readonly", "disabled");
+             }
+             else
+             {
+                // alert("기타아님");
+             }
+        });
+        */
 
 	});
 
@@ -758,7 +789,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                 <div class="form-group" id="divPhoneNumber">
                     <label for="inputPhoneNumber" class="col-lg-2 control-label">휴대폰 번호<span class="must">*</span></label>
                     <div class="col-lg-10 form-inline">
-                        <input type="tel" required="required" class="form-control onlyNumber" name="name" id="phoneNumber" data-rule-required="true" placeholder="-를 제외하고 숫자만 입력하세요." maxlength="11" style="width: 85%;">
+                        <input type="tel" required="required" class="form-control onlyNumber" name="phoneNumber" id="phoneNumber" data-rule-required="true" placeholder="-를 제외하고 숫자만 입력하세요." maxlength="11" style="width: 85%;">
                         &nbsp;
                         <button type="button" id="phoneAuth" class="btn btn-primary" onclick="sendSms()">휴대폰 인증</button>
                     </div>
@@ -784,7 +815,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 				<div class="form-group">
                     <label for="inputPhoneNumber" class="col-lg-2 control-label">본인 소개</label>
                     <div class="col-lg-10 form-inline">
-                    <input type="text" id="intro" name="intro" class="form-control" placeholder="예) 자바개발자가 되고싶은 학생입니다." maxlength="11" style="width: 85%;"/>
+                    <input type="text" id="intro" name="content" class="form-control" placeholder="예) 자바개발자가 되고싶은 학생입니다." maxlength="11" style="width: 85%;"/>
                     </div>
                 </div>
                 
@@ -818,42 +849,29 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 							<input type="text" class="keyInput form-control" name="keyInput" id="keyInput" 
 								placeholder="관심 키워드를 입력해 주세요." style="width:30%"/>
 							&nbsp;	
-							<input type="button" id="tagAddBtn" value="추가" class="keyBtn btn btn-primary" />
+							<input type="button" id="keyAddBtn" value="추가" class="keyBtn btn btn-primary" />
 							
 						</div>
 					</div>
 					
-					<br>
-					
-					<div>
-					<div class="tagStyle">
-						<span class="keyTag">
-							# 자바
-							<a href="" class="tag_delete">
-							X
-							</a>
-						</span>
-					</div>
-					<div class="tagStyle">
-						<span class="keyTag">
-							# 오라클
-							<a href="" class="tag_delete">
-							X
-							</a>
-						</span>
-					</div>
-					<div class="tagStyle">
-						<span class="keyTag">
-							# 정보처리기사
-							<a href="" class="tag_delete">
-							X
-							</a>
-						</span>
-					</div>
-				</div><!-- end .stuKeyBox -->
 					
 				</div><!-- end .stuKey -->
 				</div>
+				<div class="form-group">
+		            <label for="inputPhoneNumber" class="col-lg-2 control-label"></label>
+		            <div class="col-lg-10 form-inline">
+		               <div class="stuKeyBox" style="width: 85%;">
+		               
+		               <div class="tagStyle form-inline">
+		               <input type="text" name="intTagList" value="자바">
+		               <input type="text" name="intTagList" value=".Net">
+		               </div>
+		               
+		               </div>
+		               <!-- end .stuKeyBox -->
+		            </div>
+		        </div>
+				
                 <div class="form-group">
                     <div class="col-lg-offset-2 col-lg-10 bottom">
                     	<div class="errMsg">

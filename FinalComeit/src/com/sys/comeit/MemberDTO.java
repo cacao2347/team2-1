@@ -6,14 +6,16 @@ public class MemberDTO
 {
 	private String id, mem_cd, idntt, name, email, tel , joinDate;	// 아이디, 멤버코드, 신분, 이름, 이메일, 전화번호, 가입일
 	private String mem_content;										// 본인소개
-	private String area_name, spc_area_name;						// 세부지역명, 지역명
+	private String area_name, spc_area_name;						// 지역명, 세부지역명
 	private ArrayList<String> int_tag, etc_tag;						// 관심키워드, 기타관심키워드
 	private String img_url;											// 회원 이미지 url
 	private String pwd;												// 비밀번호							
 	
 	// 수진 추가
-	private String idntt_cd, content, spc_area_cd;		// 신분코드, 본인소개, 세부지역코드
-
+	private String idntt_cd, spc_area_cd;		// 신분코드, 세부지역코드  
+	
+	
+	// getter / setter 구성
 	public String getIdntt_cd()
 	{
 		return idntt_cd;
@@ -22,16 +24,6 @@ public class MemberDTO
 	public void setIdntt_cd(String idntt_cd)
 	{
 		this.idntt_cd = idntt_cd;
-	}
-
-	public String getContent()
-	{
-		return content;
-	}
-
-	public void setContent(String content)
-	{
-		this.content = content;
 	}
 
 	public String getSpc_area_cd()
@@ -44,7 +36,6 @@ public class MemberDTO
 		this.spc_area_cd = spc_area_cd;
 	}
 
-	// getter / setter 구성
 	public String getId() 
 	{
 		return id;

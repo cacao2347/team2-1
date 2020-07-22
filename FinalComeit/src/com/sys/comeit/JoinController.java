@@ -30,25 +30,66 @@ public class JoinController
 	@Autowired
 	private SqlSession sqlSession;
 
+	// 실제 회원가입 처리. 회원가입 프로시저 호출
 	@RequestMapping(value = "/memberinsert.action", method = RequestMethod.POST)
-	public String memberInsert(MemberDTO m)
+	public String memberInsert(Model model, HttpServletRequest request)
 	{
-		String view = "redirect:mainpage.action";
+		String view = null;
 
 		IMemberDAO dao = sqlSession.getMapper(IMemberDAO.class);
 
-		HashMap<String, Object> map = new HashMap<String, Object>();
+		// 필수항목
+		String id = request.getParameter("id");					// 아이디
+		String name = request.getParameter("name");				// 이름
+		String email = request.getParameter("email");			// 이메일
+		String tel = request.getParameter("phoneNumber");		// 휴대폰번호
+		String pwd = request.getParameter("password");			// 비밀번호
+		String idntt_cd = request.getParameter("week");			// 신분
 		
-		map.put("mem_id", m.getId());
-		map.put("name", m.getName());
-		map.put("email", m.getEmail());
-		map.put("tel", m.getTel());
-		map.put("pwd", m.getPwd());
-		map.put("idntt_cd", m.getIdntt_cd());
-		map.put("img_url", m.getImg_url());
-		map.put("content", m.getContent());
-		map.put("spc_area_cd", m.getSpc_area_cd());
+		String img_url = request.getParameter("prfImg");		// 프로필 이미지
+		String mem_content = request.getParameter("content");	// 본인소개
+		String spc_area_cd = request.getParameter("spcArea");	// 세부지역 코드
 		
+		System.out.println(img_url);	// null
+		System.out.println(mem_content);	// 공백 ???????
+		
+		MemberDTO dto = new MemberDTO();
+		
+		dto.setId(id);
+		dto.setName(name);
+		dto.setEmail(email);
+		dto.setTel(tel);
+		dto.setPwd(pwd);
+		dto.setIdntt_cd(idntt_cd);
+		dto.setImg_url(img_url);
+		dto.setMem_content(mem_content);
+		dto.setSpc_area_cd(spc_area_cd);
+		
+		
+		dao.memberAdd(dto);
+		
+		String mem_cd = dto.getMem_cd();
+		
+		System.out.println(mem_cd);
+		
+		
+		// 선택한 관심키워드 배열에 넣기
+		String[] intTagList = request.getParameterValues("intTagList");
+		
+		System.out.println(intTagList.length);
+		
+		if (mem_cd != null)
+		{
+			for(int i=0; i<intTagList.length; i++)
+			{
+				System.out.println("관심");
+				
+			}
+			
+			
+		}
+		
+		view = "redirect:memberjoin.action";
 		
 		return view;
 
