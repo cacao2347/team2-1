@@ -53,14 +53,14 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">My account <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-			<c:set var="loginId" value="${param.loginCheck }" />
+			<c:set var="idCheck" value="${id }" />
 			<c:choose>
-			<c:when test="${empty loginId}">
+			<c:when test="${empty idCheck}">
 			    <li><a href="/FinalComeit/memberlogin.action">Login</a></li>
 			    <li><a href="/FinalComeit/memberjoin.action">개인 Singup</a></li>
 			    <li><a href="/FinalComeit/spajoin.action">업체 Singup</a></li>
 			</c:when>
-			<c:when test="${not empty loginId}">
+			<c:when test="${not empty idCheck}">
 			    <li><a href="#">${name } MyPage</a></li>
 			    <li><a href="/FinalComeit/logout.action">logout</a></li>
 			</c:when>
