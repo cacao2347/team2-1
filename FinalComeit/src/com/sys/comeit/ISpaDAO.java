@@ -15,4 +15,8 @@ public interface ISpaDAO
 	public int spaBlock(String id);		// 블락 여부 확인
 	
 	public String sapId(SpaDTO dto);	// 아이디 찾기
+	
+	public int spaPwd(SpaDTO dto);	// 패스워드 찾기
+	public int pwdInfo(SpaDTO dto); // 패스워드 찾기 정보 조회
+	
 }

@@ -139,7 +139,7 @@ public class LoginController
    
    
    // 아이디 찾기 뷰
-   @RequestMapping(value = "/searchId.action", method = RequestMethod.GET)
+   @RequestMapping(value = "/searchid.action", method = RequestMethod.GET)
    public String searchIdView(HttpServletRequest request)
    {
 	   HttpSession session = request.getSession();
@@ -157,7 +157,7 @@ public class LoginController
    }
    
    // 찾은 아이디 값
-   @RequestMapping(value = "/searchIdCheck.action", method = RequestMethod.POST)
+   @RequestMapping(value = "/searchidcheck.action", method = RequestMethod.POST)
    public ModelAndView loginSearchId(HttpServletRequest request)
    {
       ModelAndView mav = new ModelAndView();  
@@ -194,7 +194,7 @@ public class LoginController
       if (search_id == null||search_id=="" ) 		// 아이디 찾기 실패시
       {
     	  mav.addObject("msg", "정보가 존재하지 않습니다.");
-          mav.setViewName("redirect:searchId.action");
+          mav.setViewName("redirect:searchid.action");
       }
       else 											// 아이디 찾기 성공시
       {
@@ -271,7 +271,7 @@ public class LoginController
 	}
    
    // 패스워드 찾기 뷰
-   @RequestMapping(value = "/searchPwd.action", method = RequestMethod.GET)
+   @RequestMapping(value = "/searchpwd.action", method = RequestMethod.GET)
    public String searchPwdView(HttpServletRequest request)
    {
 	   HttpSession session = request.getSession();
@@ -288,40 +288,62 @@ public class LoginController
    
    
    // 패스워드 찾기
-   @RequestMapping(value = "/searchPwdCheck.action", method = RequestMethod.POST)
+   @RequestMapping(value = "/searchpwdcheck.action", method = RequestMethod.POST)
    public ModelAndView loginSearchPwd(HttpServletRequest request)
    {
       ModelAndView mav = new ModelAndView();  
       
       IMemberDAO memDao = sqlSession.getMapper(IMemberDAO.class);
+      ISpaDAO spaDao = sqlSession.getMapper(ISpaDAO.class);
 
       String name = request.getParameter("formUserName");
       String id = request.getParameter("formUserId");
       String tel = request.getParameter("formTel");
+      String searchPwd = request.getParameter("searchPwd");
+    		  
       int result =0;
       
-      MemberDTO dto = new MemberDTO();      
+   
+      
+      if (searchPwd.equals("memPwdSearch")) 			// 일반 회원 비밀번호 찾기일 때
+      {
+		 MemberDTO dto = new MemberDTO();
 
-     dto.setName(name); 
-     dto.setId(id);
-     dto.setTel(tel);
-     
-       result = memDao.pwdInfo(dto);
+		 dto.setName(name);
+		 dto.setId(id);
+		 dto.setTel(tel);
+
+		 result = memDao.pwdInfo(dto);
+		 
+		 mav.addObject("infoDto", dto);
+	  }
+      else if (searchPwd.equals("spaPwdSearch")) 		// 업체 회원 비밀번호 찾기일때
+      {
+    	  SpaDTO dto = new SpaDTO();
+    	  
+    	  dto.setName(name);
+    	  dto.setSpa_id(id);
+    	  dto.setTel(tel);
+    	  
+    	  result = spaDao.pwdInfo(dto);
+    	  
+    	  mav.addObject("infoDto", dto);
+      }
+      
    
       // 비밀번호 찾기 실패시
       if (result==0) 
       {
          mav.addObject("msg", "정보가 존재하지 않습니다.");
-         mav.setViewName("redirect:searchPwd.action");
+         mav.setViewName("/WEB-INF/views/SearchPw.jsp");
       }
       else // 패스워드 찾기 성공시
-      {
-    	  mav.addObject("infoDto", dto);
+      { 	  
           mav.addObject("msg", "문자발송 버튼을 클릭하세요.");
           mav.setViewName("/WEB-INF/views/SearchPw.jsp");
       }
       
-      System.out.println(result);
+      //System.out.println(result);
       return mav;
    }
    
@@ -352,30 +374,45 @@ public class LoginController
    
    
    // 변경된 난수 비밀번호 전송
-   
    @RequestMapping(value = "/pwdsendsms.action", method = RequestMethod.POST)
 	public String pwdSendSms(HttpServletRequest request) throws CoolsmsException
    {
 	   
 	    String result = "";
 	    IMemberDAO memDao = sqlSession.getMapper(IMemberDAO.class);
+	    ISpaDAO spaDao = sqlSession.getMapper(ISpaDAO.class);
+	    
 	   
-	    MemberDTO dto = new MemberDTO();
-	    String authNum = updatePwd();
+
+	    String authNum = updatePwd();							// 난수 발생 비밀번호
 	    String name = request.getParameter("formUserName");
 	    String id = request.getParameter("formUserId");
 	    String tel = request.getParameter("formTel");
-	    int update =0;  
+	    String searchPwd = request.getParameter("searchPwd");	// 회원 여부
 	    
-	     dto.setPwd(authNum); 
-	     dto.setName(name); 
-	     dto.setId(id);
-	     dto.setTel(tel);
-	     
-	     update = memDao.memPwd(dto);
+	    if (searchPwd.equals("memPwdSearch")) 					// 일반 회원 
+	      {
+			 MemberDTO dto = new MemberDTO();
+
+			 dto.setPwd(authNum); 
+		     dto.setName(name); 
+		     dto.setId(id);
+		     dto.setTel(tel);
+		     
+		     memDao.memPwd(dto);
+		  }
+	      else if (searchPwd.equals("spaPwdSearch")) 			// 업체 회원
+	      {
+	    	  SpaDTO dto = new SpaDTO();
+	    	  
+	    	  dto.setPwd(authNum);
+	    	  dto.setName(name);
+	    	  dto.setSpa_id(id);
+	    	  dto.setTel(tel);
+	    	  
+	    	  spaDao.spaPwd(dto);
+	      }
 	       
-	    
-	   
 		String api_key = "NCSSVMTOHVFAMAWF";
 		String api_secret = "LAFEEWGYZJ7GGRH4MKT9TUXNY4OSVWBL";
 

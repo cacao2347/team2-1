@@ -5,10 +5,7 @@
    request.setCharacterEncoding("UTF-8");
    String cp = request.getContextPath();
 %>
-<%
-   String searchPwd = (String)session.getAttribute("searchPwd");
-   session.setAttribute("searchPwd", searchPwd);
-%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,7 +54,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 		// 정보 입력 후 정보확인 버튼 클릭 시 정보 체크 
 		$("#infoCheck").click(function() 
 		{
-			$("#snedForm").attr("action", "searchPwdCheck.action");	
+			$("#snedForm").attr("action", "searchpwdcheck.action");	
 		});
 		
 		
@@ -127,7 +124,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 </head>
 
 <body>
-<c:set var = "searchId" scope = "session" value = "${sessionScope.searchId }"/>
+<c:set var = "searchPwd" scope = "session" value = "${sessionScope.searchPwd }"/>
    <div class="container register">
       <div class="row">
          <div class="col-md-3 register-left">
@@ -140,12 +137,12 @@ body{font-family: 'Noto Sans KR', sans-serif;}
             <div class="col-sm-6 col-sm-offset-3 form-box login">
                <div class="form-top">
                   <div class="form-top-left">
-                  <c:set var = "type" scope = "session" value = "<%=searchPwd %>"/>
-                        <c:choose>
-                        <c:when  test="${searchId eq 'memPwdSearch'}">
+                  
+                   <c:choose>
+                        <c:when  test="${searchPwd eq 'memPwdSearch'}">
                      <h3>회원 PW 찾기</h3>
                    </c:when>
-                   <c:when  test="${searchId eq 'spaPwdSearch'}">
+                   <c:when  test="${searchPwd eq 'spaPwdSearch'}">
                       <h3>업체 PW 찾기</h3>
                    </c:when>
                    </c:choose>
@@ -170,12 +167,24 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                         </tr>
                         <tr>
                            <th>아이디</th>
+                           <c:if test="${searchPwd eq 'memPwdSearch'}">
                            <td>
                            <label class="sr-only" for="formUserId">UserId</label>
                            <input type="text" name="formUserId"
                            placeholder="가입시 입력한 아이디" class="form-userid form-control"
                            id="formUserId" value="${infoDto.id }">
                            </td>
+                           </c:if>
+                           
+                            <c:if test="${searchPwd eq 'spaPwdSearch'}">
+                           <td>
+                           <label class="sr-only" for="formUserId">UserId</label>
+                           <input type="text" name="formUserId"
+                           placeholder="가입시 입력한 아이디" class="form-userid form-control"
+                           id="formUserId" value="${infoDto.spa_id }">
+                           </td>
+                           </c:if>
+                           
                         </tr>
                         <tr>
                            <th>전화번호</th>
@@ -186,6 +195,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                            id="formTel" value="${infoDto.tel }">
                            </td>
                            <td>
+                           <input type="hidden" name="searchPwd" value="${searchPwd }"/>
                            <button type="submit" class="btn" id="infoCheck">정보확인</button>
                            <button type="button" class="btn" id="msgSend" onclick="idSendSms()">문자발송</button>
                            </td>
@@ -209,6 +219,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                         	<input type="text" id="okNumRslt" value="${msg }" class="okNumBox" readonly="readonly"/>
                         </div>
                         <input type="hidden" name="ldPwd" value="${pwd }"/>
+                        <input type="hidden" name="searchPwd" value="${searchPwd }"/>
                         <button type="submit" class="btn btn-primary searchBtn" id="rcvIdBtn" disabled="disabled">PW 받기</button>
                      </div>
                   </form>
@@ -224,12 +235,11 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                           </a> -->
                           <a class="long-form-btn">
                           <input type="hidden" id="admType" name="loginType" value="join"> 
-                              <c:set var = "type" scope = "session" value = "<%=searchPwd %>"/>
                               <c:choose>
-                              <c:when  test="${type eq 'memPwdSearch'}">
+                              <c:when  test="${searchPwd eq 'memPwdSearch'}">
                               <button type="submit" class="btn" style="background: none; color: gray;" onClick="location.href='memberjoin.action'">회원가입</button>
                               </c:when >
-                              <c:when  test="${type eq 'spaPwdSearch'}">
+                              <c:when  test="${searchPwd eq 'spaPwdSearch'}">
                               <button type="submit" class="btn" style="background: none; color: gray;" onClick="location.href='spajoin.action'">회원가입</button>
                               </c:when>
                               </c:choose>

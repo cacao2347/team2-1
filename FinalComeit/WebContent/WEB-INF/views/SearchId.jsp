@@ -132,7 +132,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 								<div class="form-top-right"></div>
 							</div>
 							<div class="form-bottom">
-								<form role="form" action="searchIdCheck.action" method="post" class="login-form">
+								<form role="form" action="searchidcheck.action" method="post" class="login-form">
 								<c:choose>
 								<c:when test="${empty search_id}">
 								<br>

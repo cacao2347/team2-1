@@ -81,13 +81,13 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 		// 회원 아이디
         $("#memSearchIdBtn").click(function() 
         {
-				$("#LoginMemForm").attr("action", "searchId.action");
+				$("#LoginMemForm").attr("action", "searchid.action");
 		});
 		
     	// 회원 비밀번호
         $("#memSearchPwdBtn").click(function() 
         {
-				$("#LoginMemForm").attr("action", "searchPwd.action");
+				$("#LoginMemForm").attr("action", "searchpwd.action");
 		});
 		
     	// 일반 회원가입
@@ -99,13 +99,13 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 		// 업체 아이디
         $("#spaSearchIdBtn").click(function() 
         {
-				$("#LoginSpaForm").attr("action", "searchId.action");
+				$("#LoginSpaForm").attr("action", "searchid.action");
 		});
 		
     	// 업체 비밀번호
         $("#spaSearchPwdBtn").click(function() 
         {
-				$("#LoginSpaForm").attr("action", "searchPwd.action");
+				$("#LoginSpaForm").attr("action", "searchpwd.action");
 		});
 		
     	// 업체 회원가입
