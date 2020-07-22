@@ -350,6 +350,14 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 			$("#proImgBtn").removeAttr("disabled");
 			$("#tagAddBtn").removeAttr("disabled");
 			$("#joinBtn").removeAttr("disabled");
+			
+			$("#authNum").removeAttr("disabled");
+			$("#authNumRslt").removeAttr("disabled");
+			$("#authNumBtn").removeAttr("disabled");
+			$("#keyAddBtn").removeAttr("disabled");
+			$("#keyResetBtn").removeAttr("disabled");
+			$("#uploadFile").removeAttr("disabled");
+			
 			$("#err").css("display", "none");
 
 		});
@@ -382,6 +390,12 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 			$("#keyInput").attr("disabled", true);
 			$("#tagAddBtn").attr("disabled", true);
 			$("#joinBtn").attr("disabled", true);
+			$("#authNum").attr("disabled", true);
+			$("#authNumRslt").attr("disabled", true);
+			$("#authNumBtn").attr("disabled", true);
+			$("#keyAddBtn").attr("disabled", true);
+			$("#keyResetBtn").attr("disabled", true);
+			$("#uploadFile").attr("disabled", true);
 			
 			$("#joinForm")[0].reset();
 			$("input:radio[name='provisionyn']:radio[value='N']").prop("checked", true);

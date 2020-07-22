@@ -70,23 +70,23 @@
 	   }
 	</select>
 	
-<!-- 일반 회원 pwd 찾기 비밀번호 변경 -->
-<update id="memPwd">
-UPDATE TBL_MEM_JOIN
-SET PWD=CRYPTPACK.ENCRYPT(#{pwd},#{pwd})
-WHERE NAME=#{name}
-AND MEM_ID=#{id}
-AND TEL=#{tel} 
-</update>
-
-<!-- 일반 회원 pwd 찾기 정보 조회 -->
-<select id="pwdInfo" resultType="java.lang.Integer" >
-SELECT COUNT(*) AS COUNT
-FROM TBL_MEM_JOIN
-WHERE MEM_ID = #{id}
-AND NAME=#{name}
-AND TEL=#{tel} 
-</select>
+	<!-- 일반 회원 pwd 찾기 비밀번호 변경 -->
+	<update id="memPwd">
+		UPDATE TBL_MEM_JOIN
+		SET PWD=CRYPTPACK.ENCRYPT(#{pwd},#{pwd})
+		WHERE NAME=#{name}
+		AND MEM_ID=#{id}
+		AND TEL=#{tel} 
+	</update>
+	
+	<!-- 일반 회원 pwd 찾기 정보 조회 -->
+	<select id="pwdInfo" resultType="java.lang.Integer" >
+		SELECT COUNT(*) AS COUNT
+		FROM TBL_MEM_JOIN
+		WHERE MEM_ID = #{id}
+		AND NAME=#{name}
+		AND TEL=#{tel} 
+	</select>
 	
 	<!-- 아이디와 같은 회원 수 조회 adminCount() -->
 	<select resultType="java.lang.Integer" id="memcheckCount">
@@ -105,6 +105,19 @@ AND TEL=#{tel}
 	<insert id="memEtcTagInsert">
 		INSERT INTO TBL_MEM_INT_ETC_TAG(MEM_INT_ETC_TAG_CD, MEM_CD, ETC_TAG)
 		VALUES('MEIET'||SEQ_MEM_INT_ETC_TAG.NEXTVAL, #{mem_cd}, #{etc_tag})
+	</insert>
+	
+	<!-- 회원 가입 기타 키워드 테이블 호출해서 10개인지 체크 -->
+	<select id="etcTagCount" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS COUNT
+		FROM TBL_MEM_INT_ETC_TAG
+		WHERE ETC_TAG=#{etc_tag}
+	</select>
+	
+	<!-- 관심 키워드에 INSERT -->
+	<insert id="addTagName">
+		INSERT INTO TBL_INT_TAG(INT_TAG_CD, INT_TAG)
+		VALUES('INT'||SEQ_INT_TAG.NEXTVAL, #{etc_tag})
 	</insert>
    
 </mapper>

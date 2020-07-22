@@ -31,7 +31,7 @@ public class JoinController
 	@Autowired
 	private SqlSession sqlSession;
 
-	// 실제 회원가입 처리. 회원가입 프로시저 호출
+	// 회원가입 처리. 회원가입 프로시저 호출
 	@RequestMapping(value = "/memberinsert.action", method = RequestMethod.POST)
 	public String memberInsert(Model model, HttpServletRequest request)
 	{
@@ -40,20 +40,19 @@ public class JoinController
 		IMemberDAO dao = sqlSession.getMapper(IMemberDAO.class);
 
 		// 필수항목
-		String id = request.getParameter("id");					// 아이디
-		String name = request.getParameter("name");				// 이름
-		String email = request.getParameter("email");			// 이메일
-		String tel = request.getParameter("phoneNumber");		// 휴대폰번호
-		String pwd = request.getParameter("password");			// 비밀번호
-		String idntt_cd = request.getParameter("week");			// 신분
-		
-		String img_url = request.getParameter("prfImg");		// 프로필 이미지
-		String mem_content = request.getParameter("content");	// 본인소개
-		String spc_area_cd = request.getParameter("spcArea");	// 세부지역 코드
-		
-		
+		String id = request.getParameter("id"); // 아이디
+		String name = request.getParameter("name"); // 이름
+		String email = request.getParameter("email"); // 이메일
+		String tel = request.getParameter("phoneNumber"); // 휴대폰번호
+		String pwd = request.getParameter("password"); // 비밀번호
+		String idntt_cd = request.getParameter("week"); // 신분코드
+
+		String img_url = request.getParameter("prfImg"); // 프로필 이미지
+		String mem_content = request.getParameter("content"); // 본인소개
+		String spc_area_cd = request.getParameter("spcArea"); // 세부지역 코드
+
 		MemberDTO dto = new MemberDTO();
-		
+
 		dto.setId(id);
 		dto.setName(name);
 		dto.setEmail(email);
@@ -63,47 +62,54 @@ public class JoinController
 		dto.setImg_url(img_url);
 		dto.setMem_content(mem_content);
 		dto.setSpc_area_cd(spc_area_cd);
-		
+
 		// 실제 회원가입 프로시저 호출
 		dao.memberAdd(dto);
-		
-		String mem_cd = dto.getMem_cd();	// OUT 변수인 PK를 담기
-		
+
+		String mem_cd = dto.getMem_cd(); // OUT 변수인 PK를 담기
+
 		// System.out.println(mem_cd);
-		
-		String[] intTagList = request.getParameterValues("intTagList");	// 선택한 모든 관심 키워드 배열에 넣기
+
+		String[] intTagList = request.getParameterValues("intTagList"); // 선택한 모든 관심 키워드 배열에 넣기
 		String[] etcTagList = request.getParameterValues("etcTagList"); // 선택한 모든 관심 기타 키워드 배열에 넣기
-		
-		
-		//System.out.println(intTagList.length);
-		
-		
-		if (mem_cd != null)		// 회원 발급 코드 PK 가 NULL 이 아닐경우
+
+		// System.out.println(intTagList.length);
+
+		if (mem_cd != null) // 회원 발급 코드 PK 가 NULL 이 아닐경우
 		{
-			if(intTagList.length > 0)
+			if (intTagList.length > 0)
 			{
-				for(int i=0; i<intTagList.length; i++)	// 선택한 모든 관심 키워드 중에
+				for (int i = 0; i < intTagList.length; i++) // 선택한 모든 관심 키워드 중에
 				{
-					dto.setInt_tag(intTagList[i]);	// 자바를 키워드에 세팅하고
-					dao.memIntTagInsert(dto);		// 관심 키워드 insert 실행시키기
-				}
-				
-			}
-			if(etcTagList.length > 0)
-			{
-				for(int i=0; i<etcTagList.length; i++)	// 선택한 모든 관심 기타 키워드 중에
-				{
-					dto.setEtc_tag(etcTagList[i]);	// 기타태그를 키워드에 세팅하고
-					dao.memEtcTagInsert(dto);		// 기타 키워드 insert 실행시키기
-					
+					dto.setInt_tag(intTagList[i]); // 자바를 키워드에 세팅하고
+					System.out.println(intTagList[i]);
+
+					dao.memIntTagInsert(dto); // 회원관심 키워드 insert 실행시키기
 				}
 			}
-			
+			if (etcTagList.length > 0)
+			{
+				for (int i = 0; i < etcTagList.length; i++) // 선택한 모든 관심 기타 키워드 중에
+				{
+					// value에 따른 코드 뽑아내는 dao 호출
+
+					dto.setEtc_tag(etcTagList[i]); // 기타태그를 키워드에 세팅하고
+					System.out.println(etcTagList[i]);
+					dao.memEtcTagInsert(dto); // 기타 키워드 insert 실행시키기
+
+					int etcTagCount = dao.etcTagCount();
+
+					if (etcTagCount == 10) // 회원 관심 기타 키워드 테이블 호출해서 10개일 경우
+						dao.addTagName(dto); // 그냥 관심키워드 테이블에 insert 시키기
+
+				}
+			}
+
 		}
-		
-		// 회원가입 성공 시 로그인 페이지로 redirect
+
+		// 회원가입 성공 시 로그인 페이지
 		view = "redirect:memberlogin.action";
-		
+
 		return view;
 
 	}

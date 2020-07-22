@@ -27,6 +27,7 @@ public interface IMemberDAO
 	public int memIntTagInsert(MemberDTO dto);	// 회원 관심 키워드
 	public int memEtcTagInsert(MemberDTO dto);	// 회원 관심 기타 키워드
 	
-	
+	public int etcTagCount();		// 회원 관심 기타 키워드 10개 체크
+	public int addTagName(MemberDTO dto);	// 관심 키워드에 INSERT
 	
 }
