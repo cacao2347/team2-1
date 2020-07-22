@@ -9,7 +9,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class ComeitController 
 {
 	   @RequestMapping(value = "/comeit.action", method = RequestMethod.GET)
-	   public String memberLogin(Model model)
+	   public String ComeIt(Model model)
+	   {
+	      String view = null;
+	      
+	      view = "/WEB-INF/views/ComeIt.jsp";
+	      
+	      return view;
+	   }
+	   
+	   @RequestMapping(value = "/mainpage.action", method = RequestMethod.GET)
+	   public String MainPage(Model model)
 	   {
 	      String view = null;
 	      
