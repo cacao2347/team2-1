@@ -70,14 +70,23 @@
 	   }
 	</select>
 	
-	<!-- 일반 회원 pwd 찾기 -->
-	<update id="memPwd">
-	   UPDATE TBL_MEM_JOIN
-	   SET PWD=CRYPTPACK.ENCRYPT(#{pwd},#{pwd})
-	   WHERE NAME=#{name}
-	   AND MEM_ID=#{id}
-	   AND TEL=#{tel}
-	</update>
+<!-- 일반 회원 pwd 찾기 비밀번호 변경 -->
+<update id="memPwd">
+UPDATE TBL_MEM_JOIN
+SET PWD=CRYPTPACK.ENCRYPT(#{pwd},#{pwd})
+WHERE NAME=#{name}
+AND MEM_ID=#{id}
+AND TEL=#{tel} 
+</update>
+
+<!-- 일반 회원 pwd 찾기 정보 조회 -->
+<select id="pwdInfo" resultType="java.lang.Integer" >
+SELECT COUNT(*) AS COUNT
+FROM TBL_MEM_JOIN
+WHERE MEM_ID = #{id}
+AND NAME=#{name}
+AND TEL=#{tel} 
+</select>
 	
 	<!-- 아이디와 같은 회원 수 조회 adminCount() -->
 	<select resultType="java.lang.Integer" id="memcheckCount">

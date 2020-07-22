@@ -1,5 +1,6 @@
 package com.sys.comeit;
 
+import java.util.HashMap;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
@@ -7,13 +8,18 @@ import javax.servlet.http.HttpSession;
 
 
 import org.apache.ibatis.session.SqlSession;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import net.nurigo.java_sdk.api.Message;
+import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 
 @Controller
@@ -201,7 +207,68 @@ public class LoginController
       
       return mav;
    }
+   
+   // 아이디 찾기 인증 번호 전송하기
+    @ResponseBody
+	@RequestMapping(value = "/idsendsms.action", method = RequestMethod.POST)
+	public String idSendSms(@RequestParam(value = "receiver") String receiver) throws CoolsmsException
+    {
+		String api_key = "NCSSVMTOHVFAMAWF";
+		String api_secret = "LAFEEWGYZJ7GGRH4MKT9TUXNY4OSVWBL";
+		String authNum = "";
+		Message coolsms = new Message(api_key, api_secret);
+		
+		System.out.println("Hello");
+		authNum = sendString();
+		
+		// 4 params(to, from, type, text) are mandatory. must be filled
+		HashMap<String, String> params = new HashMap<String, String>();
+		params.put("to", "01028652034");
+		params.put("from", "01028652034"); 				// 인증할 전화번호
+		params.put("type", "SMS");
+		params.put("text", "[COME-IT] 인증번호 : " + authNum);
+		params.put("app_version", "test app 1.2"); // application name and version
 
+		try
+		{
+			// send() 는 메시지를 보내는 함수
+			JSONObject obj = (JSONObject) coolsms.send(params);
+			System.out.println(obj.get("error_count"));
+			
+		} catch (CoolsmsException e)
+		{
+			System.out.println(e.getMessage());
+			System.out.println(e.getCode());
+		}
+		
+		return authNum;
+		
+	}
+   
+   
+   // 인증번호 난수 발생
+   public String sendString()
+   {
+		StringBuffer temp = new StringBuffer();
+		Random rnd = new Random();
+
+		for (int i = 0; i < 6; i++)
+		{
+			int rIndex = rnd.nextInt(2);
+			switch (rIndex)
+			{
+			case 0:
+				// A-Z
+				temp.append((char) ((int) (rnd.nextInt(26)) + 65)); // +97이면 소문자 +65면 대문자
+				break;
+			case 1:
+				// 0-9
+				temp.append((rnd.nextInt(10)));
+				break;
+			}
+		}
+		return temp.toString();
+	}
    
    // 패스워드 찾기 뷰
    @RequestMapping(value = "/searchPwd.action", method = RequestMethod.GET)
@@ -219,6 +286,7 @@ public class LoginController
 	   return view;
    }
    
+   
    // 패스워드 찾기
    @RequestMapping(value = "/searchPwdCheck.action", method = RequestMethod.POST)
    public ModelAndView loginSearchPwd(HttpServletRequest request)
@@ -226,22 +294,19 @@ public class LoginController
       ModelAndView mav = new ModelAndView();  
       
       IMemberDAO memDao = sqlSession.getMapper(IMemberDAO.class);
-      
-      String pwd = updatePwd();
-      String name = request.getParameter("form-username");
-      String id = request.getParameter("form-userid");
-      String tel = request.getParameter("form-tel");
+
+      String name = request.getParameter("formUserName");
+      String id = request.getParameter("formUserId");
+      String tel = request.getParameter("formTel");
       int result =0;
       
-      MemberDTO dto = new MemberDTO();
-		
-	  dto.setPwd(pwd); 
-	  dto.setName(name); 
-	  dto.setId(id);
-	  dto.setTel(tel);
-	  
-	  result = memDao.memPwd(dto);
-		 
+      MemberDTO dto = new MemberDTO();      
+
+     dto.setName(name); 
+     dto.setId(id);
+     dto.setTel(tel);
+     
+       result = memDao.pwdInfo(dto);
    
       // 비밀번호 찾기 실패시
       if (result==0) 
@@ -251,36 +316,98 @@ public class LoginController
       }
       else // 패스워드 찾기 성공시
       {
-    	  
-    	  mav.addObject("msgCheck", "문자 발송한 패스워드로 로그인 하세요.");
-          mav.setViewName("/WEB-INF/views/member/MemberLogin.jsp");
+    	  mav.addObject("infoDto", dto);
+          mav.addObject("msg", "문자발송 버튼을 클릭하세요.");
+          mav.setViewName("/WEB-INF/views/SearchPw.jsp");
       }
       
-      System.out.println(pwd);
+      System.out.println(result);
       return mav;
    }
    
-   // 패스워드 업데이트용
+   
+   // 패스워드 업데이트용 난수 발생
    public String updatePwd()
-	{
-		StringBuffer temp = new StringBuffer();
-		Random rnd = new Random();
+   {
+      StringBuffer temp = new StringBuffer();
+      Random rnd = new Random();
 
-		for (int i = 0; i < 7; i++)
+      for (int i = 0; i < 7; i++)
+      {
+         int rIndex = rnd.nextInt(2);
+         switch (rIndex)
+         {
+         case 0:
+            // A-Z
+            temp.append((char) ((int) (rnd.nextInt(26)) + 65)); // +97이면 소문자 +65면 대문자
+            break;
+         case 1:
+            // 0-9
+            temp.append((rnd.nextInt(10)));
+            break;
+         }
+      }
+      return temp.toString();
+   }
+   
+   
+   // 변경된 난수 비밀번호 전송
+   
+   @RequestMapping(value = "/pwdsendsms.action", method = RequestMethod.POST)
+	public String pwdSendSms(HttpServletRequest request) throws CoolsmsException
+   {
+	   
+	    String result = "";
+	    IMemberDAO memDao = sqlSession.getMapper(IMemberDAO.class);
+	   
+	    MemberDTO dto = new MemberDTO();
+	    String authNum = updatePwd();
+	    String name = request.getParameter("formUserName");
+	    String id = request.getParameter("formUserId");
+	    String tel = request.getParameter("formTel");
+	    int update =0;  
+	    
+	     dto.setPwd(authNum); 
+	     dto.setName(name); 
+	     dto.setId(id);
+	     dto.setTel(tel);
+	     
+	     update = memDao.memPwd(dto);
+	       
+	    
+	   
+		String api_key = "NCSSVMTOHVFAMAWF";
+		String api_secret = "LAFEEWGYZJ7GGRH4MKT9TUXNY4OSVWBL";
+
+		Message coolsms = new Message(api_key, api_secret);
+		
+		System.out.println("Hello");
+		
+		// 4 params(to, from, type, text) are mandatory. must be filled
+		HashMap<String, String> params = new HashMap<String, String>();
+		params.put("to", "01028652034");
+		params.put("from", "01028652034"); 				// 인증할 전화번호
+		params.put("type", "SMS");
+		params.put("text", "[COME-IT] 인증번호 : " + authNum);
+		params.put("app_version", "test app 1.2"); // application name and version
+
+		try
 		{
-			int rIndex = rnd.nextInt(2);
-			switch (rIndex)
-			{
-			case 0:
-				// A-Z
-				temp.append((char) ((int) (rnd.nextInt(26)) + 65)); // +97이면 소문자 +65면 대문자
-				break;
-			case 1:
-				// 0-9
-				temp.append((rnd.nextInt(10)));
-				break;
-			}
+			// send() 는 메시지를 보내는 함수
+			JSONObject obj = (JSONObject) coolsms.send(params);
+			System.out.println(obj.get("error_count"));
+			
+		} catch (CoolsmsException e)
+		{
+			System.out.println(e.getMessage());
+			System.out.println(e.getCode());
 		}
-		return temp.toString();
+		
+		result="redirect:memberlogin.action";
+
+		return result;
+		
 	}
+     
+   
 }
