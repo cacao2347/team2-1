@@ -20,4 +20,6 @@ public interface IMemberDAO
 	public String memId(MemberDTO dto);	// 아이디 찾기
 	public int memPwd(MemberDTO dto);	// 패스워드 찾기
 	
+	public int memcheckCount(String id);	// 아이디 중복확인
+	
 }
