@@ -542,13 +542,14 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 			      if(selectedValue == 'INT1057')
 			      {
 			    	  
-			    	  $(".stuKeyBox").append("<div class='tagStyle'><span class='keyTag' name='intTagList'>"+ selectedText 
-			    			  + "</span></div>");
+			    	  $(".stuKeyBox").append("<div class='tagStyle'><span class='keyTag'>"+ selectedText 
+			    			  + "<input type='hidden' name='intTagList' value='"+ selectedText + "'></span></div>");
 			      }
 			      // 관심키워드 일 때...
 			      else
 			      {
-			    	  $(".stuKeyBox").append("<div class='tagStyle'><span class='keyTag' name='etcTagList'>"+ selectedText +"</span></div>");			    	  
+			    	  $(".stuKeyBox").append("<div class='tagStyle'><span class='keyTag'>"+ selectedText 
+			    			  + "<input type='hidden' name='etcTagList' value='"+ selectedText + "'></span></div>");			    	  
 			      }
 			      
 			 });
@@ -946,7 +947,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 				
                 <div class="form-group" id="divPhoneNumber">
 				<label for="inputPhoneNumber" class="col-lg-2 control-label">휴대폰
-					번호</label>
+					번호<span class="must">*</span></label>
 				<div class="col-lg-10 form-inline">
 					<input type="tel" class="form-control onlyNumber" id="phoneNumber"
 						data-rule-required="true" placeholder="-를 제외하고 숫자만 입력하세요."

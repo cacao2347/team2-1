@@ -50,6 +50,10 @@ public class JoinController
 		String img_url = request.getParameter("prfImg"); // 프로필 이미지
 		String mem_content = request.getParameter("content"); // 본인소개
 		String spc_area_cd = request.getParameter("spcArea"); // 세부지역 코드
+		
+		// 추가 부분 - 회원관심 키워드
+		String[] int_tag = request.getParameterValues("intTagList");
+		String[] etc_tag = request.getParameterValues("etcTagList");
 
 		MemberDTO dto = new MemberDTO();
 
