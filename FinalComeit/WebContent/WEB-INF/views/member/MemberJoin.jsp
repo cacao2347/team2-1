@@ -457,22 +457,102 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 	
 			});
 		
-		
+			$("#authNumBtn").click(function() 
+			{			 
+				if($("#authNum").val() == "" || $("#authNum").val() == null)
+				 {
+					  alert("인증번호를 입력하세요.");
+					  return;
+				 }
+	
+				 if($("#authNum").val() == phoneCheck)
+			     {
+					 alert("인증에 성공하였습니다.");
+					 $("#authNumRslt").attr("value", "인증 성공");
+			     }
+				 else if($("#authNum").val() != phoneCheck)
+				 {
+					 alert("인증에 실패하였습니다.");
+					 $("#authNumRslt").attr("value", "인증 실패"); 
+				 }
+				 else
+				 {
+					 alert("인증에 실패하였습니다.");
+					 $("#authNumRslt").attr("value", "인증 실패");
+				 }
+			});
+			
+			// 관심 키워드 추가 버튼
+			 $("#keyAddBtn").click(function() 
+		     {
+			      var tmpHtml = "";
+			      var selectedKey = "";
+			      var obj = document.getElementsByName('intTagList');
+
+			      tmpHtml = tmpHtml + "";
+			      
+			      selectedText = $("#keySelect option:checked").text();
+			      selectedValue = $("#keySelect option:checked").val();
+			      elementCount = $(".tagStyle").length;
+			      
+			      // 키워드 개수 제한
+			      if(elementCount == 5)
+			      {
+			    	  alert("키워드는 최대 5개 까지 선택 할 수 있습니다.")
+			    	  return;
+			      }
+			      
+			      // 기타 키워드 일 때, 인풋박스 활성화...
+			      if(selectedValue == 'INT1057')
+			      {
+			    	  var keyInput = $("#keyInput").val();
+			    	  
+			    	  $(".stuKeyBox").append("<div class='tagStyle'><span class='keyTag' name='intTagList'>"+ keyInput 
+			    			  + "<input type='hidden' value='"+  +"</span></div>");
+			      }
+			      // 관심키워드 일 때...
+			      else
+			      {
+			    	  $(".stuKeyBox").append("<div class='tagStyle'><span class='keyTag' name='etcTagList'>"+ selectedText +"</span></div>");			    	  
+			      }
+			      
+			 });
+			
+			 $("#keySelect").change(function() 
+			 {
+				    var selectedValue = "";
+				 	// alert("셀렉트값 변경");
+				 	
+				 	selectedValue = $("#keySelect option:checked").val();
+				 
+					if(selectedValue == "INT1057")
+					{
+						$("#keyInput").attr("readonly", false);
+					}
+					else
+					{
+						$("#keyInput").attr("readonly", true);
+					}
+			 });
+			 
+			 // 관심 키워드 삭제 버튼
+			 $("#keyResetBtn").click(function() 
+		     {
+				   $(".stuKeyBox").empty();
+			 });
 
 	});
 
 	// 문자 발송
-	function sendSms()
-	{
-
-		phoneCheck = "";
-		alert("phoneCheck_bf : " + phoneCheck);
-
-		$.ajax(
-		{
-			url : "<%= cp%>/sendsms.action",
+	function ajaxSendSms()
+	 {
+    	phoneCheck = "";
+    	alert("phoneCheck_bf : "+ phoneCheck);
+    	 
+		$.ajax({
+			url: "<%=cp%>/sendsms.action",
 			data: {
-				receiver: $("#divPhoneNumber").val()
+				receiver: $("#phoneNumber").val()
 			},
 			type: "post",
 			success: function(result){
@@ -800,21 +880,29 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 				
 				
                 <div class="form-group" id="divPhoneNumber">
-                    <label for="inputPhoneNumber" class="col-lg-2 control-label">휴대폰 번호<span class="must">*</span></label>
-                    <div class="col-lg-10 form-inline">
-                        <input type="tel" required="required" class="form-control onlyNumber" name="name" id="phoneNumber" data-rule-required="true" placeholder="-를 제외하고 숫자만 입력하세요." maxlength="11" style="width: 85%;">
-                        &nbsp;
-                        <button type="button" id="phoneAuth" class="btn btn-primary" onclick="sendSms()">휴대폰 인증</button>
-                    </div>
-                </div>
-                <div class="form-group" id="divPhoneNumber">
-                    <label for="inputPhoneNumber" class="col-lg-2 control-label">인증 번호<span class="must">*</span></label>
-                    <div class="col-lg-10 form-inline">
-                        <input type="tel" required="required" maxlength="6" class="form-control onlyAlphabetAndNumber" name="phoneNumberCheck" id="phoneNumberCheck" data-rule-required="true"  maxlength="11" style="width: 85%;">
-                        &nbsp;
-                        <button type="button" id="authCheck" class="btn btn-primary">확인</button>
-                    </div>
-                </div>
+				<label for="inputPhoneNumber" class="col-lg-2 control-label">휴대폰
+					번호</label>
+				<div class="col-lg-10 form-inline">
+					<input type="tel" class="form-control onlyNumber" id="phoneNumber"
+						data-rule-required="true" placeholder="-를 제외하고 숫자만 입력하세요."
+						maxlength="11" style="width: 85%;"> &nbsp;
+					<button type="button" id="phoneAuth" class="btn btn-primary"
+						onclick="ajaxSendSms()">휴대폰 인증</button>
+				</div>
+			</div>
+			<div class="form-group" id="divPhoneNumber">
+				<label for="inputPhoneNumber" class="col-lg-2 control-label">인증
+					번호</label>
+				<div class="col-lg-10 form-inline">
+					<input type="tel" class="form-control onlyAlphabetAndNumber"
+						id="authNum" data-rule-required="true" maxlength="11"
+						style="width: 65%;"> <input type="tel"
+						class="form-control onlyAlphabetAndNumber" id="authNumRslt"
+						data-rule-required="true" maxlength="11" style="width: 20%;">
+					&nbsp;
+					<button type="button" class="btn btn-primary" id="authNumBtn">확인</button>
+				</div>
+			</div>
                 
                 <div class="image form-group">
 				<label for="profileimage" class="col-lg-2 control-label">프로필 이미지</label>
@@ -836,8 +924,10 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 			    <!-- 키워드 -->
 			    <div class="form-group">
 				<div class="stuKeyword">
-					<label for="inputPhoneNumber" class="col-lg-2 control-label">관심 키워드(최대 5개)<span class="must">*</span></label>
-					
+					<label for="inputIntKeyword" class="col-lg-2 control-label">관심
+						키워드(최대 5개)<span class="must">*</span>
+					</label>
+
 				</div>
 				<div class="stuKey1">
 					<div class="stuKeySel">
@@ -849,48 +939,37 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 								<option value="key4">spring</option>
 								<option value="key5">기타</option>
 							</select> -->
-							
-							<select name="keySelect" id="keySelect" class="form-control keySelect">
-								<c:forEach var="intTag" items="${intTag }">
-			                        <option value="${intTag.int_tag_cd }" >
-			                           ${intTag.int_tag }
-			                        </option>
-			                    </c:forEach>
-							</select>
-							
-							
-							&nbsp;
-							<input type="text" class="keyInput form-control" name="keyInput" id="keyInput" 
-								placeholder="관심 키워드를 입력해 주세요." style="width:30%"/>
-							&nbsp;	
-							<input type="button" id="tagAddBtn" value="추가" class="keyBtn btn btn-primary" />
-							
-						</div>
-					</div>
-					
 
-					
-				</div><!-- end .stuKey -->
+							<select name="keySelect" id="keySelect"
+								class="form-control keySelect">
+								<c:forEach var="intTag" items="${intTag }">
+									<option value="${intTag.int_tag_cd }">
+										${intTag.int_tag }</option>
+								</c:forEach>
+							</select> &nbsp; <input type="text" class="keyInput form-control"
+								id="keyInput" placeholder="관심 키워드를 입력해 주세요." style="width: 30%" readonly="readonly"/>
+							&nbsp; <input type="button" id="keyAddBtn" value="추가"
+								class="keyBtn btn btn-primary" />
+							&nbsp;	
+								<input type="button" id="keyResetBtn" value="초기화"
+								class="keyBtn btn btn-primary" />
+
+						</div>
+						<!-- end / col-lg-10 form-inline -->
+					</div>
+					<!-- stuKeySel -->
 				</div>
+				<!-- end .stuKey -->
+			</div>
 				
 				<div class="form-group">
-		            <label for="inputPhoneNumber" class="col-lg-2 control-label"></label>
-		            <div class="col-lg-10 form-inline">
-		               <div class="stuKeyBox" style="width: 85%;">
-
-		               <div class="tagStyle form-inline">
-		               <input type="text" name="intTagList" value="관심자바">
-		               <input type="text" name="intTagList" value="관심오라클">
-		               <input type="text" name="intTagList" value="관심파이썬">
-		               
-		               <input type="text" name="etcTagList" value="기타어쩌구">
-		               <input type="text" name="etcTagList" value="기타저쩌구">
-		               </div>
-
-		               </div>
-		               <!-- end .stuKeyBox -->
-		            </div>
-		        </div>
+				<label for="inputPhoneNumber" class="col-lg-2 control-label"></label>
+				<div class="col-lg-10 form-inline">
+					<div class="stuKeyBox" style="width: 85%;">
+					</div>
+					<!-- end .stuKeyBox -->
+				</div>
+			</div>
 		        
                 <div class="form-group">
                     <div class="col-lg-offset-2 col-lg-10 bottom">
