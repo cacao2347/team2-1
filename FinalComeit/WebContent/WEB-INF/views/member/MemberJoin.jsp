@@ -217,7 +217,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 			$("#keyAddBtn").removeAttr("disabled");
 			$("#keyResetBtn").removeAttr("disabled");
 			$("#uploadFile").removeAttr("disabled");
-			
+			$( "#stuKeyBox" ).css( "background-color", "white" );
 			
 			$("#err").css("display", "none");
 
@@ -256,7 +256,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 			$("#keyAddBtn").attr("disabled", true);
 			$("#keyResetBtn").attr("disabled", true);
 			$("#uploadFile").attr("disabled", true);
-			
+			$( "#stuKeyBox" ).css( "background-color", "#EEEEEE" );
 			
 			$("#joinForm")[0].reset();
 			$("input:radio[name='provisionyn']:radio[value='N']").prop("checked", true);
@@ -319,6 +319,12 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 				{
 					//alert("영문,숫자, 특수문자 중 2가지 이상을 혼합하여 입력해주세요.");
 					$("#err").html("패스워드는 영문,숫자, 특수문자 중 2가지 이상을 혼합하여 입력해주세요.");
+					$("#err").css("display", "inline");
+					return;
+				}
+				else if($("#stuKeyBox").children().length == 0)
+				{
+					$("#err").html("관심 키워드는 최소 한 개 이상 선택해야 합니다.");
 					$("#err").css("display", "inline");
 					return;
 				}
