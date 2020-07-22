@@ -40,7 +40,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 </head>
 
 <body>
-
+<c:set var = "searchId" scope = "session" value = "${sessionScope.searchId }"/>
 	<div class="container register">
 		<div class="row">
 			<div class="col-md-3 register-left">
@@ -55,41 +55,21 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 						<div class="form-top-left">
 						<c:set var = "type" scope = "session" value = "<%=searchPwd %>"/>
 		           		 <c:choose>
-		           		 <c:when  test="${type eq 'memPwdSearch'}">
+		           		 <c:when  test="${searchId eq 'memPwdSearch'}">
 							<h3>회원 PW 찾기</h3>
 						 </c:when>
-						 <c:when  test="${type eq 'spaPwdSearch'}">
+						 <c:when  test="${searchId eq 'spaPwdSearch'}">
 						    <h3>업체 PW 찾기</h3>
 						 </c:when>
 						 </c:choose>
 							
 							<br>
-							<p>가입시 입력한 실명, 아이디, 전화번호를 입력해 주세요.</p>
+							<p>가입시 입력한 실명, 아이디, 전화번호를 입력해 주세요.<br>패스워드 찾기 성공시 인증한 번호로 새로운 패스워드를 발송합니다.</p>
 						</div>
 						<div class="form-top-right"></div>
 					</div>
 					<div class="form-bottom">
-						<form role="form" action="" method="post" class="login-form">
-							<!-- <div class="form-group form-inline">
-								<label class="sr-only" for="form-username">Username</label> <span>실명</span>
-								<input type="text" name="form-username"
-									placeholder="가입시 입력한 실명" class="form-username form-control"
-									id="form-username">
-							</div>
-							<div class="form-group form-inline">
-								<label class="sr-only" for="form-password">Password</label> <span>전화번호</span>
-								<input type="password" name="form-password"
-									placeholder="가입시 입력한 전화번호" class="form-password form-control"
-									id="form-password">
-								<button type="submit" class="btn">문자발송</button>
-							</div>
-							<div class="form-group form-inline">
-								<label class="sr-only" for="form-oknumber">Oknumber</label> <span>인증번호</span>
-								<input type="text" name="form-oknumber"
-									placeholder="인증번호" class="form-oknumber form-control"
-									id="form-oknumber">
-								<button type="submit" class="btn">문자발송</button>
-							</div> -->
+						<form role="form" action="searchPwdCheck.action" method="post" class="login-form">
 							<table class="inputForm">
 								<tr>
 									<th>실명</th>
@@ -112,10 +92,10 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 								<tr>
 									<th>전화번호</th>
 									<td>
-									<label class="sr-only" for="form-password">Password</label>
-									<input type="text" name="form-password"
+									<label class="sr-only" for="form-tel">Password</label>
+									<input type="text" name="form-tel"
 									placeholder="가입시 입력한 전화번호" class="form-password form-control"
-									id="form-password">
+									id="form-tel">
 									</td>
 									<td>
 									<button type="submit" class="btn">문자발송</button>
@@ -136,6 +116,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 							</table>
 							<div class="resultArea">
 								<div class="resultMsg">
+								
 								인증이 성공되었습니다. 
 								</div>
 								<button type="submit" class="btn btn-primary searchBtn">PW 받기</button>

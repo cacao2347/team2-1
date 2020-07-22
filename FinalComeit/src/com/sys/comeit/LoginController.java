@@ -1,5 +1,7 @@
 package com.sys.comeit;
 
+import java.util.Random;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -217,16 +219,68 @@ public class LoginController
 	   return view;
    }
    
+   // 패스워드 찾기
+   @RequestMapping(value = "/searchPwdCheck.action", method = RequestMethod.POST)
+   public ModelAndView loginSearchPwd(HttpServletRequest request)
+   {
+      ModelAndView mav = new ModelAndView();  
+      
+      IMemberDAO memDao = sqlSession.getMapper(IMemberDAO.class);
+      
+      String pwd = updatePwd();
+      String name = request.getParameter("form-username");
+      String id = request.getParameter("form-userid");
+      String tel = request.getParameter("form-tel");
+      int result =0;
+      
+      MemberDTO dto = new MemberDTO();
+		
+	  dto.setPwd(pwd); 
+	  dto.setName(name); 
+	  dto.setId(id);
+	  dto.setTel(tel);
+	  
+	  result = memDao.memPwd(dto);
+		 
    
+      // 비밀번호 찾기 실패시
+      if (result==0) 
+      {
+         mav.addObject("msg", "정보가 존재하지 않습니다.");
+         mav.setViewName("redirect:searchPwd.action");
+      }
+      else // 패스워드 찾기 성공시
+      {
+    	  
+    	  mav.addObject("msgCheck", "문자 발송한 패스워드로 로그인 하세요.");
+          mav.setViewName("/WEB-INF/views/member/MemberLogin.jsp");
+      }
+      
+      System.out.println(pwd);
+      return mav;
+   }
    
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
+   // 패스워드 업데이트용
+   public String updatePwd()
+	{
+		StringBuffer temp = new StringBuffer();
+		Random rnd = new Random();
+
+		for (int i = 0; i < 7; i++)
+		{
+			int rIndex = rnd.nextInt(2);
+			switch (rIndex)
+			{
+			case 0:
+				// A-Z
+				temp.append((char) ((int) (rnd.nextInt(26)) + 65)); // +97이면 소문자 +65면 대문자
+				break;
+			case 1:
+				// 0-9
+				temp.append((rnd.nextInt(10)));
+				break;
+			}
+		}
+		return temp.toString();
+	}
 }

@@ -162,7 +162,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 				                    	<div class="form-group">
 				                    		<input type="hidden" id="memType" name="loginType" value="0"> 
 				                    		<label class="sr-only" for="formUsername">Username</label>
-				                        	<input type="text" name="formUsername" placeholder="Username..." class="form-username form-control" id="formUsername">
+				                        	<input type="text" name="formUsername" placeholder="UserId..." class="form-username form-control" id="formUsername">
 				                        </div>
 				                        <div class="form-group">
 				                        	<label class="sr-only" for="formPassword">Password</label>

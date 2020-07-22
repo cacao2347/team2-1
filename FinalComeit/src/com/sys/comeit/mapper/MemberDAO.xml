@@ -70,4 +70,12 @@
    }
 </insert>
 
+<!-- 일반 회원 pwd 찾기 -->
+<update id="memPwd">
+	UPDATE TBL_MEM_JOIN
+	SET PWD=CRYPTPACK.ENCRYPT(#{pwd},#{pwd})
+	WHERE NAME=#{name}
+	AND MEM_ID=#{id}
+	AND TEL=#{tel}
+</update>
 </mapper>
