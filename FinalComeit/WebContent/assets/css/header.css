@@ -1,16 +1,22 @@
 @charset "UTF-8";
+body.boheader .header
+{
+	position:fixed!important;
+	z-index: 9000 !important;	
+}
+
 .dropdown-menu>li>a
 {
-	color: #4AA8D8 !important;	
+	color: #052463 !important;	
 }
 .navbar-inverse .navbar-nav>li>a {
-    color: #4AA8D8 !important;
+    color: #052463 !important;
     font-size: 13pt !important;
     background: white !important;
 }
 .navbar-inverse
 {
-	border-bottom-color: #4AA8D8 !important;
+	border-bottom-color: #052463 !important;
 	border-left: none;
 	border-right: none;
 	background-color:white !important;
@@ -18,11 +24,11 @@
 }
 .navbar-inverse .navbar-toggle
 {
-	border-color: #4AA8D8 !important;
+	border-color: #052463 !important;
 }
 .navbar-inverse .navbar-toggle .icon-bar
 {
-	background-color: #4AA8D8 !important;
+	background-color: #052463 !important;
 }
 .navbar-inverse .navbar-toggle:hover .icon-bar
 {
@@ -35,7 +41,7 @@
 }
 .navbar-toggle:hover
 {
-	background: #4AA8D8 !important;
+	background: #052463 !important;
 }
 .navbar-collapse.collapse {
 	background: white !important;	
@@ -44,10 +50,10 @@
 .navbar-inverse .navbar-nav>li>a:hover{
     color: white !important;
     font-size: 13pt !important;
-    background: #4AA8D8 !important;
+    background: #052463 !important;
 }
 .navbar-inverse .navbar-brand {
-    color: #4AA8D8 !important;
+    color: #052463 !important;
     background: white !important;
 }
 .mega-dropdown {

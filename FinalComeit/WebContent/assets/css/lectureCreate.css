@@ -1,5 +1,8 @@
 @charset "UTF-8";
-
+body .padding
+{
+	padding-top: 60px;
+}
 h1, h4 , .m
 {
 	font-weight: bold;

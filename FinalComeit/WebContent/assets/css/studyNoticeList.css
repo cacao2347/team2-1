@@ -3,6 +3,10 @@
 {
 	text-align: center;
 }
+body .padding
+{
+	padding-top: 60px;
+}
 .pagination>li>a, .pagination>li>span
 {
 	color: black;
