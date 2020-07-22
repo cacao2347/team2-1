@@ -22,6 +22,8 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 <link rel="shortcut icon" href="<%=cp %>/assets/images/pen_1.ico" type="image/x-icon">
 <link rel="icon" href="<%=cp %>/assets/images/pen_1.ico" type="image/x-icon">
 <script>
+	 var array = new Array();
+
      $(function(){
     	 
     	 // AJAX 요청 및 응답 처리
@@ -501,28 +503,44 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 		     {
 			      var tmpHtml = "";
 			      var selectedKey = "";
-			      var obj = document.getElementsByName('intTagList');
+			      var keyInput = "";
 
 			      tmpHtml = tmpHtml + "";
 			      
 			      selectedText = $("#keySelect option:checked").text();
 			      selectedValue = $("#keySelect option:checked").val();
+			      keyInput = $("#keyInput").val();
 			      elementCount = $(".tagStyle").length;
 			      
-			      // 키워드 개수 제한
+			      if(selectedValue =='INT1057')
+			      {
+			    	  selectedText = keyInput;
+			      }
+			      
+			      for (var i = 0; i < array.length; i++) 
+			      {
+						if(selectedText == array[i])
+						{
+							alert(selectedText)
+							alert("중복된 키워드는 입력 할 수 없습니다.");
+							return;
+						}
+				  }
+			      
+			   	  // 키워드 개수 제한
 			      if(elementCount == 5)
 			      {
 			    	  alert("키워드는 최대 5개 까지 선택 할 수 있습니다.")
 			    	  return;
 			      }
 			      
-			      // 기타 키워드 일 때, 인풋박스 활성화...
+			      array.push(selectedText);
+			      
 			      if(selectedValue == 'INT1057')
 			      {
-			    	  var keyInput = $("#keyInput").val();
 			    	  
-			    	  $(".stuKeyBox").append("<div class='tagStyle'><span class='keyTag' name='intTagList'>"+ keyInput 
-			    			  + "<input type='hidden' value='"+  +"</span></div>");
+			    	  $(".stuKeyBox").append("<div class='tagStyle'><span class='keyTag' name='intTagList'>"+ selectedText 
+			    			  + "</span></div>");
 			      }
 			      // 관심키워드 일 때...
 			      else
@@ -553,6 +571,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 			 $("#keyResetBtn").click(function() 
 		     {
 				   $(".stuKeyBox").empty();
+				   array = [];
 			 });
 
 	});
@@ -560,21 +579,50 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 	// 문자 발송
 	function ajaxSendSms()
 	 {
-    	phoneCheck = "";
-    	alert("phoneCheck_bf : "+ phoneCheck);
-    	 
-		$.ajax({
-			url: "<%=cp%>/sendsms.action",
-			data: {
-				receiver: $("#phoneNumber").val()
-			},
-			type: "post",
-			success: function(result){
-				phoneCheck = result;
-				alert("result : " + result);
-				alert("phoneCheck_af : " + phoneCheck);
-			}
-		});	
+		var check = false;
+        // 문자 인증 발송 전 중복확인
+           if(!$('#phoneNumber').val())
+           {
+              alert("전화번호를 입력해주세요");
+              $('#phoneNumber').focus();
+              
+           }
+           else
+           {
+             $.ajax({ type: 'POST', url: 'checkpwdajax.action', data: { "phoneNumber" : $('#phoneNumber').val() }
+               ,async:false,  success: function(data)
+                   { 
+                       if($.trim(data) == 0 && $('#phoneNumber').val() != null)
+                       { 
+                          check=true;
+                          alert("사용가능합니다.");
+                       }
+                       else 
+                       { 
+                          alert("번호가 이미 존재합니다.");
+                       }
+                 } 
+              }); //end ajax
+           }
+      
+          if(check==true){
+            phoneCheck = "";
+            alert("phoneCheck_bf : " + phoneCheck);
+      
+            $.ajax(
+            {
+               url : "<%= cp%>/sendsms.action",
+               data: {
+                  receiver: $("#divPhoneNumber").val()
+               },
+               type: "post",
+               success: function(result){
+                  phoneCheck = result;
+                  alert("result : " + result);
+                  alert("phoneCheck_af : " + phoneCheck);
+               }
+            });   
+         }	
 	 }
      
      
@@ -912,7 +960,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 						id="authNum" data-rule-required="true" maxlength="11"
 						style="width: 65%;"> <input type="tel"
 						class="form-control onlyAlphabetAndNumber" id="authNumRslt"
-						data-rule-required="true" maxlength="11" style="width: 20%;">
+						data-rule-required="true" maxlength="11" style="width: 20%;" readonly="readonly">
 					&nbsp;
 					<button type="button" class="btn btn-primary" id="authNumBtn">확인</button>
 				</div>

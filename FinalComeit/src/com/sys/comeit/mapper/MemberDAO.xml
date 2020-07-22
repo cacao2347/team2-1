@@ -94,6 +94,13 @@
 	   FROM TBL_MEM_JOIN
 	   WHERE MEM_ID = #{id} 
 	</select>
+	
+	<!-- 전화번호가 같은 회원 수 조회 adminCount() -->
+    <select resultType="java.lang.Integer" id="memTelcheckCount">
+       SELECT COUNT(*) AS COUNT
+       FROM TBL_MEM_JOIN
+       WHERE TEL = #{tel} 
+    </select>
    
 	<!-- 회원 관심 키워드 -->
 	<insert id="memIntTagInsert">

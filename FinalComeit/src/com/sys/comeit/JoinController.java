@@ -261,5 +261,21 @@ public class JoinController
 
 	}
 	
+	// 전화번호 중복  AJAX 처리
+    @ResponseBody
+	@RequestMapping(value = "/checkpwdajax.action", method = RequestMethod.POST)
+	 public String checkTelAjax(HttpServletRequest request, Model model)
+	 {
+	   
+	      // String view = null;
+	   
+	      IMemberDAO memberDao = sqlSession.getMapper(IMemberDAO.class);
+	   
+	      String tel = request.getParameter("phoneNumber");
+	   
+	      int result = memberDao.memTelcheckCount(tel);
+	   
+	      return String.valueOf(result);
+	  }
 
 }
