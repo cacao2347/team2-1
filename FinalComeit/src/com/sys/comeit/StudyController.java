@@ -1,5 +1,7 @@
 package com.sys.comeit;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
@@ -20,9 +22,17 @@ public class StudyController
 	@RequestMapping(value = "/studydetail.action", method = RequestMethod.GET)
 	public String memberLogin(Model model, HttpServletRequest request)
 	{
+		IStudyDAO studyDao = sqlSession.getMapper(IStudyDAO.class);
+		
 		String view = null;
 		
 		String stu_cd = "STU1002";
+		
+		StudyDTO dto = studyDao.studyInfoSearch(stu_cd);
+		
+		
+		model.addAttribute("studyInfo", dto);
+		model.addAttribute("intTag", studyDao.studyIntTagSearch(stu_cd));
 		
 		
 		

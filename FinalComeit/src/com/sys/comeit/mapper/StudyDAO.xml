@@ -6,8 +6,31 @@
 <mapper namespace="com.sys.comeit.IStudyDAO">
 
 	<!-- 스터디방 정보 조회 -->
-	<select id="studyInfoSearch" resultType="com.sys.comeit.StudyDTO">
-		
+	<select id="studyInfoSearch"
+		resultType="com.sys.comeit.StudyDTO">
+		SELECT STU_CD,CRT_DATE ,TITLE,STR_DATE,MEM_NUM, CONTENT, CMT_DATE,
+		STU_JOIN_CD
+		, STU_HIST_CD, APNTM_DATE, AREA_NAME, SPC_AREA_NAME
+		, MEET_TERM, IDNTT_TYPE, LV, CAT_NAME, LEADER_MEM_CD, LEADER_ID
+		, LEADER_NAME, SCRT_NUM, CRT_MEM_CD, END_DATE
+		FROM VIEW_STU_INFO
+		WHERE STU_CD=#{stu_cd}
+	</select>
+
+	<!-- 스터디방 관심 태그 조회 -->
+	<select id="studyIntTagSearch"
+		resultType="com.sys.comeit.StudyDTO">
+		SELECT INT_TAG AS INT_TAG_NAME
+		FROM VIEW_STU_TAG
+		WHERE STU_CD = #{stu_cd}
+	</select>
+	
+	<!-- 스터디방 기타 관심 태그 조회 -->
+	<select id="studyEtcTagSearch"
+		resultType="com.sys.comeit.StudyDTO">
+		SELECT ETC_TAG AS ETC_TAG_NAME
+		FROM VIEW_STU_ETC_TAG
+		WHERE STU_CD = #{stu_cd}
 	</select>
 	
 </mapper>

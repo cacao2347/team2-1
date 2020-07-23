@@ -5,6 +5,8 @@ import java.util.ArrayList;
 public interface IStudyDAO
 {
 	public StudyDTO studyInfoSearch(String stu_cd);			// 스터디방 정보 조회
+	public ArrayList<StudyDTO> studyIntTagSearch(String stu_cd);		// 스터디방 관심 키워드 조회
+	public ArrayList<StudyDTO> studyEtcTagSearch(String stu_cd);		// 스터디방 기타 관심 키워드 조회
 	
 	public String studyInsert(StudyDTO dto);		// 스터디 개설 
 	public int studyDayInsert(String day);			// 스터디 진행 요일 insert
