@@ -36,10 +36,45 @@
 	<!-- 스터디 진행 요일 조회 -->
 	<select id="studyDaySearch" 
 		resultType="com.sys.comeit.StudyDTO">
-		SELECT D.DAY_NAME AS STUDY_DAY_NAME
+		SELECT D.DAY_NAME AS STU_DAY_NAME
 		FROM TBL_STU_PRG_DAY SD, TBL_DAY D
 		WHERE SD.DAY_CD = D.DAY_CD
 		  AND SD.STU_CD=#{stu_cd}
 	</select>
+	
+	<!-- 스터디장 조회 -->
+	<select id="studyLeaderSearch" resultType="com.sys.comeit.StudyDTO">
+		SELECT DISTINCT LEADER_NAME, LEADER_MEM_CD
+		FROM VIEW_STU_INFO
+		WHERE STU_CD = #{stu_cd}
+		  AND APNTM_DATE = (
+		                    SELECT MAX(APNTM_DATE)
+		                    FROM VIEW_STU_INFO
+		                    WHERE STU_CD =#{stu_cd}
+                    		)
+	</select>
+	
+	<!-- 스터디원 조회 -->
+	<select id="studyJoinName"
+	resultType="com.sys.comeit.StudyDTO">
+		SELECT NAME AS STU_JOIN_NAME, MEM_CD AS JOIN_MEM_CD
+		FROM VIEW_MY_STU
+		WHERE STU_CD = #{stu_cd}
+		  AND EXT_NAME IS NULL
+	</select>
+	
+	<!-- 스터디장/원 이미지 조회 -->
+	<select id="memImgSearch"
+	resultType="com.sys.comeit.StudyDTO">
+		SELECT MJ.MEM_CD AS JOIN_MEM_CD, MI.IMG_URL AS MEM_IMG
+		FROM TBL_MEM_IMG MI, TBL_MEM_JOIN MJ, TBL_STU_JOIN SJ
+		WHERE MJ.MEM_ID = MI.MEM_ID
+		  AND MJ.MEM_CD = SJ.MEM_CD
+		AND SJ.STU_CD = (SELECT DISTINCT STU_CD
+		                 FROM VIEW_MY_STU
+		                 WHERE STU_CD = #{stu_cd}
+		                   AND EXT_NAME IS NULL)
+	</select>
+	
 	
 </mapper>

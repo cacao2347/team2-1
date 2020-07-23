@@ -9,6 +9,9 @@ public interface IStudyDAO
 	public ArrayList<StudyDTO> studyEtcTagSearch(String stu_cd);		// 스터디 기타 관심 키워드 태그 조회
 	
 	public ArrayList<StudyDTO> studyDaySearch(String stu_cd);			// 스터디 진행 요일
+	public StudyDTO studyLeaderSearch(String stu_cd);					// 스터디장 조회
+	public ArrayList<StudyDTO> studyJoinName(String stu_cd);			// 참가 스터디원 이름 조회
+	public ArrayList<StudyDTO> memImgSearch(String stu_cd);				// 참가 스터디원 이미지 조회
 	
 	public String studyInsert(StudyDTO dto);		// 스터디 개설 
 	public int studyDayInsert(String day);			// 스터디 진행 요일 insert

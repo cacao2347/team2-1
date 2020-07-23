@@ -10,16 +10,17 @@ public class StudyDTO
 	private String leader_mem_cd, leader_name;					// 스터디장 회원코드, 스터디장 이름
 	private String meet_term, area_name, spc_area_name;			// 기간, 지역명, 세부지역명 
 	private String idntt_type, lv, cat_name, scrt_num;			// 신분유형, 레벨, 카테고리, 방비밀번호(없으면 0 나옴)
+	private String join_mem_cd , stu_join_name;					// 스터디를 참가하는 사람의 이름
+	private String mem_img;							// 스터디장, 스터디원 이미지 조회
 	
 	private String int_tag_name, etc_tag_name;					// 관심 키워드 태그, 기타 관심 키워드 태그
 	private String stu_day_name;								// 스터디 진행 요일
-	
 	// 개설하기
 	// 스터디방 제목, 세부키워드, 상세설명, 모집인원, 활동 지역, 레벨, 시작날짜
 	// 종료날짜, 모임 지정 요일, 비밀방 설정 여부
 	// 대표이미지, 스터디신분, 레벨코드, 신분코드
 	
-	
+
 	// 개설 프로시저 : 개설자, 세부지역, 모임기간코드, 신분코드, 레벨코드, 카테고리코드, 제목, 시작날짜, 인원수, 내용
 	private String crt_mem_cd, spc_area_cd, meet_term_cd, idntt_cd, lv_cd, stu_cat_cd, img_url;
 	private String int_tag_cd, etc_tag_cd;
@@ -30,6 +31,14 @@ public class StudyDTO
 		return leader_mem_cd;
 	}
 	
+	public String getStu_join_name() {
+		return stu_join_name;
+	}
+
+	public void setStu_join_name(String stu_join_name) {
+		this.stu_join_name = stu_join_name;
+	}
+
 	public String getInt_tag_name()
 	{
 		return int_tag_name;
@@ -287,5 +296,19 @@ public class StudyDTO
 	{
 		this.stu_day_name = stu_day_name;
 	}
-	
+	public String getJoin_mem_cd() {
+		return join_mem_cd;
+	}
+
+	public void setJoin_mem_cd(String join_mem_cd) {
+		this.join_mem_cd = join_mem_cd;
+	}
+
+	public String getMem_img() {
+		return mem_img;
+	}
+
+	public void setMem_img(String mem_img) {
+		this.mem_img = mem_img;
+	}
 }

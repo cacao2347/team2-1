@@ -134,10 +134,9 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 							<span class="glyphicon glyphicon-calendar icon"></span>
 							<h4>활동 기간</h4><br>
 							<span class="term">${studyInfo.str_date } ~ ${studyInfo.end_date }&nbsp;&nbsp;&nbsp;&nbsp;${studyInfo.meet_term }개월</span><br />
-							
-						
-								<span class="day">└ 월요일 </span>
-							
+							└ <c:forEach var="dayName" items="${dayName }">
+								 <span class="day"> ${dayName.stu_day_name } </span>
+							   </c:forEach>
 																
 						</div><!-- end stuTerm -->
 						
@@ -226,39 +225,60 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 							</div><!-- end .search-modal-content -->							
 							</div><!-- end .searchModal -->	
 					
+				
 					<div class="stuMem">
 						<!-- <h3>스터디장</h3> -->
+					
+					
 						<div class="memLeader" id="member1">
-
-							<div class="leaderImg">
-								<img src="<%=cp %>/assets/images/hjkim.PNG" alt="" class="img-circle memImg" />
-							</div><!-- end .leaderImg -->
+							<c:forEach var="memImg" items="${memImg }">
+								<c:if test="${memImg.join_mem_cd eq leaderName.leader_mem_cd}">
+									<div class="leaderImg">
+										<img src="${memImg.mem_img }" alt="" class="img-circle memImg" />
+									</div><!-- end .leaderImg -->
+								</c:if>
+							</c:forEach>
 							
 							<div class="leaderInfo">
 								<span class="glyphicon glyphicon-ok ok"></span>
 								<h4>Study Leader</h4><br>
-								<span class="name">김길동</span>
+								<span class="name">${leaderName.leader_name }</span>
 								<input type="button" class="btn btn-xs btn-default infoBtn" id="" value="정보" />
 							</div><!-- end .leaderInfo -->
 							
 						</div><!-- end .memLeader -->
+						
+						
+						
+						
 					<!-- 	<h3>스터디원</h3> -->
+
+						<c:forEach var="joinName" items="${joinName }">
 						
+							<c:if test="${joinName.stu_join_name ne leaderName.leader_name}">
+								<div class="memLeader" id="">
+									
+									<c:forEach var="memImg" items="${memImg }">
+										<c:if test="${memImg.join_mem_cd eq joinName.join_mem_cd}">
+											<div class="leaderImg">
+												<img src="${memImg.mem_img }" alt="" class="img-circle memImg" />
+											</div><!-- end .leaderImg -->
+										</c:if>
+									</c:forEach>
+									<div class="leaderInfo">
+										<h4>Study Member</h4><br>
+										<span class="name">${joinName.stu_join_name }</span>
+										<input type="button" class="btn btn-xs btn-default infoBtn" id="" value="정보" />
+									
+									</div><!-- end .leaderInfo -->
+								
+									
+									
+								</div><!-- end .memLeader -->
+							</c:if>
 						
-						<div class="memLeader" id="">
-							
-							<div class="leaderImg">
-								<img src="<%=cp %>/assets/images/khjang.PNG" alt="" class="img-circle memImg" />
-							</div><!-- end .leaderImg -->
-							
-							<div class="leaderInfo">
-								<h4>Study Member</h4><br>
-								<span class="name">장길동</span>
-								<input type="button" class="btn btn-xs btn-default infoBtn" id="" value="정보" />
-							</div><!-- end .leaderInfo -->
-						</div><!-- end .memLeader -->
-						
-						
+						</c:forEach>
+						<%-- 
 						<div class="memLeader" id="">
 							<div class="leaderImg">
 								<img src="<%=cp %>/assets/images/sjsong.PNG" alt="" class="img-circle memImg" />
@@ -297,9 +317,10 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 								<input type="button" class="btn btn-xs btn-default infoBtn" id="" value="정보" />
 							</div><!-- end .leaderInfo -->
 						</div><!-- end .memLeader -->
+						 --%>
 						
 					</div><!-- end .stuMem -->
-				
+		
 					
 					<!-- 스터디장에게만 보일 수정 / 폐쇄 버튼 -->
 					<div class="roomBtn">
