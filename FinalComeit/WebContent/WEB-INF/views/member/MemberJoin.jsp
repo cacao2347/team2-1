@@ -17,19 +17,36 @@
 <script src="http://code.jquery.com/jquery.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet"><style type="text/css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
+
+<style type="text/css">
+
 body{font-family: 'Noto Sans KR', sans-serif;}
+
+
+#preview 
+{
+  z-index: 1; /* 필요시 설정 */
+  position: absolute;
+  background: #333333;
+  padding: 2px;
+}
+
+
 </style>
+
 <link rel="shortcut icon" href="<%=cp %>/assets/images/pen_1.ico" type="image/x-icon">
 <link rel="icon" href="<%=cp %>/assets/images/pen_1.ico" type="image/x-icon">
 <script>
-	 var array = new Array();
+    var array = new Array();
 
      $(function(){
-    	 
-    	 // AJAX 요청 및 응답 처리
-    	 ajaxSpcAreaRequest();
-    	 
+        
+        // AJAX 요청 및 응답 처리
+        ajaxSpcAreaRequest();
+        
+           
+           
          //모달을 전역변수로 선언
          var modalContents = $(".modal-contents");
          var modal = $("#defaultModal");
@@ -123,6 +140,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
              }
          });
          
+         
          $('#phoneNumber').keyup(function(event){
              
              var divPhoneNumber = $('#divPhoneNumber');
@@ -138,362 +156,457 @@ body{font-family: 'Noto Sans KR', sans-serif;}
          
          $("#proImgBtn").click(function()
                  {
-                    alert("하이");
-                    var myFormData = new FormData();
-                    //alert(myFormData);
-                    
-                    var fileok = document.getElementById("uploadFile");
-                    
-                    var fileCheck = null;
-                    fileCheck = $("#uploadFile").val();
-
-                    alert(fileCheck);
-                    
-                     alert(fileok.files[0].name);
-                    
-                    myFormData.append("fileok", fileok.files[0]);
-                    
-                    if(fileCheck == false)
-                    {
-                         alert("파일을 첨부해 주세요");
-                         return;
-                    }
-                    else
-                    {
-                       $.ajax(
-                       {
-                            url: '<%=cp%>/ajaximg.action',
-                            type: 'POST',
-                            processData: false, // important
-                            contentType: false,//'multipart/form-data', // important
-                            dataType : 'text',
-                            data: myFormData,
+                	 var result = confirm('정말 등록하시겠습니까?'); 
+                	 
+                	 if(result) 
+                	 { 
+                		 //yes location.replace('index.php');
+                		 //alert("하이");
+                            var myFormData = new FormData();
+                            //alert(myFormData);
                             
-                            success : function(data)
+                            var fileok = document.getElementById("uploadFile");
+                            
+                            var fileCheck = null;
+                            fileCheck = $("#uploadFile").val();
+
+                            //alert(fileCheck);
+                            
+                            //var filename = fileok.files[0].name;
+                            
+                            //alert(filename);
+                            
+                            myFormData.append("fileok", fileok.files[0]);
+                            
+                            if(fileCheck == false)
                             {
-                                alert($.trim(data));
-                                
-                                $('#okFile').val($.trim(data));
-                                
-                               //$("#img_form_url").attr("src", imgurl);
-                        
-                               var good = $("#okFile").val();
-                               
-                               alert(good);
-                               alert('<%=cp%>');
-                               
-                               $("#goodImg").attr("src", '<%=imagePath%>'+'/' + fileok.files[0].name);
+                                 alert("파일을 첨부해 주세요");
+                                 return;
                             }
-                       });
-                    }
-                 
-                 })
+                            else
+                            {
+                               $.ajax(
+                               {
+                                    url: '<%=cp%>/ajaximg.action',
+                                    type: 'POST',
+                                    processData: false, // important
+                                    contentType: false,//'multipart/form-data', // important
+                                    dataType : 'text',
+                                    data: myFormData,
+                                    
+                                    success : function(data)
+                                    {
+                                        //alert($.trim(data));
+                                        
+                                        $('#okFile').val($.trim(data));
+                                        
+                                       //$("#img_form_url").attr("src", imgurl);
+                                
+                                       var good = $("#okFile").val();
+                                       
+                                       //alert(good);
+                                       
+                                       var pics = good.substr(101);
+                                       
+                                       //alert(pics);
+                                       
+                                       /* $("#gmd").attr("src",  '/FinalComeit/pds/saveData/back028.jpg' ); */
+                                       
+                                       <%-- $("#gmd").attr("src",  '<%=imagePath%>/' + pics); --%>
+                                       
+                                       <%-- alert(<%=cp%>); --%>
+                                       <%-- alert(<%=imagePath%>); --%>
+                                       <%-- alert(<%=imagePath%>/fileok.files[0]); --%>
+                                       
+                                       <%-- <%=imagePath%>/" + pics + " --%>
+                                       
+                                    }
+                               })
+                            }
+                     } 
+                	 else 
+                     { 
+                    	 //no 
+                     }
+
+                            
+                         
+                  })
+                         
+                  
+                         
+                	 var xOffset = 5;
+                     var yOffset = 15;
+                     
+                	 // 마우스 오버시 미리보기 이미지 설정 및 위치 설정
+                      $(document).on("mouseover", "#thumbnail", function (e) { //마우스 오버시
+                          // 미리보기 이미지 설정
+                          
+                          var okFile = $("#okFile").val();
+                      
+                      	  if(okFile == false)
+                          {
+                      		  //alert("등록된 파일이 없습니다.");
+                      		  return;
+                          }
+                      	  else
+                      	  {
+                      		var div = $("<div>", {id: "preview"});
+                            /* var img = $("<img>", {src: $(this).attr("href")}); */
+                            
+                            //alert(pics);
+                            
+                            <%-- var img = "<img id='bye' src='<%=imagePath%>/" + pics + "' style='width: 400px; height: 200px;'>"; --%>
+                            
+                            //alert(okFile);
+                            
+                            var newpics = okFile.substr(101);
+                            
+                            var img = "<img id='bye' src='<%=imagePath%>/" + newpics + "' style='width: 400px; height: 200px;'>";
+                            
+                            //alert(img);
+                            
+                            div.append(img);
+                            
+                            $("body").append(div);
+                            
+                            <%-- $('#bye').attr('src').change(function() 
+                   	 		{
+                            	 $('#bye').attr('src','<%=imagePath%>/" + pics + "');
+                   	 		}); --%>
+
+                            // 마우스 오버에 따른 위치 설정
+                            $("#preview")
+                                .css("top", (e.pageY - xOffset) + "px")
+                                .css("left", (e.pageX + yOffset) + "px")
+                                .fadeIn("fast"); 
+                      	  }
+                          
+                          
+                      }); 
+                      
+                      // 마우스 이동시 위치 변경
+                      $(document).on("mousemove", "#thumbnail", function (e) {
+                          $("#preview")
+                              .css("top", (e.pageY - xOffset) + "px")
+                              .css("left", (e.pageX + yOffset) + "px");
+                      });
+
+
+                      // 마우스 아웃시 이미지 제거
+                      $(document).on("mouseout", "#thumbnail", function () 
+                      { //마우스 아웃시
+                         $("#preview").remove()
+                      });
+          
+          
+          
          
          // 중복확인 버튼을 클릭했을때의 처리
          $('#dupBtn').click(function()
-  		 {
-        	 
-  			 if(!$('#id').val())
-  			 {
-  				 alert("아이디를 입력해주세요");
-  				 $('#id').focus();
-  				 
-  			 }
-  			 else
-  			 {
-  				$.ajax({ type: 'POST', url: 'checkidajax.action', data: { "id" : $('#id').val() }
-          		, success: function(data)
-          		
-	          		{ //alert(data); 
-			           	if($.trim(data) == 0 && $('#id').val() != null)
-			           	{ 
-			           		//$('#checkMsg').html('<p style="color:blue">사용가능</p>');
-			           		alert("사용가능합니다.");
-			           		$("#phoneAuth").removeAttr("disabled");
-			           	}
-			           	else 
-			           	{ 
-			           		//$('#checkMsg').html('<p style="color:red">사용불가능</p>');
-			           		alert("사용불가능합니다.");
-			           	}
-			           	
-	        		} 
-   				}); //end ajax
-  			 }
-          	 //alert('뭐');
-          	
-  		});
+         {
+            
+            if(!$('#id').val())
+            {
+               alert("아이디를 입력해주세요");
+               $('#id').focus();
+               
+            }
+            else
+            {
+              $.ajax({ type: 'POST', url: 'checkidajax.action', data: { "id" : $('#id').val() }
+                , success: function(data)
+                
+                   { //alert(data); 
+                       if($.trim(data) == 0 && $('#id').val() != null)
+                       { 
+                          //$('#checkMsg').html('<p style="color:blue">사용가능</p>');
+                          alert("사용가능합니다.");
+                          $("#phoneAuth").removeAttr("disabled");
+                       }
+                       else 
+                       { 
+                          //$('#checkMsg').html('<p style="color:red">사용불가능</p>');
+                          alert("사용불가능합니다.");
+                       }
+                       
+                 } 
+               }); //end ajax
+            }
+              //alert('뭐');
+             
+        });
          
-		
+      
         // 지역명이 바뀌면 상세지역 ajax 호출
-		$("#area").change(function()
-		{
-			ajaxSpcAreaRequest();
-			
-		})
+      $("#area").change(function()
+      {
+         ajaxSpcAreaRequest();
+         
+      })
 
-		
-		// 동의합니다 누르면 비활성화 해제
-		$("#provisionY").click(function()
-		{
-			$("#id").removeAttr("disabled");
-			$("#password").removeAttr("disabled");
-			$("#passwordCheck").removeAttr("disabled");
-			$("#name").removeAttr("disabled");
-			$("#email").removeAttr("disabled");
-			$("#area").removeAttr("disabled");
-			$("#spcArea").removeAttr("disabled");
-			$("#phoneNumber").removeAttr("disabled");
-			$("#week").removeAttr("disabled");
-			$("#phoneNumberCheck").removeAttr("disabled");
-			$("#prfImg").removeAttr("disabled");
-			$("#intro").removeAttr("disabled");
-			$("#keySelect").removeAttr("disabled");
-			$("#keyInput").removeAttr("disabled");
-			
-			
-			$("#dupBtn").removeAttr("disabled");
-			$("#authCheck").removeAttr("disabled");
-			$("#proImgBtn").removeAttr("disabled");
-			$("#tagAddBtn").removeAttr("disabled");
-			
-			$("#authNum").removeAttr("disabled");
-			$("#authNumRslt").removeAttr("disabled");
-			$("#keyAddBtn").removeAttr("disabled");
-			$("#keyResetBtn").removeAttr("disabled");
-			$("#uploadFile").removeAttr("disabled");
-			$( "#stuKeyBox" ).css( "background-color", "white" );
-			
-			$("#err").css("display", "none");
+      
+      // 동의합니다 누르면 비활성화 해제
+      $("#provisionY").click(function()
+      {
+         $("#id").removeAttr("disabled");
+         $("#password").removeAttr("disabled");
+         $("#passwordCheck").removeAttr("disabled");
+         $("#name").removeAttr("disabled");
+         $("#email").removeAttr("disabled");
+         $("#area").removeAttr("disabled");
+         $("#spcArea").removeAttr("disabled");
+         $("#phoneNumber").removeAttr("disabled");
+         $("#week").removeAttr("disabled");
+         $("#phoneNumberCheck").removeAttr("disabled");
+         $("#prfImg").removeAttr("disabled");
+         $("#intro").removeAttr("disabled");
+         $("#keySelect").removeAttr("disabled");
+         $("#keyInput").removeAttr("disabled");
+         
+         
+         $("#dupBtn").removeAttr("disabled");
+         $("#authCheck").removeAttr("disabled");
+         $("#proImgBtn").removeAttr("disabled");
+         $("#tagAddBtn").removeAttr("disabled");
+         
+         $("#authNum").removeAttr("disabled");
+         $("#authNumRslt").removeAttr("disabled");
+         $("#keyAddBtn").removeAttr("disabled");
+         $("#keyResetBtn").removeAttr("disabled");
+         $("#uploadFile").removeAttr("disabled");
+         $( "#stuKeyBox" ).css( "background-color", "white" );
+         
+         $("#err").css("display", "none");
 
-		});
-		
-		
-		// 동의하지 않습니다 누르면 비활성화 하고 값 리셋
-		$("#provisionN").click(function()
-		{
-			$("#id").attr("disabled", true);
-			$("#password").attr("disabled", true);
-			$("#passwordCheck").attr("disabled", true);
-			$("#name").attr("disabled", true);
-			$("#email").attr("disabled", true);
-			$("#area").attr("disabled", true);
-			$("#spcArea").attr("disabled", true);
-			$("#phoneNumber").attr("disabled", true);
-			$("#phoneNumberCheck").attr("disabled", true);
-			
-			$("#dupBtn").attr("disabled", true);
-			$("#week").attr("disabled", true);
-			$("#phoneAuth").attr("disabled", true);
-			$("#authCheck").attr("disabled", true);
-			
-			$("#prfImg").attr("disabled", true);
-			$("#proImgBtn").attr("disabled", true);
-			$("#intro").attr("disabled", true);
-			
-			$("#keySelect").attr("disabled", true);
-			$("#keyInput").attr("disabled", true);
-			$("#tagAddBtn").attr("disabled", true);
-			$("#joinBtn").attr("disabled", true);
-			$("#authNum").attr("disabled", true);
-			$("#authNumRslt").attr("disabled", true);
-			$("#authNumBtn").attr("disabled", true);
-			$("#keyAddBtn").attr("disabled", true);
-			$("#keyResetBtn").attr("disabled", true);
-			$("#uploadFile").attr("disabled", true);
-			$( "#stuKeyBox" ).css( "background-color", "#EEEEEE" );
-			
-			$("#joinForm")[0].reset();
-			$("input:radio[name='provisionyn']:radio[value='N']").prop("checked", true);
-			$("#err").css("display", "none");
-		});
-		
+      });
+      
+      
+      // 동의하지 않습니다 누르면 비활성화 하고 값 리셋
+      $("#provisionN").click(function()
+      {
+         $("#id").attr("disabled", true);
+         $("#password").attr("disabled", true);
+         $("#passwordCheck").attr("disabled", true);
+         $("#name").attr("disabled", true);
+         $("#email").attr("disabled", true);
+         $("#area").attr("disabled", true);
+         $("#spcArea").attr("disabled", true);
+         $("#phoneNumber").attr("disabled", true);
+         $("#phoneNumberCheck").attr("disabled", true);
+         
+         $("#dupBtn").attr("disabled", true);
+         $("#week").attr("disabled", true);
+         $("#phoneAuth").attr("disabled", true);
+         $("#authCheck").attr("disabled", true);
+         
+         $("#prfImg").attr("disabled", true);
+         $("#proImgBtn").attr("disabled", true);
+         $("#intro").attr("disabled", true);
+         
+         $("#keySelect").attr("disabled", true);
+         $("#keyInput").attr("disabled", true);
+         $("#tagAddBtn").attr("disabled", true);
+         $("#joinBtn").attr("disabled", true);
+         $("#authNum").attr("disabled", true);
+         $("#authNumRslt").attr("disabled", true);
+         $("#authNumBtn").attr("disabled", true);
+         $("#keyAddBtn").attr("disabled", true);
+         $("#keyResetBtn").attr("disabled", true);
+         $("#uploadFile").attr("disabled", true);
+         $( "#stuKeyBox" ).css( "background-color", "#EEEEEE" );
+         
+         $("#joinForm")[0].reset();
+         $("input:radio[name='provisionyn']:radio[value='N']").prop("checked", true);
+         $("#err").css("display", "none");
+      });
+      
 
-		//alert($('input[name=provisionyn]').val());
-		// 가입하기 버튼 클릭 시 유효성 체크
-		$("#joinBtn").click(
-			function()
-			{
-				if ($("#id").val() == "" || $("#password").val() == ""
-						|| $("#passwordCheck").val() == ""
-						|| $("#name").val() == ""
-						|| $("#email").val() == "" || $("#week").val() == 0
-						|| $("#area").val() == 0
-						|| $("#spcArea").val() == 0
-						|| $("#phoneNumber").val() == ""
-						|| $("#phoneNumberCheck").val() == ""
-						)
-				{
-					$("#err").html("필수 입력 항목이 누락되었습니다.");
-					$("#err").css("display", "inline");
-					return;
-				}
-	
-				/*
-				if( $("input:radio[name='provisionyn']:radio[value='N']") == true)
-				{
-					//alert($('input[name=provisionyn]').val());
-					$("#err").html("회원가입약관에 동의해주세요.");
-					$("#err").css("display", "inline");
-					return;
-				}
-				*/
-				
-				// 비밀번호 유효성 체크
-				//영문,숫자,특수문자 중 2가지 혼합 (영문,숫자 = 통과) (특문,숫자 = 통과) 비밀번호 10~20자리
-				var pw = $("#password").val();
-				var num = pw.search(/[0-9]/g);
-				var eng = pw.search(/[a-z]/ig);
-				var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
+      //alert($('input[name=provisionyn]').val());
+      // 가입하기 버튼 클릭 시 유효성 체크
+      $("#joinBtn").click(
+         function()
+         {
+            if ($("#id").val() == "" || $("#password").val() == ""
+                  || $("#passwordCheck").val() == ""
+                  || $("#name").val() == ""
+                  || $("#email").val() == "" || $("#week").val() == 0
+                  || $("#area").val() == 0
+                  || $("#spcArea").val() == 0
+                  || $("#phoneNumber").val() == ""
+                  || $("#phoneNumberCheck").val() == ""
+                  )
+            {
+               $("#err").html("필수 입력 항목이 누락되었습니다.");
+               $("#err").css("display", "inline");
+               return;
+            }
+   
+            /*
+            if( $("input:radio[name='provisionyn']:radio[value='N']") == true)
+            {
+               //alert($('input[name=provisionyn]').val());
+               $("#err").html("회원가입약관에 동의해주세요.");
+               $("#err").css("display", "inline");
+               return;
+            }
+            */
+            
+            // 비밀번호 유효성 체크
+            //영문,숫자,특수문자 중 2가지 혼합 (영문,숫자 = 통과) (특문,숫자 = 통과) 비밀번호 10~20자리
+            var pw = $("#password").val();
+            var num = pw.search(/[0-9]/g);
+            var eng = pw.search(/[a-z]/ig);
+            var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
 
-				if(pw.length < 10 || pw.length > 20)
-				{
-					//alert("10자리 ~ 20자리 이내로 입력해주세요.");
-					$("#err").html("패스워드는 10자리 ~ 20자리 이내로 입력해주세요.");
-					$("#err").css("display", "inline");
-					return;
-				}
-				else if(pw.search(/\s/) != -1)
-				{
-					//alert("비밀번호는 공백 없이 입력해주세요.");
-					$("#err").html("패스워드는 공백 없이 입력해주세요.");
-					$("#err").css("display", "inline");
-					return;
-				}
-				else if( (num < 0 && eng < 0) || (eng < 0 && spe < 0) || (spe < 0 && num < 0) )
-				{
-					//alert("영문,숫자, 특수문자 중 2가지 이상을 혼합하여 입력해주세요.");
-					$("#err").html("패스워드는 영문,숫자, 특수문자 중 2가지 이상을 혼합하여 입력해주세요.");
-					$("#err").css("display", "inline");
-					return;
-				}
-				else if($("#stuKeyBox").children().length == 0)
-				{
-					$("#err").html("관심 키워드는 최소 한 개 이상 선택해야 합니다.");
-					$("#err").css("display", "inline");
-					return;
-				}
-				else 
-				{
-					console.log("통과");	 
-				}
-				
-				
-				// 최종 submit
-				$("#joinForm").submit();
-	
-			});
-		
-			$("#authNumBtn").click(function() 
-			{			 
-				if($("#authNum").val() == "" || $("#authNum").val() == null)
-				 {
-					  alert("인증번호를 입력하세요.");
-					  return;
-				 }
-	
-				 if($("#authNum").val() == phoneCheck)
-			     {
-					 alert("인증에 성공하였습니다.");
-					 $("#authNumRslt").attr("value", "인증 성공");
-					 
-					 $("#joinBtn").removeAttr("disabled");
-			     }
-				 else if($("#authNum").val() != phoneCheck)
-				 {
-					 alert("인증에 실패하였습니다.");
-					 $("#authNumRslt").attr("value", "인증 실패"); 
-				 }
-				 else
-				 {
-					 alert("인증에 실패하였습니다.");
-					 $("#authNumRslt").attr("value", "인증 실패");
-				 }
-			});
-			
-			// 관심 키워드 추가 버튼
-			 $("#keyAddBtn").click(function() 
-		     {
-			      var tmpHtml = "";
-			      var selectedKey = "";
-			      var keyInput = "";
+            if(pw.length < 10 || pw.length > 20)
+            {
+               //alert("10자리 ~ 20자리 이내로 입력해주세요.");
+               $("#err").html("패스워드는 10자리 ~ 20자리 이내로 입력해주세요.");
+               $("#err").css("display", "inline");
+               return;
+            }
+            else if(pw.search(/\s/) != -1)
+            {
+               //alert("비밀번호는 공백 없이 입력해주세요.");
+               $("#err").html("패스워드는 공백 없이 입력해주세요.");
+               $("#err").css("display", "inline");
+               return;
+            }
+            else if( (num < 0 && eng < 0) || (eng < 0 && spe < 0) || (spe < 0 && num < 0) )
+            {
+               //alert("영문,숫자, 특수문자 중 2가지 이상을 혼합하여 입력해주세요.");
+               $("#err").html("패스워드는 영문,숫자, 특수문자 중 2가지 이상을 혼합하여 입력해주세요.");
+               $("#err").css("display", "inline");
+               return;
+            }
+            else if($("#stuKeyBox").children().length == 0)
+            {
+               $("#err").html("관심 키워드는 최소 한 개 이상 선택해야 합니다.");
+               $("#err").css("display", "inline");
+               return;
+            }
+            else 
+            {
+               console.log("통과");    
+            }
+            
+            
+            // 최종 submit
+            $("#joinForm").submit();
+   
+         });
+      
+         $("#authNumBtn").click(function() 
+         {          
+            if($("#authNum").val() == "" || $("#authNum").val() == null)
+             {
+                 alert("인증번호를 입력하세요.");
+                 return;
+             }
+   
+             if($("#authNum").val() == phoneCheck)
+              {
+                alert("인증에 성공하였습니다.");
+                $("#authNumRslt").attr("value", "인증 성공");
+                
+                $("#joinBtn").removeAttr("disabled");
+              }
+             else if($("#authNum").val() != phoneCheck)
+             {
+                alert("인증에 실패하였습니다.");
+                $("#authNumRslt").attr("value", "인증 실패"); 
+             }
+             else
+             {
+                alert("인증에 실패하였습니다.");
+                $("#authNumRslt").attr("value", "인증 실패");
+             }
+         });
+         
+         // 관심 키워드 추가 버튼
+          $("#keyAddBtn").click(function() 
+           {
+               var tmpHtml = "";
+               var selectedKey = "";
+               var keyInput = "";
 
-			      tmpHtml = tmpHtml + "";
-			      
-			      selectedText = $("#keySelect option:checked").text();
-			      selectedValue = $("#keySelect option:checked").val();
-			      keyInput = $("#keyInput").val();
-			      elementCount = $(".tagStyle").length;
-			      
-			      if(selectedValue =='INT1057')
-			      {
-			    	  selectedText = keyInput;
-			      }
-			      
-			      for (var i = 0; i < array.length; i++) 
-			      {
-						if(selectedText == array[i])
-						{
-							alert(selectedText)
-							alert("중복된 키워드는 입력 할 수 없습니다.");
-							return;
-						}
-				  }
-			      
-			   	  // 키워드 개수 제한
-			      if(elementCount == 5)
-			      {
-			    	  alert("키워드는 최대 5개 까지 선택 할 수 있습니다.")
-			    	  return;
-			      }
-			      
-			      array.push(selectedText);
-			      
-			      if(selectedValue == 'INT1057')
-			      {
-			    	  
-			    	  $(".stuKeyBox").append("<div class='tagStyle'><span class='keyTag'>"+ selectedText 
-			    			  + "<input type='hidden' name='etcTagList' value='"+ selectedText + "'></span></div>");
-			      }
-			      // 관심키워드 일 때...
-			      else
-			      {
-			    	  $(".stuKeyBox").append("<div class='tagStyle'><span class='keyTag'>"+ selectedText 
-			    			  + "<input type='hidden' name='intTagList' value='"+ selectedValue + "'></span></div>");			    	  
-			      }
-			      
-			 });
-			
-			 $("#keySelect").change(function() 
-			 {
-				    var selectedValue = "";
-				 	// alert("셀렉트값 변경");
-				 	
-				 	selectedValue = $("#keySelect option:checked").val();
-				 
-					if(selectedValue == "INT1057")
-					{
-						$("#keyInput").attr("readonly", false);
-					}
-					else
-					{
-						$("#keyInput").attr("readonly", true);
-					}
-			 });
-			 
-			 // 관심 키워드 삭제 버튼
-			 $("#keyResetBtn").click(function() 
-		     {
-				   $(".stuKeyBox").empty();
-				   array = [];
-			 });
+               tmpHtml = tmpHtml + "";
+               
+               selectedText = $("#keySelect option:checked").text();
+               selectedValue = $("#keySelect option:checked").val();
+               keyInput = $("#keyInput").val();
+               elementCount = $(".tagStyle").length;
+               
+               if(selectedValue =='INT1057')
+               {
+                  selectedText = keyInput;
+               }
+               
+               for (var i = 0; i < array.length; i++) 
+               {
+                  if(selectedText == array[i])
+                  {
+                     alert(selectedText)
+                     alert("중복된 키워드는 입력 할 수 없습니다.");
+                     return;
+                  }
+              }
+               
+                 // 키워드 개수 제한
+               if(elementCount == 5)
+               {
+                  alert("키워드는 최대 5개 까지 선택 할 수 있습니다.")
+                  return;
+               }
+               
+               array.push(selectedText);
+               
+               if(selectedValue == 'INT1057')
+               {
+                  
+                  $(".stuKeyBox").append("<div class='tagStyle'><span class='keyTag'>"+ selectedText 
+                        + "<input type='hidden' name='intTagList' value='"+ selectedText + "'></span></div>");
+               }
+               // 관심키워드 일 때...
+               else
+               {
+                  $(".stuKeyBox").append("<div class='tagStyle'><span class='keyTag'>"+ selectedText 
+                        + "<input type='hidden' name='etcTagList' value='"+ selectedText + "'></span></div>");                  
+               }
+               
+          });
+         
+          $("#keySelect").change(function() 
+          {
+                var selectedValue = "";
+                // alert("셀렉트값 변경");
+                
+                selectedValue = $("#keySelect option:checked").val();
+             
+               if(selectedValue == "INT1057")
+               {
+                  $("#keyInput").attr("readonly", false);
+               }
+               else
+               {
+                  $("#keyInput").attr("readonly", true);
+               }
+          });
+          
+          // 관심 키워드 삭제 버튼
+          $("#keyResetBtn").click(function() 
+           {
+               $(".stuKeyBox").empty();
+               array = [];
+          });
 
-	});
+   });
 
-	// 문자 발송
-	function ajaxSendSms()
-	 {
-		var check = false;
+   // 문자 발송
+   function ajaxSendSms()
+    {
+      var check = false;
         // 문자 인증 발송 전 중복확인
            if(!$('#phoneNumber').val())
            {
@@ -503,7 +616,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
            }
            else
            {
-        	   $("#authNumBtn").removeAttr("disabled");
+              $("#authNumBtn").removeAttr("disabled");
              $.ajax({ type: 'POST', url: 'checkpwdajax.action', data: { "phoneNumber" : $('#phoneNumber').val() }
                ,async:false,  success: function(data)
                    { 
@@ -526,7 +639,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
       
             $.ajax(
             {
-               url : "<%= cp%>/sendsms.action",
+               url : "<%=cp%>/sendsms.action",
                data: {
                   receiver: $("#divPhoneNumber").val()
                },
@@ -537,36 +650,36 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                   alert("phoneCheck_af : " + phoneCheck);
                }
             });   
-         }	
-	 }
+         }   
+    }
      
      
-  	// 지역에 따른 세부지역 불러오는 ajax
- 	function ajaxSpcAreaRequest()
- 	{
+     // 지역에 따른 세부지역 불러오는 ajax
+    function ajaxSpcAreaRequest()
+    {
 
- 		$.post("areaajax.action",
- 		{
- 			area_cd : $("#area").children("option:selected").val()
- 		}, function(data)
- 		{
- 			//alert(data);
- 			$("#spcAreaDiv").html(data);
- 			$("#spcArea").removeAttr("disabled");
- 		});
- 	}
-  	
-
- 	
+       $.post("areaajax.action",
+       {
+          area_cd : $("#area").children("option:selected").val()
+       }, function(data)
+       {
+          //alert(data);
+          $("#spcAreaDiv").html(data);
+          $("#spcArea").removeAttr("disabled");
+       });
+    }
      
-  	
+
+    
+     
+     
      
      
 </script>
 </head>
 <body>
 <div class="headerrow">
-	<%-- <c:import url="WEB-INF/views/header.jsp"></c:import> --%>
+   <%-- <c:import url="WEB-INF/views/header.jsp"></c:import> --%>
 </div>
         <div class="container"><!-- 좌우측의 공간 확보 -->
             <!-- 헤더 들어가는 부분 -->
@@ -575,10 +688,10 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                 <p></p>
                 <div class="col-md-12 topHeader">
                     <div class="home">
-                    	<a href="mainpage.action">로고</a>
+                       <a href="mainpage.action">로고</a>
                     </div>
                     <div class="goLogin">
-                    	<a href="memberlogin.action">로그인</a>
+                       <a href="memberlogin.action">로그인</a>
                     </div>
                 </div>
             </div>
@@ -763,14 +876,14 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 (시행일) 이 약관은 2020년 08월부터 시행합니다.
                         </textarea>
                         <div class="radio" style="margin-bottom: 2%;">
-	                           <label>
-	                               <input type="radio" id="provisionY" name="provisionyn" value="Y" checked>
-	                               동의합니다.
-	                           </label>
-	                           <label>
-	                               <input type="radio" id="provisionN" name="provisionyn" value="N">
-	                               동의하지 않습니다.
-	                           </label>
+                              <label>
+                                  <input type="radio" id="provisionY" name="provisionyn" value="Y" checked>
+                                  동의합니다.
+                              </label>
+                              <label>
+                                  <input type="radio" id="provisionN" name="provisionyn" value="N">
+                                  동의하지 않습니다.
+                              </label>
                         </div>
                         
                     </div>
@@ -778,7 +891,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                 <div class="form-group " id="divId">
                     <label for="inputId" class="col-lg-2 control-label">아이디<span class="must">*</span></label>
                     <div class="col-lg-10 form-inline" >
-                        <input type="text" required="required" class="form-control onlyAlphabetAndNumber" id="id" name="id" data-rule-required="true" placeholder="7~10자리 알파벳, 숫자, 특수문자(_)만 입력 가능합니다." maxlength="30"
+                        <input type="text" required="required" class="form-control" id="id" name="id" data-rule-required="true" placeholder="7~10자리 알파벳, 숫자, 특수문자(_)만 입력 가능합니다." maxlength="30"
                         style="width: 85%;">
                         &nbsp;
                         <button type="button" id="dupBtn" class="btn btn-primary">중복확인</button>
@@ -810,154 +923,153 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                 </div>
                 
                 
-				<div class="form-group" id="divPosition">
-				<label for="inputsinboon" class="col-lg-2 control-label">신분<span class="must">*</span></label>
-					<div class="col-lg-10">
-					
-					<select name="week" required="required" id="week" class="posiSel form-control" style="width: 450px;">
-						<option value="0">신분 선택</option>
-						<!-- <option value="1">취준생</option>
-						<option value="2">대학생</option>
-						<option value="3">직장인</option> -->
-						<c:forEach var="idntts" items="${idntt }">
-	                    	<option value="${idntts.idntt_cd }">
-	                    		${idntts.idntt_type }
-	                    	</option>
-	                  </c:forEach>
-					</select>
-					
-					</div>
-				</div><!-- end .position -->
-					
-					
-				
-				<div class="form-group" id="areaMemNum">
-				<label for="areaMemNum" class="col-lg-2 control-label" >지역<span class="must">*</span></label>	
-					<div class="col-lg-10" style="float: left; width: 225px;" >
-					
-						<select name="area" required="required" id="area" class="area form-control">
-						<option value="0">지역 선택</option>
-							<c:forEach var="areas" items="${area }">
-		                        <option value="${areas.area_cd }" 
-		                        ${areas.area_cd == spcArea.area_cd ? "selected= \"selected\"" : ""}>
-		                           ${areas.area_name }
-		                        </option>
-		                     </c:forEach>
-						</select>
-						
-					</div>
-					
-					
-					<!-- div 안에있는 select 문은 AjaxJoinSpcArea.jsp에서 가져온다 -->
-					<div id="spcAreaDiv" class="col-lg-10" style="float: left; width: 225px;" >
-					
-					</div>
-				</div><!-- end .areaMemNum -->
-				
-				
+            <div class="form-group" id="divPosition">
+            <label for="inputsinboon" class="col-lg-2 control-label">신분<span class="must">*</span></label>
+               <div class="col-lg-10">
+               
+               <select name="week" required="required" id="week" class="posiSel form-control" style="width: 450px;">
+                  <option value="0">신분 선택</option>
+                  <!-- <option value="1">취준생</option>
+                  <option value="2">대학생</option>
+                  <option value="3">직장인</option> -->
+                  <c:forEach var="idntts" items="${idntt }">
+                          <option value="${idntts.idntt_cd }">
+                             ${idntts.idntt_type }
+                          </option>
+                     </c:forEach>
+               </select>
+               
+               </div>
+            </div><!-- end .position -->
+               
+               
+            
+            <div class="form-group" id="areaMemNum">
+            <label for="areaMemNum" class="col-lg-2 control-label" >지역<span class="must">*</span></label>   
+               <div class="col-lg-10" style="float: left; width: 225px;" >
+               
+                  <select name="area" required="required" id="area" class="area form-control">
+                  <option value="0">지역 선택</option>
+                     <c:forEach var="areas" items="${area }">
+                              <option value="${areas.area_cd }" 
+                              ${areas.area_cd == spcArea.area_cd ? "selected= \"selected\"" : ""}>
+                                 ${areas.area_name }
+                              </option>
+                           </c:forEach>
+                  </select>
+                  
+               </div>
+               
+               
+               <!-- div 안에있는 select 문은 AjaxJoinSpcArea.jsp에서 가져온다 -->
+               <div id="spcAreaDiv" class="col-lg-10" style="float: left; width: 225px;" >
+               
+               </div>
+            </div><!-- end .areaMemNum -->
+            
+            
                 <div class="form-group" id="divPhoneNumber">
-				<label for="inputPhoneNumber" class="col-lg-2 control-label">휴대폰
-					번호<span class="must">*</span></label>
-				<div class="col-lg-10 form-inline">
-					<input type="tel" class="form-control onlyNumber" id="phoneNumber" name="phoneNumber"
-						data-rule-required="true" placeholder="-를 제외하고 숫자만 입력하세요."
-						maxlength="11" style="width: 85%;"> &nbsp;
-					<button type="button" id="phoneAuth" class="btn btn-primary" disabled="disabled"
-						onclick="ajaxSendSms()">휴대폰 인증</button>
-				</div>
-			</div>
-			<div class="form-group" id="divPhoneNumber">
-				<label for="inputPhoneNumber" class="col-lg-2 control-label">인증
-					번호</label>
-				<div class="col-lg-10 form-inline">
-					<input type="tel" class="form-control onlyAlphabetAndNumber"
-						id="authNum" data-rule-required="true" maxlength="11"
-						style="width: 65%;"> <input type="tel"
-						class="form-control onlyAlphabetAndNumber" id="authNumRslt"
-						data-rule-required="true" maxlength="11" style="width: 20%;" readonly="readonly">
-					&nbsp;
-					<button type="button" class="btn btn-primary" disabled="disabled" id="authNumBtn">확인</button>
-				</div>
-			</div>
+            <label for="inputPhoneNumber" class="col-lg-2 control-label">휴대폰
+               번호<span class="must">*</span></label>
+            <div class="col-lg-10 form-inline">
+               <input type="tel" class="form-control onlyNumber" id="phoneNumber"
+                  data-rule-required="true" placeholder="-를 제외하고 숫자만 입력하세요."
+                  maxlength="11" style="width: 85%;"> &nbsp;
+               <button type="button" id="phoneAuth" class="btn btn-primary" disabled="disabled"
+                  onclick="ajaxSendSms()">휴대폰 인증</button>
+            </div>
+         </div>
+         <div class="form-group" id="divPhoneNumber">
+            <label for="inputPhoneNumber" class="col-lg-2 control-label">인증
+               번호</label>
+            <div class="col-lg-10 form-inline">
+               <input type="tel" class="form-control onlyAlphabetAndNumber"
+                  id="authNum" data-rule-required="true" maxlength="11"
+                  style="width: 65%;"> <input type="tel"
+                  class="form-control onlyAlphabetAndNumber" id="authNumRslt"
+                  data-rule-required="true" maxlength="11" style="width: 20%;" readonly="readonly">
+               &nbsp;
+               <button type="button" class="btn btn-primary" disabled="disabled" id="authNumBtn">확인</button>
+            </div>
+         </div>
 
-			<div class="image form-group">
-				<label for="profileimage" class="col-lg-2 control-label">프로필
-					이미지</label>
-				<div class="col-lg-10 form-inline">
-					<!-- <form action="Test_ok.jsp" method="post" enctype="multipart/form-data"> -->
-					<input type="file" id="uploadFile" name="uploadFile"
-						class="form-control" style="width: 60%;" /> &nbsp;
-					<button class="btn btn-primary" id="proImgBtn" type="button">등록</button>
-					<div id="miri">
-						<img src="" id="goodImg" style="width: 100px; height: 100px;">
-					</div>
-					<input type="hidden" id="okFile" name="okFile" class="form-control">
-				</div>
-			</div>
+         <div class="image form-group">
+            <label for="profileimage" class="col-lg-2 control-label">프로필
+               이미지</label>
+            <div class="col-lg-10 form-inline">
+               <!-- <form action="Test_ok.jsp" method="post" enctype="multipart/form-data"> -->
+               <input type="file" id="uploadFile" name="uploadFile"
+                  class="form-control" style="width: 65%;" />
+               <input type="text"
+                  class="form-control" id="thumbnail" style="width: 20%;" readonly="readonly" value="미리보기">
+               &nbsp;
+               <button class="btn btn-primary" id="proImgBtn" type="button">등록</button>
+               <input type="hidden" id="okFile" name="okFile" class="btn btn-primary">
+            </div>
+         </div>
 
-			<div class="form-group">
+         <div class="form-group">
                     <label for="selfintro" class="col-lg-2 control-label">본인 소개</label>
                     <div class="col-lg-10 form-inline">
                     <input type="text" id="intro" name="intro" class="form-control" placeholder="예) 자바개발자가 되고싶은 학생입니다." maxlength="11" style="width: 85%;"/>
                     </div>
                 </div>
-                
-			    <!-- 키워드 -->
-			    <div class="form-group">
-				<div class="stuKeyword">
-					<label for="inputIntKeyword" class="col-lg-2 control-label">관심
-						키워드(최대 5개)<span class="must">*</span>
-					</label>
+             <!-- 키워드 -->
+             <div class="form-group">
+            <div class="stuKeyword">
+               <label for="inputIntKeyword" class="col-lg-2 control-label">관심
+                  키워드(최대 5개)<span class="must">*</span>
+               </label>
 
-				</div>
-				<div class="stuKey1">
-					<div class="stuKeySel">
-						<div class="col-lg-10 form-inline">
-							<!-- <select name="keySelect" id="keySelect" class="form-control keySelect">
-								<option value="key1">java</option>
-								<option value="key2">oracle</option>
-								<option value="key3">jsp</option>
-								<option value="key4">spring</option>
-								<option value="key5">기타</option>
-							</select> -->
+            </div>
+            <div class="stuKey1">
+               <div class="stuKeySel">
+                  <div class="col-lg-10 form-inline">
+                     <!-- <select name="keySelect" id="keySelect" class="form-control keySelect">
+                        <option value="key1">java</option>
+                        <option value="key2">oracle</option>
+                        <option value="key3">jsp</option>
+                        <option value="key4">spring</option>
+                        <option value="key5">기타</option>
+                     </select> -->
 
-							<select name="keySelect" id="keySelect"
-								class="form-control keySelect">
-								<c:forEach var="intTag" items="${intTag }">
-									<option value="${intTag.int_tag_cd }">
-										${intTag.int_tag }</option>
-								</c:forEach>
-							</select> &nbsp; <input type="text" class="keyInput form-control"
-								id="keyInput" placeholder="관심 키워드를 입력해 주세요." style="width: 30%" readonly="readonly"/>
-							&nbsp; <input type="button" id="keyAddBtn" value="추가"
-								class="keyBtn btn btn-primary" />
-							&nbsp;	
-								<input type="button" id="keyResetBtn" value="초기화"
-								class="keyBtn btn btn-primary" />
+                     <select name="keySelect" id="keySelect"
+                        class="form-control keySelect">
+                        <c:forEach var="intTag" items="${intTag }">
+                           <option value="${intTag.int_tag_cd }">
+                              ${intTag.int_tag }</option>
+                        </c:forEach>
+                     </select> &nbsp; <input type="text" class="keyInput form-control"
+                        id="keyInput" placeholder="관심 키워드를 입력해 주세요." style="width: 30%" readonly="readonly"/>
+                     &nbsp; <input type="button" id="keyAddBtn" value="추가"
+                        class="keyBtn btn btn-primary" />
+                     &nbsp;   
+                        <input type="button" id="keyResetBtn" value="초기화"
+                        class="keyBtn btn btn-primary" />
 
-						</div>
-						<!-- end / col-lg-10 form-inline -->
-					</div>
-					<!-- stuKeySel -->
-				</div>
-				<!-- end .stuKey -->
-			</div>
-				
-				<div class="form-group">
-				<label for="inputPhoneNumber" class="col-lg-2 control-label"></label>
-				<div class="col-lg-10 form-inline">
-					<div id="stuKeyBox" class="stuKeyBox" style="width: 85%;">
-					</div>
-					<!-- end .stuKeyBox -->
-				</div>
-			</div>
-		        
+                  </div>
+                  <!-- end / col-lg-10 form-inline -->
+               </div>
+               <!-- stuKeySel -->
+            </div>
+            <!-- end .stuKey -->
+         </div>
+            
+            <div class="form-group">
+            <label for="inputPhoneNumber" class="col-lg-2 control-label"></label>
+            <div class="col-lg-10 form-inline">
+               <div id="stuKeyBox" class="stuKeyBox" style="width: 85%;">
+               </div>
+               <!-- end .stuKeyBox -->
+            </div>
+         </div>
+              
                 <div class="form-group">
                     <div class="col-lg-offset-2 col-lg-10 bottom">
-                    	<div class="errMsg">
-                    		<span id="err"></span>
-                    	</div>
-                    	<div>
+                       <div class="errMsg">
+                          <span id="err"></span>
+                       </div>
+                       <div>
                         <button type="button" id="joinBtn" disabled="disabled" class="btn btn-lg btn-success joinBtn">가입하기</button>
                         </div>
                     </div>
@@ -965,9 +1077,9 @@ body{font-family: 'Noto Sans KR', sans-serif;}
             </form>
             </div>
 <div class="row">
-	<div class="col-md-12">
-	<%-- <c:import url="WEB-INF/views/footer.jsp"></c:import> --%>
-	</div>
+   <div class="col-md-12">
+   <%-- <c:import url="WEB-INF/views/footer.jsp"></c:import> --%>
+   </div>
 </div>
 </body>
 </html>
