@@ -117,10 +117,6 @@ public class JoinController
 			
 		}
 		
-
-		
-		
-
 		return view;
 
 	}
