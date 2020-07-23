@@ -162,24 +162,7 @@
 				
 				<!-- 스터디원 정보 -->
 				<div class="col-md-4 ">
-				
-					
-					<div class="stuMem">
-						<!-- <h3>스터디장</h3> -->
-						<div class="memLeader" id="member1">
-
-							<div class="leaderImg">
-								<img src="<%=cp %>/assets/images/hjkim.PNG" alt="" class="img-circle memImg" />
-							</div><!-- end .leaderImg -->
-							
-							<div class="leaderInfo">
-								<span class="glyphicon glyphicon-ok ok"></span>
-								<h4>Study Leader</h4><br>
-								<span class="name">김길동</span>
-								<input type="button" class="btn btn-xs btn-default infoBtn" id="" value="정보" />
-							</div><!-- end .leaderInfo -->
-							
-							<!-- 모달 -->
+				<!-- 모달 -->
 							<div id="modal" class="searchModal">
 								<!-- 모달창 -->
 								<div class="search-modal-content">
@@ -218,12 +201,23 @@
 										<input type="button" value="방출" class="btn btn-sm outBtn" />
 										<input type="button" class="btn btn-sm btn-primary manBtn" value="위임" />
 									</div><!-- end .out -->
-							</div><!-- end .search-modal-content -->
-							
-							
+							</div><!-- end .search-modal-content -->							
 							</div><!-- end .searchModal -->	
+					
+					<div class="stuMem">
+						<!-- <h3>스터디장</h3> -->
+						<div class="memLeader" id="member1">
+
+							<div class="leaderImg">
+								<img src="<%=cp %>/assets/images/hjkim.PNG" alt="" class="img-circle memImg" />
+							</div><!-- end .leaderImg -->
 							
-						
+							<div class="leaderInfo">
+								<span class="glyphicon glyphicon-ok ok"></span>
+								<h4>Study Leader</h4><br>
+								<span class="name">김길동</span>
+								<input type="button" class="btn btn-xs btn-default infoBtn" id="" value="정보" />
+							</div><!-- end .leaderInfo -->
 							
 						</div><!-- end .memLeader -->
 					<!-- 	<h3>스터디원</h3> -->

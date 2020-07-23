@@ -5,6 +5,9 @@
   
 <mapper namespace="com.sys.comeit.IStudyDAO">
 
-	
+	<!-- 스터디방 정보 조회 -->
+	<select id="studyInfoSearch" resultType="com.sys.comeit.StudyDTO">
+		
+	</select>
 	
 </mapper>
