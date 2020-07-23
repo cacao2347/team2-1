@@ -12,12 +12,12 @@
 <%
 	
 	String root = pageContext.getServletContext().getRealPath("/");
-	System.out.println(root);
+	//System.out.println(root);
 	String savePath = root + "pds\\saveData";
-	System.out.println(savePath);
+	//System.out.println(savePath);
 	
 	File dir = new File(savePath);
-	System.out.println(dir);
+	//System.out.println(dir);
 	
 	if(!dir.exists())
 		dir.mkdirs();
@@ -40,6 +40,7 @@
 		while(files.hasMoreElements())
 		{
 			String name = (String)files.nextElement();
+			System.out.println(name);
 			if(multi.getFilesystemName(name) != null)
 			{
 				//out.println("서버에 저장된 파일명 : "+multi.getFilesystemName(name));
