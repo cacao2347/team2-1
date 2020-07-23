@@ -134,7 +134,11 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 							<span class="glyphicon glyphicon-calendar icon"></span>
 							<h4>활동 기간</h4><br>
 							<span class="term">${studyInfo.str_date } ~ ${studyInfo.end_date }&nbsp;&nbsp;&nbsp;&nbsp;${studyInfo.meet_term }개월</span><br />
-							<span class="day">└ 월요일, 수요일</span>		
+							
+						
+								<span class="day">└ 월요일 </span>
+							
+																
 						</div><!-- end stuTerm -->
 						
 						<!-- 활동 지역 -->
@@ -149,16 +153,14 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 							<span class="glyphicon glyphicon-tags icon"></span>
 							<h4>키워드</h4><br>
 							<c:forEach var="intTag" items="${intTag }">
-							
-							
-							
-								<%-- <span class="keword">${intTag.int_tag_name }</span> --%>
 									<ul class="list-study-tags">
 										<li class="stack-item">${intTag.int_tag_name }</li>
 									</ul>
-					
-							
-							
+							</c:forEach>
+							<c:forEach var="etcTag" items="${etcTag }">
+									<ul class="list-study-tags">
+										<li class="stack-item">${etcTag.etc_tag_name }</li>
+									</ul>
 							</c:forEach>
 						</div><!-- end .stuKey -->
 						

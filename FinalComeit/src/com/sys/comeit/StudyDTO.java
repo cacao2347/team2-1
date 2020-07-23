@@ -1,6 +1,5 @@
 package com.sys.comeit;
 
-import java.util.ArrayList;
 
 public class StudyDTO
 {
@@ -12,12 +11,14 @@ public class StudyDTO
 	private String meet_term, area_name, spc_area_name;			// 기간, 지역명, 세부지역명 
 	private String idntt_type, lv, cat_name, scrt_num;			// 신분유형, 레벨, 카테고리, 방비밀번호(없으면 0 나옴)
 	
-	private String int_tag_name, etc_tag_name;
+	private String int_tag_name, etc_tag_name;					// 관심 키워드 태그, 기타 관심 키워드 태그
+	private String stu_day_name;								// 스터디 진행 요일
 	
 	// 개설하기
 	// 스터디방 제목, 세부키워드, 상세설명, 모집인원, 활동 지역, 레벨, 시작날짜
 	// 종료날짜, 모임 지정 요일, 비밀방 설정 여부
 	// 대표이미지, 스터디신분, 레벨코드, 신분코드
+	
 	
 	// 개설 프로시저 : 개설자, 세부지역, 모임기간코드, 신분코드, 레벨코드, 카테고리코드, 제목, 시작날짜, 인원수, 내용
 	private String crt_mem_cd, spc_area_cd, meet_term_cd, idntt_cd, lv_cd, stu_cat_cd, img_url;
@@ -277,6 +278,14 @@ public class StudyDTO
 	public void setScrt_num(String scrt_num)
 	{
 		this.scrt_num = scrt_num;
+	}
+	public String getStu_day_name()
+	{
+		return stu_day_name;
+	}
+	public void setStu_day_name(String stu_day_name)
+	{
+		this.stu_day_name = stu_day_name;
 	}
 	
 }

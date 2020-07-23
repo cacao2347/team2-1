@@ -1,7 +1,5 @@
 package com.sys.comeit;
 
-import java.util.ArrayList;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
@@ -28,14 +26,10 @@ public class StudyController
 		
 		String stu_cd = "STU1002";
 		
-		StudyDTO dto = studyDao.studyInfoSearch(stu_cd);
-		
-		
-		model.addAttribute("studyInfo", dto);
+		model.addAttribute("studyInfo", studyDao.studyInfoSearch(stu_cd));
 		model.addAttribute("intTag", studyDao.studyIntTagSearch(stu_cd));
-		
-		
-		
+		model.addAttribute("etcTag", studyDao.studyEtcTagSearch(stu_cd));
+		model.addAttribute("dayName", studyDao.studyDaySearch(stu_cd));
 		
 		view = "/WEB-INF/views/study/StudyBfDetail.jsp";
 

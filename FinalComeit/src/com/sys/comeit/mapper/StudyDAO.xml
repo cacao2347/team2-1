@@ -33,4 +33,13 @@
 		WHERE STU_CD = #{stu_cd}
 	</select>
 	
+	<!-- 스터디 진행 요일 조회 -->
+	<select id="studyDaySearch" 
+		resultType="com.sys.comeit.StudyDTO">
+		SELECT D.DAY_NAME AS STUDY_DAY_NAME
+		FROM TBL_STU_PRG_DAY SD, TBL_DAY D
+		WHERE SD.DAY_CD = D.DAY_CD
+		  AND SD.STU_CD=#{stu_cd}
+	</select>
+	
 </mapper>
