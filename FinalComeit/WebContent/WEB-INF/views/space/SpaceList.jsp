@@ -21,7 +21,7 @@
 <body class="padding">
 <div class="row">
 	<div class="col-md-12">
-	<c:import url="WEB-INF/views/header.jsp"></c:import>
+	<c:import url="/WEB-INF/views/header.jsp"></c:import>
 	</div>
 </div>
 			
@@ -43,7 +43,6 @@
 				</div>
 				<div class="col-md-2"><!-- 필터 시작 -->
 				<div class="side">
-				
 					<dl class="region">
 						<dt>지역</dt>
 						<dd>
@@ -99,7 +98,6 @@
 							
 						</dd>
 					</dl><!-- end inwon -->
-				
 				</div><!-- end side -->
 				</div><!-- 필터 끝 -->
 				
@@ -136,7 +134,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="create">
-									<button type="button" class="btn btn-primary btn-sm createBtn">공간 개설</button>
+									<button type="button" class="btn btn-primary btn-sm createBtn" onClick="location.href='spacreate.action'">공간 개설</button>
 								</div>
 							</div>
 						</div>
@@ -230,7 +228,7 @@
 </div>
 <div class="row">
 	<div class="col-md-12">
-	<c:import url="WEB-INF/views/footer.jsp"></c:import>
+	<c:import url="/WEB-INF/views/footer.jsp"></c:import>
 	</div>
 </div>
 </body>

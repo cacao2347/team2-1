@@ -46,8 +46,8 @@
 		<ul class="nav navbar-nav">
 			<li><a href="#">스터디</a></li>
 			<!-- <li><a href="#">프로젝트</a></li> -->
-			<li><a href="#">강의</a></li>
-            <li><a href="#">공간</a></li>
+			<li><a href="">강의</a></li>
+            <li><a href="/FinalComeit/spalist.action">공간</a></li>
 		</ul>
         <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">

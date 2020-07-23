@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
@@ -69,6 +70,45 @@
 	        $(this).siblings("label").text(select_name);
 	    });
 	});
+	
+	
+	$(function(){
+		
+		
+		// 사업자 번호 입력 유효성 검사
+		$(".onlyNumber").keyup(function(event){
+	        if (!(event.keyCode >=37 && event.keyCode<=40)) {
+	            var inputVal = $(this).val();
+	            $(this).val(inputVal.replace(/[^0-9]/gi,''));
+	        }
+	    });
+		
+		//------- 검사하여 상태를 class에 적용
+	    $('#aa').keyup(function(event){
+	        
+	        var divaa = $('#divaa');
+	        
+	        if($('#aa').val()==""){
+	        	divaa.removeClass("has-success");
+	        	divaa.addClass("has-error");
+	        }else{
+	        	divaa.removeClass("has-error");
+	        	divaa.addClass("has-success");
+	        }
+	    });
+	});
+	
+	$("#nextone").click(
+	function()
+	{
+		var num = $("#aa").val();
+		if(num.length != 10)
+		{
+			$("#err").html("사업자 번호는 10자리 숫자 입니다.");
+			$("#err").css("display", "inline");
+			return;
+		}
+	});
 
 
 </script>
@@ -111,19 +151,23 @@
             </div>
             
             <div class="panel-body">
-                <div class="form-group"><span style="color: red; font-size: 11pt;"> 사업자등록번호는 필수사항입니다.<br> * 제대로된 정보를 입력하지 않을시 불이익을 받을 수 있습니다.<br><br></span>
+                <div class="form-group" id="divaa"><span style="color: red; font-size: 11pt;"> 사업자등록번호는 필수사항입니다.<br> * 제대로된 정보를 입력하지 않을시 불이익을 받을 수 있습니다.<br><br></span>
 						입력한 사업자 번호와 동일한 파일을 업로드 해야합니다. 후 관리자의 검수기간을 거쳐 승인된 공간만 활동할 수 있습니다.<br> 지금 사업자등록번호를 입력해 공간을 등록 하세요!<br>
                      <label class="control-label" style="margin-left: 50px;"></label><br><br><br>
                      <label class="control-label" for="aa">사업자등록번호 입력</label>
                      <label class="control-label aa2" for="aa2" >첨부파일 업로드</label><br>
+                     
                      <div class="spain">
                 	 	<input maxlength="40" type="text" required="required" name="housing" id="aa" 
-                		  class="form-control aa" placeholder="사업자등록번호 입력" />
-                		 <button class="btn btn-primary nextBtn pull-right aa2" type="button" >등록</button>
-                		 <input type="text" required="required" name="housing" id="aa2" class="aa2 aa form-control"/>
+                		  class="onlyNumber form-control aa"  placeholder="숫자만 입력(10자리)" />
+                		 <button class="btn btn-primary pull-right aa2" type="button" >등록</button>
+                		 <input type="file" required="required" name="housing" id="aa2" class="aa2 aa form-control"/>
                 	 </div>
+                	 <div class="errMsg">
+                    	<span id="err"></span>
+                    </div>
                 </div>
-                <button class="btn btn-primary nextBtn pull-right" type="button">Next</button>
+                <button class="btn btn-primary nextBtn pull-right" type="button" id="nextone">Next</button>
             </div>
         </div>
         <br><br>
@@ -156,18 +200,39 @@
             </div>
         </div>
         
+        <!-- 키워드 입력 -->
         <div class="panel panel-primary setup-content" id="step-3">
             <div class="panel-heading">
                  <h4 class="panel-title">"태그/키워드"</h4>
             </div>
-            <div class="panel-body">
-                <div class="form-group">
-                    <label class="control-label">키워드</label>
-                    <div class="form-inline">
-                    <input maxlength="500" type="text" required="required" class="form-control key" placeholder="예) 가성비  노트북 ..." />
-                    <button class="btn btn-primary nextBtn pull-right" type="button" style="margin-left: 10px;" >등록</button>
-                    </div>
-                </div>
+			    <div class="form-group">
+				<div class="stuKeyword">
+					<label for="inputIntKeyword" class="col-lg-2 control-label">
+						키워드(최대 5개)<span class="must">*</span>
+					</label>
+
+				</div>
+				<div class="stuKey1">
+					<div class="stuKeySel">
+						<div class="col-lg-10 form-inline">
+							<select name="keySelect" id="keySelect"
+								class="form-control keySelect">
+								<c:forEach var="Tag" items="${Tag }">
+									<option value="${Tag.tag_cd }">
+										${Tag.tag }</option>
+								</c:forEach>
+							</select> &nbsp; <input type="text" class="keyInput form-control"
+								id="keyInput" placeholder="키워드를 입력해 주세요." style="width: 30%" readonly="readonly"/>
+							&nbsp; <input type="button" id="keyAddBtn" value="추가"
+								class="keyBtn btn btn-primary" />
+							&nbsp;	
+								<input type="button" id="keyResetBtn" value="초기화"
+								class="keyBtn btn btn-primary" />
+						</div>
+					</div>
+				</div>
+			</div>
+			
                 <br><br>
                 <div class="panel-heading">
                  	<h4 class="panel-title">"공간 정보"</h4>

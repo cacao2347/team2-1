@@ -1,4 +1,7 @@
-
+body
+{
+	background: -webkit-linear-gradient(left, #183350, #b4cde9) !important;
+}
 .spawh
 {
 	background-color: white;
