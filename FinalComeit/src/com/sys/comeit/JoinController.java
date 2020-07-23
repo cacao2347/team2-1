@@ -362,5 +362,15 @@ public class JoinController
 		return String.valueOf(result);
 	}
 	
+	@RequestMapping(value = "/ajaximg.action", method = RequestMethod.POST)
+	   public String ajaximg()
+	   {
+	      String view = null;
+
+	      view = "WEB-INF/views/member/AjaxProImg.jsp";
+	      
+	      return view;
+	   }
+	
 
 }

@@ -4,6 +4,7 @@
 <%
    request.setCharacterEncoding("UTF-8");
    String cp = request.getContextPath();
+   String imagePath = cp + "/pds/saveData";
 %>
 <!DOCTYPE html>
 <html>
@@ -135,12 +136,58 @@ body{font-family: 'Noto Sans KR', sans-serif;}
              }
          });
          
-         $('#proImgBtn').click(function()
-		{
-			alert("파일 등록하고 싶습니다");
-			
-			//$("#proImgBtn").submit();
-		})
+         $("#proImgBtn").click(function()
+                 {
+                    alert("하이");
+                    var myFormData = new FormData();
+                    //alert(myFormData);
+                    
+                    var fileok = document.getElementById("uploadFile");
+                    
+                    var fileCheck = null;
+                    fileCheck = $("#uploadFile").val();
+
+                    alert(fileCheck);
+                    
+                     alert(fileok.files[0].name);
+                    
+                    myFormData.append("fileok", fileok.files[0]);
+                    
+                    if(fileCheck == false)
+                    {
+                         alert("파일을 첨부해 주세요");
+                         return;
+                    }
+                    else
+                    {
+                       $.ajax(
+                       {
+                            url: '<%=cp%>/ajaximg.action',
+                            type: 'POST',
+                            processData: false, // important
+                            contentType: false,//'multipart/form-data', // important
+                            dataType : 'text',
+                            data: myFormData,
+                            
+                            success : function(data)
+                            {
+                                alert($.trim(data));
+                                
+                                $('#okFile').val($.trim(data));
+                                
+                               //$("#img_form_url").attr("src", imgurl);
+                        
+                               var good = $("#okFile").val();
+                               
+                               alert(good);
+                               alert('<%=cp%>');
+                               
+                               $("#goodImg").attr("src", '<%=imagePath%>'+'/' + fileok.files[0].name);
+                            }
+                       });
+                    }
+                 
+                 })
          
          // 중복확인 버튼을 클릭했을때의 처리
          $('#dupBtn').click(function()
@@ -833,18 +880,23 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 					<button type="button" class="btn btn-primary" disabled="disabled" id="authNumBtn">확인</button>
 				</div>
 			</div>
-                
-                <div class="image form-group">
-				<label for="profileimage" class="col-lg-2 control-label">프로필 이미지</label>
-                     <div class="col-lg-10 form-inline">
-                     	<!-- <form action="Test_ok.jsp" method="post" enctype="multipart/form-data"> -->
-	                     	<input type="file" name="uploadFile" id="uploadFile" class="form-control" style="width: 85%;"/>
-	                     	&nbsp;
-	                		<button class="btn btn-primary" id="proImgBtn" type="submit" >등록</button>
-                	 </div>
-                </div>
-				
-				<div class="form-group">
+
+			<div class="image form-group">
+				<label for="profileimage" class="col-lg-2 control-label">프로필
+					이미지</label>
+				<div class="col-lg-10 form-inline">
+					<!-- <form action="Test_ok.jsp" method="post" enctype="multipart/form-data"> -->
+					<input type="file" id="uploadFile" name="uploadFile"
+						class="form-control" style="width: 60%;" /> &nbsp;
+					<button class="btn btn-primary" id="proImgBtn" type="button">등록</button>
+					<div id="miri">
+						<img src="" id="goodImg" style="width: 100px; height: 100px;">
+					</div>
+					<input type="hidden" id="okFile" name="okFile" class="form-control">
+				</div>
+			</div>
+
+			<div class="form-group">
                     <label for="selfintro" class="col-lg-2 control-label">본인 소개</label>
                     <div class="col-lg-10 form-inline">
                     <input type="text" id="intro" name="intro" class="form-control" placeholder="예) 자바개발자가 되고싶은 학생입니다." maxlength="11" style="width: 85%;"/>
