@@ -46,7 +46,7 @@ public class JoinController
 		String pwd = request.getParameter("password"); // 비밀번호
 		String idntt_cd = request.getParameter("week"); // 신분코드
 
-		String img_url = request.getParameter("prfImg"); // 프로필 이미지
+		String img_url = request.getParameter("okFile"); // 프로필 이미지
 		String mem_content = request.getParameter("intro"); // 본인소개
 		String spc_area_cd = request.getParameter("spcArea"); // 세부지역 코드
 

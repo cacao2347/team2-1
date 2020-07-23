@@ -571,13 +571,13 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                {
                   
                   $(".stuKeyBox").append("<div class='tagStyle'><span class='keyTag'>"+ selectedText 
-                        + "<input type='hidden' name='intTagList' value='"+ selectedText + "'></span></div>");
+                        + "<input type='hidden' name='etcTagList' value='"+ selectedText + "'></span></div>");
                }
                // 관심키워드 일 때...
                else
                {
                   $(".stuKeyBox").append("<div class='tagStyle'><span class='keyTag'>"+ selectedText 
-                        + "<input type='hidden' name='etcTagList' value='"+ selectedText + "'></span></div>");                  
+                        + "<input type='hidden' name='intTagList' value='"+ selectedValue + "'></span></div>");                  
                }
                
           });
