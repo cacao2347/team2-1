@@ -345,7 +345,20 @@ body{font-family: 'Noto Sans KR', sans-serif;}
          
       })
 
-      
+      $('INPUT[type="file"]').change(function () {
+    var ext = this.value.match(/\.(.+)$/)[1];
+    switch (ext) {
+        case 'jpg':
+        case 'jpeg':
+        case 'png':
+        case 'gif':
+            $('#proImgBtn').attr('disabled', false);
+            break;
+        default:
+            alert('형식에 어긋나는 파일입니다.');
+            this.value = '';
+    }
+})
       // 동의합니다 누르면 비활성화 해제
       $("#provisionY").click(function()
       {
@@ -1004,7 +1017,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
             <div class="col-lg-10 form-inline">
                <!-- <form action="Test_ok.jsp" method="post" enctype="multipart/form-data"> -->
                <input type="file" id="uploadFile" name="uploadFile"
-                  class="form-control" style="width: 65%;" />
+                  class="form-control" accept=".gif, .jpg, .png, .jpeg" style="width: 65%;" />
                <input type="text"
                   class="form-control" id="thumbnail" style="width: 20%;" readonly="readonly" value="미리보기">
                &nbsp;
