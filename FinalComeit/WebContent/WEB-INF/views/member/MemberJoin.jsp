@@ -977,7 +977,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
             <label for="inputPhoneNumber" class="col-lg-2 control-label">휴대폰
                번호<span class="must">*</span></label>
             <div class="col-lg-10 form-inline">
-               <input type="tel" class="form-control onlyNumber" id="phoneNumber"
+               <input type="tel" class="form-control onlyNumber" id="phoneNumber" name="phoneNumber"
                   data-rule-required="true" placeholder="-를 제외하고 숫자만 입력하세요."
                   maxlength="11" style="width: 85%;"> &nbsp;
                <button type="button" id="phoneAuth" class="btn btn-primary" disabled="disabled"
