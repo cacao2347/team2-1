@@ -43,9 +43,9 @@ var array = new Array();
 			$('#check1').addClass('btn-default');
 			$('#check1').removeClass('btn-success');
 			$('#check2').addClass('btn-success');
-			
 			return false;
 		});
+		
 		$('#next2').click(function()
 		{
 			$ ('.show1').hide(); 
@@ -114,168 +114,121 @@ $(function(){
         }
     });
     
-    //------- 검사하여 상태를 class에 적용
-    $('#id').keyup(function(event){
-        
-        var divId = $('#divId');
-        
-        if($('#id').val()==""){
-            divId.removeClass("has-success");
-            divId.addClass("has-error");
-        }else{
-            divId.removeClass("has-error");
-            divId.addClass("has-success");
-        }
-    });
-    
-    $('#password').keyup(function(event){
-        
-        var divPassword = $('#divPassword');
-        
-        if($('#password').val()==""){
-            divPassword.removeClass("has-success");
-            divPassword.addClass("has-error");
-        }else{
-            divPassword.removeClass("has-error");
-            divPassword.addClass("has-success");
-        }
-    });
-    
-    $('#passwordCheck').keyup(function(event){
-        
-        var passwordCheck = $('#passwordCheck').val();
-        var password = $('#password').val();
-        var divPasswordCheck = $('#divPasswordCheck');
-        
-        if((passwordCheck=="") || (password!=passwordCheck)){
-            divPasswordCheck.removeClass("has-success");
-            divPasswordCheck.addClass("has-error");
-        }else{
-            divPasswordCheck.removeClass("has-error");
-            divPasswordCheck.addClass("has-success");
-        }
-    });
-    
-    $('#name').keyup(function(event){
-        
-        var divName = $('#divName');
-        
-        if($.trim($('#name').val())==""){
-            divName.removeClass("has-success");
-            divName.addClass("has-error");
-        }else{
-            divName.removeClass("has-error");
-            divName.addClass("has-success");
-        }
-    });
-    
-    $('#email').keyup(function(event){
-        
-        var divEmail = $('#divEmail');
-        
-        if($.trim($('#email').val())==""){
-            divEmail.removeClass("has-success");
-            divEmail.addClass("has-error");
-        }else{
-            divEmail.removeClass("has-error");
-            divEmail.addClass("has-success");
-        }
-    });
-    
-    // 사업자 번호
-    $('#aa').keyup(function(event){
-        
-        var divPhoneNumber = $('#aadiv');
-        
-        if($.trim($('#aa').val())==""){
-            divPhoneNumber.removeClass("has-success");
-            divPhoneNumber.addClass("has-error");
-        }else{
-            divPhoneNumber.removeClass("has-error");
-            divPhoneNumber.addClass("has-success");
-        }
-    });
-    
-    
+    var check= false; // 파일 여부확인 
+    // 사업자 파일
     $("#spanumfile").click(function()
-            {
-               var myFormData = new FormData();
-               var fileok = document.getElementById("aa2");
-               var fileCheck = null;
-               fileCheck = $("#aa2").val();
+      {
+         var myFormData = new FormData();
+         var fileok = document.getElementById("aa2");
+         var fileCheck = null;
+         fileCheck = $("#aa2").val();
 
-               alert(fileCheck);
-               
-                alert(fileok.files[0].name);
-               
-               myFormData.append("fileok", fileok.files[0]);
-               
-               if(fileCheck == false)
-               {
-                    alert("파일을 첨부해 주세요");
-                    return;
-               }
-               else
-               {
-                  $.ajax(
-                  {
-                       url: '<%=cp%>/ajaximg.action',
-                       type: 'POST',
-                       processData: false, // important
-                       contentType: false,//'multipart/form-data', // important
-                       dataType : 'text',
-                       data: myFormData,
-                       
-                       success : function(data)
-                       {
-                           alert($.trim(data));
-                           
-                           $('#okFile').val($.trim(data));
-                           
-                   
-                          var good = $("#okFile").val();
-                          
-                          alert(good);
-                          alert('<%=cp%>');
-                          
-                          $("#goodImg").attr("src", '<%=imagePath%>'+'/' + fileok.files[0].name);
-                       }
-                  });
-               }
-            
-            })
+         //alert(fileCheck);
+         
+          //alert(fileok.files[0].name);
+         
+         myFormData.append("fileok", fileok.files[0]);
+         
+         if(fileCheck == false)
+         {
+              alert("파일을 첨부해 주세요");
+              return;
+         }
+         else
+         {
+            $.ajax(
+            {
+                 url: '<%=cp%>/ajaximg.action',
+                 type: 'POST',
+                 processData: false, // important
+                 contentType: false,//'multipart/form-data', // important
+                 dataType : 'text',
+                 data: myFormData,
+                 async:false,
+                 success : function(data)
+                 {
+                     //alert($.trim(data));
+                     
+                     $('#okFile').val($.trim(data));
+                     
+             
+                    var good = $("#okFile").val();
+                    
+                    //alert(good);
+                    //alert('<%=cp%>');
+                    
+                    check=true;
+                    $("#next1").removeAttr("disabled");
+                    $("#goodImg").attr("src", '<%=imagePath%>'+'/' + fileok.files[0].name);
+                 }
+            });
+         }
+      
+      })
     
-	    // 사업자번호 중복 확인
-	    $('#dupBtn').click(function()
+    // 사업자번호 중복 확인
+    $('#dupBtn').click(function()
+		 {
+   	 
+			 if(!$('#aa').val())
 			 {
-	   	 
-				 if(!$('#aa').val())
-				 {
-					 alert("사업자 번호를 입력하세요.");
-					 $('#aa').focus();
-				 }
-				 else
-				 {
-					$.ajax({ type: 'POST', url: 'checkspanum.action', data: { "aa" : $('#aa').val() }
-	     		, success: function(data)
-	         		{  
-			           	if($.trim(data) == 0 && $('#aa').val() != null)
-			           	{ 
-			           		alert("등록가능한 번호입니다.");
-			           		$("#phoneAuth").removeAttr("disabled");
-			           	}
-			           	else 
-			           	{ 
-			           		alert("등록 불가능한 번호입니다.");
-			           	}
-			           	
-	       				} 
-					}); //end ajax
-				 }
-	     	 //alert('뭐');
-	     	
-			});
+				 alert("사업자 번호를 입력하세요.");
+				 $('#aa').focus();
+			 }
+			 else
+			 {
+				$.ajax({ type: 'POST', url: 'checkspanum.action', data: { "aa" : $('#aa').val() }
+     		, success: function(data)
+         		{  
+		           	if($.trim(data) == 0 && $('#aa').val() != null)
+		           	{ 
+		           		alert("등록가능한 번호입니다.");
+		           		$("#spanumfile").removeAttr("disabled");
+		           	}
+		           	else 
+		           	{ 
+		           		alert("등록 불가능한 번호입니다.");
+		           	}
+		           	
+       				} 
+				}); //end ajax
+			 }
+     	 //alert('뭐');
+     	
+		});
     
+    var oneinch = false;
+    var dtlinch = false;
+    
+    // 한줄소개
+    $('#onein').keyup(function(event){
+        var oneindiv = $('#oneindiv');
+        
+        if(($.trim($('#onein').val())!="" && dtlinch==true)){
+        	$("#next2").removeAttr("disabled");
+        	oneinch=true;
+        }
+        else if(($.trim($('#onein').val())!=""))
+        {
+        	oneinch=true;
+        }
+    });
+    
+    // 상세소개
+    $('#dtlin').keyup(function(event){
+        var dtlindiv = $('#dtlindiv');
+        
+        if(($.trim($('#dtlin').val())!="" && oneinch==true)){
+        	$("#next2").removeAttr("disabled");
+        	dtlinch=true;
+        }
+        else if(($.trim($('#dtlin').val())!=""))
+        {
+        	dtlinch=true;
+        }
+    });
+    
+
 	
 	   // 지역명이 바뀌면 상세지역 ajax 호출
 		$("#area").change(function()
@@ -296,6 +249,7 @@ $(function(){
 		      
 		      selectedText = $("#keySelect option:checked").text();
 		      selectedValue = $("#keySelect option:checked").val();
+		      
 		      keyInput = $("#keyInput").val();
 		      elementCount = $(".tagStyle").length;
 		      
@@ -308,11 +262,17 @@ $(function(){
 		      {
 					if(selectedText == array[i])
 					{
-						alert(selectedText)
+						//alert(selectedText)
 						alert("중복된 키워드는 입력 할 수 없습니다.");
 						return;
 					}
 			  }
+		      
+		      if(selectedText.trim()=="")
+		     {
+		    	alert("공백은 입력할 수 없습니다.");
+		    	return;
+		     }
 		      
 		   	  // 키워드 개수 제한
 		      if(elementCount == 5)
@@ -336,82 +296,151 @@ $(function(){
 		    			  + "<input type='hidden' name='intTagList' value='"+ selectedValue + "'></span></div>");			    	  
 		      }
 		      
+		      $("#spacon").removeAttr("disabled");
 		 });
 		
-			 $("#keySelect").change(function() 
-			 {
-				    var selectedValue = "";
-				 	// alert("셀렉트값 변경");
-				 	
-				 	selectedValue = $("#keySelect option:checked").val();
-				 
-					if(selectedValue == "SPTGT1009")
-					{
-						$("#keyInput").attr("readonly", false);
-					}
-					else
-					{
-						$("#keyInput").attr("readonly", true);
-					}
-			 });
+		 $("#keySelect").change(function() 
+		 {
+			    var selectedValue = "";
+			 	// alert("셀렉트값 변경");
+			 	
+			 	selectedValue = $("#keySelect option:checked").val();
 			 
-			 // 관심 키워드 삭제 버튼
-			 $("#keyResetBtn").click(function() 
-		     {
-				   $(".stuKeyBox").empty();
-				   array = [];
-			 });
+				if(selectedValue == "SPTGT1009")
+				{
+					$("#keyInput").attr("readonly", false);
+				}
+				else
+				{
+					$("#keyInput").attr("readonly", true);
+				}
+		 });
+		 
+		 // 관심 키워드 삭제 버튼
+		 $("#keyResetBtn").click(function() 
+	     {
+			   $(".stuKeyBox").empty();
+			   array = [];
+			   $("#spacon").attr("disabled", "disabled");
+			   $("#sparsv").attr("disabled", "disabled");
+			   $("#spaconup").attr("disabled", "disabled");
+			   $("#resetBtn").attr("disabled", "disabled");
+		 });
 	
+	
+	
+	var checkcon=false;
+	
+	// 시설안내 추가 버튼
+	 $("#spaconup").click(function() 
+    {
+		 var count=0;
+		 var spacon = document.getElementById("spacon").value;
+		 count=count+1;
+	   	  // 개수 제한
+	      if(count == 5)
+	      {
+	    	  alert("시설안내는 최대 5개 까지만 등록 가능합니다.");
+	    	  return;
+	      }
+	   	  if(spacon.trim()!="")
+	   	  {
+	   			$(".spaConBox").append("<div class='tagStyle'><span class='keyTag'> ※"+ spacon
+		    			  + "<input type='hidden' name='intTagList' value='"+ spacon + "'></span></div>");
+	   	  }
+	      array.push(spacon);
+	      $("#sparsv").removeAttr("disabled");
+	      $("#spaconup").removeAttr("disabled");
+	      $("#resetBtn").removeAttr("disabled");
+	      checkcon=true;
+	 });
+	
+	// 시설안내 삭제 버튼
+	 $("#resetBtn").click(function() 
+     {
+		   $(".spaConBox").empty();
+		   array = [];
+		   $("#sparsv").attr("disabled", "disabled");
+	 });
+	
+	
+	// 예약시 주의사항
+	$('#sparsv').keyup(function(event){
+	    
+	    var sparsvdiv = $('#sparsvdiv');
+	    
+	    if(($.trim($('#sparsv').val())!="" && checkcon==true)){
+	    	$("#next3").removeAttr("disabled");
+	    }
 	});
+});
+
 	
-		// 지역에 따른 세부지역 불러오는 ajax
-		function ajaxSpcAreaRequest()
+	// 지역에 따른 세부지역 불러오는 ajax
+	function ajaxSpcAreaRequest()
+	{
+		$.post("areaajax.action",
 		{
-			$.post("areaajax.action",
-			{
-				area_cd : $("#area").children("option:selected").val()
-			}, function(data)
-			{
-				//alert(data);
-				$("#spcAreaDiv").html(data);
-				$("#spcArea").removeAttr("disabled");
-			});
-		}
-		
+			area_cd : $("#area").children("option:selected").val()
+		}, function(data)
+		{
+			//alert(data);
+			$("#spcAreaDiv").html(data);
+			$("#spcArea").removeAttr("disabled");
+		});
+	}
 	
-		// 공간등록 버튼 클릭시
-		$("#finish").click(
-			function()
-			{
-				if ($("#id").val() == "" || $("#password").val() == ""
-						|| $("#passwordCheck").val() == ""
-						|| $("#name").val() == ""
-						|| $("#email").val() == "" || $("#week").val() == 0
-						|| $("#area").val() == 0
-						|| $("#spcArea").val() == 0
-						|| $("#aa").val() == ""						// 사업자번호
-						|| $("#phoneNumberCheck").val() == ""
-						)
-				{
-					$("#err").html("필수 입력 항목이 누락되었습니다.");
-					$("#err").css("display", "inline");
-					return;
-				}
-				else if($("#stuKeyBox").children().length == 0)
-				{
-					$("#err").html("관심 키워드는 최소 한 개 이상 선택해야 합니다.");
-					$("#err").css("display", "inline");
-					return;
-				}
-				else 
-				{
-					console.log("통과");	 
-				}
-				
-				// 최종 submit
-				$("#finish").submit();
+	
+	var checkspa = checkspapeo = checkspaname = checkspatel = false;
+	 // 상호명
+    $('#spa').keyup(function(event){
+        if(($.trim($('#spa').val())!="" && checkspapeo==true && checkspaname==true && checkspatel==true)){
+        	$("#next4").removeAttr("disabled");
+        	checkspa=true;
+        }
+        else if(($.trim($('#spa').val())!=""))
+        {
+        	checkspa=true;
+        }
+    });
+    
+    // 대표자명
+    $('#spapeo').keyup(function(event){
+        if(($.trim($('#spapeo').val())!="" && checkspa==true && checkspaname==true && checkspatel==true)){
+        	$("#next4").removeAttr("disabled");
+        	checkspapeo=true;
+        }
+        else if(($.trim($('#spapeo').val())!=""))
+        {
+        	checkspapeo=true;
+        }
+    });
 		
-			});
+    // 공간명
+    $('#spaname').keyup(function(event){
+        if(($.trim($('#spaname').val())!="" && checkspa==true &&  checkspapeo==true && checkspatel==true )){
+        	$("#next4").removeAttr("disabled");
+        	checkspaname=true;
+        }
+        else if(($.trim($('#spaname').val())!=""))
+        {
+        	checkspaname=true;
+        }
+    });
+    
+    // 업체 전화번호
+    $('#spatel').keyup(function(event){
+        if(($.trim($('#spatel').val())!="" && checkspa==true && checkspapeo==true && checkspaname==true)){
+        	$("#next4").removeAttr("disabled");
+        	checkspatel=true;
+        }
+        else if(($.trim($('#spatel').val())!=""))
+        {
+        	checkspatel=true;
+        }
+    });
+
+
 
 
 </script>
@@ -457,8 +486,8 @@ $(function(){
                 <div class="form-group" id="divaa"><span style="color: red; font-size: 11pt;"> 사업자등록번호는 필수사항입니다.<br> * 제대로된 정보를 입력하지 않을시 불이익을 받을 수 있습니다.<br><br></span>
 						입력한 사업자 번호와 동일한 파일을 업로드 해야합니다. 후 관리자의 검수기간을 거쳐 승인된 공간만 활동할 수 있습니다.<br> 지금 사업자등록번호를 입력해 공간을 등록 하세요!<br>
                      <label class="control-label" style="margin-left: 50px;"></label><br><br><br>
-                     <label class="control-label" for="aa">사업자등록번호 입력</label>
-                     <label class="control-label aa2" for="aa2" >첨부파일 업로드</label><br>
+                     <label class="control-label" for="aa">사업자등록번호 입력<span class="red">*</span></label>
+                     <label class="control-label aa2" for="aa2" >첨부파일 업로드<span class="red">*</span></label><br>
                      
                      <div class="spain">
                      <div class="aadiv form-inline">
@@ -466,14 +495,17 @@ $(function(){
                 		  class="onlyNumber form-control aa"  placeholder="숫자만 입력(10자리)" />
                 		  <button type="button" id="dupBtn" class="btn btn-primary">인증</button>
                 		  </div>
-                		 <button class="btn btn-primary pull-right aa2" type="button" id="spanumfile">등록</button>
+                		 <button class="btn btn-primary pull-right aa2" type="button" id="spanumfile" disabled="disabled">등록</button>
                 		 <input type="file" required="required" name="housing" id="aa2" class="aa2 aa form-control"/>
                 	 </div>
                 	 <div class="errMsg">
                     	<span id="err"></span>
                     </div>
                 </div>
-                <button class="btn btn-primary nextBtn pull-right" type="button" id="next1">Next</button>
+                <button class="btn btn-primary nextBtn pull-right" disabled="disabled" type="button" id="next1">Next</button>
+                <div class="errMsg">
+               		<span id="err1"></span>
+               	</div>
                 <br><br>
             </div>
         </div>
@@ -484,7 +516,7 @@ $(function(){
             </div>
             <div class="panel-body">
                 <div class="form-group">
-                    	카페의 유형을 선택해주세요!<br>
+                    	카페의 유형을 선택해주세요!<span class="red">*</span><br>
                  	<input maxlength="100" type="radio" name="housing" id="spa1" checked/><label class="control-label" for="spa1">카페</label>
                  	<input maxlength="100" type="radio" name="housing" id="spa2"/><label class="control-label" for="spa2">스터디 카페</label>
                  	
@@ -495,15 +527,15 @@ $(function(){
                  <h4 class="panel-title">"공간 소개"</h4>
             </div>
             <div class="panel-body">
-                <div class="form-group">
-                    <label class="control-label">한줄 소개</label>
-                    <input maxlength="200" type="text" required="required" class="form-control" placeholder="예) 노트북 대여 가능한 스터디 카페입니다." />
+                <div class="form-group" id="oneindiv">
+                    <label class="control-label">한줄 소개<span class="red">*</span></label>
+                    <input maxlength="200" id="onein" type="text" required="required" class="form-control" placeholder="예) 노트북 대여 가능한 스터디 카페입니다." />
                 </div>
-                <div class="form-group">
-                    <label class="control-label">상세 소개</label>
-                    <input maxlength="1000" type="text" required="required" class="form-control" placeholder="예) 위치는 홍대입구 2번 출구 앞이며 노트북 대여가 가능하고, 최대 이용 시간은 3시간입니다." />
+                <div class="form-group" id="dtlindiv">
+                    <label class="control-label">상세 소개<span class="red">*</span></label>
+                    <input maxlength="1000" type="text" id="dtlin" required="required" class="form-control" placeholder="예) 위치는 홍대입구 2번 출구 앞이며 노트북 대여가 가능하고, 최대 이용 시간은 3시간입니다." />
                 </div>
-                <button class="btn btn-primary nextBtn pull-right" type="button" id="next2">Next</button>
+                <button class="btn btn-primary nextBtn pull-right"  disabled="disabled"type="button" id="next2">Next</button>
                 <br><br>
             </div>
         </div>
@@ -516,7 +548,7 @@ $(function(){
 			    <div class="form-group">
 				<div class="stuKeyword">
 					<label for="inputIntKeyword" class="col-lg-2 control-label">
-						키워드(최대 5개)<span class="must">*</span>
+						키워드(최대 5개)<span class="red">*</span>
 					</label>
 
 				</div>
@@ -526,7 +558,7 @@ $(function(){
 							<select name="keySelect" id="keySelect"
 								class="form-control keySelect">
 								<c:forEach var="Tag" items="${spaTag }">
-									<option value="${Tag.spa_tag_tpye_cd }">
+									<option value="${Tag.spa_tag_type_cd }">
 										${Tag.tag_name }</option>
 								</c:forEach>
 							</select> &nbsp; 
@@ -556,15 +588,30 @@ $(function(){
                 <div class="panel-heading ">
                  	<h4 class="panel-title">"공간 정보"</h4>
             	</div>
-                <div class="form-group">
-                    <label class="control-label" for="1">공간 시설 안내</label>
-                    <input maxlength="200" type="text" required="required" id="1" class="form-control" placeholder="예) 화장실은 복도 왼편에 있습니다." />
+                <div class="form-group" id="spacondiv">
+                    <label class="control-label" for="1">공간 시설 안내<span class="red">*</span></label>
+                    &nbsp;
+                    <input type="button" id="spaconup" disabled="disabled" value="추가" class="keyBtn btn btn-primary" />
+					&nbsp;	<input type="button" disabled="disabled" id="resetBtn" value="초기화" class="keyBtn btn btn-primary" />
+                    <br><br>
+                    <input maxlength="200" type="text" id="spacon" disabled="disabled" required="required" id="1" class="form-control" placeholder="예) 화장실은 복도 왼편에 있습니다." />
+                    <div class="form-group">
+				<label for="inputPhoneNumber" class="col-lg-2 control-label"></label>
+				<div class="col-lg-10 form-inline">
+					<div id="spaConBox" class="spaConBox" style="width: 85%;">
+						</div>
+						<!-- end .stuKeyBox -->
+					</div>
+				</div>
                 </div>
-                <div class="form-group">
-                    <label class="control-label" for="2">예약시 주의사항</label>
-                    <input maxlength="1000" type="text" required="required" id="2" class="form-control" placeholder="예) 최대 이용시간은 3시간입니다. 준수해주십시오. 5명이상의 단체 예약은 받기 어렵습니다..." />
+                
+                
+                
+                <div class="form-group" id="sparsvdiv">
+                    <label class="control-label" for="2">예약시 주의사항<span class="red">*</span></label>
+                    <input maxlength="1000" type="text" id="sparsv" disabled="disabled" required="required" id="2" class="form-control" placeholder="예) 최대 이용시간은 3시간입니다. 준수해주십시오. 5명이상의 단체 예약은 받기 어렵습니다..." />
                 </div>
-                <button class="btn btn-primary nextBtn pull-right" type="button" id="next3">Next</button>
+                <button class="btn btn-primary nextBtn pull-right" disabled="disabled" type="button" id="next3">Next</button>
                 <br><br>
             </div>
 
@@ -575,26 +622,26 @@ $(function(){
             </div>
             <br><br>
             <div class="panel-body">
-                		대표이미지 
+                		대표이미지<span class="red">*</span> 
                 		<button class="btn btn-primary nextBtn pull-right" type="button" style="margin-left: 10px;" >등록</button>
-                		<br><br>상세이미지
+                		<br><br>상세이미지<span class="red">*</span>
                 		<button class="btn btn-primary nextBtn pull-right" type="button" style="margin-left: 10px;" >등록</button>
             </div>
             <br><br>
             <div class="panel-body">
                 <div class="form-inline">
-                		업체 전화번호 : 
-                    	<input maxlength="50" type="text" required="required" class="form-control key" placeholder="예) 010-0000-0000" style="margin-right: 10px; margin-left: 10px;"/> 
-                    	대표자명: 
-                    	<input maxlength="50" type="text" required="required" class="form-control key" placeholder="예) 홍길동" style="margin-right: 10px; margin-left: 10px;"/>
-                    	상호명: 
-                    	<input maxlength="50" type="text" required="required" class="form-control key" placeholder="예) (주)길동" style="margin-left: 10px;"/>
+                		상호명<span class="red">*</span>: 
+                    	<input maxlength="50" type="text" id="spa" required="required" class="form-control key" placeholder="예) (주)길동" style="margin-left: 10px; margin-right: 10px;"/>
+                    	대표자명<span class="red">*</span>: 
+                    	<input maxlength="50" type="text" id="spapeo" required="required" class="form-control key" placeholder="예) 홍길동" style="margin-right: 10px; margin-left: 10px;"/>
                     </div>
-                <div class="form-group">
-                    <label class="control-label">Company Address</label>
-                    <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Address" />
-                </div>
-                <button class="btn btn-primary nextBtn pull-right" type="button" id="next4">Next</button>
+                     <div class="form-inline">
+                    	공간명<span class="red">*</span>: 
+                    	<input maxlength="50" type="text" id="spaname" required="required" class="form-control key" placeholder="예) 길동이 가게" style="margin-left: 10px; margin-right: 10px;"/>
+                    	업체 전화번호<span class="red">*</span> : 
+                    	<input maxlength="50" type="text" id="spatel" required="required" class="form-control key onlyNumber" placeholder="예) 01000000000(- 제외)" style="margin-right: 10px; margin-left: 10px;"/>
+                    </div>
+                <button class="btn btn-primary nextBtn pull-right" type="button" disabled="disabled" id="next4">Next</button>
                 <br><br>
             </div>
         </div>
@@ -605,7 +652,7 @@ $(function(){
             </div>
             <div class="panel-body">
                 <div class="form-group">
-                <label class="control-label">위치 입력*</label>
+                <label class="control-label">위치 입력<span class="red">*</span></label>
                 <div class="form-group" id="areaMemNum">
 					<div class="col-lg-10" style="float: left; width: 225px;" >
 					
@@ -642,7 +689,7 @@ $(function(){
                     <!-- 지우면 next 버튼이 안돼서 히든으로 감춤... -->
                     <input maxlength="200" id="url" type="hidden" required="required" class="form-control" placeholder="예) http://www.~~~.com" />
                 </div>
-                <button class="btn btn-success pull-right" type="submit" id="finish">Finish!</button>
+                <button class="btn btn-success pull-right" type="submit" disabled="disabled" id="finish">Finish!</button>
                 <br><br>
             </div>
         </div>

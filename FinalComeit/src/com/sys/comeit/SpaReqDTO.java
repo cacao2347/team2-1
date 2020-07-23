@@ -8,6 +8,7 @@ public class SpaReqDTO
 	   private String busi_name, spa_name, dtl_addr, tel; // 상호명, 공간명, 상세주소, 전화번호
 	   private String rprsn_name, spa_addr; //대표자명, 사업장 주소
 	   private String web_url, file_url;//웹사이트, 사업자번호
+	   
 	public String getSpa_req_cd()
 	{
 		return spa_req_cd;
