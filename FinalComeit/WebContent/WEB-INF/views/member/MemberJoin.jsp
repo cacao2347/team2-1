@@ -453,13 +453,13 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 			      {
 			    	  
 			    	  $(".stuKeyBox").append("<div class='tagStyle'><span class='keyTag'>"+ selectedText 
-			    			  + "<input type='hidden' name='intTagList' value='"+ selectedText + "'></span></div>");
+			    			  + "<input type='hidden' name='etcTagList' value='"+ selectedText + "'></span></div>");
 			      }
 			      // 관심키워드 일 때...
 			      else
 			      {
 			    	  $(".stuKeyBox").append("<div class='tagStyle'><span class='keyTag'>"+ selectedText 
-			    			  + "<input type='hidden' name='etcTagList' value='"+ selectedText + "'></span></div>");			    	  
+			    			  + "<input type='hidden' name='intTagList' value='"+ selectedValue + "'></span></div>");			    	  
 			      }
 			      
 			 });
@@ -606,8 +606,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                 
  
  
-            <form id="joinForm" class="form-horizontal" role="form" method="post" action="memberinsert.action" 
-            enctype="multipart/form-data">
+            <form id="joinForm" class="form-horizontal" role="form" method="post" action="memberinsert.action">
                 <div class="form-group">
                     <label for="provision" class="col-lg-2 control-label">회원가입약관</label>
                     <div class="col-lg-10" id="provision">
@@ -860,7 +859,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 				<label for="inputPhoneNumber" class="col-lg-2 control-label">휴대폰
 					번호<span class="must">*</span></label>
 				<div class="col-lg-10 form-inline">
-					<input type="tel" class="form-control onlyNumber" id="phoneNumber"
+					<input type="tel" class="form-control onlyNumber" id="phoneNumber" name="phoneNumber"
 						data-rule-required="true" placeholder="-를 제외하고 숫자만 입력하세요."
 						maxlength="11" style="width: 85%;"> &nbsp;
 					<button type="button" id="phoneAuth" class="btn btn-primary" disabled="disabled"

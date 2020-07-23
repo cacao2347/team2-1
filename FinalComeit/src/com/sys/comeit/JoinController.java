@@ -47,12 +47,20 @@ public class JoinController
 		String idntt_cd = request.getParameter("week"); // 신분코드
 
 		String img_url = request.getParameter("prfImg"); // 프로필 이미지
-		String mem_content = request.getParameter("content"); // 본인소개
+		String mem_content = request.getParameter("intro"); // 본인소개
 		String spc_area_cd = request.getParameter("spcArea"); // 세부지역 코드
 
-		// 추가 부분 - 회원관심 키워드
-		String[] int_tag = request.getParameterValues("intTagList");
-		String[] etc_tag = request.getParameterValues("etcTagList");
+		System.out.println("파라미터 값");
+		System.out.println(id);
+		System.out.println(name);
+		System.out.println(email);
+		System.out.println(tel);
+		System.out.println(pwd);
+		System.out.println(idntt_cd);
+		System.out.println(img_url);
+		System.out.println(mem_content);
+		System.out.println(spc_area_cd);
+		System.out.println("파라미터 끝");
 
 		MemberDTO dto = new MemberDTO();
 
@@ -71,12 +79,13 @@ public class JoinController
 
 		String mem_cd = dto.getMem_cd(); // OUT 변수인 PK를 담기
 
-		// System.out.println(mem_cd);
+		System.out.println(mem_cd);
 
 		String[] intTagList = request.getParameterValues("intTagList"); // 선택한 모든 관심 키워드 배열에 넣기
 		String[] etcTagList = request.getParameterValues("etcTagList"); // 선택한 모든 관심 기타 키워드 배열에 넣기
 
-		// System.out.println(intTagList.length);
+		System.out.println("그냥 관심 : " + intTagList.length);
+		System.out.println("기타 관심 : " + etcTagList.length);
 
 		if (mem_cd != null) // 회원 발급 코드 PK 가 NULL 이 아닐경우
 		{
@@ -85,7 +94,8 @@ public class JoinController
 				for (int i = 0; i < intTagList.length; i++) // 선택한 모든 관심 키워드 중에
 				{
 					dto.setInt_tag(intTagList[i]); // 자바를 키워드에 세팅하고
-					System.out.println(intTagList[i]);
+
+					System.out.println("각 관심 : " + intTagList[i]);
 
 					dao.memIntTagInsert(dto); // 회원관심 키워드 insert 실행시키기
 				}
@@ -97,26 +107,27 @@ public class JoinController
 					// value에 따른 코드 뽑아내는 dao 호출
 
 					dto.setEtc_tag(etcTagList[i]); // 기타태그를 키워드에 세팅하고
-					System.out.println(etcTagList[i]);
+					System.out.println("각 기타 : " + etcTagList[i]);
+
 					dao.memEtcTagInsert(dto); // 기타 키워드 insert 실행시키기
 
-					int etcTagCount = dao.etcTagCount();
+					int etcTagCount = dao.etcTagCount(etcTagList[i]);
 
 					if (etcTagCount == 10) // 회원 관심 기타 키워드 테이블 호출해서 10개일 경우
-						dao.addTagName(dto); // 그냥 관심키워드 테이블에 insert 시키기
+						dao.addTagName(etcTagList[i]); // 그냥 관심키워드 테이블에 insert 시키기
 
 				}
 			}
-			
-			
-			view = "redirect:memberlogin.action";	// 회원가입 성공 시 로그인 페이지
-		}
-		else
+
+			view = "redirect:memberlogin.action"; // 회원가입 성공 시 로그인 페이지
+		} else
 		{
-			view = "redirect:memberjoin.action";	// 회원가입 실패 시 회원가입 페이지 유지
-			
+			view = "redirect:memberjoin.action"; // 회원가입 실패 시 회원가입 페이지 유지
+
 		}
-		
+
+		view = "redirect:memberlogin.action";
+
 		return view;
 
 	}
@@ -344,7 +355,7 @@ public class JoinController
 		return view;
 
 	}
-	
+
 	// 업체 전화번호 중복 ajax 처리
 	@ResponseBody
 	@RequestMapping(value = "/checkpwdspaajax.action", method = RequestMethod.POST)
@@ -361,16 +372,15 @@ public class JoinController
 
 		return String.valueOf(result);
 	}
-	
-	@RequestMapping(value = "/ajaximg.action", method = RequestMethod.POST)
-	   public String ajaximg()
-	   {
-	      String view = null;
 
-	      view = "WEB-INF/views/member/AjaxProImg.jsp";
-	      
-	      return view;
-	   }
-	
+	@RequestMapping(value = "/ajaximg.action", method = RequestMethod.POST)
+	public String ajaximg()
+	{
+		String view = null;
+
+		view = "WEB-INF/views/member/AjaxProImg.jsp";
+
+		return view;
+	}
 
 }
