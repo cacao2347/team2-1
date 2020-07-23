@@ -47,7 +47,18 @@ public class JoinController
 		String idntt_cd = request.getParameter("week"); // 신분코드
 
 		String img_url = request.getParameter("okFile"); // 프로필 이미지
+		// 프로필 이미지가 없다면 null 처리
+		if (img_url == "") 
+		{
+			img_url = null;
+		}
+		
 		String mem_content = request.getParameter("intro"); // 본인소개
+		// 본인소개가 없다면 null 처리
+		if (mem_content == "") 
+		{
+			mem_content = null;
+		}
 		String spc_area_cd = request.getParameter("spcArea"); // 세부지역 코드
 
 		System.out.println("파라미터 값");
