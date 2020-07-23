@@ -107,11 +107,19 @@ public class JoinController
 
 				}
 			}
-
+			
+			
+			view = "redirect:memberlogin.action";	// 회원가입 성공 시 로그인 페이지
 		}
+		else
+		{
+			view = "redirect:memberjoin.action";	// 회원가입 실패 시 회원가입 페이지 유지
+			
+		}
+		
 
-		// 회원가입 성공 시 로그인 페이지
-		view = "redirect:memberlogin.action";
+		
+		
 
 		return view;
 
@@ -220,19 +228,7 @@ public class JoinController
 		return temp.toString();
 	}
 
-	// 업체 회원가입 찾기
-
-	@RequestMapping(value = "/spajoin.action", method = RequestMethod.GET)
-	public String spaJoin()
-	{
-		String view = null;
-
-		view = "WEB-INF/views/space/ComJoin.jsp";
-
-		return view;
-	}
-
-	// 아이디가 맞는지 확인해주고 알려주는 AJAX 처리
+	// 회원 아이디가 맞는지 확인해주고 알려주는 AJAX 처리
 	@ResponseBody
 	@RequestMapping(value = "/checkidajax.action", method = RequestMethod.POST)
 	public String checkidAjax(HttpServletRequest request, Model model)
@@ -262,7 +258,7 @@ public class JoinController
 
 	}
 
-	// 전화번호 중복 AJAX 처리
+	// 회원 전화번호 중복 AJAX 처리
 	@ResponseBody
 	@RequestMapping(value = "/checkpwdajax.action", method = RequestMethod.POST)
 	public String checkTelAjax(HttpServletRequest request, Model model)
@@ -285,7 +281,7 @@ public class JoinController
 	// 업체 회원 가입 시작
 	// ------------------------------------------------------------------------------------------------------
 
-	// 회원가입 FORM에서 신분, 지역, 세부지역, 관심키워드 리스트 던져주기
+	// 업체 회원가입 form 던져주기
 	@RequestMapping(value = "/spacejoin.action", method = RequestMethod.GET)
 	public String spaJoin(Model model)
 	{
@@ -296,7 +292,7 @@ public class JoinController
 		return view;
 	}
 
-	// 아이디가 맞는지 확인해주고 알려주는 AJAX 처리
+	// 업체 아이디가 맞는지 확인해주고 알려주는 AJAX 처리
 	@ResponseBody
 	@RequestMapping(value = "/checkspaidajax.action", method = RequestMethod.POST)
 	public String checkSpaIdAjax(HttpServletRequest request, Model model)
@@ -314,7 +310,7 @@ public class JoinController
 
 	}
 
-	// 일반회원가입 처리. 회원가입 프로시저 호출
+	// 업체 회원가입 처리. 회원가입 프로시저 호출
 	@RequestMapping(value = "/spaceinsert.action", method = RequestMethod.POST)
 	public String spaceInsert(Model model, HttpServletRequest request)
 	{
@@ -352,5 +348,23 @@ public class JoinController
 		return view;
 
 	}
+	
+	// 업체 전화번호 중복 ajax 처리
+	@ResponseBody
+	@RequestMapping(value = "/checkpwdspaajax.action", method = RequestMethod.POST)
+	public String checkPwdSpaAjax(HttpServletRequest request, Model model)
+	{
+
+		// String view = null;
+
+		ISpaDAO spaDao = sqlSession.getMapper(ISpaDAO.class);
+
+		String tel = request.getParameter("phoneNumber");
+
+		int result = spaDao.spaTelcheckCount(tel);
+
+		return String.valueOf(result);
+	}
+	
 
 }

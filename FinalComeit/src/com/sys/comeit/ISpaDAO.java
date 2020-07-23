@@ -20,5 +20,6 @@ public interface ISpaDAO
 	public int pwdInfo(SpaDTO dto); // 패스워드 찾기 정보 조회
 	
 	public int spaCheckCount(String id);	// 아이디 중복확인
+	public int spaTelcheckCount(String tel);   // 전화번호 중복확인
 	
 }

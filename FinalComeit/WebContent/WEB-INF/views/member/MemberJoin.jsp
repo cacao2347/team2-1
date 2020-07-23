@@ -162,6 +162,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 			           	{ 
 			           		//$('#checkMsg').html('<p style="color:blue">사용가능</p>');
 			           		alert("사용가능합니다.");
+			           		$("#phoneAuth").removeAttr("disabled");
 			           	}
 			           	else 
 			           	{ 
@@ -205,15 +206,12 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 			
 			
 			$("#dupBtn").removeAttr("disabled");
-			$("#phoneAuth").removeAttr("disabled");
 			$("#authCheck").removeAttr("disabled");
 			$("#proImgBtn").removeAttr("disabled");
 			$("#tagAddBtn").removeAttr("disabled");
-			$("#joinBtn").removeAttr("disabled");
 			
 			$("#authNum").removeAttr("disabled");
 			$("#authNumRslt").removeAttr("disabled");
-			$("#authNumBtn").removeAttr("disabled");
 			$("#keyAddBtn").removeAttr("disabled");
 			$("#keyResetBtn").removeAttr("disabled");
 			$("#uploadFile").removeAttr("disabled");
@@ -351,6 +349,8 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 			     {
 					 alert("인증에 성공하였습니다.");
 					 $("#authNumRslt").attr("value", "인증 성공");
+					 
+					 $("#joinBtn").removeAttr("disabled");
 			     }
 				 else if($("#authNum").val() != phoneCheck)
 				 {
@@ -456,6 +456,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
            }
            else
            {
+        	   $("#authNumBtn").removeAttr("disabled");
              $.ajax({ type: 'POST', url: 'checkpwdajax.action', data: { "phoneNumber" : $('#phoneNumber').val() }
                ,async:false,  success: function(data)
                    { 
@@ -815,7 +816,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 					<input type="tel" class="form-control onlyNumber" id="phoneNumber"
 						data-rule-required="true" placeholder="-를 제외하고 숫자만 입력하세요."
 						maxlength="11" style="width: 85%;"> &nbsp;
-					<button type="button" id="phoneAuth" class="btn btn-primary"
+					<button type="button" id="phoneAuth" class="btn btn-primary" disabled="disabled"
 						onclick="ajaxSendSms()">휴대폰 인증</button>
 				</div>
 			</div>
@@ -829,7 +830,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 						class="form-control onlyAlphabetAndNumber" id="authNumRslt"
 						data-rule-required="true" maxlength="11" style="width: 20%;" readonly="readonly">
 					&nbsp;
-					<button type="button" class="btn btn-primary" id="authNumBtn">확인</button>
+					<button type="button" class="btn btn-primary" disabled="disabled" id="authNumBtn">확인</button>
 				</div>
 			</div>
                 
@@ -906,7 +907,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                     		<span id="err"></span>
                     	</div>
                     	<div>
-                        <button type="button" id="joinBtn" class="btn btn-lg btn-success joinBtn">가입하기</button>
+                        <button type="button" id="joinBtn" disabled="disabled" class="btn btn-lg btn-success joinBtn">가입하기</button>
                         </div>
                     </div>
                 </div>

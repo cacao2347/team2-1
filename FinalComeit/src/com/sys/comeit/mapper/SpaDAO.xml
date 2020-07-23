@@ -73,7 +73,7 @@
 	<select resultType="java.lang.Integer" id="spaCheckCount">
 	   SELECT COUNT(*) AS COUNT
 	   FROM TBL_SPA_JOIN
-	   WHERE SPA_ID = #{id} 
+	   WHERE SPA_ID = #{spa_id} 
 	</select>
 	
 	<!-- 업체 회원 가입 public int spaAdd(SpaDTO dto); -->
@@ -89,5 +89,12 @@
 	      )
 	   }
 	</select>
+	
+	<!-- 전화번호가 같은 업체 회원 수 조회 spaTelcheckCount() -->
+    <select resultType="java.lang.Integer" id="spaTelcheckCount">
+       SELECT COUNT(*) AS COUNT
+       FROM TBL_SPA_JOIN
+       WHERE TEL = #{tel} 
+    </select>
 	
 </mapper>
