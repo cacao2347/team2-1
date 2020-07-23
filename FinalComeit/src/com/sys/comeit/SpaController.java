@@ -1,6 +1,5 @@
 package com.sys.comeit;
 
-import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -10,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class SpaController
@@ -18,7 +18,7 @@ public class SpaController
 	private SqlSession sqlSession;
 
 	@RequestMapping(value = "/spalist.action", method = RequestMethod.GET)
-	public String spaList(Model model)
+	public String spaList()
 	{
 		String view = null;
 
@@ -44,26 +44,20 @@ public class SpaController
 		  return view; 
 	  }
 	  
-		/*
-		 * // 지역에 맞는 세부지역 뿌려주는 AJAX 처리
-		 * 
-		 * @RequestMapping(value = "/areaajax.action", method = RequestMethod.POST)
-		 * public String selectAjax(HttpServletRequest request, Model model) {
-		 * 
-		 * String view = null;
-		 * 
-		 * ISpcAreaDAO spcAreaDao = sqlSession.getMapper(ISpcAreaDAO.class);
-		 * 
-		 * ArrayList<SpcAreaDTO> list =
-		 * spcAreaDao.spcAreaList(request.getParameter("area_cd"));
-		 * 
-		 * model.addAttribute("spcAreaList", list);
-		 * 
-		 * view = "WEB-INF/views/member/AjaxJoinSpcArea.jsp";
-		 * 
-		 * return view;
-		 * 
-		 * }
-		 */
+	  // 사업자 번호 중복 확인 ajax
+		@ResponseBody
+		@RequestMapping(value = "/checkspanum.action", method = RequestMethod.POST)
+		public String checkidAjax(HttpServletRequest request, Model model)
+		{
+			ISpaNumDAO iSpaNumDao = sqlSession.getMapper(ISpaNumDAO.class);
+
+			int aa = Integer.parseInt(request.getParameter("aa"));
+
+			int result = iSpaNumDao.spacheckCount(aa);
+			System.out.println(result);
+
+			return String.valueOf(result);
+		}
+	  
 	 
 }
