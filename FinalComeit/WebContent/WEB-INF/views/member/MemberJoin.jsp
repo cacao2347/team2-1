@@ -552,6 +552,11 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                      return;
                   }
               }
+              if(selectedText.trim()=="")
+  		     {
+  		    	alert("공백은 입력할 수 없습니다.");
+  		    	return;
+  		     }
                
                  // 키워드 개수 제한
                if(elementCount == 5)
