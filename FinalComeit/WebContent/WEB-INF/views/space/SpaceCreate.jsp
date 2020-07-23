@@ -236,8 +236,7 @@ $(function(){
 			ajaxSpcAreaRequest();
 			
 		});
-
-		
+		 
 		// 관심 키워드 추가 버튼
 		 $("#keyAddBtn").click(function() 
 	     {
@@ -297,6 +296,8 @@ $(function(){
 		      }
 		      
 		      $("#spacon").removeAttr("disabled");
+		      $("#spaconup").removeAttr("disabled");
+		      $("#resetBtn").removeAttr("disabled");
 		 });
 		
 		 $("#keySelect").change(function() 
@@ -325,6 +326,7 @@ $(function(){
 			   $("#sparsv").attr("disabled", "disabled");
 			   $("#spaconup").attr("disabled", "disabled");
 			   $("#resetBtn").attr("disabled", "disabled");
+			   $("#next3").attr("disabled", "disabled");
 		 });
 	
 	
@@ -361,6 +363,7 @@ $(function(){
 		   $(".spaConBox").empty();
 		   array = [];
 		   $("#sparsv").attr("disabled", "disabled");
+		   $("#next3").attr("disabled", "disabled");
 	 });
 	
 	
