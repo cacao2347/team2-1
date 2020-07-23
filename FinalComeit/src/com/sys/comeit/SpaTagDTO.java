@@ -2,27 +2,27 @@ package com.sys.comeit;
 
 public class SpaTagDTO
 {
-	private String int_tag_cd , int_tag;	// 관심키워드 코드, 키워드명
+	private String spa_tag_tpye_cd ,tag_name;	// 관심키워드 코드, 키워드명
 
-	public String getInt_tag_cd()
+	public String getSpa_tag_tpye_cd()
 	{
-		return int_tag_cd;
+		return spa_tag_tpye_cd;
 	}
 
-	public void setInt_tag_cd(String int_tag_cd)
+	public void setSpa_tag_tpye_cd(String spa_tag_tpye_cd)
 	{
-		this.int_tag_cd = int_tag_cd;
+		this.spa_tag_tpye_cd = spa_tag_tpye_cd;
 	}
 
-	public String getInt_tag()
+	public String getTag_name()
 	{
-		return int_tag;
+		return tag_name;
 	}
 
-	public void setInt_tag(String int_tag)
+	public void setTag_name(String tag_name)
 	{
-		this.int_tag = int_tag;
+		this.tag_name = tag_name;
 	}
+
 	
-
 }

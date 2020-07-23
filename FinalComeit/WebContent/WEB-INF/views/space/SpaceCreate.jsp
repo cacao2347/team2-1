@@ -48,7 +48,7 @@
 	            nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
 	            curInputs = curStep.find("input[type='text'],input[type='url']"),
 	            isValid = true;
-	
+	        url
 	        $(".form-group").removeClass("has-error");
 	        for (var i = 0; i < curInputs.length; i++) {
 	            if (!curInputs[i].validity.valid) {
@@ -56,7 +56,7 @@
 	                $(curInputs[i]).closest(".form-group").addClass("has-error");
 	            }
 	        }
-	
+	        $(".form-group").removeClass("has-error");
 	        if (isValid) nextStepWizard.removeAttr('disabled').trigger('click');
 	    });
 	
@@ -110,6 +110,138 @@
 		}
 	});
 
+	//지역 & 키워드
+	$(function(){
+    	 
+    	 // AJAX 요청 및 응답 처리
+    	 ajaxSpcAreaRequest();
+    	 
+    	// 지역명이 바뀌면 상세지역 ajax 호출
+ 		$("#area").change(function()
+ 		{
+ 			ajaxSpcAreaRequest();
+ 			
+ 		})
+ 		
+ 		//키워드
+ 		$("#keySelect").change(function() 
+ 				 {
+ 					    var selectedValue = "";
+ 					 	// alert("셀렉트값 변경");
+ 					 	
+ 					 	selectedValue = $("#keySelect option:checked").val();
+ 					 
+ 						if(selectedValue == "SPTGT1009")
+ 						{
+ 							$("#keyInput").attr("readonly", false);
+ 						}
+ 						else
+ 						{
+ 							$("#keyInput").attr("readonly", true);
+ 						}
+ 				 });
+ 				 
+ 				 // 관심 키워드 삭제 버튼
+ 				 $("#keyResetBtn").click(function() 
+ 			    {
+ 					   $(".stuKeyBox").empty();
+ 					   array = [];
+ 				 });
+	});
+	
+	// 지역에 따른 세부지역 불러오는 ajax
+ 	function ajaxSpcAreaRequest()
+ 	{
+
+ 		$.post("areaajax.action",
+ 		{
+ 			area_cd : $("#area").children("option:selected").val()
+ 		}, function(data)
+ 		{
+ 			//alert(data);
+ 			$("#spcAreaDiv").html(data);
+ 			$("#spcArea").removeAttr("disabled");
+ 		});
+ 	}
+	
+ // 관심 키워드 추가 버튼
+	 $("#keyAddBtn").click(function() 
+    {
+	      var tmpHtml = "";
+	      var selectedKey = "";
+	      var keyInput = "";
+
+	      tmpHtml = tmpHtml + "";
+	      
+	      selectedText = $("#keySelect option:checked").text();
+	      selectedValue = $("#keySelect option:checked").val();
+	      keyInput = $("#keyInput").val();
+	      elementCount = $(".tagStyle").length;
+	      
+	      if(selectedValue =='SPTGT1009')
+	      {
+	    	  selectedText = keyInput;
+	      }
+	      
+	      for (var i = 0; i < array.length; i++) 
+	      {
+				if(selectedText == array[i])
+				{
+					alert(selectedText)
+					alert("중복된 키워드는 입력 할 수 없습니다.");
+					return;
+				}
+		  }
+	      
+	   	  // 키워드 개수 제한
+	      if(elementCount == 5)
+	      {
+	    	  alert("키워드는 최대 5개 까지 선택 할 수 있습니다.")
+	    	  return;
+	      }
+	      
+	      array.push(selectedText);
+	      
+	      if(selectedValue == 'SPTGT1009')
+	      {
+	    	  
+	    	  $(".stuKeyBox").append("<div class='tagStyle'><span class='keyTag'>"+ selectedText 
+	    			  + "<input type='hidden' name='intTagList' value='"+ selectedText + "'></span></div>");
+	      }
+	      // 관심키워드 일 때...
+	      else
+	      {
+	    	  $(".stuKeyBox").append("<div class='tagStyle'><span class='keyTag'>"+ selectedText 
+	    			  + "<input type='hidden' name='etcTagList' value='"+ selectedText + "'></span></div>");			    	  
+	      }
+	      
+	 });
+	
+	 $("#keySelect").change(function() 
+	 {
+		    var selectedValue = "";
+		 	// alert("셀렉트값 변경");
+		 	
+		 	selectedValue = $("#keySelect option:checked").val();
+		 
+			if(selectedValue == "SPTGT1009")
+			{
+				$("#keyInput").attr("readonly", false);
+			}
+			else
+			{
+				$("#keyInput").attr("readonly", true);
+			}
+	 });
+	 
+	 // 관심 키워드 삭제 버튼
+	 $("#keyResetBtn").click(function() 
+    {
+		   $(".stuKeyBox").empty();
+		   array = [];
+	 });
+	 
+
 
 </script>
 </head>
@@ -139,7 +271,7 @@
             </div>
             <div class="stepwizard-step col-xs-3"> 
                 <a href="#step-5" type="button" class="btn btn-default btn-circle">5</a>
-                <p><small>위치 & 사이트주소</small></p>
+                <p><small>위치</small></p><!--  & 사이트주소 -->
             </div>
         </div>
     </div>
@@ -168,6 +300,7 @@
                     </div>
                 </div>
                 <button class="btn btn-primary nextBtn pull-right" type="button" id="nextone">Next</button>
+                <br><br>
             </div>
         </div>
         <br><br>
@@ -178,7 +311,7 @@
             <div class="panel-body">
                 <div class="form-group">
                     	카페의 유형을 선택해주세요!<br>
-                 	<input maxlength="100" type="radio" name="housing" id="spa1"/><label class="control-label" for="spa1">카페</label>
+                 	<input maxlength="100" type="radio" name="housing" id="spa1" checked/><label class="control-label" for="spa1">카페</label>
                  	<input maxlength="100" type="radio" name="housing" id="spa2"/><label class="control-label" for="spa2">스터디 카페</label>
                  	
                  </div>
@@ -197,6 +330,7 @@
                     <input maxlength="1000" type="text" required="required" class="form-control" placeholder="예) 위치는 홍대입구 2번 출구 앞이며 노트북 대여가 가능하고, 최대 이용 시간은 3시간입니다." />
                 </div>
                 <button class="btn btn-primary nextBtn pull-right" type="button">Next</button>
+                <br><br>
             </div>
         </div>
         
@@ -217,12 +351,12 @@
 						<div class="col-lg-10 form-inline">
 							<select name="keySelect" id="keySelect"
 								class="form-control keySelect">
-								<c:forEach var="Tag" items="${Tag }">
-									<option value="${Tag.tag_cd }">
-										${Tag.tag }</option>
+								<c:forEach var="Tag" items="${spaTag }">
+									<option value="${Tag.spa_tag_tpye_cd }">
+										${Tag.tag_name }</option>
 								</c:forEach>
-							</select> &nbsp; <input type="text" class="keyInput form-control"
-								id="keyInput" placeholder="키워드를 입력해 주세요." style="width: 30%" readonly="readonly"/>
+							</select> &nbsp; 
+							<input type="text" class="keyInput form-control" id="keyInput" placeholder="키워드를 입력해 주세요." style="width: 30%" readonly="readonly"/>
 							&nbsp; <input type="button" id="keyAddBtn" value="추가"
 								class="keyBtn btn btn-primary" />
 							&nbsp;	
@@ -232,6 +366,17 @@
 					</div>
 				</div>
 			</div>
+			<div class="form-group">
+				<label for="inputPhoneNumber" class="col-lg-2 control-label"></label>
+				<div class="col-lg-10 form-inline">
+					<div id="stuKeyBox" class="stuKeyBox" style="width: 85%;">
+					</div>
+					<!-- end .stuKeyBox -->
+				</div>
+			</div>
+			
+			
+			
 			
                 <br><br>
                 <div class="panel-heading">
@@ -246,8 +391,8 @@
                     <input maxlength="1000" type="text" required="required" id="2" class="form-control" placeholder="예) 최대 이용시간은 3시간입니다. 준수해주십시오. 5명이상의 단체 예약은 받기 어렵습니다..." />
                 </div>
                 <button class="btn btn-primary nextBtn pull-right" type="button">Next</button>
+                <br><br>
             </div>
-        </div>
 
         
         <div class="panel panel-primary setup-content" id="step-4">
@@ -276,6 +421,7 @@
                     <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Address" />
                 </div>
                 <button class="btn btn-primary nextBtn pull-right" type="button">Next</button>
+                <br><br>
             </div>
         </div>
         
@@ -285,36 +431,45 @@
             </div>
             <div class="panel-body">
                 <div class="form-group">
-                <label class="control-label">위치 입력</label>
-                <div class="form-inline">
-                    <div class="selects">
-	                	<label for="mm">지역</label>
-		    				<select id="mm" title="select mm">
-					    	    <option selected="selected">서울</option>
-					        	<option>경기도</option>
-		    				</select>
-		    			</div>
-		    			<div class="selects" style="margin-left: 10px;">
-	                	<label for="mm">상세지역</label>
-		    				<select id="mm" title="select mm">
-					    	    <option selected="selected">마포구</option>
-					        	<option>...</option>
-		    				</select>
-						</div>
+                <label class="control-label">위치 입력*</label>
+                <div class="form-group" id="areaMemNum">
+					<div class="col-lg-10" style="float: left; width: 225px;" >
+					
+						<select name="area" required="required" id="area" class="area form-control">
+						<option value="0">지역 선택</option>
+							<c:forEach var="areas" items="${area }">
+		                        <option value="${areas.area_cd }" 
+		                        ${areas.area_cd == spcArea.area_cd ? "selected= \"selected\"" : ""}>
+		                           ${areas.area_name }
+		                        </option>
+		                     </c:forEach>
+						</select>
+						
 					</div>
+					
+					
+					<!-- div 안에있는 select 문은 AjaxJoinSpcArea.jsp에서 가져온다 -->
+					<div id="spcAreaDiv" class="col-lg-10" style="float: left; width: 225px;" >
+					
+					</div>
+				</div><!-- end .areaMemNum -->
 					<br>
 					상세주소
                     <input maxlength="200" type="text" required="required" class="form-control" placeholder="예) 홍대입구 2번출구" />
                 </div>
+                
+                
                 <br>
                 <div class="panel-heading">
-                 	<h4 class="panel-title" style="margin-bottom: 10px;">"사이트주소"</h4>
+                 	<!-- <h4 class="panel-title" style="margin-bottom: 10px;">"사이트주소"</h4> -->
             	</div>
                 <div class="form-group">
-                    <label class="control-label">웹 사이트 주소</label>
-                    <input maxlength="200" type="text" required="required" class="form-control" placeholder="예) http://www.~~~.com" />
+                    <!-- <label class="control-label">웹 사이트 주소</label> -->
+                    <!-- 지우면 next 버튼이 안돼서 히든으로 감춤... -->
+                    <input maxlength="200" id="url" type="hidden" required="required" class="form-control" placeholder="예) http://www.~~~.com" />
                 </div>
                 <button class="btn btn-success pull-right" type="submit">Finish!</button>
+                <br><br>
             </div>
         </div>
     </form>
