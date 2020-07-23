@@ -1,14 +1,58 @@
+
 @charset "UTF-8";
 html, body
 {
    overflow-x:hidden;
    overflow-y:auto;
 }
+body .padding
+{
+	padding-top: 60px;
+}
 h1, h4 , .m
 {
 	font-weight: bold;
 }
-
+.listBody
+{
+	font-size: 13pt;
+}
+.must
+{
+	color: red;
+	margin-left: 3%;
+}
+.topHeader .home, .topHeader .goLogin
+{
+	display: inline-block;
+}
+.goLogin
+{
+	float: right;
+}
+.joinDiv
+{
+	float: center;
+	margin-top: 7%;
+}
+.bottom
+{
+	margin: auto;
+	text-align: center;
+	margin-left: 5%;
+}
+.bottom #err
+{
+	color: red; 
+	font-weight: bold; 
+	display: none;
+	float: center;
+	font-size: 12pt;
+}
+.bottom .errMsg
+{
+	margin-top: 5%;
+}
 .ePoint
 {
 	color: red;
