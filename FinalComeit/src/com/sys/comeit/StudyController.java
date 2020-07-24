@@ -88,31 +88,6 @@ public class StudyController
 	// 수진
 	// ---------------------------------------------------------------------------------
 
-	// 스터디방 개설 페이지에서 지역, 레벨, 신분, 요일, 관심키워드, 기간 리스트 던져주기
-	@RequestMapping(value = "/studycreate.action", method = RequestMethod.GET)
-	public String studyCreate(Model model)
-	{
-		String view = null;
-
-		IAreaDAO areaDao = sqlSession.getMapper(IAreaDAO.class); // 지역
-		ILevelDAO levelDao = sqlSession.getMapper(ILevelDAO.class); // 레벨
-		IIdnttDAO idnttDao = sqlSession.getMapper(IIdnttDAO.class); // 신분
-		IDayDAO dayDao = sqlSession.getMapper(IDayDAO.class); // 요일
-		IIntTagDAO intTagDao = sqlSession.getMapper(IIntTagDAO.class); // 관심키워드
-		IMeetTermDAO meetTermDao = sqlSession.getMapper(IMeetTermDAO.class); // 기간
-
-		model.addAttribute("area", areaDao.areaList()); // 지역
-		model.addAttribute("level", levelDao.levelList()); // 레벨
-		model.addAttribute("idntt", idnttDao.idnttList()); // 신분
-		model.addAttribute("day", dayDao.dayList()); // 요일
-		model.addAttribute("intTag", intTagDao.intTagList()); // 관심키워드
-		model.addAttribute("meetTerm", meetTermDao.meetTermList()); // 기간
-
-		view = "WEB-INF/views/study/StudyCreate.jsp";
-
-		return view;
-	}
-
 	// 스터디 리스트 화면 노출하기
 	@RequestMapping(value = "/studylist.action", method = RequestMethod.GET)
 	public String memberJoin(Model model, HttpServletRequest request)
@@ -156,6 +131,31 @@ public class StudyController
 
 		return String.valueOf(scrt_num);
 
+	}
+	
+	// 스터디방 개설 페이지에서 지역, 레벨, 신분, 요일, 관심키워드, 기간 리스트 던져주기
+	@RequestMapping(value = "/studycreate.action", method = RequestMethod.GET)
+	public String studyCreate(Model model)
+	{
+		String view = null;
+
+		IAreaDAO areaDao = sqlSession.getMapper(IAreaDAO.class); // 지역
+		ILevelDAO levelDao = sqlSession.getMapper(ILevelDAO.class); // 레벨
+		IIdnttDAO idnttDao = sqlSession.getMapper(IIdnttDAO.class); // 신분
+		IDayDAO dayDao = sqlSession.getMapper(IDayDAO.class); // 요일
+		IIntTagDAO intTagDao = sqlSession.getMapper(IIntTagDAO.class); // 관심키워드
+		IMeetTermDAO meetTermDao = sqlSession.getMapper(IMeetTermDAO.class); // 기간
+
+		model.addAttribute("area", areaDao.areaList()); // 지역
+		model.addAttribute("level", levelDao.levelList()); // 레벨
+		model.addAttribute("idntt", idnttDao.idnttList()); // 신분
+		model.addAttribute("day", dayDao.dayList()); // 요일
+		model.addAttribute("intTag", intTagDao.intTagList()); // 관심키워드
+		model.addAttribute("meetTerm", meetTermDao.meetTermList()); // 기간
+
+		view = "WEB-INF/views/study/StudyCreate.jsp";
+
+		return view;
 	}
 	
 
