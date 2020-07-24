@@ -64,8 +64,7 @@
 	</select>
 	
 	<!-- 스터디장/원 이미지 조회 -->
-	<select id="memImgSearch"
-	resultType="com.sys.comeit.StudyDTO">
+	<select id="memImgSearch" resultType="com.sys.comeit.StudyDTO">
 		SELECT MJ.MEM_CD AS JOIN_MEM_CD, MI.IMG_URL AS MEM_IMG
 		FROM TBL_MEM_IMG MI, TBL_MEM_JOIN MJ, TBL_STU_JOIN SJ
 		WHERE MJ.MEM_ID = MI.MEM_ID
@@ -74,6 +73,15 @@
 		                 FROM VIEW_MY_STU
 		                 WHERE STU_CD = #{stu_cd}
 		                   AND EXT_NAME IS NULL)
+	</select>
+	
+	
+	<!-- 수진 추가 -->
+	<!-- 전체 스터디방 조회 -->
+	<select id="studyList" resultType="com.sys.comeit.StudyDTO">
+		SELECT STU_CD, CRT_DATE, TITLE, STR_DATE, MEM_NUM, CMT_DATE, AREA_NAME, SPC_AREA_NAME, MEET_TERM, IDNTT_TYPE, LV, CAT_NAME, SCRT_NUM, END_DATE
+		FROM VIEW_STU_LIST
+		WHERE STR_DATE <![CDATA[<]]> SYSDATE AND END_DATE <![CDATA[>]]> SYSDATE
 	</select>
 	
 	

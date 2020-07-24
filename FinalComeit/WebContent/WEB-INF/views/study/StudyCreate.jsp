@@ -239,7 +239,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 	<!-- 헤더 -->
 	<div class="row">
 		<div class="col-md-12">
-		<c:import url="WEB-INF/views/header.jsp"></c:import>
+		<c:import url="/WEB-INF/views/header.jsp"></c:import>
 		</div>
 	</div><!-- row -->
 	
@@ -347,8 +347,8 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 						
 						<select name="keySelect" id="keySelect"
 							class="form-control keySelect">
-							<c:forEach var="intTag" items="${intTag }">
-								<option value="${intTag.int_tag_cd }">${intTag.int_tag }</option>
+							<c:forEach var="days" items="${day }">
+								<option value="${days.day_cd }">${days.day_name }</option>
 							</c:forEach>
 						</select> &nbsp; <input type="text" class="keyInput form-control"
 							id="keyInput" placeholder="관심 키워드를 입력해 주세요." style="width: 30%"
@@ -430,8 +430,8 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 					class="posiSel form-control" style="width: 40%;">
 					<option value="0">기간 선택</option>
 					
-					<c:forEach var="idntts" items="${idntt }">
-						<option value="${idntts.idntt_cd }">${idntts.idntt_type }
+					<c:forEach var="meetTerms" items="${meetTerm }">
+						<option value="${meetTerms.meet_term_cd }">${meetTerms.meet_term }
 						</option>
 					</c:forEach>
 				</select>
@@ -449,8 +449,8 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 					class="posiSel form-control" style="width: 40%;">
 					<option value="0">레벨 선택</option>
 					
-					<c:forEach var="idntts" items="${idntt }">
-						<option value="${idntts.idntt_cd }">${idntts.idntt_type }
+					<c:forEach var="levels" items="${level }">
+						<option value="${levels.lv_cd }">${levels.lv }
 						</option>
 					</c:forEach>
 				</select>
@@ -528,7 +528,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 	<!-- 푸터 -->
 	<div class="row">
 		<div class="col-md-12">
-		<c:import url="WEB-INF/views/footer.jsp"></c:import>
+		<c:import url="/WEB-INF/views/footer.jsp"></c:import>
 		</div>
 	</div>
 
