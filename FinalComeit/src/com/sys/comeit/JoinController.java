@@ -97,7 +97,7 @@ public class JoinController
 
 		System.out.println("그냥 관심 : " + intTagList.length);
 		System.out.println("기타 관심 : " + etcTagList.length);
-
+		
 		if (mem_cd != null) // 회원 발급 코드 PK 가 NULL 이 아닐경우
 		{
 			if (intTagList.length > 0)

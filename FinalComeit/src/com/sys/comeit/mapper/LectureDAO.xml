@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.sys.comeit.ILectureDAO">
+
+	<!-- <insert id="lectureInsert">
+		INSERT INTO TBL_LEC(LEC_CD, PROF_CD, SPC_AREA_CD
+		, LEC_TERM_CD, LEC_NAME, CRT_DATE, STR_DATE, LEC_FEE
+		, LEC_INTRO, MIN_MEM, MAX_MEM)
+		VALUES('LEC' || SEQ_LEC.NEXTVAL, 'PROF1001', #{spc_area_cd}
+		, #{lec_term_cd}, #{lec_name}, SYSDATE, #{str_date} , #{lec_fee}
+		, #{lec_intro}, #{min_mem}, #{max_mem})
+	</insert> -->
+	
+	<select id="lectureInsert" parameterType="com.sys.comeit.LectureDTO" statementType="CALLABLE">
+	   { CALL PRC_LEC_CRT
+	      (
+	           #{prof_cd}
+	         , #{spc_area_cd}
+	         , #{lec_term_cd}
+	         , #{lec_name}
+	         , #{str_date}
+	         , #{lec_fee}
+	         , #{lec_intro}
+	         , #{min_mem}
+	         , #{max_mem}
+	         , #{lec_cd, mode=OUT, jdbcType=VARCHAR}
+	      )
+	   }
+	</select>
+	
+	<insert id="insertIntTag">
+		INSERT INTO TBL_LEC_INT_TAG(LEC_INT_TAG_CD, INT_TAG_CD, LEC_CD)
+		VALUES('LECIT' || SEQ_LEC_INT_TAG.NEXTVAL, #{int_tag_cd}, #{lec_cd})
+	</insert>
+	
+	<insert id="insertEtcTag">
+		INSERT INTO TBL_LEC_INT_ETC_TAG(LEC_INT_ETC_TAG_CD, LEC_CD, ETC_TAG)
+		VALUES('LECET' || SEQ_LEC_INT_ETC_TAG.NEXTVAL, #{lec_cd}, #{etc_tag})
+	</insert>
+	
+	<select id="etcTagCount" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS COUNT
+		FROM TBL_LEC_INT_ETC_TAG
+		WHERE ETC_TAG=#{etc_tag}
+	</select>
+	
+	<insert id="addTagName">
+		INSERT INTO TBL_INT_TAG(INT_TAG_CD, INT_TAG)
+		VALUES('INT'||SEQ_INT_TAG.NEXTVAL, #{etc_tag})
+	</insert>
+	
+</mapper>

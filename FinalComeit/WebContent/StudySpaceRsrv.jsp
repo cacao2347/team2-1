@@ -21,7 +21,7 @@ p
 </head>
 <body>
 
-	<div class="col-8" style="position: absolute; left: 17%">
+	<div class="col-12" style="position: absolute; left: 17%">
 		<h2 class="card-title">모임장소 예약내역</h2>
 		<div class="card">
 			<img src="images/card-image.png" alt="" class="card-img-top" />
