@@ -16,15 +16,72 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet"><style type="text/css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
+<link rel="shortcut icon" href="<%=cp %>/assets/images/pen_1.ico" type="image/x-icon">
+<link rel="icon" href="<%=cp %>/assets/images/pen_1.ico" type="image/x-icon">
+<style type="text/css">
+
 body{font-family: 'Noto Sans KR', sans-serif;}
+
 </style>
 
+<script type="text/javascript">
+
+	$(function()
+	{
+		// AJAX 요청 및 응답 처리
+        ajaxSpcAreaRequest();
+		
+     	// 지역명이 바뀌면 상세지역 ajax 호출
+		$("#area").change(function()
+		{
+		   ajaxSpcAreaRequest();
+		   
+		})
+		
+		// 필터
+		// 카테고리
+		// 언어 클릭 시
+		
+		// 면접 클릭 시
+		
+		// 자격증 클릭 시
+		
+		// 기타 클릭 시
+		
+		// 선택 초기화 버튼 클릭 시
+		
+		// 지역, 인원수, 레벨은 다 선택하고 '필터' 버튼 어떤지
+		
+		// 검색 버튼 클릭 시
+		
+		// 스터디 각각 리스트 클릭 시 
+		
+		// 스터디방 개설 버튼 클릭 시
+		
+	});
+	
+	// 지역에 따른 세부지역 불러오는 ajax
+    function ajaxSpcAreaRequest()
+    {
+
+       $.post("areaajax.action",
+       {
+          area_cd : $("#area").children("option:selected").val()
+       }, function(data)
+       {
+          //alert(data);
+          $("#spcAreaDiv").html(data);
+          $("#spcArea").removeAttr("disabled");
+       });
+    }
+
+</script>
 </head>
 <body class="padding">
 <div class="row">
 	<div class="col-md-12">
-	<c:import url="WEB-INF/views/header.jsp"></c:import>
+	<c:import url="/WEB-INF/views/header.jsp"></c:import>
 	</div>
 </div>
 			
@@ -48,10 +105,16 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 				<div class="side">
 					<dl class="cat">
 						<dt>카테고리</dt>
-						<dd><a href="">언어</a></dd>
-						<dd><a href="">면접</a></dd>
-						<dd><a href="">자격증</a></dd>
-						<dd><a href="">기타</a></dd>
+						<dd><a href="">전체</a></dd>
+						<c:forEach var="stuCats" items="${stuCat }">
+							<!-- <dd><a href="">언어</a></dd>
+							<dd><a href="">면접</a></dd>
+							<dd><a href="">자격증</a></dd>
+							<dd><a href="">기타</a></dd> -->
+							<dd><a href="">${stuCats.cat_name }</a></dd>
+						
+						</c:forEach>
+						
 					</dl><!-- end cat -->
 					
 					<dl class="region">
@@ -59,19 +122,27 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 						<dd>
 							<select name="region" class="form-control">
 								<option value="전체">전체</option>
-								<option value="서울">서울</option>
-								<option value="인천">인천</option>
+								<c:forEach var="areas" items="${area }">
+									<!-- <option value="서울">서울</option>
+									<option value="인천">인천</option> -->
+									<option value="${areas.area_cd }"
+									${areas.area_cd == spcArea.area_cd ? "selected= \"selected\"" : ""}>
+									${areas.area_name }
+									</option>
+								</c:forEach>
+								
 							</select>
 						</dd>
 						  
- 						<dd>
-							<select name="regDetail" class="form-control">
+ 						
+					</dl><!-- end region -->
+					<div id="spcAreaDiv">
+							<!-- <select name="regDetail" class="form-control">
 								<option value="전체">전체</option>
 								<option value="마포구">마포구</option>
 								<option value="양천구">양천구</option>
-							</select>
-						</dd>
-					</dl><!-- end region -->
+							</select> -->
+						</div>
 					
 					<dl class="inwon">
 						<dt>인원 수</dt>
@@ -320,7 +391,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 </div>
 <div class="row">
 	<div class="col-md-12">
-	<c:import url="WEB-INF/views/footer.jsp"></c:import>
+	<c:import url="/WEB-INF/views/footer.jsp"></c:import>
 	</div>
 </div>
 
