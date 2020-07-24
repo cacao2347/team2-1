@@ -49,7 +49,6 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 		});
 
 		
-		// 필터
 		// 카테고리
 		// 언어 클릭 시
 		
@@ -59,21 +58,37 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 		
 		// 기타 클릭 시
 		
+		
+		
 		// 선택 초기화 버튼 클릭 시
 		
 		// 지역, 인원수, 레벨은 다 선택하고 '필터' 버튼 어떤지
 		
 		// 검색 버튼 클릭 시
+		$("#searchBtn").click(function()
+		{
+			/* var k = $(this).val();
+			$(".list-study").hide();
+			
+			//alert(k);
+			var temp = $(".list-study > ul > li > item-body > firstLine > listTitle > study-title:contains('" + k + "')");
+			
+			$(temp).parent().show(); */
+			
+			
+			
+		});
 		
 		// 스터디 각각 리스트 클릭 시 
+		/* $(".study-title").click(function()
+		{
+			alert("리스트");
+		}); */
 		
 		// 스터디방 개설 버튼 클릭 시
 		$("#createBtn").click(function()
 		{
-			
-			
-			
-			
+			location.href = "/FinalComeit/studycreate.action";
 		});
 		
 	});
@@ -226,7 +241,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 						<div class="form-inline search">
 							<input type="text" class="form-control tag" id="tag" placeholder="기술 태그">
 							<input type="text" class="form-control title" id="title" placeholder="스터디방 제목">
-							<button type="button" class="btn btn-primary searchBtn">검색</button>
+							<button type="button" id="searchBtn" class="btn btn-primary searchBtn">검색</button>
 						</div>
 						</div>
 					</div>
@@ -284,6 +299,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 								</ul>
 
 								</div>
+								
 							</li>
 							
 							</c:forEach>

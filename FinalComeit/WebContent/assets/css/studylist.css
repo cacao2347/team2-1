@@ -1,5 +1,12 @@
 @charset "UTF-8";
-
+a
+{
+	color: #033158 !important;
+}
+ul :hover 
+{
+	background-color: #f9fbff;
+}
 .sub
 {
 	text-align: right;
