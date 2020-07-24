@@ -82,7 +82,23 @@ body
 			
 		});
 		
-		// 스터디 각각 리스트 클릭 시 
+		// 스터디 각각 리스트 클릭 시 (로그인 전)
+		$(".bFtitleBtn").click(function()
+		{
+			var result = confirm("로그인 후 이용 가능합니다.\n확인 버튼 클릭 시 로그인 페이지로 이동합니다.");
+			
+			if(result)
+			{
+				location.href = "/FinalComeit/memberlogin.action";
+			}
+			else if(result==null)
+			{
+				return;
+			}
+			
+		});
+		
+		// 스터디 각각 리스트 클릭 시 (로그인 후)
 		$(".titleBtn").click(function()
 		{
 			//var params = "scrtCheck" + $
@@ -128,7 +144,22 @@ body
 	
 		});
 		
-		// 스터디방 개설 버튼 클릭 시
+		// 스터디방 개설 버튼 클릭 시 (로그인 전)
+		$("#bFcreateBtn").click(function()
+		{
+			var result = confirm("로그인 후 이용 가능합니다.\n확인 버튼 클릭 시 로그인 페이지로 이동합니다.");
+			
+			if(result)
+			{
+				location.href = "/FinalComeit/memberlogin.action";
+			}
+			else if(result==null)
+			{
+				return;
+			}
+		});
+		
+		// 스터디방 개설 버튼 클릭 시 (로그인 후)
 		$("#createBtn").click(function()
 		{
 			location.href = "/FinalComeit/studycreate.action";
@@ -155,12 +186,16 @@ body
 </script>
 </head>
 <body class="padding">
+<c:if test="">
+
+</c:if>
+
 <div class="row">
 	<div class="col-md-12">
 	<c:import url="/WEB-INF/views/header.jsp"></c:import>
 	</div>
 </div>
-			
+
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
@@ -307,7 +342,18 @@ body
 								<div class="firstLine">
 									<div class="listTitle">
 										<h4 class="study-title" style="font-weight: bold;">
-										<button type="button" class="btn btn-link titleBtn" value="${studys.stu_cd }">[${studys.cat_name }] ${studys.title }</button>
+										
+										<c:choose>
+										<c:when test="${empty id }">
+											<button type="button" class="btn btn-link bFtitleBtn" value="${studys.stu_cd }">[${studys.cat_name }] ${studys.title }</button>
+										</c:when>
+										
+										<c:when test="${not empty id }">
+											<button type="button" class="btn btn-link titleBtn" value="${studys.stu_cd }">[${studys.cat_name }] ${studys.title }</button>
+										</c:when>
+										</c:choose>
+										
+										
 										</h4>
 									</div>
 									
@@ -358,7 +404,17 @@ body
 					<div class="row">
 					<div class="col-md-12">
 						<div class="create">
-							<button type="button" id="createBtn" class="btn btn-primary btn-sm createBtn">스터디방 개설</button>
+							<c:choose>
+							
+							<c:when test="${empty id }">
+								<button type="button" id="bFcreateBtn" class="btn btn-primary btn-sm createBtn">스터디방 개설</button>
+							</c:when>
+							
+							<c:when test="${not empty id }">
+								<button type="button" id="createBtn" class="btn btn-primary btn-sm createBtn">스터디방 개설</button>
+							</c:when>
+							</c:choose>
+						
 						</div>
 					</div>
 					</div>

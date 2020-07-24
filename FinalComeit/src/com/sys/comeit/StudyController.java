@@ -2,6 +2,7 @@ package com.sys.comeit;
 
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -114,10 +115,11 @@ public class StudyController
 
 	// 스터디 리스트 화면 노출하기
 	@RequestMapping(value = "/studylist.action", method = RequestMethod.GET)
-	public String memberJoin(Model model)
+	public String memberJoin(Model model, HttpServletRequest request)
 	{
 		String view = null;
 
+		
 		IStuCatDAO stuCatDao = sqlSession.getMapper(IStuCatDAO.class); // 스터디 카테고리
 		IAreaDAO areaDao = sqlSession.getMapper(IAreaDAO.class); // 지역
 		ILevelDAO levelDao = sqlSession.getMapper(ILevelDAO.class); // 레벨
