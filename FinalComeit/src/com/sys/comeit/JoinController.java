@@ -165,7 +165,7 @@ public class JoinController
 	}
 
 	// 지역에 맞는 세부지역 뿌려주는 AJAX 처리
-	@RequestMapping(value = "/areaajax.action", method = RequestMethod.POST)
+	@RequestMapping(value = "/areaajax.action", method = {RequestMethod.GET, RequestMethod.POST})
 	public String selectAjax(HttpServletRequest request, Model model)
 	{
 

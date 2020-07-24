@@ -91,37 +91,21 @@ public class StudyController
 		ILevelDAO levelDao = sqlSession.getMapper(ILevelDAO.class); // 레벨
 
 		IStudyDAO studyDao = sqlSession.getMapper(IStudyDAO.class); // 스터디 정보
-
+		
 		model.addAttribute("stuCat", stuCatDao.stuCatList());
 		model.addAttribute("area", areaDao.areaList());
 		model.addAttribute("level", levelDao.levelList());
 
 		model.addAttribute("study", studyDao.studyList());
+		model.addAttribute("count", studyDao.studyCount());
+		
+		model.addAttribute("studyTags", studyDao.studyTagList());	// 모든 스터디의 모든 키워드 
 
 		view = "WEB-INF/views/study/StudyList.jsp";
 
 		return view;
 	}
 
-	// 지역에 맞는 세부지역 뿌려주는 AJAX 처리
-	/*
-	@RequestMapping(value = "/areaajax.action", method = RequestMethod.POST)
-	public String selectAjax(HttpServletRequest request, Model model)
-	{
-
-		String view = null;
-
-		ISpcAreaDAO spcAreaDao = sqlSession.getMapper(ISpcAreaDAO.class);
-
-		ArrayList<SpcAreaDTO> list = spcAreaDao.spcAreaList(request.getParameter("area_cd"));
-
-		model.addAttribute("spcAreaList", list);
-
-		view = "WEB-INF/views/member/AjaxJoinSpcArea.jsp";
-
-		return view;
-
-	}
-	*/
+	
 
 }

@@ -37,7 +37,17 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 		{
 		   ajaxSpcAreaRequest();
 		   
-		})
+		});
+		
+		$("#allCheck").click(function()	
+		{  
+			if ($("#allCheck").is(':checked')) {
+                $("input[type=checkbox]").prop("checked", true);
+            } else {
+                $("input[type=checkbox]").prop("checked", false);
+            }
+		});
+
 		
 		// 필터
 		// 카테고리
@@ -58,6 +68,13 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 		// 스터디 각각 리스트 클릭 시 
 		
 		// 스터디방 개설 버튼 클릭 시
+		$("#createBtn").click(function()
+		{
+			
+			
+			
+			
+		});
 		
 	});
 	
@@ -71,7 +88,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
        }, function(data)
        {
           //alert(data);
-          $("#spcAreaDiv").html(data);
+          $("#spcAreadd").html(data);
           $("#spcArea").removeAttr("disabled");
        });
     }
@@ -88,7 +105,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-			
+			<form method="post" >
 			<div class="row">
 				<div class="col-md-2">
 				</div>
@@ -120,29 +137,23 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 					<dl class="region">
 						<dt>지역</dt>
 						<dd>
-							<select name="region" class="form-control">
-								<option value="전체">전체</option>
-								<c:forEach var="areas" items="${area }">
-									<!-- <option value="서울">서울</option>
-									<option value="인천">인천</option> -->
-									<option value="${areas.area_cd }"
-									${areas.area_cd == spcArea.area_cd ? "selected= \"selected\"" : ""}>
-									${areas.area_name }
-									</option>
-								</c:forEach>
-								
-							</select>
+							<select name="area" id="area" class="area form-control">
+			                  <option value="0">전체</option>
+			                     <c:forEach var="areas" items="${area }">
+			                              <option value="${areas.area_cd }" 
+			                              ${areas.area_cd == spcArea.area_cd ? "selected= \"selected\"" : ""}>
+			                                 ${areas.area_name }
+			                              </option>
+			                           </c:forEach>
+			                  </select>
 						</dd>
-						  
+						
+						<dd id="spcAreadd">
+							
+						</dd>
  						
 					</dl><!-- end region -->
-					<div id="spcAreaDiv">
-							<!-- <select name="regDetail" class="form-control">
-								<option value="전체">전체</option>
-								<option value="마포구">마포구</option>
-								<option value="양천구">양천구</option>
-							</select> -->
-						</div>
+					
 					
 					<dl class="inwon">
 						<dt>인원 수</dt>
@@ -173,11 +184,12 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 					<dl class="level">
 						<dt>레벨</dt>
 						<dd class="checkbox">
-							<label id="all">
-							<input type="checkbox" id="all" name="all" value="전체" checked="checked">전체
+							<label id="allChecklabel">
+							<input type="checkbox" id="allCheck" name="all" value="전체" checked="checked">전체
 							</label>
 						</dd>
-						<dd class="checkbox">
+						
+						<!-- <dd class="checkbox">
 							<label id="low">
 							<input type="checkbox" id="low" name="low" value="초급">초급
 							</label>
@@ -191,7 +203,15 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 							<label id="high">
 							<input type="checkbox" id="high" name="high" value="고급">고급
 							</label>
-						</dd>
+						</dd> -->
+						<c:forEach var="levels" items="${level }">
+							<dd class="checkbox">
+								<label>
+								<input type="checkbox" checked="checked" value="${levels.lv_cd }">${levels.lv }
+								</label>
+							</dd>
+						
+						</c:forEach>
 					</dl><!-- end level -->
 				
 				</div><!-- end side -->
@@ -214,138 +234,59 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 					<!-- 리스트 영역 -->
 					<div class="row list">
 						<div class="col-md-12">
-						99개의 스터디방
-						</div>
+						${count }개의 스터디방에서 스터디원을 모집중입니다!
+						</div> 
 						<div class="col-md-12">
 						<ul class="list-study">
-							<li class="list-study-item">
+														
+							<c:forEach var="studys" items="${study }">
+								<li class="list-study-item">
 								<div class="item-header">
 								<img class="study-logo" alt="study-logo" src="assets/images/studylogo.PNG">
 								</div>
 								<div class="item-body">
 								<div class="firstLine">
 									<div class="listTitle">
-										<h4 class="study-title" style="font-weight: bold;">[언어] 자바 공부 같이해요</h4>
+										<h4 class="study-title" style="font-weight: bold;">[${studys.cat_name }] ${studys.title }</h4>
 									</div>
+									
+									<c:if test="${studys.scrt_num ne '0'}">
+										<div class="lock">
+										<h5><span class="glyphicon glyphicon-lock icon" aria-hidden="true"></span></h5>
+										</div> 
+									</c:if>
+									
+									<!-- 
 									<div class="lock">
 										<h5><span class="glyphicon glyphicon-lock icon" aria-hidden="true"></span></h5>
-									</div>
+									</div> 
+									-->
+									
 								</div>
 								<div class="form-inline">
-									<h5 class="study-date">2020-06-16 ~ 2020-07-15</h5>
-									<h5 class="study-term">1개월</h5>
+									<h5 class="study-date">${studys.str_date } ~ ${studys.end_date }</h5>
+									<h5 class="study-term">${studys.meet_term }개월</h5>
 								</div>
 								
 								<ul class="study-info">
-									<li class="level"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span> 초급</li>
-									<li class="location"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> 서울 마포구</li>
-									<li class="numb"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> 5명</li>
+									<li class="level"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span> ${studys.lv }</li>
+									<li class="location"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> ${studys.area_name } ${studys.spc_area_name }</li>
+									<li class="numb"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> ${studys.mem_num }명</li>
 								</ul>
+
+								
 								<ul class="list-study-tags">
-									<li class="stack-item">Java</li>
-									<li class="stack-item">Oracle</li>
+								<c:forEach var="studyTagss" items="${studyTags }">
+								<c:if test="${studyTagss.stu_cd eq studys.stu_cd}">
+									<li class="stack-item">${studyTagss.int_tag_name }</li>
+								</c:if>
+								</c:forEach>
 								</ul>
+
 								</div>
 							</li>
-							<li class="list-study-item">
-								<div class="item-header">
-								<img class="study-logo" alt="study-logo" src="assets/images/studylogo.PNG">
-								</div>
-								<div class="item-body">
-								<h4 class="study-title" style="font-weight: bold;">[자격증] 정보처리기사 필기 같이 공부하실 분</h4>
-								<div class="form-inline">
-									<h5 class="study-date">2020-05-16 ~ 2020-08-15</h5>
-									<h5 class="study-term">3개월</h5>
-								</div>
-								
-								<ul class="study-info">
-									<li class="level"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span> 초급</li>
-									<li class="location"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> 서울 영등포구</li>
-									<li class="numb"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> 8명</li>
-								</ul>
-								<ul class="list-study-tags">
-									<li class="stack-item">정보처리기사</li>
-								</ul>
-								</div>
-							</li>
-							<li class="list-study-item">
-								<div class="item-header">
-								<img class="study-logo" alt="study-logo" src="assets/images/studylogo.PNG">
-								</div>
-								<div class="item-body">
-								<h4 class="study-title" style="font-weight: bold;">[언어] 웹 풀스택 개발 공부</h4>
-								
-								<div class="form-inline">
-									<h5 class="study-date">2020-01-16 ~ 2020-07-15</h5>
-									<h5 class="study-term">6개월</h5>
-								</div>
-								
-								<ul class="study-info">
-									<li class="level"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span> 중급</li>
-									<li class="location"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> 서울 마포구</li>
-									<li class="numb"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> 6명</li>
-								</ul>
-								<ul class="list-study-tags">
-									<li class="stack-item">Java</li>
-									<li class="stack-item">Oracle</li>
-									<li class="stack-item">JavaScript</li>
-									<li class="stack-item">HTML</li>
-									<li class="stack-item">CSS</li>
-								</ul>
-								</div>
-							</li>
-							<li class="list-study-item">
-								<div class="item-header">
-								<img class="study-logo" alt="study-logo" src="assets/images/studylogo.PNG">
-								</div>
-								<div class="item-body">
-								<h4 class="study-title" style="font-weight: bold;">[언어] 웹 풀스택 개발 공부</h4>
-								
-								<div class="form-inline">
-									<h5 class="study-date">2020-01-16 ~ 2020-07-15</h5>
-									<h5 class="study-term">6개월</h5>
-								</div>
-								
-								<ul class="study-info">
-									<li class="level"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span> 중급</li>
-									<li class="location"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> 서울 마포구</li>
-									<li class="numb"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> 6명</li>
-								</ul>
-								<ul class="list-study-tags">
-									<li class="stack-item">Java</li>
-									<li class="stack-item">Oracle</li>
-									<li class="stack-item">JavaScript</li>
-									<li class="stack-item">HTML</li>
-									<li class="stack-item">CSS</li>
-								</ul>
-								</div>
-							</li>
-							<li class="list-study-item">
-								<div class="item-header">
-								<img class="study-logo" alt="study-logo" src="assets/images/studylogo.PNG">
-								</div>
-								<div class="item-body">
-								<h4 class="study-title" style="font-weight: bold;">[언어] 웹 풀스택 개발 공부</h4>
-								
-								<div class="form-inline">
-									<h5 class="study-date">2020-01-16 ~ 2020-07-15</h5>
-									<h5 class="study-term">6개월</h5>
-								</div>
-								
-								<ul class="study-info">
-									<li class="level"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span> 중급</li>
-									<li class="location"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> 서울 마포구</li>
-									<li class="numb"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> 6명</li>
-								</ul>
-								<ul class="list-study-tags">
-									<li class="stack-item">Java</li>
-									<li class="stack-item">Oracle</li>
-									<li class="stack-item">JavaScript</li>
-									<li class="stack-item">HTML</li>
-									<li class="stack-item">CSS</li>
-								</ul>
-								</div>
-							</li>
+							
+							</c:forEach>
 						</ul>
 						
 						</div>
@@ -354,7 +295,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 					<div class="row">
 					<div class="col-md-12">
 						<div class="create">
-							<button type="button" class="btn btn-primary btn-sm createBtn">스터디방 개설</button>
+							<button type="button" id="createBtn" class="btn btn-primary btn-sm createBtn">스터디방 개설</button>
 						</div>
 					</div>
 					</div>
@@ -385,7 +326,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 				</div>
 				
 			</div>
-			
+		</form>
 		</div>
 	</div>
 </div>

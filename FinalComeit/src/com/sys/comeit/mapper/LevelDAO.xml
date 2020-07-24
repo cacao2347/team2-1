@@ -8,6 +8,7 @@
 	<select id="levelList" resultType="com.sys.comeit.LevelDTO">
 		SELECT LV_CD, LV 
 		FROM TBL_LV
+		ORDER BY LV_CD
 	</select>
 	
 </mapper>

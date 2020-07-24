@@ -21,4 +21,8 @@ public interface IStudyDAO
 	
 	public ArrayList<StudyDTO> studyList();			// 스터디 리스트
 	public int studyModify(StudyDTO dto);			// 스터디 정보 수정
+	
+	public int studyCount();						// 스터디방 개수 조회
+	public ArrayList<StudyDTO> studyTagList();		// 모든 스터디 키워드들
+	
 }
