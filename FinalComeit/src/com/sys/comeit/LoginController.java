@@ -123,7 +123,7 @@ public class LoginController
       {
          
          if (loginType.equals("2")) 						// 관리자 로그인
-        	 result = "";
+        	 result = "/adminmemberlist.action";
          else 												// 업체 및 회원 로그인
         	 result = "/WEB-INF/views/MainPage.jsp";
       }

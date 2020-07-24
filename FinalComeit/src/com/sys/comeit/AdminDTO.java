@@ -2,11 +2,19 @@ package com.sys.comeit;
 
 public class AdminDTO
 {
-	private String admin_cd, adm_grds_cd, name, pwd, email, tel;
+	private String admin_cd, adm_grds_cd, name, pwd, email, tel, grds_name;
 
 	public String getAdmin_cd()
 	{
 		return admin_cd;
+	}
+
+	public String getGrds_name() {
+		return grds_name;
+	}
+
+	public void setGrds_name(String grds_name) {
+		this.grds_name = grds_name;
 	}
 
 	public void setAdmin_cd(String admin_cd)
