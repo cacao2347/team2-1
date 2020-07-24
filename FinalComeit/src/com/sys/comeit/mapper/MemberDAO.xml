@@ -126,5 +126,42 @@
 		INSERT INTO TBL_INT_TAG(INT_TAG_CD, INT_TAG)
 		VALUES('INT'||SEQ_INT_TAG.NEXTVAL, #{etc_tag})
 	</insert>
+	
+	
+	<!-- 체크 해보기 -->
+	
+	
+	<!-- 스터디 평가 내역 -->
+	<select id="studyEval" resultType="com.sys.comeit.MemberDTO">
+	  <![CDATA[
+      	SELECT SUM(SINCERITY)/COUNT(*) AS SINCERITY, SUM(EMBRACE)/COUNT(*) AS EMBRACE
+		, SUM(COMMUNICATION)/COUNT(*) AS COMMUNICATION, SUM(SKILL)/COUNT(*) AS SKILL
+		, SUM(LEADERSHIP)/COUNT(*) AS LEADERSHIP
+		FROM VIEW_STU_EVAL
+		WHERE MEM_CD = #{mem_cd}
+		GROUP BY ID
+      ]]>
+	</select>
+	
+	
+	<!-- 패널티 개수 -->
+	<select id="pnltCount" resultType="com.sys.comeit.MemberDTO">
+		<![CDATA[
+      	SELECT COUNT(*) AS PNLT_CNT
+		FROM TBL_MEM_PNLT
+		WHERE MEM_CD = #{mem_cd}
+      ]]>
+	</select>
+	
+	
+	<!-- 멤버별 정보 조회 list() -->
+	<select id="memModalList" resultType="com.sys.comeit.MemberDTO">
+	   SELECT ID, MEM_CD, NAME, IDNTT, MEM_CONTENT
+	   FROM VIEW_MEM_MY
+	   WHERE MEM_CD = #{mem_cd}
+	</select>
+	
+	
+	
    
 </mapper>

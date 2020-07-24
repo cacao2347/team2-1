@@ -39,7 +39,7 @@ public class LoginController
    }
    
    // 로그인 처리
-   @RequestMapping(value = "/login.action",method = {RequestMethod.GET, RequestMethod.POST})
+   @RequestMapping(value = "/login.action", method = {RequestMethod.GET, RequestMethod.POST})
    public String memberLoginCheck(HttpServletRequest request)
    {
 	  HttpSession session = request.getSession();   
@@ -95,7 +95,7 @@ public class LoginController
     	  blockCount = spaDao.spaBlock(id);
     	  
     	  // 회원 코드
-    	  spa_cd = spaDao.spaCd(id);
+          spa_cd = spaDao.spaCd(id);
     	  
       }
       else if(loginType.equals("2"))
@@ -132,7 +132,6 @@ public class LoginController
       session.setAttribute("id", id);
       session.setAttribute("pwd", pwd); 	 
       session.setAttribute("loginType", loginType);
-      session.setAttribute("spa_cd", spa_cd); // 업체 코드
       
       // 테스트
 	  // System.out.println(name+id+pwd+loginType+stopDate);
@@ -215,7 +214,7 @@ public class LoginController
    
    // 아이디 찾기 인증 번호 전송하기
     @ResponseBody
-	@RequestMapping(value = "/idsendsms.action", method = RequestMethod.POST)
+	@RequestMapping(value = "/idsendsms.action", method = {RequestMethod.GET, RequestMethod.POST})
 	public String idSendSms(@RequestParam(value = "receiver") String receiver) throws CoolsmsException
     {
 		String api_key = "NCSSVMTOHVFAMAWF";
@@ -276,7 +275,7 @@ public class LoginController
 	}
    
    // 패스워드 찾기 뷰
-   @RequestMapping(value = "/searchpwd.action", method = RequestMethod.GET)
+   @RequestMapping(value = "/searchpwd.action", method = {RequestMethod.GET, RequestMethod.POST})
    public String searchPwdView(HttpServletRequest request)
    {
 	   HttpSession session = request.getSession();
@@ -293,7 +292,7 @@ public class LoginController
    
    
    // 패스워드 찾기
-   @RequestMapping(value = "/searchpwdcheck.action", method = RequestMethod.POST)
+   @RequestMapping(value = "/searchpwdcheck.action", method = {RequestMethod.GET, RequestMethod.POST})
    public ModelAndView loginSearchPwd(HttpServletRequest request)
    {
       ModelAndView mav = new ModelAndView();  
@@ -379,7 +378,7 @@ public class LoginController
    
    
    // 변경된 난수 비밀번호 전송
-   @RequestMapping(value = "/pwdsendsms.action", method = RequestMethod.POST)
+   @RequestMapping(value = "/pwdsendsms.action", method = {RequestMethod.GET, RequestMethod.POST})
 	public String pwdSendSms(HttpServletRequest request) throws CoolsmsException
    {
 	   

@@ -1,16 +1,26 @@
 package com.sys.comeit;
 
-import java.util.ArrayList;
 
 public class MemberDTO
 {
 	private String id, mem_cd, idntt, name, email, tel , join_date;	// 아이디, 멤버코드, 신분, 이름, 이메일, 전화번호, 가입일
 	private String mem_content;										// 본인소개
 	private String area_name, spc_area_name;						// 지역명, 세부지역명
-	private String int_tag, etc_tag;						// 관심키워드, 기타관심키워드
+	private String int_tag, etc_tag;								// 관심키워드, 기타관심키워드
 	private String img_url;											// 회원 이미지 url
-	private String pwd;												// 비밀번호							
+	private String pwd;												// 비밀번호
 	
+	
+	// 기혜 추가 
+	private int sincerity, embrace, communication, skill, leadership; // 스터디 평가 내역
+	private int pnlt_cnt;											  // 패널티 받은 내역
+	
+
+	public void setPnlt_cnt(int pnlt_cnt)
+	{
+		this.pnlt_cnt = pnlt_cnt;
+	}
+
 	// 수진 추가
 	private String idntt_cd, spc_area_cd;		// 신분코드, 세부지역코드  
 	
@@ -177,5 +187,58 @@ public class MemberDTO
 	{
 		this.pwd = pwd;
 	}
+	public int getSincerity()
+	{
+		return sincerity;
+	}
 
+	public void setSincerity(int sincerity)
+	{
+		this.sincerity = sincerity;
+	}
+
+	public int getEmbrace()
+	{
+		return embrace;
+	}
+
+	public void setEmbrace(int embrace)
+	{
+		this.embrace = embrace;
+	}
+
+	public int getCommunication()
+	{
+		return communication;
+	}
+
+	public void setCommunication(int communication)
+	{
+		this.communication = communication;
+	}
+
+	public int getSkill()
+	{
+		return skill;
+	}
+
+	public void setSkill(int skill)
+	{
+		this.skill = skill;
+	}
+
+	public int getLeadership()
+	{
+		return leadership;
+	}
+
+	public void setLeadership(int leadership)
+	{
+		this.leadership = leadership;
+	}
+
+	public int getPnlt_cnt()
+	{
+		return pnlt_cnt;
+	}
 }

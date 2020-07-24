@@ -31,4 +31,9 @@ public interface IMemberDAO
 	public int addTagName(String etcTag);	// 관심 키워드에 INSERT
 	public int memTelcheckCount(String tel);   // 전화번호 중복확인
 	
+	
+	public MemberDTO memModalList(String mem_cd); 	// 모달 정보 조회
+	public MemberDTO studyEval(String mem_cd);		// 스터디 평가 내역
+	public int pnltCount(String mem_cd);			// 패널티 개수
+	
 }
