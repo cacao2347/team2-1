@@ -112,7 +112,7 @@ public class LoginController
       else if(blockCount != 0 || stopDate != null) 			// 블락된 내역, 정지 내역이 있을시
       {
     	  session.setAttribute("stopDate", stopDate);
-          result = "/WEB-INF/views/MemStop.jsp";
+          result = "/WEB-INF/views/member/MemStop.jsp";
       }
       else 													// 로그인 성공시
       {
@@ -149,7 +149,7 @@ public class LoginController
 	   System.out.println(searchId);
 	   
 	   session.setAttribute("searchId", searchId);
-	   view = "/WEB-INF/views/SearchId.jsp";
+	   view = "/WEB-INF/views/member/SearchId.jsp";
 	   
 	      
 	   return view;
@@ -193,7 +193,7 @@ public class LoginController
       if (search_id == null||search_id=="" ) 		// 아이디 찾기 실패시
       {
     	  mav.addObject("msg", "정보가 존재하지 않습니다.");
-          mav.setViewName("/WEB-INF/views/SearchId.jsp");
+          mav.setViewName("/WEB-INF/views/member/SearchId.jsp");
       }
       else 											// 아이디 찾기 성공시
       {
@@ -201,7 +201,7 @@ public class LoginController
     	  //System.out.println(search_id + searchId);
 
     	  mav.addObject("search_id", search_id);
-    	  mav.setViewName("/WEB-INF/views/SearchId.jsp");   	  
+    	  mav.setViewName("/WEB-INF/views/member/SearchId.jsp");   	  
       }
       
       return mav;
@@ -280,7 +280,7 @@ public class LoginController
 	   
 	   session.setAttribute("searchPwd", searchPwd);
 	   
-	   view = "/WEB-INF/views/SearchPw.jsp";
+	   view = "/WEB-INF/views/member/SearchPw.jsp";
 	   
 	   return view;
    }
@@ -334,12 +334,12 @@ public class LoginController
       if (result==0) 
       {
          mav.addObject("msg", "정보가 존재하지 않습니다.");
-         mav.setViewName("/WEB-INF/views/SearchPw.jsp");
+         mav.setViewName("/WEB-INF/views/member/SearchPw.jsp");
       }
       else // 패스워드 찾기 성공시
       { 	  
           mav.addObject("msg", "문자발송 버튼을 클릭하세요.");
-          mav.setViewName("/WEB-INF/views/SearchPw.jsp");
+          mav.setViewName("/WEB-INF/views/member/SearchPw.jsp");
       }
       
       //System.out.println(result);
