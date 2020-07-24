@@ -29,7 +29,6 @@
 
 <body class="boheader">
 <!------ Include the above in your HEAD tag ---------->
-
 <div class="header">
   <nav class="navbar navbar-inverse">
     <div class="navbar-header">
@@ -44,7 +43,7 @@
 	
 	<div class="collapse navbar-collapse js-navbar-collapse">
 		<ul class="nav navbar-nav">
-			<li><a href="#">스터디</a></li>
+			<li><a href="/FinalComeit/studylist.action">스터디</a></li>
 			<!-- <li><a href="#">프로젝트</a></li> -->
 			<li><a href="">강의</a></li>
             <li><a href="/FinalComeit/spalist.action">공간</a></li>
@@ -65,14 +64,11 @@
 			    <li><a href="/FinalComeit/logout.action">logout</a></li>
 			</c:when>
 			</c:choose>
-            
-         
           </ul>
         </li>
       </ul>
 	</div><!-- /.nav-collapse -->
   </nav>
 </div>
-
 </body>
 </html>
