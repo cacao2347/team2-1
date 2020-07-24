@@ -109,7 +109,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 				<img src="<%=cp %>/assets/images/data.png" alt="" />
 				<h3>Welcome</h3>
 				<p>COME-IT에 가입하세요!</p>
-				<input type="submit" name="mainPage" value="메인페이지"  onClick="location.href='comeit.action'"/><br />
+				<input type="submit" name="mainPage" value="메인페이지"  onClick="location.href='mainpage.action'"/><br />
 			</div>
 			<div class="col-md-9 register-right">
 				<div class="tab-content" id="myTabContent">

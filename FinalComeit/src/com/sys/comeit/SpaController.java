@@ -2,6 +2,7 @@ package com.sys.comeit;
 
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,9 @@ public class SpaController
 	  
 		  IAreaDAO areaDao = sqlSession.getMapper(IAreaDAO.class);
 		  ISpaTagDAO ispaTagDao = sqlSession.getMapper(ISpaTagDAO.class);
-		  
+		  ISpaTypeDAO ispaTypeDao = sqlSession.getMapper(ISpaTypeDAO.class);
+
+		  model.addAttribute("spaType", ispaTypeDao.cafeList());
 		  model.addAttribute("area", areaDao.areaList()); 
 		  model.addAttribute("spaTag",ispaTagDao.spaTagList());
 		  
@@ -57,6 +60,122 @@ public class SpaController
 			System.out.println(result);
 
 			return String.valueOf(result);
+		}
+		
+		// 공간 등록
+		@RequestMapping(value = "/spareqinsert.action", method = RequestMethod.POST)
+		public String spareqinsert(Model model, HttpServletRequest request)
+		{
+			String view = null;
+			ISpaReqDAO dao = sqlSession.getMapper(ISpaReqDAO.class);
+			HttpSession session = request.getSession(); 
+
+			String spa_cd = (String) session.getAttribute("spa_cd");
+			// 필수항목
+			String num = request.getParameter("num"); // 사업자 번호
+			String cafe_cd = request.getParameter("cafe"); // 카페유형
+			String onein = request.getParameter("onein"); // 한줄소개
+			String dtlin = request.getParameter("dtlin"); // 상세소개
+			String sparsv = request.getParameter("sparsv"); // 주의사항
+			
+
+			String img_url_file = request.getParameter("okFile"); // 첨부파일
+			String img_url_img = request.getParameter("okFile2"); // 공간 이미지
+			
+			String spc_area_cd = request.getParameter("spcArea"); // 세부지역 코드
+			
+			String spa = request.getParameter("spa"); // 상호명
+			String spapeo = request.getParameter("spapeo"); // 대표자명
+			String spaname = request.getParameter("spaname"); // 공간명
+			String spatel = request.getParameter("spatel"); // 업체 전화번호
+			String dtladdr = request.getParameter("dtladdr"); // 업체 상세주소
+			
+			System.out.println("파라미터 값");
+			/*
+			 * System.out.println(id); System.out.println(name); System.out.println(email);
+			 * System.out.println(tel); System.out.println(pwd);
+			 * System.out.println(idntt_cd); System.out.println(img_url);
+			 * System.out.println(mem_content); System.out.println(spc_area_cd);
+			 */
+			System.out.println("파라미터 끝");
+
+			SpaReqDTO dto = new SpaReqDTO();
+
+			dto.setRprsn_num(num);
+			dto.setSpa_type(cafe_cd);
+			dto.setOne_intro(onein);
+			dto.setDtl_intro(dtlin);
+			dto.setRsv_notes(sparsv);
+			dto.setFile_url(img_url_file);
+			dto.setImg_url(img_url_img);
+			dto.setSpc_area_cd(spc_area_cd);
+			dto.setBusi_name(spa);
+			dto.setRprsn_name(spapeo);
+			dto.setSpa_name(spaname);
+			dto.setTel(spatel);
+			dto.setDtl_addr(dtladdr);
+			dto.setSpa_cd(spa_cd);
+			
+			// 공간등록 프로시저 호출
+			dao.spaReqAdd(dto);
+			
+			
+			
+/*
+			String mem_cd = dto.getMem_cd(); // OUT 변수인 PK를 담기
+
+			System.out.println(mem_cd);
+
+			String[] intTagList = request.getParameterValues("intTagList"); // 선택한 모든 관심 키워드 배열에 넣기
+			String[] etcTagList = request.getParameterValues("etcTagList"); // 선택한 모든 관심 기타 키워드 배열에 넣기
+
+			System.out.println("그냥 관심 : " + intTagList.length);
+			System.out.println("기타 관심 : " + etcTagList.length);
+
+			if (mem_cd != null) // 회원 발급 코드 PK 가 NULL 이 아닐경우
+			{
+				if (intTagList.length > 0)
+				{
+					for (int i = 0; i < intTagList.length; i++) // 선택한 모든 관심 키워드 중에
+					{
+						dto.setInt_tag(intTagList[i]); // 자바를 키워드에 세팅하고
+
+						System.out.println("각 관심 : " + intTagList[i]);
+
+						dao.memIntTagInsert(dto); // 회원관심 키워드 insert 실행시키기
+					}
+				}
+				if (etcTagList.length > 0)
+				{
+					for (int i = 0; i < etcTagList.length; i++) // 선택한 모든 관심 기타 키워드 중에
+					{
+						// value에 따른 코드 뽑아내는 dao 호출
+
+						dto.setEtc_tag(etcTagList[i]); // 기타태그를 키워드에 세팅하고
+						System.out.println("각 기타 : " + etcTagList[i]);
+
+						dao.memEtcTagInsert(dto); // 기타 키워드 insert 실행시키기
+
+						int etcTagCount = dao.etcTagCount(etcTagList[i]);
+
+						if (etcTagCount == 10) // 회원 관심 기타 키워드 테이블 호출해서 10개일 경우
+							dao.addTagName(etcTagList[i]); // 그냥 관심키워드 테이블에 insert 시키기
+
+					}
+				}
+
+				view = "redirect:memberlogin.action"; // 회원가입 성공 시 로그인 페이지
+			} else
+			{
+				view = "redirect:memberjoin.action"; // 회원가입 실패 시 회원가입 페이지 유지
+
+			}
+
+			view = "redirect:memberlogin.action";
+
+			
+*/
+			return view;
 		}
 	  
 	 

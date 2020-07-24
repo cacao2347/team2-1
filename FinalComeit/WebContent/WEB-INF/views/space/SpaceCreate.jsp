@@ -15,6 +15,13 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/spacecreate.css">
+<!-- 글씨체 -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet"><style type="text/css">
+body{font-family: 'Noto Sans KR', sans-serif;}
+</style>
+<!-- 파비콘 -->
+<link rel="shortcut icon" href="<%=cp %>/assets/images/pen_1.ico" type="image/x-icon">
+<link rel="icon" href="<%=cp %>/assets/images/pen_1.ico" type="image/x-icon">
 <style type="text/css">
  body {
     background-image: url('assets/images/199.jpg');
@@ -22,6 +29,7 @@
 </style>
 <script type="text/javascript">
 var array = new Array();
+var arrayCon = new Array();
 
 
 	/* 페이지 전환 */
@@ -114,7 +122,6 @@ $(function(){
         }
     });
     
-    var check= false; // 파일 여부확인 
     // 사업자 파일
     $("#spanumfile").click(function()
       {
@@ -157,8 +164,61 @@ $(function(){
                     //alert(good);
                     //alert('<%=cp%>');
                     
-                    check=true;
                     $("#next1").removeAttr("disabled");
+                    $("#goodImg").attr("src", '<%=imagePath%>'+'/' + fileok.files[0].name);
+                 }
+            });
+         }
+      
+      })
+      
+      
+    // 대표사진여부
+    $("#uploadSpaBtn").click(function()
+      {
+         var myFormData = new FormData();
+         var fileok = document.getElementById("uploadSpaFile");
+         var fileCheck = null;
+         fileCheck = $("#uploadSpaFile").val();
+
+         //alert(fileCheck);
+         
+          //alert(fileok.files[0].name);
+         
+         myFormData.append("fileokSpa", fileok.files[0]);
+         
+         if(fileCheck == false)
+         {
+              alert("파일을 첨부해 주세요");
+              return;
+         }
+         else
+         {
+            $.ajax(
+            {
+                 url: '<%=cp%>/ajaximg.action',
+                 type: 'POST',
+                 processData: false, // important
+                 contentType: false,//'multipart/form-data', // important
+                 dataType : 'text',
+                 data: myFormData,
+                 async:false,
+                 success : function(data)
+                 {
+                     //alert($.trim(data));
+                     
+                     $('#okFile').val($.trim(data));
+                     
+             
+                    var good = $("#okFile").val();
+                    
+                    //alert(good);
+                    //alert('<%=cp%>');
+                    
+                    $("#spa").removeAttr("disabled");
+                    $("#spaname").removeAttr("disabled");
+                    $("#spapeo").removeAttr("disabled");
+                    $("#spatel").removeAttr("disabled");
                     $("#goodImg").attr("src", '<%=imagePath%>'+'/' + fileok.files[0].name);
                  }
             });
@@ -336,21 +396,29 @@ $(function(){
 	// 시설안내 추가 버튼
 	 $("#spaconup").click(function() 
     {
-		 var count=0;
 		 var spacon = document.getElementById("spacon").value;
-		 count=count+1;
-	   	  // 개수 제한
-	      if(count == 5)
+
+		 if(arrayCon.length == 5)
 	      {
 	    	  alert("시설안내는 최대 5개 까지만 등록 가능합니다.");
 	    	  return;
 	      }
+	   	  
+	      for (var i = 0; i < arrayCon.length; i++) 
+	      {
+				if(spacon == arrayCon[i])
+				{
+					alert("중복된 시설안내는 입력 할 수 없습니다.");
+					return;
+				}
+		  }
+	      
 	   	  if(spacon.trim()!="")
 	   	  {
 	   			$(".spaConBox").append("<div class='tagStyle'><span class='keyTag'> ※"+ spacon
 		    			  + "<input type='hidden' name='intTagList' value='"+ spacon + "'></span></div>");
 	   	  }
-	      array.push(spacon);
+	      arrayCon.push(spacon);
 	      $("#sparsv").removeAttr("disabled");
 	      $("#spaconup").removeAttr("disabled");
 	      $("#resetBtn").removeAttr("disabled");
@@ -361,7 +429,7 @@ $(function(){
 	 $("#resetBtn").click(function() 
      {
 		   $(".spaConBox").empty();
-		   array = [];
+		   arrayCon = [];
 		   $("#sparsv").attr("disabled", "disabled");
 		   $("#next3").attr("disabled", "disabled");
 	 });
@@ -376,28 +444,11 @@ $(function(){
 	    	$("#next3").removeAttr("disabled");
 	    }
 	});
-});
-
-	
-	// 지역에 따른 세부지역 불러오는 ajax
-	function ajaxSpcAreaRequest()
-	{
-		$.post("areaajax.action",
-		{
-			area_cd : $("#area").children("option:selected").val()
-		}, function(data)
-		{
-			//alert(data);
-			$("#spcAreaDiv").html(data);
-			$("#spcArea").removeAttr("disabled");
-		});
-	}
-	
 	
 	var checkspa = checkspapeo = checkspaname = checkspatel = false;
 	 // 상호명
     $('#spa').keyup(function(event){
-        if(($.trim($('#spa').val())!="" && checkspapeo==true && checkspaname==true && checkspatel==true)){
+        if(($.trim($('#spa').val())!="" && checkspapeo==true && checkspatel==true && checkspaname==true)){
         	$("#next4").removeAttr("disabled");
         	checkspa=true;
         }
@@ -409,7 +460,7 @@ $(function(){
     
     // 대표자명
     $('#spapeo').keyup(function(event){
-        if(($.trim($('#spapeo').val())!="" && checkspa==true && checkspaname==true && checkspatel==true)){
+        if(($.trim($('#spapeo').val())!="" && checkspa==true && checkspatel==true  && checkspaname==true)){
         	$("#next4").removeAttr("disabled");
         	checkspapeo=true;
         }
@@ -418,7 +469,7 @@ $(function(){
         	checkspapeo=true;
         }
     });
-		
+    
     // 공간명
     $('#spaname').keyup(function(event){
         if(($.trim($('#spaname').val())!="" && checkspa==true &&  checkspapeo==true && checkspatel==true )){
@@ -441,11 +492,52 @@ $(function(){
         {
         	checkspatel=true;
         }
-    });
+    }); 
+    
+/*  	// 세부지역입력
+	 $("#spcArea").keyup(function(event)
+   {
+		   $("#dtladdr").removeAttr("disabled");
+	 }); */
+    
+ 	// 상세주소 입력, 등록버튼 해제하기
+	 $("#dtladdr").change(function() 
+    {
+		   $("#finish").removeAttr("disabled");
+	 });
+	
+    
+});
 
-
-
-
+	
+	// 지역에 따른 세부지역 불러오는 ajax
+	function ajaxSpcAreaRequest()
+	{
+		$.post("areaajax.action",
+		{
+			area_cd : $("#area").children("option:selected").val()
+		}, function(data)
+		{
+			//alert(data);
+			$("#spcAreaDiv").html(data);
+			$("#spcArea").removeAttr("disabled");
+		});
+	}
+	
+	 $("#finish").click(
+	         function()
+	         {
+	            if ($("#dtladdr").val() == "" || $("#area").val() == 0
+	                  || $("#spcArea").val() == 0 )
+	            {
+	               $("#err").html("필수 입력 항목이 누락되었습니다.");
+	               $("#err").css("display", "inline");
+	               return;
+	            }
+	            $("#spaReqForm").submit();
+	   
+	         });
+	
 </script>
 </head>
 <body>
@@ -474,12 +566,12 @@ $(function(){
             </div>
             <div class="stepwizard-step col-xs-3"> 
                 <a href="#step-5" id="check5" type="button" class="btn btn-default btn-circle">5</a>
-                <p><small>위치</small></p><!--  & 사이트주소 -->
+                <p><small>위치 등록[지역]</small></p><!--  & 사이트주소 -->
             </div>
         </div>
     </div>
     
-    <form role="form">
+    <form id="spaReqForm" class="form-horizontal" role="form" method="post" action="spareqinsert.action">
         <div class="panel panel-primary show1" id="step-1"><br><br>
             <div class="panel-heading">
                  <h4 class="panel-title">"사업자번호"</h4>
@@ -592,7 +684,7 @@ $(function(){
                  	<h4 class="panel-title">"공간 정보"</h4>
             	</div>
                 <div class="form-group" id="spacondiv">
-                    <label class="control-label" for="1">공간 시설 안내<span class="red">*</span></label>
+                    <label class="control-label" for="1">공간 시설 안내(최대5개)<span class="red">*</span></label>
                     &nbsp;
                     <input type="button" id="spaconup" disabled="disabled" value="추가" class="keyBtn btn btn-primary" />
 					&nbsp;	<input type="button" disabled="disabled" id="resetBtn" value="초기화" class="keyBtn btn btn-primary" />
@@ -626,23 +718,29 @@ $(function(){
             <br><br>
             <div class="panel-body">
                 		대표이미지<span class="red">*</span> 
-                		<button class="btn btn-primary nextBtn pull-right" type="button" style="margin-left: 10px;" >등록</button>
-                		<br><br>상세이미지<span class="red">*</span>
-                		<button class="btn btn-primary nextBtn pull-right" type="button" style="margin-left: 10px;" >등록</button>
+                		<div class="form-inline">
+                		 <input type="file" id="uploadSpaFile" name="uploadSpaFile"
+		                  class="form-control" style="width: 65%;" />
+		               &nbsp;<button class="btn btn-primary" id="uploadSpaBtn" type="button">등록</button></div>
+                		<!-- <br><br>상세이미지<span class="red">*</span>
+                		<div class="form-inline">
+                		<input type="file" id="uploadFile" name="uploadFile"
+		                  class="form-control" style="width: 65%;" />
+		               &nbsp;<button class="btn btn-primary" id="proImgBtn" type="button">등록</button></div> -->
             </div>
             <br><br>
             <div class="panel-body">
                 <div class="form-inline">
                 		상호명<span class="red">*</span>: 
-                    	<input maxlength="50" type="text" id="spa" required="required" class="form-control key" placeholder="예) (주)길동" style="margin-left: 10px; margin-right: 10px;"/>
+                    	<input maxlength="50" type="text" id="spa" required="required" disabled="disabled" class="form-control key" placeholder="예) (주)길동" style="margin-left: 10px; margin-right: 10px;"/>
                     	대표자명<span class="red">*</span>: 
-                    	<input maxlength="50" type="text" id="spapeo" required="required" class="form-control key" placeholder="예) 홍길동" style="margin-right: 10px; margin-left: 10px;"/>
+                    	<input maxlength="50" type="text" id="spapeo" required="required" disabled="disabled" class="form-control key" placeholder="예) 홍길동" style="margin-right: 10px; margin-left: 10px;"/>
                     </div>
                      <div class="form-inline">
                     	공간명<span class="red">*</span>: 
-                    	<input maxlength="50" type="text" id="spaname" required="required" class="form-control key" placeholder="예) 길동이 가게" style="margin-left: 10px; margin-right: 10px;"/>
+                    	<input maxlength="50" type="text" id="spaname" required="required" disabled="disabled" class="form-control key" placeholder="예) 길동이 가게" style="margin-left: 10px; margin-right: 10px;"/>
                     	업체 전화번호<span class="red">*</span> : 
-                    	<input maxlength="50" type="text" id="spatel" required="required" class="form-control key onlyNumber" placeholder="예) 01000000000(- 제외)" style="margin-right: 10px; margin-left: 10px;"/>
+                    	<input maxlength="50" type="text" id="spatel" required="required" disabled="disabled" class="form-control key onlyNumber" placeholder="예) 01000000000(- 제외)" style="margin-right: 10px; margin-left: 10px;"/>
                     </div>
                 <button class="btn btn-primary nextBtn pull-right" type="button" disabled="disabled" id="next4">Next</button>
                 <br><br>
@@ -655,7 +753,7 @@ $(function(){
             </div>
             <div class="panel-body">
                 <div class="form-group">
-                <label class="control-label">위치 입력<span class="red">*</span></label>
+                <label class="control-label">위치 등록[지역]<span class="red">*</span></label>
                 <div class="form-group" id="areaMemNum">
 					<div class="col-lg-10" style="float: left; width: 225px;" >
 					
@@ -677,9 +775,9 @@ $(function(){
 					
 					</div>
 				</div><!-- end .areaMemNum -->
-					<br>
-					상세주소
-                    <input maxlength="200" type="text" required="required" class="form-control" placeholder="예) 홍대입구 2번출구" />
+					<br><br>
+					상세주소<span class="red">*</span>
+                    <input maxlength="200" type="text" id="dtladdr" class="form-control" placeholder="예) 홍대입구 2번출구" />
                 </div>
                 
                 
@@ -688,11 +786,13 @@ $(function(){
                  	<!-- <h4 class="panel-title" style="margin-bottom: 10px;">"사이트주소"</h4> -->
             	</div>
                 <div class="form-group">
-                    <!-- <label class="control-label">웹 사이트 주소</label> -->
-                    <!-- 지우면 next 버튼이 안돼서 히든으로 감춤... -->
-                    <input maxlength="200" id="url" type="hidden" required="required" class="form-control" placeholder="예) http://www.~~~.com" />
+                    <!-- <label class="control-label">웹 사이트 주소</label>
+                    <input maxlength="200" id="url" type="text" required="required" class="form-control" placeholder="예) http://www.~~~.com" /> -->
                 </div>
-                <button class="btn btn-success pull-right" type="submit" disabled="disabled" id="finish">Finish!</button>
+                <div class="errMsg">
+                   <span id="err"></span>
+                </div>
+                <button class="btn btn-success" type="submit" disabled="disabled" id="finish">Finish!</button>
                 <br><br>
             </div>
         </div>

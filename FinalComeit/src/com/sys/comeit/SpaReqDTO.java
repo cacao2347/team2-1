@@ -2,13 +2,47 @@ package com.sys.comeit;
 
 public class SpaReqDTO
 {
-	private String    spa_req_cd, spa_cd, spa_type;//등록요청 코드, 업체코드, 업체타입
-	   private String one_intro,dtl_intro, rsv_notes, req_date; //한줄 소개, 상세소개, 주의사항, 등록요청일
-	   private int use_hrs, str_time, end_time;//최대 이용시간, 시작시간, 종료시간
-	   private String busi_name, spa_name, dtl_addr, tel; // 상호명, 공간명, 상세주소, 전화번호
-	   private String rprsn_name, spa_addr; //대표자명, 사업장 주소
-	   private String web_url, file_url;//웹사이트, 사업자번호
+	private String spa_req_cd, spa_cd, spa_type;//등록요청 코드, 업체코드, 업체타입
+    private String one_intro,dtl_intro, rsv_notes, req_date; //한줄 소개, 상세소개, 주의사항, 등록요청일
+    private int use_hrs, str_time, end_time;//최대 이용시간, 시작시간, 종료시간
+    private String busi_name, spa_name, dtl_addr, tel; // 상호명, 공간명, 상세주소, 전화번호
+    private String rprsn_name, spa_addr; //대표자명, 사업장 주소
+    private String web_url, file_url;//웹사이트, 사업자번호파일
+    private String area_name, spc_area_name;						// 지역명, 세부지역명
+    private String rprsn_num,img_url ; //사업자번호, 대표이미지
+    private String spc_area_cd; //세부지역코드
+    
 	   
+	public String getSpc_area_cd() {
+		return spc_area_cd;
+	}
+	public void setSpc_area_cd(String spc_area_cd) {
+		this.spc_area_cd = spc_area_cd;
+	}
+	public String getImg_url() {
+		return img_url;
+	}
+	public void setImg_url(String img_url) {
+		this.img_url = img_url;
+	}
+	public String getRprsn_num() {
+		return rprsn_num;
+	}
+	public void setRprsn_num(String rprsn_num) {
+		this.rprsn_num = rprsn_num;
+	}
+	public String getArea_name() {
+		return area_name;
+	}
+	public void setArea_name(String area_name) {
+		this.area_name = area_name;
+	}
+	public String getSpc_area_name() {
+		return spc_area_name;
+	}
+	public void setSpc_area_name(String spc_area_name) {
+		this.spc_area_name = spc_area_name;
+	}
 	public String getSpa_req_cd()
 	{
 		return spa_req_cd;

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.sys.comeit.ISpaReqDAO">
+
+	<!-- 공간등록 -->
+	<select id="spaReqAdd" parameterType="com.sys.comeit.SpaReqDTO" statementType="CALLABLE">
+	   { CALL PRC_SPA_REQ
+	      (
+	         #{spa_cd}
+	         , #{spa_type}
+	         , #{one_intro}
+	         , #{use_hrs}
+	         , #{rsv_notes}
+	         , #{str_time}
+	         , #{end_time}
+	         , #{dtl_intro}
+	         , #{busi_name}
+	         , #{spa_name}
+	         , #{dtl_addr}
+	         , #{tel}
+	         , #{rprsn_name}
+	         , #{dtl_addr}
+	         , #{rprsn_num}
+	         , #{file_url}
+	         , #{web_url, jdbcType=VARCHAR}
+	         , #{spc_area_cd}
+	         , #{spa_req_cd, mode=OUT, jdbcType=VARCHAR}
+	      )
+	   }
+	</select>
+	
+
+
+
+
+
+<!-- 
+
+   
+	회원 관심 키워드
+	<insert id="memIntTagInsert">
+		INSERT INTO TBL_MEM_INT_TAG(MEM_INT_TAG_CD, MEM_CD, INT_TAG_CD)
+		VALUES('MEIT'||SEQ_MEM_INT_TAG.NEXTVAL, #{mem_cd}, #{int_tag})
+	</insert>
+	
+	회원 관심 기타 키워드
+	<insert id="memEtcTagInsert">
+		INSERT INTO TBL_MEM_INT_ETC_TAG(MEM_INT_ETC_TAG_CD, MEM_CD, ETC_TAG)
+		VALUES('MEIET'||SEQ_MEM_INT_ETC_TAG.NEXTVAL, #{mem_cd}, #{etc_tag})
+	</insert>
+	
+	회원 가입 기타 키워드 테이블 호출해서 10개인지 체크
+	<select id="etcTagCount" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS COUNT
+		FROM TBL_MEM_INT_ETC_TAG
+		WHERE ETC_TAG=#{etc_tag}
+	</select>
+	
+	관심 키워드에 INSERT
+	<insert id="addTagName">
+		INSERT INTO TBL_INT_TAG(INT_TAG_CD, INT_TAG)
+		VALUES('INT'||SEQ_INT_TAG.NEXTVAL, #{etc_tag})
+	</insert> -->
+   
+</mapper>

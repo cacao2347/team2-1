@@ -54,6 +54,8 @@ public class LoginController
       String loginType = request.getParameter("loginType");
       String name = null;
       String stopDate = null;
+      String spa_cd = null;
+      
       int blockCount = 0;
       
       
@@ -91,6 +93,9 @@ public class LoginController
     	  
     	  // 업체 블락 조회
     	  blockCount = spaDao.spaBlock(id);
+    	  
+    	  // 회원 코드
+          spa_cd = spaDao.spaCd(id);
     	  
       }
       else if(loginType.equals("2"))

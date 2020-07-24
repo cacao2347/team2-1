@@ -16,7 +16,7 @@ public class LogoutController
 		   HttpSession session = request.getSession(); 
 	      String view = null;
 	      session.invalidate();
-	      view = "/comeit.action";
+	      view = "/mainpage.action";
 	      
 	      return view;
 	   }
