@@ -11,8 +11,61 @@ public class SpaReqDTO
     private String area_name, spc_area_name;						// 지역명, 세부지역명
     private String rprsn_num,img_url ; //사업자번호, 대표이미지
     private String spc_area_cd; //세부지역코드
+    private String int_tag, etc_tag;						// 관심키워드, 기타관심키워드
+    private String img_type_cd;	// 이미지 타입
+    private String content;// 시설안내
+    private String spa_tag_type_cd,tag_name; // 키워드 코드, 명
+    
     
 	   
+	public String getSpa_tag_type_cd()
+	{
+		return spa_tag_type_cd;
+	}
+	public void setSpa_tag_type_cd(String spa_tag_type_cd)
+	{
+		this.spa_tag_type_cd = spa_tag_type_cd;
+	}
+	public String getTag_name()
+	{
+		return tag_name;
+	}
+	public void setTag_name(String tag_name)
+	{
+		this.tag_name = tag_name;
+	}
+	public String getContent()
+	{
+		return content;
+	}
+	public void setContent(String content)
+	{
+		this.content = content;
+	}
+	public String getImg_type_cd()
+	{
+		return img_type_cd;
+	}
+	public void setImg_type_cd(String img_type_cd)
+	{
+		this.img_type_cd = img_type_cd;
+	}
+	public String getInt_tag()
+	{
+		return int_tag;
+	}
+	public void setInt_tag(String int_tag)
+	{
+		this.int_tag = int_tag;
+	}
+	public String getEtc_tag()
+	{
+		return etc_tag;
+	}
+	public void setEtc_tag(String etc_tag)
+	{
+		this.etc_tag = etc_tag;
+	}
 	public String getSpc_area_cd() {
 		return spc_area_cd;
 	}

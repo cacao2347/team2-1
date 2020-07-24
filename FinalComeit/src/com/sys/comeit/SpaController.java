@@ -35,12 +35,12 @@ public class SpaController
 		  String view = null;
 	  
 		  IAreaDAO areaDao = sqlSession.getMapper(IAreaDAO.class);
-		  ISpaTagDAO ispaTagDao = sqlSession.getMapper(ISpaTagDAO.class);
 		  ISpaTypeDAO ispaTypeDao = sqlSession.getMapper(ISpaTypeDAO.class);
-
+		  ISpaReqDAO iSpaReqDao = sqlSession.getMapper(ISpaReqDAO.class);
+		  
 		  model.addAttribute("spaType", ispaTypeDao.cafeList());
 		  model.addAttribute("area", areaDao.areaList()); 
-		  model.addAttribute("spaTag",ispaTagDao.spaTagList());
+		  model.addAttribute("spaTag",iSpaReqDao.spaTagList());
 		  
 		  view = "WEB-INF/views/space/SpaceCreate.jsp";
 		  
@@ -57,7 +57,6 @@ public class SpaController
 			int aa = Integer.parseInt(request.getParameter("aa"));
 
 			int result = iSpaNumDao.spacheckCount(aa);
-			System.out.println(result);
 
 			return String.valueOf(result);
 		}
@@ -71,6 +70,7 @@ public class SpaController
 			HttpSession session = request.getSession(); 
 
 			String spa_cd = (String) session.getAttribute("spa_cd");
+			
 			// 필수항목
 			String num = request.getParameter("num"); // 사업자 번호
 			String cafe_cd = request.getParameter("cafe"); // 카페유형
@@ -78,27 +78,45 @@ public class SpaController
 			String dtlin = request.getParameter("dtlin"); // 상세소개
 			String sparsv = request.getParameter("sparsv"); // 주의사항
 			
-
 			String img_url_file = request.getParameter("okFile"); // 첨부파일
-			String img_url_img = request.getParameter("okFile2"); // 공간 이미지
+			String img_url_img = request.getParameter("uploadSpaFile"); // 공간 이미지
 			
 			String spc_area_cd = request.getParameter("spcArea"); // 세부지역 코드
-			
 			String spa = request.getParameter("spa"); // 상호명
 			String spapeo = request.getParameter("spapeo"); // 대표자명
 			String spaname = request.getParameter("spaname"); // 공간명
 			String spatel = request.getParameter("spatel"); // 업체 전화번호
+			int start = Integer.parseInt(request.getParameter("start").trim());  // 영업시작시간
+			int end = Integer.parseInt(request.getParameter("end").trim()); // 영업최대 이용시간
+			int max = Integer.parseInt(request.getParameter("max").trim()); // 영업최대 이용시간
 			String dtladdr = request.getParameter("dtladdr"); // 업체 상세주소
+			String web_url = null;
 			
-			System.out.println("파라미터 값");
-			/*
-			 * System.out.println(id); System.out.println(name); System.out.println(email);
-			 * System.out.println(tel); System.out.println(pwd);
-			 * System.out.println(idntt_cd); System.out.println(img_url);
-			 * System.out.println(mem_content); System.out.println(spc_area_cd);
-			 */
-			System.out.println("파라미터 끝");
-
+			
+			System.out.println(spa_cd);
+			System.out.println(num);
+			System.out.println(cafe_cd);
+			System.out.println(onein);
+			System.out.println(dtlin);
+			System.out.println(sparsv);
+			System.out.println(img_url_file);
+			System.out.println(img_url_img);
+			System.out.println(spc_area_cd);
+			System.out.println(spa);
+			System.out.println(spapeo);
+			System.out.println(spaname);
+			System.out.println(spatel);
+			System.out.println(start);
+			System.out.println(end);
+			System.out.println(max);
+			System.out.println(dtladdr);
+			
+			
+			
+			
+			
+			
+			
 			SpaReqDTO dto = new SpaReqDTO();
 
 			dto.setRprsn_num(num);
@@ -115,24 +133,29 @@ public class SpaController
 			dto.setTel(spatel);
 			dto.setDtl_addr(dtladdr);
 			dto.setSpa_cd(spa_cd);
+			dto.setUse_hrs(max);
+			dto.setStr_time(start); 
+			dto.setEnd_time(end);
+			dto.setWeb_url(web_url);
 			
 			// 공간등록 프로시저 호출
 			dao.spaReqAdd(dto);
 			
-			
-			
-/*
-			String mem_cd = dto.getMem_cd(); // OUT 변수인 PK를 담기
+			String spa_req_cd = dto.getSpa_req_cd(); // OUT 변수인 PK를 담기
 
-			System.out.println(mem_cd);
+			System.out.println(spa_req_cd);
 
-			String[] intTagList = request.getParameterValues("intTagList"); // 선택한 모든 관심 키워드 배열에 넣기
-			String[] etcTagList = request.getParameterValues("etcTagList"); // 선택한 모든 관심 기타 키워드 배열에 넣기
+			String[] intTagList = request.getParameterValues("intTagList"); // 선택한 모든 키워드 배열에 넣기
+			String[] etcTagList = request.getParameterValues("etcTagList"); // 선택한 모든 기타 키워드 배열에 넣기
 
 			System.out.println("그냥 관심 : " + intTagList.length);
 			System.out.println("기타 관심 : " + etcTagList.length);
+			
+			// 공간 이미지 설정
+			String img_type_cd = "IMGT1001";
+			
 
-			if (mem_cd != null) // 회원 발급 코드 PK 가 NULL 이 아닐경우
+			if (spa_req_cd != null) // 카페 등록 성공했을경우
 			{
 				if (intTagList.length > 0)
 				{
@@ -142,41 +165,51 @@ public class SpaController
 
 						System.out.println("각 관심 : " + intTagList[i]);
 
-						dao.memIntTagInsert(dto); // 회원관심 키워드 insert 실행시키기
+						dao.spaIntTagInsert(dto); // 키워드 insert 실행시키기
 					}
 				}
 				if (etcTagList.length > 0)
 				{
-					for (int i = 0; i < etcTagList.length; i++) // 선택한 모든 관심 기타 키워드 중에
+					for (int i = 0; i < etcTagList.length; i++) // 선택한 모든 기타 키워드 중에
 					{
-						// value에 따른 코드 뽑아내는 dao 호출
-
 						dto.setEtc_tag(etcTagList[i]); // 기타태그를 키워드에 세팅하고
 						System.out.println("각 기타 : " + etcTagList[i]);
 
-						dao.memEtcTagInsert(dto); // 기타 키워드 insert 실행시키기
+						dao.spaEtcTagInsert(dto); // 기타 키워드 insert 실행시키기
 
-						int etcTagCount = dao.etcTagCount(etcTagList[i]);
+						int etcTagCount = dao.spaEtcTagCount(etcTagList[i]);
 
-						if (etcTagCount == 10) // 회원 관심 기타 키워드 테이블 호출해서 10개일 경우
-							dao.addTagName(etcTagList[i]); // 그냥 관심키워드 테이블에 insert 시키기
-
+						if (etcTagCount == 10) // 기타 키워드 테이블 호출해서 10개일 경우
+							dao.spaAddTagName(etcTagList[i]); // 그냥 관심키워드 테이블에 insert 시키기
 					}
 				}
+				
+				// 공간 이미지 등록
+				dto.setImg_type_cd(img_type_cd);
+				dao.spaAddImg(dto);
+				
+				// 시설안내 등록
+				String[] contentList = request.getParameterValues("contentList"); // 모든 시설안내를 배열에 넣기
+				if (contentList.length > 0)
+				{
+					for (int i = 0; i < contentList.length; i++) // 모든 시설안내를
+					{
+						dto.setContent(contentList[i]); // 시설안내 set
+						System.out.println("시설안내 : " + contentList[i]);
 
-				view = "redirect:memberlogin.action"; // 회원가입 성공 시 로그인 페이지
+						dao.spaAddContent(dto); // 시설안내 insert 실행시키기
+					}
+				}
+				
+				view = "redirect:spalist.action"; // 회원가입 성공 시 로그인 페이지
 			} else
 			{
-				view = "redirect:memberjoin.action"; // 회원가입 실패 시 회원가입 페이지 유지
+				view = "redirect:spacreate.action"; // 회원가입 실패 시 회원가입 페이지 유지
 
 			}
 
-			view = "redirect:memberlogin.action";
-
+			view = "redirect:spalist.action";
 			
-*/
 			return view;
 		}
-	  
-	 
 }

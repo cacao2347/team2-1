@@ -32,37 +32,50 @@
 	   }
 	</select>
 	
-
-
-
-
-
-<!-- 
-
-   
-	회원 관심 키워드
-	<insert id="memIntTagInsert">
-		INSERT INTO TBL_MEM_INT_TAG(MEM_INT_TAG_CD, MEM_CD, INT_TAG_CD)
-		VALUES('MEIT'||SEQ_MEM_INT_TAG.NEXTVAL, #{mem_cd}, #{int_tag})
+	<!-- 키워드 리스트 -->
+	<select id="spaTagList" resultType="com.sys.comeit.SpaReqDTO">
+		SELECT SPA_TAG_TYPE_CD, TAG_NAME
+		FROM TBL_SPA_TAG_TYPE
+		ORDER BY SPA_TAG_TYPE_CD
+	</select>
+	
+	<!-- 관심 키워드에 INSERT -->
+	<insert id="spaAddTagName">
+		INSERT INTO TBL_SPA_TAG_TYPE(SPA_TAG_TYPE_CD, TAG_NAME)
+		VALUES('SPTGT'||SEQ_SPA_TAG_TYPE.NEXTVAL, #{etc_tag})
 	</insert>
 	
-	회원 관심 기타 키워드
-	<insert id="memEtcTagInsert">
-		INSERT INTO TBL_MEM_INT_ETC_TAG(MEM_INT_ETC_TAG_CD, MEM_CD, ETC_TAG)
-		VALUES('MEIET'||SEQ_MEM_INT_ETC_TAG.NEXTVAL, #{mem_cd}, #{etc_tag})
+	
+	<!-- 공간 키워드 -->
+	<insert id="spaIntTagInsert">
+		INSERT INTO TBL_SPA_TAG(SPA_TAG_CD, SPA_REQ_CD, SPA_TAG_TYPE_CD)
+		VALUES('SPTAG'||SEQ_SPA_TAG.NEXTVAL, #{spa_req_cd}, #{int_tag})
 	</insert>
 	
-	회원 가입 기타 키워드 테이블 호출해서 10개인지 체크
-	<select id="etcTagCount" resultType="java.lang.Integer">
+	<!-- 공간 기타 키워드 -->
+	<insert id="spaEtcTagInsert">
+		INSERT INTO TBL_SPA_ETC_TAG(SPA_ETC_TAG_CD, SPA_REQ_CD, ETC_TAG)
+		VALUES('SPECT'||SEQ_SPA_ETC_TAG.NEXTVAL, #{etc_tag})
+	</insert>
+	
+	<!-- 공간 가입 기타 키워드 테이블 호출해서 10개인지 체크 -->
+	<select id="spaEtcTagCount" resultType="java.lang.Integer">
 		SELECT COUNT(*) AS COUNT
-		FROM TBL_MEM_INT_ETC_TAG
+		FROM TBL_SPA_ETC_TAG
 		WHERE ETC_TAG=#{etc_tag}
 	</select>
 	
-	관심 키워드에 INSERT
-	<insert id="addTagName">
-		INSERT INTO TBL_INT_TAG(INT_TAG_CD, INT_TAG)
-		VALUES('INT'||SEQ_INT_TAG.NEXTVAL, #{etc_tag})
-	</insert> -->
+	<!-- 공간 이미지에 INSERT -->
+	<insert id="spaAddImg">
+		INSERT INTO TBL_SPA_IMG(SPA_IMG_CD, SPA_REQ_CD,IMG_TYPE_CD,IMG_URL)
+		VALUES('SPIMG'||SEQ_SPA_IMG.NEXTVAL, #{spa_req_cd},#{img_type_cd} , #{img_url})
+	</insert>
+	
+	<!-- 시설 안내 INSERT -->
+	<insert id="spaAddContent">
+		INSERT INTO TBL_FCLTY_INFO(FCLTY_INFO_CD, SPA_REQ_CD,CONTENT)
+		VALUES('FCINF'||SEQ_FCLTY_INFO.NEXTVAL, #{spa_req_cd},#{content})
+	</insert>
+
    
 </mapper>
