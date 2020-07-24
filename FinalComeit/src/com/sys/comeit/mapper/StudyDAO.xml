@@ -107,4 +107,11 @@
       ]]>
    </select>
    
+   <!-- 스터디방의 비밀번호 확인 -->
+	<select id="studyScrt" resultType="java.lang.String">
+		SELECT SCRT_NUM
+		FROM VIEW_STU_LIST
+		WHERE STU_CD = #{stu_cd}
+	</select>
+   
 </mapper>

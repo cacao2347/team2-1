@@ -21,7 +21,10 @@
 <link rel="icon" href="<%=cp %>/assets/images/pen_1.ico" type="image/x-icon">
 <style type="text/css">
 
-body{font-family: 'Noto Sans KR', sans-serif;}
+body
+{
+	font-family: 'Noto Sans KR', sans-serif !important;
+}
 
 </style>
 
@@ -80,10 +83,50 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 		});
 		
 		// 스터디 각각 리스트 클릭 시 
-		/* $(".study-title").click(function()
+		$(".titleBtn").click(function()
 		{
-			alert("리스트");
-		}); */
+			//var params = "scrtCheck" + $
+			//alert($(".stu_cd").val());
+			
+			//$(location).attr("href", "employeeupdateform.action?employeeId=" + $(this).val());
+			
+			alert($(this).val());
+			
+			var params = "stu_cd=" + $(this).val();
+			
+			$.ajax(
+			{
+				type : "POST"
+				, url : "stuscrtcheck.action"
+				, data : params
+				, dataType : "json"
+				, success : function(data)
+				{
+					if(data != 0)
+					{
+						var result = prompt("비밀번호를 입력해 주세요 : ");
+						
+						if(result=="" || result==null)
+							return;
+						else if(result == data)
+							location.href = "/FinalComeit/studydetail.action";
+						else if(result != data)
+							alert("비밀번호가 틀렸습니다!");
+					}
+					else
+					{
+						location.href = "/FinalComeit/studydetail.action";
+					}
+						
+					
+				}
+				, error : function(e)
+				{
+					alert(e.responseText);
+				}
+			});
+	
+		});
 		
 		// 스터디방 개설 버튼 클릭 시
 		$("#createBtn").click(function()
@@ -107,6 +150,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
           $("#spcArea").removeAttr("disabled");
        });
     }
+	
 
 </script>
 </head>
@@ -262,12 +306,15 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 								<div class="item-body">
 								<div class="firstLine">
 									<div class="listTitle">
-										<h4 class="study-title" style="font-weight: bold;">[${studys.cat_name }] ${studys.title }</h4>
+										<h4 class="study-title" style="font-weight: bold;">
+										<button type="button" class="btn btn-link titleBtn" value="${studys.stu_cd }">[${studys.cat_name }] ${studys.title }</button>
+										</h4>
 									</div>
 									
 									<c:if test="${studys.scrt_num ne '0'}">
 										<div class="lock">
 										<h5><span class="glyphicon glyphicon-lock icon" aria-hidden="true"></span></h5>
+										<input type="hidden" name=currentbook${status.index} class="scrtCheck" value="${studys.scrt_num }">
 										</div> 
 									</c:if>
 									

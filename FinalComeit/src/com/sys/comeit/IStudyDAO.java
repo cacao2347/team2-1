@@ -25,4 +25,6 @@ public interface IStudyDAO
 	public int studyCount();						// 스터디방 개수 조회
 	public ArrayList<StudyDTO> studyTagList();		// 모든 스터디 키워드들
 	
+	public String studyScrt(String stu_cd);			// 스터디방의 비밀번호 확인
+	
 }

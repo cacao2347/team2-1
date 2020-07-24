@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class StudyController
@@ -136,6 +137,25 @@ public class StudyController
 
 		return view;
 	}
+	
+	// 스터디 리스트에서 스터디 클릭 시 비밀번호 확인 AJAX 처리
+	@ResponseBody
+	@RequestMapping(value = "/stuscrtcheck.action", method = {RequestMethod.GET, RequestMethod.POST})
+	public String checkSpaIdAjax(HttpServletRequest request, Model model)
+	{
+
+		IStudyDAO studyDao = sqlSession.getMapper(IStudyDAO.class); // 스터디 정보
+
+		String stu_cd = request.getParameter("stu_cd");
+		System.out.println("스터디코드 : " + stu_cd);
+
+		String scrt_num = studyDao.studyScrt(request.getParameter("stu_cd"));
+		System.out.println("비밀번호 : " + scrt_num);
+
+		return String.valueOf(scrt_num);
+
+	}
+	
 
 	
 
