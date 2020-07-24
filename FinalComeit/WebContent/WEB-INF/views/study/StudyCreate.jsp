@@ -3,6 +3,7 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
+	String imagePath = cp + "/pds/saveData";
 %>
 <!DOCTYPE html>
 <html>
@@ -23,6 +24,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 <script type="text/javascript">
 		
 	var array = new Array();
+	var array2 = new Array();
 
     $(function(){
     	
@@ -106,6 +108,13 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 					return;
 				}
 				
+				if ($("#stuNum").val() > 15)
+				{
+					$("#err").html("모임 인원수는 15명 이하만 가능합니다.");
+					$("#err").css("display", "inline");
+					return;
+				}
+				
 				// 최종 submit
 				$("#joinForm").submit();
 	
@@ -167,6 +176,12 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 						}
 				  }
 			      
+			      if(selectedText.trim()=="")
+			     {
+			    	alert("공백은 입력할 수 없습니다.");
+			    	return;
+			     }
+			      
 			   	  // 키워드 개수 제한
 			      if(elementCount == 5)
 			      {
@@ -214,6 +229,206 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 				   $(".stuKeyBox").empty();
 				   array = [];
 			 });
+			 
+			 
+			// 요일 키워드 추가 버튼
+			 $("#dayAddBtn").click(function() 
+		     {
+			      var tmpHtml = "";
+			      var selectedKey = "";
+			      var dayInput = "";
+
+			      tmpHtml = tmpHtml + "";
+			      
+			      selectedText = $("#daySelect option:checked").text();
+			      selectedValue = $("#daySelect option:checked").val();
+			      dayInput = $("#dayInput").val();
+			      elementCount = $(".tagStyle2").length;
+			      
+			      for (var i = 0; i < array2.length; i++) 
+			      {
+						if(selectedText == array2[i])
+						{
+							alert(selectedText)
+							alert("중복된 키워드는 입력 할 수 없습니다.");
+							return;
+						}
+				  }
+			      
+			   	  // 요일 개수 제한
+			      if(elementCount == 4)
+			      {
+			    	  alert("요일은 최대 4개 까지 선택 할 수 있습니다.")
+			    	  return;
+			      }
+			      
+			      array2.push(selectedText);
+			      
+		    	  $(".stuDayBox").append("<div class='tagStyle2'><span class='dayTag'>"+ selectedText 
+		    			  + "<input type='hidden' name='dayList' value='"+ selectedValue + "'></span></div>");			    	  
+			      
+			 });
+			
+			 
+			 // 요일 삭제 버튼
+			 $("#dayResetBtn").click(function() 
+		     {
+				   $(".stuDayBox").empty();
+				   array2 = [];
+			 });
+			 
+			 
+			 // 대표 이미지 등록
+			 $("#proImgBtn").click(function()
+	                 {
+	                	 var result = confirm('정말 등록하시겠습니까?'); 
+	                	 
+	                	 if(result) 
+	                	 { 
+	                		 //yes location.replace('index.php');
+	                		 //alert("하이");
+	                            var myFormData = new FormData();
+	                            alert(myFormData);
+	                            
+	                            var fileok = document.getElementById("uploadFile");
+	                            
+	                            var fileCheck = null;
+	                            fileCheck = $("#uploadFile").val();
+
+	                            alert(fileCheck);
+	                            
+	                            var filename = fileok.files[0].name;
+	                            
+	                            alert(filename);
+	                            
+	                            myFormData.append("fileok", fileok.files[0]);
+	                            
+	                            if(fileCheck == false)
+	                            {
+	                                 alert("파일을 첨부해 주세요");
+	                                 return;
+	                            }
+	                            else
+	                            {
+	                               $.ajax(
+	                               {
+	                                    url: '<%=cp%>/ajaximg.action',
+	                                    type: 'POST',
+	                                    processData: false, // important
+	                                    contentType: false,//'multipart/form-data', // important
+	                                    dataType : 'text',
+	                                    data: myFormData,
+	                                    
+	                                    success : function(data)
+	                                    {
+	                                        alert($.trim(data));
+	                                        
+	                                        $('#okFile').val($.trim(data));
+	                                        
+	                                       //$("#img_form_url").attr("src", imgurl);
+	                                
+	                                       var good = $("#okFile").val();
+	                                       
+	                                       //alert(good);
+	                                       
+	                                       var pics = good.substr(101);
+	                                       
+	                                       //alert(pics);
+	                                       
+	                                       /* $("#gmd").attr("src",  '/FinalComeit/pds/saveData/back028.jpg' ); */
+	                                       
+	                                       <%-- $("#gmd").attr("src",  '<%=imagePath%>/' + pics); --%>
+	                                       
+	                                       <%-- alert(<%=cp%>); --%>
+	                                       <%-- alert(<%=imagePath%>); --%>
+	                                       <%-- alert(<%=imagePath%>/fileok.files[0]); --%>
+	                                       
+	                                       <%-- <%=imagePath%>/" + pics + " --%>
+	                                       
+	                                    }
+	                               })
+	                            }
+	                     } 
+	                	 else 
+	                     { 
+	                    	 //no 
+	                     }
+
+	                            
+	                         
+	                  })
+	                         
+	                  
+	                         
+               	 var xOffset = 5;
+                 var yOffset = 15;
+                    
+               	 // 마우스 오버시 미리보기 이미지 설정 및 위치 설정
+                     $(document).on("mouseover", "#thumbnail", function (e) { //마우스 오버시
+                         // 미리보기 이미지 설정
+                         
+                         var okFile = $("#okFile").val();
+                     
+                     	  if(okFile == false)
+                         {
+                     		  //alert("등록된 파일이 없습니다.");
+                     		  return;
+                         }
+                     	  else
+                     	  {
+                     		var div = $("<div>", {id: "preview"});
+                           /* var img = $("<img>", {src: $(this).attr("href")}); */
+                           
+                           //alert(pics);
+                           
+                           <%-- var img = "<img id='bye' src='<%=imagePath%>/" + pics + "' style='width: 400px; height: 200px;'>"; --%>
+                           
+                           //alert(okFile);
+                           
+                           var newpics = okFile.substr(101);
+                           
+                           var img = "<img id='bye' src='<%=imagePath%>/" + newpics + "' style='width: 400px; height: 200px;'>";
+                           
+                           //alert(img);
+                           
+                           div.append(img);
+                           
+                           $("body").append(div);
+                           
+                           <%-- $('#bye').attr('src').change(function() 
+                  	 		{
+                           	 $('#bye').attr('src','<%=imagePath%>/" + pics + "');
+                  	 		}); --%>
+
+                           // 마우스 오버에 따른 위치 설정
+                           $("#preview")
+                               .css("top", (e.pageY - xOffset) + "px")
+                               .css("left", (e.pageX + yOffset) + "px")
+                               .fadeIn("fast"); 
+                     	  }
+                         
+                         
+                     }); 
+                     
+                     // 마우스 이동시 위치 변경
+                     $(document).on("mousemove", "#thumbnail", function (e) {
+                         $("#preview")
+                             .css("top", (e.pageY - xOffset) + "px")
+                             .css("left", (e.pageX + yOffset) + "px");
+                     });
+
+
+                     // 마우스 아웃시 이미지 제거
+                     $(document).on("mouseout", "#thumbnail", function () 
+                     { //마우스 아웃시
+                        $("#preview").remove()
+                     });
+			 
+			 
+			 
+			 
+			 
+			 
 
 	});
     
@@ -312,7 +527,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 								<option value="${intTag.int_tag_cd }">${intTag.int_tag }</option>
 							</c:forEach>
 						</select> &nbsp; <input type="text" class="keyInput form-control"
-							id="keyInput" placeholder="관심 키워드를 입력해 주세요." style="width: 30%"
+							id="keyInput" placeholder="기타 관심 키워드를 입력해 주세요." style="width: 30%"
 							readonly="readonly" /> &nbsp; <input type="button" id="keyAddBtn"
 							value="추가" class="keyBtn btn btn-primary" /> &nbsp; <input
 							type="button" id="keyResetBtn" value="초기화"
@@ -341,21 +556,19 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 				</label>
 
 			</div>
-			<div class="stuKey1">
-				<div class="stuKeySel">
+			<div class="stuDay1">
+				<div class="stuDaySel">
 					<div class="col-lg-10 form-inline">
 						
-						<select name="keySelect" id="keySelect"
-							class="form-control keySelect">
+						<select name="daySelect" id="daySelect"
+							class="form-control daySelect">
 							<c:forEach var="days" items="${day }">
 								<option value="${days.day_cd }">${days.day_name }</option>
 							</c:forEach>
-						</select> &nbsp; <input type="text" class="keyInput form-control"
-							id="keyInput" placeholder="관심 키워드를 입력해 주세요." style="width: 30%"
-							readonly="readonly" /> &nbsp; <input type="button" id="keyAddBtn"
-							value="추가" class="keyBtn btn btn-primary" /> &nbsp; <input
-							type="button" id="keyResetBtn" value="초기화"
-							class="keyBtn btn btn-primary" />
+						</select> &nbsp; <input type="button" id="dayAddBtn"
+							value="추가" class="dayBtn btn btn-primary" /> &nbsp; <input
+							type="button" id="dayResetBtn" value="초기화"
+							class="dayBtn btn btn-primary" />
 
 					</div>
 					<!-- end / col-lg-10 form-inline -->
@@ -366,9 +579,9 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 		</div>
 		
 		<div class="form-group">
-			<label for="inputKeyBox" class="col-lg-2 control-label"></label>
+			<label for="inputdayBox" class="col-lg-2 control-label"></label>
 			<div class="col-lg-10 form-inline">
-				<div id="stuKeyBox" class="stuKeyBox" style="width: 85%;"></div>
+				<div id="stuDayBox" class="stuDayBox" style="width: 85%;"></div>
 				<!-- end .stuKeyBox -->
 			</div>
 		</div><!-- 모임 지정 요일 영역 끝 -->
@@ -415,7 +628,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 			</label>
 			<div class="col-lg-10 form-inline">
 				<input type="text" class="start form-control" id="start"  name="start"
-					placeholder="시작날짜를 선택하세요." style="width: 40%;" readonly="readonly"/>
+					placeholder="시작날짜를 선택하세요." style="width: 40%;"/>
 			</div>
 			
 		</div>
@@ -431,7 +644,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 					<option value="0">기간 선택</option>
 					
 					<c:forEach var="meetTerms" items="${meetTerm }">
-						<option value="${meetTerms.meet_term_cd }">${meetTerms.meet_term }
+						<option value="${meetTerms.meet_term_cd }">${meetTerms.meet_term }개월
 						</option>
 					</c:forEach>
 				</select>
@@ -490,19 +703,19 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 		
 		<!-- 대표 이미지 -->
 		<div class="image form-group">
-			<label for="profileimage" class="col-lg-2 control-label">대표
-				이미지</label>
-			<div class="col-lg-10 form-inline">
-				<!-- <form action="Test_ok.jsp" method="post" enctype="multipart/form-data"> -->
-				<input type="file" id="uploadFile" name="uploadFile"
-					class="form-control" style="width: 60%;" /> &nbsp;
-				<button class="btn btn-primary" id="proImgBtn" type="button">등록</button>
-				<div id="miri">
-					<img src="" id="goodImg" style="width: 100px; height: 100px;">
-				</div>
-				<input type="hidden" id="okFile" name="okFile" class="form-control">
-			</div>
-		</div>
+            <label for="profileimage" class="col-lg-2 control-label">대표
+               이미지</label>
+            <div class="col-lg-10 form-inline">
+               <!-- <form action="Test_ok.jsp" method="post" enctype="multipart/form-data"> -->
+               <input type="file" id="uploadFile" name="uploadFile"
+                  class="form-control" accept=".gif, .jpg, .png, .jpeg" style="width: 65%;" />
+               <input type="text"
+                  class="form-control" id="thumbnail" style="width: 20%;" readonly="readonly" value="미리보기">
+               &nbsp;
+               <button class="btn btn-primary" id="proImgBtn" type="button">등록</button>
+               <input type="text" id="okFile" name="okFile" class="btn btn-primary">
+            </div>
+         </div>
 		
 
 		<div class="form-group">

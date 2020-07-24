@@ -30,6 +30,17 @@ public class StudyDTO
 	// 종료날짜, 모임 지정 요일, 비밀방 설정 여부
 	// 대표이미지, 스터디신분, 레벨코드, 신분코드
 	
+	private String stu_day_cd;			// 스터디 진행 요일 코드
+
+	public String getStu_day_cd()
+	{
+		return stu_day_cd;
+	}
+
+	public void setStu_day_cd(String stu_day_cd)
+	{
+		this.stu_day_cd = stu_day_cd;
+	}
 
 	// 개설 프로시저 : 개설자, 세부지역, 모임기간코드, 신분코드, 레벨코드, 카테고리코드, 제목, 시작날짜, 인원수, 내용
 	private String crt_mem_cd, spc_area_cd, meet_term_cd, idntt_cd, lv_cd, stu_cat_cd, img_url;

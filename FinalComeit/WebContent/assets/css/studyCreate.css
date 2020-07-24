@@ -1,5 +1,9 @@
 
 @charset "UTF-8";
+.padding .container-fluid .listBody 
+{
+	font-size: 11pt !important;
+}
 html, body
 {
    overflow-x:hidden;
@@ -13,10 +17,7 @@ h1, h4 , .m
 {
 	font-weight: bold;
 }
-.listBody
-{
-	font-size: 12pt;
-}
+
 .must
 {
 	color: red;
@@ -129,14 +130,21 @@ h1, h4 , .m
 
 .stuKeyBox
 {
-	width: 990px;
-	height: 100px;
-	border: 1px solid #d9d9d9;
-	border-radius: 5px;
 	margin-bottom: 10px;
 }
 
 .tagStyle
+{
+	display : inline-block;
+	border: 1px solid #d9d9d9;
+	border-radius: 10px;
+	background-color: #D0DAEA;
+	margin-top: 5px;
+	margin-left: 5px;
+	color: black;
+	padding: 2px 6px 2px 6px;
+}
+.tagStyle2
 {
 	display : inline-block;
 	border: 1px solid #d9d9d9;

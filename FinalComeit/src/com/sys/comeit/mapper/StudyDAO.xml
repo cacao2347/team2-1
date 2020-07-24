@@ -84,14 +84,14 @@
    </select>
    
    <!-- 전체 스터디방 개수 조회 -->
-   <!-- 총 멤버 회원 수 조회 count() -->
+   <!-- 총 스터디방 개수 조회 count() -->
    <select id="studyCount" resultType="java.lang.Integer">
       SELECT COUNT(*) AS COUNT
       FROM VIEW_STU_LIST
       WHERE STR_DATE <![CDATA[<]]> SYSDATE AND END_DATE <![CDATA[>]]> SYSDATE
    </select>
    
-   <!-- 모든 스터디방의 각 관심 키워드 -->
+   <!-- 모든 스터디방의 관심 키워드 -->
    <select id="studyTagList" resultType="com.sys.comeit.StudyDTO">
       <![CDATA[
       	SELECT STU_CD, INT_TAG AS INT_TAG_NAME
@@ -113,5 +113,58 @@
 		FROM VIEW_STU_LIST
 		WHERE STU_CD = #{stu_cd}
 	</select>
+	
+	<!-- 스터디 개설 -->
+	<select id="studyInsert" parameterType="com.sys.comeit.SpaReqDTO" statementType="CALLABLE">
+		{ CALL PRC_STU_CREATE
+		   (
+		      #{crt_mem_cd}
+		      , #{spc_area_cd}
+		      , #{meet_term_cd}
+		      , #{idntt_cd}
+		      , #{lv_cd}
+		      , #{stu_cat_cd}
+		      , #{title}
+		      , #{str_date}
+		      , #{mem_num}
+		      , #{content}
+		      , #{img_url, jdbcType=VARCHAR}
+		      , #{scrt_num, jdbcType=VARCHAR}
+		      , #{stu_cd, mode=OUT, jdbcType=VARCHAR}
+		   )
+		}
+	</select>
+	
+	<!-- 스터디 관심 키워드 -->
+	<insert id="studyIntTagInsert">
+		INSERT INTO TBL_STU_INT_TAG(STU_INT_TAG_CD, STU_CD, INT_TAG_CD)
+		VALUES('STITG'||SEQ_STU_INT_TAG.NEXTVAL, #{stu_cd}, #{int_tag_cd})
+	</insert>
+	
+	<!-- 스터디 관심 기타 키워드 -->
+	<insert id="studyEtcTagInsert">
+		INSERT INTO TBL_STU_INT_ETC_TAG(STU_INT_ETC_TAG_CD, STU_CD, ETC_TAG)
+		VALUES('STIET'||SEQ_STU_INT_ETC_TAG.NEXTVAL, #{stu_cd}, #{etc_tag_cd})
+	</insert>
+	
+	<!-- 스터디 관심 기타 키워드 테이블 호출해서 10개인지 체크 -->
+	<select id="studyEtcTagCount" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS COUNT
+		FROM TBL_STU_INT_ETC_TAG
+		WHERE ETC_TAG=#{etc_tag_name}
+	</select>
+	
+	<!-- 관심 키워드에 INSERT -->
+	<insert id="addTagName">
+		INSERT INTO TBL_INT_TAG(INT_TAG_CD, INT_TAG)
+		VALUES('INT'||SEQ_INT_TAG.NEXTVAL, #{etc_tag_name})
+	</insert>
+	
+	<!-- 스터디 진행 요일 키워드 -->
+	<insert id="studyDayInsert">
+		INSERT INTO TBL_STU_PRG_DAY(STU_PRG_DAY_CD, STU_CD, DAY_CD)
+		VALUES('SPRDY'||SEQ_STU_PRG_DAY.NEXTVAL, #{stu_cd}, ${stu_day_cd})
+	</insert>
+	
    
 </mapper>
