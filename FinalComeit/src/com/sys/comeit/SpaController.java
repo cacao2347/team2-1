@@ -54,9 +54,9 @@ public class SpaController
 		{
 			ISpaNumDAO iSpaNumDao = sqlSession.getMapper(ISpaNumDAO.class);
 
-			int aa = Integer.parseInt(request.getParameter("aa"));
+			int num = Integer.parseInt(request.getParameter("num"));
 
-			int result = iSpaNumDao.spacheckCount(aa);
+			int result = iSpaNumDao.spacheckCount(num);
 
 			return String.valueOf(result);
 		}
@@ -79,7 +79,7 @@ public class SpaController
 			String sparsv = request.getParameter("sparsv"); // 주의사항
 			
 			String img_url_file = request.getParameter("okFile"); // 첨부파일
-			String img_url_img = request.getParameter("uploadSpaFile"); // 공간 이미지
+			String img_url_img = request.getParameter("fileokSpa"); // 공간 이미지
 			
 			String spc_area_cd = request.getParameter("spcArea"); // 세부지역 코드
 			String spa = request.getParameter("spa"); // 상호명
@@ -110,8 +110,6 @@ public class SpaController
 			System.out.println(end);
 			System.out.println(max);
 			System.out.println(dtladdr);
-			
-			
 			
 			
 			
@@ -210,6 +208,27 @@ public class SpaController
 
 			view = "redirect:spalist.action";
 			
+			return view;
+		}
+		
+		
+		@RequestMapping(value = "/ajaxspafile.action", method = RequestMethod.POST)
+		public String ajaxSpaFile()
+		{
+			String view = null;
+
+			view = "WEB-INF/views/space/AjaxSpaFile.jsp";
+
+			return view;
+		}
+		
+		@RequestMapping(value = "/ajaxspaimg.action", method = RequestMethod.POST)
+		public String ajaxSpaImg()
+		{
+			String view = null;
+
+			view = "WEB-INF/views/space/AjaxSpaImg.jsp";
+
 			return view;
 		}
 }

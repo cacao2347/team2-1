@@ -28,7 +28,7 @@ public class LoginController
    @Autowired
    private SqlSession sqlSession;
    
-   @RequestMapping(value = "/memberlogin.action", method = RequestMethod.GET)
+   @RequestMapping(value = "/memberlogin.action", method = {RequestMethod.GET, RequestMethod.POST})
    public String memberLogin(Model model)
    {
       String view = null;
@@ -39,7 +39,7 @@ public class LoginController
    }
    
    // 로그인 처리
-   @RequestMapping(value = "/login.action", method = RequestMethod.POST)
+   @RequestMapping(value = "/login.action",method = {RequestMethod.GET, RequestMethod.POST})
    public String memberLoginCheck(HttpServletRequest request)
    {
 	  HttpSession session = request.getSession();   
@@ -95,7 +95,7 @@ public class LoginController
     	  blockCount = spaDao.spaBlock(id);
     	  
     	  // 회원 코드
-          spa_cd = spaDao.spaCd(id);
+    	  spa_cd = spaDao.spaCd(id);
     	  
       }
       else if(loginType.equals("2"))
@@ -132,6 +132,7 @@ public class LoginController
       session.setAttribute("id", id);
       session.setAttribute("pwd", pwd); 	 
       session.setAttribute("loginType", loginType);
+      session.setAttribute("spa_cd", spa_cd); // 업체 코드
       
       // 테스트
 	  // System.out.println(name+id+pwd+loginType+stopDate);
@@ -143,7 +144,7 @@ public class LoginController
    
    
    // 아이디 찾기 뷰
-   @RequestMapping(value = "/searchid.action", method = RequestMethod.GET)
+   @RequestMapping(value = "/searchid.action", method = {RequestMethod.GET, RequestMethod.POST})
    public String searchIdView(HttpServletRequest request)
    {
 	   HttpSession session = request.getSession();
@@ -161,7 +162,7 @@ public class LoginController
    }
    
    // 찾은 아이디 값
-   @RequestMapping(value = "/searchidcheck.action", method = RequestMethod.POST)
+   @RequestMapping(value = "/searchidcheck.action", method = {RequestMethod.GET, RequestMethod.POST})
    public ModelAndView loginSearchId(HttpServletRequest request)
    {
       ModelAndView mav = new ModelAndView();  

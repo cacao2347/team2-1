@@ -55,7 +55,7 @@
 	<!-- 공간 기타 키워드 -->
 	<insert id="spaEtcTagInsert">
 		INSERT INTO TBL_SPA_ETC_TAG(SPA_ETC_TAG_CD, SPA_REQ_CD, ETC_TAG)
-		VALUES('SPECT'||SEQ_SPA_ETC_TAG.NEXTVAL, #{etc_tag})
+		VALUES('SPECT'||SEQ_SPA_ETC_TAG.NEXTVAL, #{spa_req_cd} , #{etc_tag})
 	</insert>
 	
 	<!-- 공간 가입 기타 키워드 테이블 호출해서 10개인지 체크 -->

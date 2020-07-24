@@ -163,18 +163,18 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                 		 //yes location.replace('index.php');
                 		 //alert("하이");
                             var myFormData = new FormData();
-                            //alert(myFormData);
+                            alert(myFormData);
                             
                             var fileok = document.getElementById("uploadFile");
                             
                             var fileCheck = null;
                             fileCheck = $("#uploadFile").val();
 
-                            //alert(fileCheck);
+                            alert(fileCheck);
                             
-                            //var filename = fileok.files[0].name;
+                            var filename = fileok.files[0].name;
                             
-                            //alert(filename);
+                            alert(filename);
                             
                             myFormData.append("fileok", fileok.files[0]);
                             
@@ -196,7 +196,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                                     
                                     success : function(data)
                                     {
-                                        //alert($.trim(data));
+                                        alert($.trim(data));
                                         
                                         $('#okFile').val($.trim(data));
                                         
@@ -1022,7 +1022,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                   class="form-control" id="thumbnail" style="width: 20%;" readonly="readonly" value="미리보기">
                &nbsp;
                <button class="btn btn-primary" id="proImgBtn" type="button">등록</button>
-               <input type="hidden" id="okFile" name="okFile" class="btn btn-primary">
+               <input type="text" id="okFile" name="okFile" class="btn btn-primary">
             </div>
          </div>
 

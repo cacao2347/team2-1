@@ -126,9 +126,9 @@ $(function(){
     $("#spanumfile").click(function()
       {
          var myFormData = new FormData();
-         var fileok = document.getElementById("okFile");
+         var fileok = document.getElementById("uploadFile");
          var fileCheck = null;
-         fileCheck = $("#okFile").val();
+         fileCheck = $("#uploadFile").val();
 
          //alert(fileCheck);
          
@@ -145,7 +145,7 @@ $(function(){
          {
             $.ajax(
             {
-                 url: '<%=cp%>/ajaximg.action',
+                 url: '<%=cp%>/ajaxspafile.action',
                  type: 'POST',
                  processData: false, // important
                  contentType: false,//'multipart/form-data', // important
@@ -154,7 +154,7 @@ $(function(){
                  async:false,
                  success : function(data)
                  {
-                     //alert($.trim(data));
+                     alert($.trim(data));
                      
                      $('#okFile').val($.trim(data));
                      
@@ -196,7 +196,7 @@ $(function(){
          {
             $.ajax(
             {
-                 url: '<%=cp%>/ajaximg.action',
+                 url: '<%=cp%>/ajaxspaimg.action',
                  type: 'POST',
                  processData: false, // important
                  contentType: false,//'multipart/form-data', // important
@@ -207,10 +207,10 @@ $(function(){
                  {
                      //alert($.trim(data));
                      
-                     $('#okFile').val($.trim(data));
+                     $('#fileokSpa').val($.trim(data));
                      
              
-                    var good = $("#okFile").val();
+                    var good = $("#fileokSpa").val();
                     
                     //alert(good);
                     //alert('<%=cp%>');
@@ -632,21 +632,25 @@ $(function(){
 						입력한 사업자 번호와 동일한 파일을 업로드 해야합니다. 후 관리자의 검수기간을 거쳐 승인된 공간만 활동할 수 있습니다.<br> 지금 사업자등록번호를 입력해 공간을 등록 하세요!<br>
                      <label class="control-label" style="margin-left: 50px;"></label><br><br><br>
                      <label class="control-label" for="num">사업자등록번호 입력<span class="red">*</span></label>
-                     <label class="control-label aa2" for="okFile" >첨부파일 업로드<span class="red">*</span></label><br>
-                     
                      <div class="spain">
-                     <div class="aadiv form-inline">
-                	 	<input maxlength="40" type="text"  name="housing" id="num" 
+                     <div class="aadiv">
+                     <div class="form-inline">
+                	 	<input maxlength="40" type="text" id="num" 
                 		  class="onlyNumber form-control aa"  name="num" placeholder="숫자만 입력" />
-                		  <button type="button" id="dupBtn" class="btn btn-primary">인증</button>
+                		  <button type="button" id="dupBtn" class="btn btn-primary">인증</button></div>
                 		  </div>
-                		 <button class="btn btn-primary pull-right aa2" type="button" id="spanumfile" disabled="disabled">등록</button>
-                		 <input type="file"  name="housing" name="okFile" id="okFile" class="aa2 aa form-control"/>
+                		  <label class="control-label" for="okFile" >첨부파일 업로드<span class="red">*</span></label><br>
+                		  <div class="form-inline">
+                		 <input type="file" id="uploadFile" name="uploadFile"
+                  class="form-control" accept=".gif, .jpg, .png, .jpeg" style="width: 65%;" />
+                  <button class="btn btn-primary " type="button" id="spanumfile" disabled="disabled">등록</button></div>
+                		 <input type="hidden" id="okFile" name="okFile" class="btn btn-primary">
                 	 </div>
                 	 <div class="errMsg">
                     	<span id="err"></span>
                     </div>
                 </div>
+                
                 <button class="btn btn-primary nextBtn pull-right" disabled="disabled" type="button" id="next1">Next</button>
                 <div class="errMsg">
                		<span id="err1"></span>
@@ -775,8 +779,9 @@ $(function(){
             <div class="panel-body">
                 		대표이미지<span class="red">*</span> 
                 		<div class="form-inline">
-                		 <input type="file" id="uploadSpaFile" name="uploadSpaFile"
-		                  class="form-control" style="width: 65%;" />
+		                  <input type="file" id="uploadSpaFile" name="uploadSpaFile"
+                  class="form-control" accept=".gif, .jpg, .png, .jpeg" style="width: 65%;" />
+                		 <input type="hidden" id="fileokSpa" name="fileokSpa" class="btn btn-primary">
 		               &nbsp;<button class="btn btn-primary" id="uploadSpaBtn" type="button">등록</button></div>
                 		<!-- <br><br>상세이미지<span class="red">*</span>
                 		<div class="form-inline">
