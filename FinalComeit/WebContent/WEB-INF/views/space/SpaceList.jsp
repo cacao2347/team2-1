@@ -10,7 +10,97 @@
 <head>
 <meta charset="UTF-8">
 <title>COME-IT</title>
+<style type="text/css">
+[class*=' imghvr-'],[class^=imghvr-]
+{
+	font-family:Montserrat,sans-serif;
+	position:relative;
+	display:inline-block;
+	margin:0;
+	max-width:100%;
+	background-color:rgba(230,230,230,.7);
+	color:#666;overflow:hidden
+	;-moz-osx-font-smoothing:grayscale;
+	-webkit-backface-visibility:hidden;
+	backface-visibility:hidden;
+	-webkit-transform:translateZ(0);
+	transform:translateZ(0)
+}
+[class*=' imghvr-'] figcaption,[class^=imghvr-] figcaption
+{
+	background-color:rgba(255,255,255,.9);
+	padding:20px;
+	position:absolute;
+	top:15px;
+	bottom:15px;
+	left:15px;
+	right:15px;
+	border:1px solid rgba(0,0,0,.1)
+}
 
+[class*=' imghvr-'] a,[class^=imghvr-] a
+{ 
+	position:absolute;
+	top:0;
+	bottom:0;
+	left:0;
+	right:0;
+	z-index:1
+}
+[class*=' imghvr-'],[class*=' imghvr-'] *,[class*=' imghvr-'] :after,[class*=' imghvr-'] :before,[class*=' imghvr-']:after,[class*=' imghvr-']:before,[class^=imghvr-],[class^=imghvr-] *,[class^=imghvr-] :after,[class^=imghvr-] :before,[class^=imghvr-]:after,[class^=imghvr-]:before
+{
+	-webkit-box-sizing:border-box;
+	box-sizing:border-box;
+	-webkit-transition:all .35s ease;
+	transition:all .35s ease
+}
+
+[class*=' imghvr-push-']:hover figcaption,[class*=' imghvr-slide-']:hover figcaption,[class^=imghvr-push-]:hover figcaption,[class^=imghvr-slide-]:hover figcaption
+{
+	-webkit-transform:translate(0,0);transform:translate(0,0)
+}
+
+[class*=' imghvr-book-open-']:hover figcaption:after,[class*=' imghvr-book-open-']:hover figcaption:before,[class^=imghvr-book-open-]:hover figcaption:after,[class^=imghvr-book-open-]:hover figcaption:before
+{
+	opacity:1;
+	background-color:#fff;
+	-webkit-transform:rotateY(0);
+	transform:rotateY(0)
+}
+/* 2번째 처리 css */
+[class*=' imghvr-scale-']:before,[class^=imghvr-scale-]:before
+{
+	background-color:inherit;
+	top:15px;
+	bottom:15px;
+	left:15px;
+	right:15px;
+	position:
+	absolute;content:''
+}
+[class*=' imghvr-scale-'] figcaption,[class^=imghvr-scale-] figcaption
+{
+	opacity:0
+}
+
+[class*=' imghvr-scale-']:hover:before,[class^=imghvr-scale-]:hover:before
+{
+	top:15px;
+	bottom:15px;
+	left:15px;
+	right:15px;
+	opacity:.9
+}
+[class*=' imghvr-scale-']:hover figcaption,[class^=imghvr-scale-]:hover figcaption
+{
+	opacity:1;
+	-webkit-transition-delay:.25s;
+	transition-delay:.25s
+}
+
+.imghvr-slide-down figcaption{-webkit-transform:translateY(-120%);transform:translateY(-120%)}
+.imghvr-scale-top-left:before{bottom:100%;right:100%}
+</style>
 <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/bootstrap/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
@@ -33,7 +123,7 @@
 				<div class="col-md-2">
 				</div>
 				<div class="col-md-8">
-				<img class="img-fluid rounded study-img" src="assets/images/cafe07.jpg" alt="studyImg">
+				<img class="img-fluid rounded study-img" src="assets/images/color.png" alt="studyImg">
 				</div>
 				<div class="col-md-2">
 				</div>
@@ -142,52 +232,60 @@
 						 <div class="item">
                     <ul class="thumbnails" style="list-style:none;" >
                         <li class="col-sm-4 col-md-6" >	
-							<div class="fff">
-								<div class="thumbnail">
-									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-								</div>
-								<div class="caption">
-									<h4>Praesent commodo</h4>
+							<div class="demo">
+						      <figure class="imghvr-scale-top-left"><img src="http://placehold.it/360x270" alt="53">
+						        <figcaption>
+						          <h3>2번째 Oscar Wilde</h3>
+						          <p>&quot;You can never be overdressed or overeducated.&quot;</p>
+						        </figcaption><a href="javascript:;"></a>
+						      </figure>
+						      <div class="caption">
+								<h4>Praesent commodo</h4>
 									<p>Nullam Condimentum Nibh Etiam Sem</p>
-									<a class="btn btn-mini" href="#">» Read More</a>
-								</div>
-                            </div>
+							  </div>
+						    </div>
                         </li>
                         <li class="col-sm-4 col-md-6">
-							<div class="fff">
-								<div class="thumbnail">
-									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-								</div>
-								<div class="caption">
-									<h4>Praesent commodo</h4>
+							<div class="demo">
+						      <figure class="imghvr-scale-top-left"><img src="http://placehold.it/360x270" alt="53">
+						        <figcaption>
+						          <h3>2번째 Oscar Wilde</h3>
+						          <p>&quot;You can never be overdressed or overeducated.&quot;</p>
+						        </figcaption><a href="javascript:;"></a>
+						      </figure>
+						      <div class="caption">
+								<h4>Praesent commodo</h4>
 									<p>Nullam Condimentum Nibh Etiam Sem</p>
-									<a class="btn btn-mini" href="#">» Read More</a>
-								</div>
-                            </div>
+							  </div>
+						    </div>
                         </li>
                         <li class="col-sm-4 col-md-6">
-							<div class="fff">
-								<div class="thumbnail">
-									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-								</div>
-								<div class="caption">
-									<h4>Praesent commodo</h4>
+							<div class="demo">
+						      <figure class="imghvr-scale-top-left"><img src="http://placehold.it/360x270" alt="53">
+						        <figcaption>
+						          <h3>2번째 Oscar Wilde</h3>
+						          <p>&quot;You can never be overdressed or overeducated.&quot;</p>
+						        </figcaption><a href="javascript:;"></a>
+						      </figure>
+						      <div class="caption">
+								<h4>Praesent commodo</h4>
 									<p>Nullam Condimentum Nibh Etiam Sem</p>
-									<a class="btn btn-mini" href="#">» Read More</a>
-								</div>
-                            </div>
+							  </div>
+						    </div>
                         </li>
                         <li class="col-sm-4 col-md-6">
-							<div class="fff">
-								<div class="thumbnail">
-									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-								</div>
-								<div class="caption">
-									<h4>Praesent commodo</h4>
+							<div class="demo">
+						      <figure class="imghvr-scale-top-left"><img src="http://placehold.it/360x270" alt="53">
+						        <figcaption>
+						          <h3>2번째 Oscar Wilde</h3>
+						          <p>&quot;You can never be overdressed or overeducated.&quot;</p>
+						        </figcaption><a href="javascript:;"></a>
+						      </figure>
+						      <div class="caption">
+								<h4>Praesent commodo</h4>
 									<p>Nullam Condimentum Nibh Etiam Sem</p>
-									<a class="btn btn-mini" href="#">» Read More</a>
-								</div>
-                            </div>
+							  </div>
+						    </div>
                         </li>
                     </ul>
               </div><!-- /Slide3 --> 
