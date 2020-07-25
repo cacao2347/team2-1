@@ -20,14 +20,14 @@
   <title>SB Admin 2 - Tables</title>
 
   <!-- Custom fonts for this template -->
-  <link href="<%=cp %>/assets/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="<%=cp %>/assets/admvendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link href="<%=cp %>/assets/css/sb-admin-2.min.css" rel="stylesheet">
+  <link href="<%=cp %>/assets/admcss/sb-admin-2.min.css" rel="stylesheet">
 
   <!-- Custom styles for this page -->
-  <link href="<%=cp %>/assets/css/bootstrap/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <link href="<%=cp %>/assets/admvendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 </head>
 
@@ -67,22 +67,21 @@
   </div>
 
   <!-- Bootstrap core JavaScript-->
-  <script src="<%=cp %>/assets/js/jquery.min.js"></script>
-  <script defer src="<%=cp %>/assets/js/all.min.js"></script>
-  <script src="<%=cp %>/assets/js/bootstrap.bundle.min.js"></script>
+  <script src="<%=cp %>/assets/admvendor/jquery/jquery.min.js"></script>
+  <script src="<%=cp %>/assets/admvendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Core plugin JavaScript-->
-  <script src="<%=cp %>/assets/js/jquery.easing.min.js"></script>
+  <script src="<%=cp %>/assets/admvendor/jquery-easing/jquery.easing.min.js"></script>
 
   <!-- Custom scripts for all pages-->
-  <script src="<%=cp %>/assets/js/sb-admin-2.min.js"></script>
+  <script src="<%=cp %>/assets/admjs/sb-admin-2.min.js"></script>
 
   <!-- Page level plugins -->
-  <script src="<%=cp %>/assets/js/jquery.dataTables.js"></script>
-  <script src="<%=cp %>/assets/js/dataTables.bootstrap4.js"></script>
+  <script src="<%=cp %>/assets/admvendor/datatables/jquery.dataTables.js"></script>
+  <script src="<%=cp %>/assets/admvendor/datatables/dataTables.bootstrap4.js"></script>
 
   <!-- Page level custom scripts -->
-  <script src="<%=cp %>/assets/js/datatables-demo.js"></script>
+  <script src="<%=cp %>/assets/admjs/demo/datatables-demo.js"></script>
 
 
 </body>

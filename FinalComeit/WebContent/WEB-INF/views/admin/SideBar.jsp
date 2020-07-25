@@ -133,5 +133,22 @@
 	</ul>
 	<!-- End of Sidebar -->
 
+  <!-- Bootstrap core JavaScript-->
+  <script src="<%=cp %>/assets/admvendor/jquery/jquery.js"></script>
+  <script src="<%=cp %>/assets/admvendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="<%=cp %>/assets/admvendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="<%=cp %>/assets/admjs/sb-admin-2.min.js"></script>
+
+  <!-- Page level plugins -->
+  <script src="<%=cp %>/assets/admvendor/datatables/jquery.dataTables.min.js"></script>
+  <script src="<%=cp %>/assets/admvendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="<%=cp %>/assets/admjs/demo/datatables-demo.js"></script>
+          
 </body>
 </html>
