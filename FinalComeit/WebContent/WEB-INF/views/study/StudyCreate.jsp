@@ -306,11 +306,12 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                         var fileok = document.getElementById("uploadFile");
                         
                         var fileCheck = null;
+                        
                         fileCheck = $("#uploadFile").val();
 
                         //alert(fileCheck);
                         
-                        var filename = fileok.files[0].name;
+                        //var filename = fileok.files[0].name;
                         
                         //alert(filename);
                         
@@ -340,13 +341,17 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                                     
                                  //alert(dataArray);
                                  
-                                 var realData = '\\'+dataArray[7]+'\\' + dataArray[8]+'\\'+ dataArray[9] +'\\'+dataArray[10];
+                                 var realData = '/'+dataArray[7]+'/' + dataArray[8]+'/'+ dataArray[9] +'/'+dataArray[10];
+                                 
+                                 var miriData = '\\'+dataArray[7]+'\\' + dataArray[8]+'\\'+ dataArray[9] +'\\'+dataArray[10];
                                  
                                  //alert(realData);
                                  
                                  realData = $.trim(realData);
+                                 miriData = $.trim(miriData);
                                  
-                                    $('#okFile').val(realData);
+                                 $('#okFile').val(realData);
+                                 $('#miriFile').val(miriData);
                                     
                                    //$("#img_form_url").attr("src", imgurl);
                             
@@ -680,8 +685,12 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                <!-- <form action="Test_ok.jsp" method="post" enctype="multipart/form-data"> -->
                <input type="file" id="uploadFile" name="uploadFile"
                   class="form-control" accept=".gif, .jpg, .png, .jpeg" style="width: 65%;" />
+               <input type="text"
+                  class="form-control" id="thumbnail" style="width: 20%;" readonly="readonly" value="미리보기">
+               &nbsp;
                <button class="btn btn-primary" id="proImgBtn" type="button">등록</button>
                <input type="text" id="okFile" name="okFile" class="btn btn-primary">
+               <input type="text" id="miriFile" name="miriFile" class="btn btn-primary">
             </div>
          </div>
 		
