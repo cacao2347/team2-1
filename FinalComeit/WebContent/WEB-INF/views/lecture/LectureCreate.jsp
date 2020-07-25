@@ -30,6 +30,8 @@
 <script type="text/javascript">
 	var keyArray = new Array();
 	var dayArray = new Array();
+	var minMem = 0;
+	var maxMem = 0;
 
 	$(function() {
 		// AJAX 요청 및 응답 처리
@@ -38,6 +40,8 @@
 		// submit 하기 전에 입력폼 유효성 검사
 		$("#insertBtn").click(function() 
 		{	
+			
+			
 			$("#joinForm").submit();
 		});
 		
@@ -198,10 +202,13 @@
 
 		// 최소 인원, 모집 인원이 변할 때, 인원 유효성 체크
 		$("#minMem").change(function() {
-			previousMin = $("#minMem option:selected").val();
-			previousMax = $("#maxMem option:selected").val();
 			
-			if ($("#minMem").val() > $("#maxMem").val()) 
+			alert("최소인원 : " + $("#minMem").val());
+			alert("최대인원 : " + $("#maxMem").val());
+			minMem = $("#minMem").val();
+			maxMem = $("#maxMem").val();
+			
+			if (minMem > maxMem) 
 			{
 				alert("최대인원이 최소인원보다 적습니다.");
 				$("#minMem").find('option:first').attr('selected', 'selected');
@@ -211,9 +218,15 @@
 			}
 		});
 
+		// 최소 인원, 모집 인원이 변할 때, 인원 유효성 체크
 		$("#maxMem").change(function() {
 			
-			if ($("#minMem").val() > $("#maxMem").val()) 
+			alert("최소인원 : " + $("#minMem").val());
+			alert("최대인원 : " + $("#maxMem").val());
+			minMem = $("#minMem").val();
+			maxMem = $("#maxMem").val();
+			
+			if (minMem > maxMem) 
 			{
 				alert("최대인원이 최소인원보다 적습니다.");
 				$("#minMem").find('option:first').attr('selected', 'selected');
