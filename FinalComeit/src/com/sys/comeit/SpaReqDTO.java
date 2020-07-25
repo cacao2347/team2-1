@@ -2,7 +2,7 @@ package com.sys.comeit;
 
 public class SpaReqDTO
 {
-	private String spa_req_cd, spa_cd, spa_type;//등록요청 코드, 업체코드, 업체타입
+	private String spa_req_cd, spa_cd, spa_type,type_name;//등록요청 코드, 업체코드, 업체타입
     private String one_intro,dtl_intro, rsv_notes, req_date; //한줄 소개, 상세소개, 주의사항, 등록요청일
     private int use_hrs, str_time, end_time;//최대 이용시간, 시작시간, 종료시간
     private String busi_name, spa_name, dtl_addr, tel; // 상호명, 공간명, 상세주소, 전화번호
@@ -15,9 +15,21 @@ public class SpaReqDTO
     private String img_type_cd;	// 이미지 타입
     private String content;// 시설안내
     private String spa_tag_type_cd,tag_name; // 키워드 코드, 명
-    
+    private String feedCount; // 피드백수
     
 	   
+	public String getFeedCount() {
+		return feedCount;
+	}
+	public void setFeedCount(String feedCount) {
+		this.feedCount = feedCount;
+	}
+	public String getType_name() {
+		return type_name;
+	}
+	public void setType_name(String type_name) {
+		this.type_name = type_name;
+	}
 	public String getSpa_tag_type_cd()
 	{
 		return spa_tag_type_cd;

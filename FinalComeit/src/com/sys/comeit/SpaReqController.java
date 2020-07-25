@@ -13,20 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-public class SpaController
+public class SpaReqController
 {
 	@Autowired
 	private SqlSession sqlSession;
-
-	@RequestMapping(value = "/spalist.action", method = RequestMethod.GET)
-	public String spaList()
-	{
-		String view = null;
-
-		view = "/WEB-INF/views/space/SpaceList.jsp";
-
-		return view;
-	}
 
 	// 공간 등록 키워드
 	  @RequestMapping(value = "/spacreate.action", method = RequestMethod.GET)

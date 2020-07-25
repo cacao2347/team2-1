@@ -105,8 +105,56 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
+<link rel="shortcut icon" href="<%=cp %>/assets/images/pen_1.ico" type="image/x-icon">
+<link rel="icon" href="<%=cp %>/assets/images/pen_1.ico" type="image/x-icon">
 
 <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/spacelist.css" >
+<style type="text/css">
+body{font-family: 'Noto Sans KR', sans-serif;}
+</style>
+
+<script type="text/javascript">
+
+	$(function()
+	{
+		// AJAX 요청 및 응답 처리
+        ajaxSpcAreaRequest();
+		
+     	// 지역명이 바뀌면 상세지역 ajax 호출
+		$("#area").change(function()
+		{
+		   ajaxSpcAreaRequest();
+		   
+		});
+		
+		$("#allCheck").click(function()	
+		{  
+			if ($("#allCheck").is(':checked')) {
+                $("input[type=checkbox]").prop("checked", true);
+            } else {
+                $("input[type=checkbox]").prop("checked", false);
+            }
+		});
+
+	});
+	
+	// 지역에 따른 세부지역 불러오는 ajax
+    function ajaxSpcAreaRequest()
+    {
+
+       $.post("areaajax.action",
+       {
+          area_cd : $("#area").children("option:selected").val()
+       }, function(data)
+       {
+          //alert(data);
+          $("#spcAreadd").html(data);
+          $("#spcArea").removeAttr("disabled");
+       });
+    }
+
+</script>
 </head>
 <body class="padding">
 <div class="row">
@@ -123,7 +171,7 @@
 				<div class="col-md-2">
 				</div>
 				<div class="col-md-8">
-				<img class="img-fluid rounded study-img" src="assets/images/color.png" alt="studyImg">
+				<img class="img-fluid rounded space-img" src="assets/images/spaimg.png" alt="studyImg">
 				</div>
 				<div class="col-md-2">
 				</div>
@@ -136,19 +184,17 @@
 					<dl class="region">
 						<dt>지역</dt>
 						<dd>
-							<select name="region" class="form-control">
-								<option value="전체">전체</option>
-								<option value="서울">서울</option>
-								<option value="인천">인천</option>
-							</select>
+							<select name="area" id="area" class="area form-control">
+			                  <option value="0">전체</option>
+			                     <c:forEach var="areas" items="${area }">
+			                              <option value="${areas.area_cd }" 
+			                              ${areas.area_cd == spcArea.area_cd ? "selected= \"selected\"" : ""}>
+			                                 ${areas.area_name }
+			                              </option>
+			                           </c:forEach>
+			                  </select>
 						</dd>
-						  
- 						<dd>
-							<select name="regDetail" class="form-control">
-								<option value="전체">전체</option>
-								<option value="마포구">마포구</option>
-								<option value="양천구">양천구</option>
-							</select>
+						<dd id="spcAreadd">
 						</dd>
 					</dl><!-- end region -->
 					
@@ -219,110 +265,57 @@
 					<!-- 리스트 영역 -->
 					<div class="row list">
 						<div class="col-md-12">
-						99개의 공간
+						${count }개의 공간
 						</div>
 						<div class="row">
 							<div class="col-md-12">
 								<div class="create">
+								<c:if test="${not empty id}" >
 									<button type="button" class="btn btn-primary btn-sm createBtn" onClick="location.href='spacreate.action'">공간 개설</button>
+								</c:if>
 								</div>
 							</div>
 						</div>
 						<div class="col-md-12" style="margin-top: 30px;">
 						 <div class="item">
-                    <ul class="thumbnails" style="list-style:none;" >
-                        <li class="col-sm-4 col-md-6" >	
-							<div class="demo">
-						      <figure class="imghvr-scale-top-left"><img src="http://placehold.it/360x270" alt="53">
-						        <figcaption>
-						          <h3>2번째 Oscar Wilde</h3>
-						          <p>&quot;You can never be overdressed or overeducated.&quot;</p>
-						        </figcaption><a href="javascript:;"></a>
-						      </figure>
-						      <div class="caption">
-								<h4>Praesent commodo</h4>
-									<p>Nullam Condimentum Nibh Etiam Sem</p>
-							  </div>
-						    </div>
-                        </li>
-                        <li class="col-sm-4 col-md-6">
-							<div class="demo">
-						      <figure class="imghvr-scale-top-left"><img src="http://placehold.it/360x270" alt="53">
-						        <figcaption>
-						          <h3>2번째 Oscar Wilde</h3>
-						          <p>&quot;You can never be overdressed or overeducated.&quot;</p>
-						        </figcaption><a href="javascript:;"></a>
-						      </figure>
-						      <div class="caption">
-								<h4>Praesent commodo</h4>
-									<p>Nullam Condimentum Nibh Etiam Sem</p>
-							  </div>
-						    </div>
-                        </li>
-                        <li class="col-sm-4 col-md-6">
-							<div class="demo">
-						      <figure class="imghvr-scale-top-left"><img src="http://placehold.it/360x270" alt="53">
-						        <figcaption>
-						          <h3>2번째 Oscar Wilde</h3>
-						          <p>&quot;You can never be overdressed or overeducated.&quot;</p>
-						        </figcaption><a href="javascript:;"></a>
-						      </figure>
-						      <div class="caption">
-								<h4>Praesent commodo</h4>
-									<p>Nullam Condimentum Nibh Etiam Sem</p>
-							  </div>
-						    </div>
-                        </li>
-                        <li class="col-sm-4 col-md-6">
-							<div class="demo">
-						      <figure class="imghvr-scale-top-left"><img src="http://placehold.it/360x270" alt="53">
-						        <figcaption>
-						          <h3>2번째 Oscar Wilde</h3>
-						          <p>&quot;You can never be overdressed or overeducated.&quot;</p>
-						        </figcaption><a href="javascript:;"></a>
-						      </figure>
-						      <div class="caption">
-								<h4>Praesent commodo</h4>
-									<p>Nullam Condimentum Nibh Etiam Sem</p>
-							  </div>
-						    </div>
-                        </li>
-                    </ul>
-              </div><!-- /Slide3 --> 
-        </div>
-						
-						</div>
-					</div><!-- 리스트 영역 끝 -->
-					
-					
-						
-					
-					<!-- <div class="row paging">
-					<div class="col-md-12">
-						<nav>
-							<ul class="pagination">
-				            <li class="page-item"><a href="#" class="page-link">Previous</a></li>
-				            <li class="page-item"><a href="#" class="page-link">1</a></li>
-				            <li class="page-item"><a href="#" class="page-link">2</a></li>
-				            <li class="page-item"><a href="#" class="page-link">3</a></li>
-				            <li class="page-item"><a href="#" class="page-link">4</a></li>
-				            <li class="page-item"><a href="#" class="page-link">5</a></li>
-				            <li class="page-item"><a href="#" class="page-link">6</a></li>
-				            <li class="page-item"><a href="#" class="page-link">7</a></li>
-				            <li class="page-item"><a href="#" class="page-link">8</a></li>
-				            <li class="page-item"><a href="#" class="page-link">9</a></li>
-				            <li class="page-item"><a href="#" class="page-link">10</a></li>
-				            <li class="page-item"><a href="#" class="page-link">Next</a></li>
-				            </ul>
-						</nav>
+		                    <ul class="thumbnails" style="list-style:none;" >
+		                        <c:forEach var="spaceList" items="${space }">
+			                        <li class="col-sm-4 col-md-6" >	
+										<div class="demo">
+									      <figure class="imghvr-scale-top-left"><img src="<%=cp %>/assets/images/199.jpg" alt="53" style="width: 300px; height: 250px;">
+									        <figcaption>
+									        <p><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+									        ${spaceList.area_name} ${spaceList.spc_area_name}</p>
+									        <p><span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+									               영업 시간 : ${spaceList.str_time}시 ~ ${spaceList.end_time}시</p>
+									        <p><span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+									               최대이용시간 : ${spaceList.use_hrs}시간</p>
+									        <div class="form-inline">
+									        <p><span class="glyphicon glyphicon-home" aria-hidden="true"></span> ${spaceList.type_name}</p>
+									        <p><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> ${spaceList.busi_name}</p>
+									        </div>
+									        </figcaption><a href="javascript:;"></a>
+									      </figure>
+									      <div class="caption">
+									      	<div class="nameAndCount">
+											<h4>${spaceList.spa_name}</h4>
+											<p class="feed"><span class="glyphicon glyphicon-heart heart" aria-hidden="true"></span>피드백수: ${spaceList.feedCount }개</p>
+											</div>
+												<p>&quot;${spaceList.one_intro}&quot;</p>
+										  </div>
+									    </div>
+			                        </li>
+								</c:forEach>
+		                    </ul>
+			              </div>
+				        </div>
 					</div>
-					</div> -->
+				</div><!-- 리스트 영역 끝 -->
 					
-				</div>
 				
 			</div>
-			
 		</div>
+	</div>
 </div>
 <div class="row">
 	<div class="col-md-12">
