@@ -138,26 +138,6 @@ body{font-family: 'Noto Sans KR', sans-serif;}
     $(document).ready(function () { $('head').append('<style type="text/css">.modal .modal-body {max-height: ' + ($('body').height() * .8) + 'px;}.modal-open .modal{overflow-y: hidden !important;overflow-x: hidden !important;}</style>'); });
 
 </script>
- <style type="text/css">
-.modal {
-        text-align: center;
-}
- 
-@media screen and (min-width: 768px) { 
-        .modal:before {
-                display: inline-block;
-                vertical-align: middle;
-                content: " ";
-                height: 100%;
-        }
-}
- 
-.modal-dialog {
-        display: inline-block;
-        text-align: left;
-        vertical-align: middle;
-}
- </style>
 </head>
 <body>
 <!-- 헤더 -->
@@ -175,50 +155,54 @@ body{font-family: 'Noto Sans KR', sans-serif;}
      <div class="col-lg-8">
 
         <!-- Title -->
-        <h1 class="mt-4">업체명</h1>
+        <h1 class="mt-4">${spaceInfo.spa_name }</h1>
 
         <!-- Author -->
-        <p class="lead">상호명</p>
+        <p class="lead">${spaceInfo.busi_name }</p>
         <hr>
         </div>
 
       <!-- Post Content Column -->
       <div class="col-lg-8">
         <!-- Preview Image -->
-        <img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">
+        <img src="<%=cp %>/assets/images/199.jpg" alt="53" style="width: 755px; height: 250px;">
 
         <hr>
 
         <!-- Post Content -->
         <div class="lead">
-        <h4>#태그1 #태그2 #태그3</h4><h5>스터디카페</h5>
+        <ul class="list-space-tags form-inline">
+		<c:forEach var="spaceTagss" items="${spaceTag }">
+		<c:if test="${spaceTagss.spa_req_cd eq spaceInfo.spa_req_cd}">
+		<li class="stack-item"><h4 >#${spaceTagss.tag_name }</h4></li>
+		</c:if>
+		</c:forEach>
+		</ul>
+		<h5>${spaceInfo.type_name }</h5>
         </div>
         <br><br>
         
         <!-- 공간 정보 부분 -->
         <div class="row">
-		<div class="col-md-12">
+		<div class="col-md-12 font-14">
 			<dl>
 				<dt>
 					한줄 소개
 				</dt>
 				<dd>
-					A description list is perfect for defining terms.
+					${spaceInfo.one_intro }
 				</dd>
 				<dt>
 					상세 소개
 				</dt>
 				<dd>
-					Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.
-				</dd>
-				<dd>
-					Donec id elit non mi porta gravida at eget metus.
+					${spaceInfo.dtl_intro }
 				</dd>
 				<dt>
 					예약시 주의사항
 				</dt>
 				<dd>
-				  주의사항 내용 부분
+				    ${spaceInfo.rsv_notes }
 				</dd>
 				<dt>
 					시설 안내
@@ -252,7 +236,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 	<div class="feed">
 		<div class="reList">
 			<div class="count">
-			댓글 2
+			<span class="glyphicon glyphicon-heart heart" aria-hidden="true"></span>피드백참여: ${spaceInfo.feedCount }명</p>
 			</div>
 			<table class="table table-hover table-bordered">
 				<tr>
@@ -371,11 +355,11 @@ body{font-family: 'Noto Sans KR', sans-serif;}
           <div class="card-body">
           	<dl>
           		<dt>대표자명</dt>
-          		<dd>홍길동</dd>
+          		<dd>${spaceInfo.rprsn_name }</dd>
           		<dt>전화번호</dt>
-          		<dd>(123) 456-7890</dd>
+          		<dd>${spaceInfo.tel }</dd>
           		<dt>영업 정보</dt>
-          		<dd>요일 : 월요일<br>영업 시간 : 오후 1시 ~ 8시<br>최대 이용 시간 : 3시간</dd>
+          		<dd>영업시간 : ${spaceInfo.str_time }시 ~ ${spaceInfo.end_time }시<br> 최대 이용시간: ${spaceInfo.use_hrs }시</dd>
           	</dl>
           </div>
         </div>
@@ -385,9 +369,8 @@ body{font-family: 'Noto Sans KR', sans-serif;}
           <h5 class="card-header">위치</h5>
           <div class="card-body">
           <!-- 지도넣는 부분 -->
-          	지도
           <address>
-				 <strong>업체 주소</strong><br /> 795 Folsom Ave, Suite 600<br /> San Francisco, CA 94107<br />
+				 <strong>업체 주소</strong><br /> ${spaceInfo.area_name } ${spaceInfo.spc_area_name }<br />${spaceInfo.dtl_addr }<br />
 			</address>
 			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
 						예약하기
@@ -448,7 +431,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
           </div>
         </div>
 
-	<button type="button" id="report" class="btn btnEvent">
+	<button type="button" id="report" class="btn btnEvent" style="background-color:transparent;float: right;">
 		<img src="<%=cp %>/assets/images/report.png" alt="btnImages" class="btnImages" style="width: 35px;">
 	</button>
     </div>

@@ -92,11 +92,21 @@ public class JoinController
 
 		System.out.println(mem_cd);
 
-		String[] intTagList = request.getParameterValues("intTagList"); // 선택한 모든 관심 키워드 배열에 넣기
-		String[] etcTagList = request.getParameterValues("etcTagList"); // 선택한 모든 관심 기타 키워드 배열에 넣기
-
+		String[] intTagList = {};
+		String[] etcTagList = {};
+		
+		if(request.getParameterValues("intTagList")!=null)
+		{
+			intTagList = request.getParameterValues("intTagList"); // 선택한 모든 관심 키워드 배열에 넣기
+		}
+		
+		if(request.getParameterValues("etcTagList")!=null)
+		{
+			etcTagList = request.getParameterValues("etcTagList"); // 선택한 모든 관심 기타 키워드 배열에 넣기
+		}
 		System.out.println("그냥 관심 : " + intTagList.length);
 		System.out.println("기타 관심 : " + etcTagList.length);
+		
 		
 		if (mem_cd != null) // 회원 발급 코드 PK 가 NULL 이 아닐경우
 		{

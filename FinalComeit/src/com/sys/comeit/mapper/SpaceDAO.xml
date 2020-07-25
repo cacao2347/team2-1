@@ -7,33 +7,26 @@
 
 <!-- 공간 상세페이지 -->
    <!-- 공간 정보 조회 -->
-   <!-- 수정해야함 -->
-<!-- 	<select id="spaceInfoSearch"
-		resultType="com.sys.comeit.SpaReqDTO">
-		SELECT STU_CD,CRT_DATE ,TITLE,STR_DATE,MEM_NUM, CONTENT, CMT_DATE,
-		STU_JOIN_CD
-		, STU_HIST_CD, APNTM_DATE, AREA_NAME, SPC_AREA_NAME
-		, MEET_TERM, IDNTT_TYPE, LV, CAT_NAME, LEADER_MEM_CD, LEADER_ID
-		, LEADER_NAME, SCRT_NUM, CRT_MEM_CD, END_DATE
-		FROM VIEW_STU_INFO
-		WHERE STU_CD=#{stu_cd}
-	</select>
+	<select id="spaceInfoSearch" resultType="com.sys.comeit.SpaReqDTO">
+		SELECT ID, SPA_CD, SPA_REQ_CD, SPA_NAME, TYPE_NAME, BUSI_NAME, RPRSN_NAME, STR_TIME, END_TIME, USE_HRS, ONE_INTRO, AREA_NAME, SPC_AREA_NAME,RSV_NOTES,DTL_INTRO 
+		(     
+		SELECT COUNT(*)
+		FROM VIEW_SPA_FEEDCOUNT 
+		WHERE SPA_REQ_CD=M.SPA_REQ_CD
+		) AS FEEDCOUNT
+		FROM VIEW_SPA_MY M
+		WHERE SPA_REQ_CD = #{spa_req_cd}
+   </select>
 
-	공간 관심 태그 조회
-	<select id="spaceIntTagSearch"
-		resultType="com.sys.comeit.SpaReqDTO">
-		SELECT INT_TAG AS INT_TAG_NAME
-		FROM VIEW_STU_TAG
-		WHERE STU_CD = #{stu_cd}
-	</select>
-	
-	공간 기타 관심 태그 조회
-	<select id="spaceEtcTagSearch"
-		resultType="com.sys.comeit.SpaReqDTO">
-		SELECT ETC_TAG AS ETC_TAG_NAME
-		FROM VIEW_STU_ETC_TAG
-		WHERE STU_CD = #{stu_cd}
-	</select> -->
+	<!-- 공간 관심 태그 조회 -->
+	<select id="spaceTagSearch" resultType="com.sys.comeit.SpaReqDTO">
+	 SELECT SPA_REQ_CD, TAG_NAME
+	 FROM VIEW_SPA_TAG
+	 UNION ALL
+	 SELECT SPA_REQ_CD, ETC_TAG
+	 FROM VIEW_SPA_ETC_TAG
+	 WHERE SPA_REQ_CD = #{spa_req_cd}
+   </select>
 	
 
 <!-- 공간 리스트 -->

@@ -1,5 +1,7 @@
 package com.sys.comeit;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,13 +39,21 @@ public class SpaceController
 		
 		// 공간 상세페이지로 이동
 		@RequestMapping(value = "/spacedetail.action", method = RequestMethod.GET)
-		public String spaceDetail(Model model)
+		public String spaceDetail(Model model,HttpServletRequest request)
 		{
 			String view = null;
 
-
+			
+			String spa_req_cd = request.getParameter("spa_req_cd");
+			
+			ISpaceDAO ispaceDAO = sqlSession.getMapper(ISpaceDAO.class); // 공간 정보
+			
+			// 공간 정보
+			model.addAttribute("spaceInfo",ispaceDAO.spaceInfoSearch(spa_req_cd));
+			// 키워드
+			model.addAttribute("spaceTag",ispaceDAO.spaceTagSearch(spa_req_cd));
+			
 			view = "WEB-INF/views/space/SpaceDetail.jsp";
-
 			return view;
 		}
 }
