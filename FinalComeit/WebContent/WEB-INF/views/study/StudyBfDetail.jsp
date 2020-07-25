@@ -32,7 +32,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 	   // 스터디장 모달 정보 요청
       $(".leaderBtn").click(function() 
       {
-    	  var params = "leaderMemCd=" +$(".leaderBtn").val();
+    	  var params = "leaderMemCd=" +$(this).val();
     	  
     	  $.ajax(
     	  {
@@ -78,7 +78,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
       // 스터디원 모달 정보 요청 joinMemBtn
        $(".joinMemBtn").click(function() 
       {
-    	  var params = "joinMemCd=" +$(".joinMemBtn").val();
+    	  var params = "joinMemCd=" +$(this).val();
     	  
     	  $.ajax(
     	  {
