@@ -75,10 +75,22 @@ public class LectureController
 		String lec_cd = dto.getLec_cd();
 		System.out.println(lec_cd);
 
-		String[] intTagList = request.getParameterValues("intTagList");
-		String[] etcTagList = request.getParameterValues("etcTagList");
-		String[] dayTagList = request.getParameterValues("dayTagList");
-
+		String[] dayTagList = request.getParameterValues("dayTagList");		
+		String[] intTagList = {};
+		String[] etcTagList = {};
+		
+		if(request.getParameterValues("intTagList")!=null)
+		{
+			intTagList = request.getParameterValues("intTagList"); // 선택한 모든 관심 키워드 배열에 넣기
+		}
+		
+		if(request.getParameterValues("etcTagList")!=null)
+		{
+			etcTagList = request.getParameterValues("etcTagList"); // 선택한 모든 관심 기타 키워드 배열에 넣기
+		}
+		System.out.println("그냥 관심 : " + intTagList.length);
+		System.out.println("기타 관심 : " + etcTagList.length);
+		
 		// 관심키워드 DB INSERT
 		if (lec_cd != null)
 		{

@@ -246,7 +246,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                   
                   <!-- 상세 설명 -->
                   <div class="stuCurr">
-                     <span class="glyphicon glyphicon-bookmark icon"></span>
+                     <span class="glyphicon glyphicon-bookmark icon icCrr"></span>
                      <h4>상세 설명</h4><br />
                      <p style="white-space: pre-line;" class="curr">${studyInfo.content }</p>
                      <%-- <span class="curr">${studyInfo.content }</span> --%>

@@ -1,4 +1,10 @@
 @charset "UTF-8";
+
+.stuCurr > .icCrr
+{
+	color: #e78e08;
+}
+
 body .padding
 {
 	padding-top: 60px;
