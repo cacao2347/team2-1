@@ -19,8 +19,8 @@
 	</select>
 	
 	<!-- 로그인 -->
-	<select id="memberLogin" resultType="java.lang.String">
-	      SELECT NAME
+	<select id="memberLogin" resultType="com.sys.comeit.MemberDTO">
+	      SELECT NAME, MEM_CD
 	      FROM TBL_MEM_JOIN
 	      WHERE MEM_ID=#{id}
 	      AND PWD=CRYPTPACK.ENCRYPT(#{pwd},#{pwd})

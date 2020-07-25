@@ -21,7 +21,6 @@ import org.springframework.web.servlet.ModelAndView;
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
-
 @Controller
 public class LoginController
 {
@@ -45,18 +44,20 @@ public class LoginController
 	  HttpSession session = request.getSession();   
       String result = null;
      
-      IMemberDAO memDao = sqlSession.getMapper(IMemberDAO.class);
-      ISpaDAO spaDao = sqlSession.getMapper(ISpaDAO.class);
-      IAdminDAO admDao = sqlSession.getMapper(IAdminDAO.class);
+      IMemberDAO memDao = sqlSession.getMapper(IMemberDAO.class);		// 회원
+      ISpaDAO spaDao = sqlSession.getMapper(ISpaDAO.class);				// 업체
+      IAdminDAO admDao = sqlSession.getMapper(IAdminDAO.class);			// 관리자
       
-      String id = request.getParameter("formUsername");
-      String pwd = request.getParameter("formPassword");
-      String loginType = request.getParameter("loginType");
-      String name = null;
-      String stopDate = null;
-      String spa_cd = null;
+      String id = request.getParameter("formUsername");					// 로그인 아이디
+      String pwd = request.getParameter("formPassword");				// 패스워드
+      String loginType = request.getParameter("loginType");				// 회원 유형
+     
+      MemberDTO member = new MemberDTO();
+      SpaDTO spa = new SpaDTO();
       
-      int blockCount = 0;
+      String stopDate = null;		// 정지일
+      String code = null;			 //코드
+      String name = null;		    // 이름
       
       
       // 로그인 정보 확인 및 정지 여부 조회
@@ -68,14 +69,18 @@ public class LoginController
           dto.setId(id);
           dto.setPwd(pwd);   
           
-          // 멤버 이름 조회
-          name = memDao.memberLogin(dto);
+          // 멤버 이름, 멤버코드 조회
+          member = memDao.memberLogin(dto);
           
           // 멤버 정지 내역 조회
           stopDate = memDao.memStop(id);
           
-          // 멤버 블락 조회
-          blockCount = memDao.memBlock(id);
+          // 멤버 이름,코드 받기
+          if (! member.getName().isEmpty())
+          {
+        	  name = member.getName();
+        	  code = member.getMem_cd();
+          }
           
       }
       else if(loginType.equals("1")) 
@@ -86,17 +91,21 @@ public class LoginController
     	  dto.setPwd(pwd);
     	  
     	  // 업체 이름 조회
-    	  name = spaDao.spaLogin(dto);
+    	  spa = spaDao.spaLogin(dto);
     	  
     	  // 업체 정지 내역 조회
     	  stopDate = spaDao.spaStop(id);
     	  
     	  // 업체 블락 조회
-    	  blockCount = spaDao.spaBlock(id);
+    	  //blockCount = spaDao.spaBlock(id);
     	  
-    	  // 회원 코드
-          spa_cd = spaDao.spaCd(id);
-    	  
+    	  // 업체 코드 받기
+    	  if (!spa.getName().isEmpty()) 
+    	  {
+    		  name = spa.getName();
+    		  code = spa.getSpa_cd();
+    	  }
+    		  
       }
       else if(loginType.equals("2"))
       {
@@ -108,13 +117,11 @@ public class LoginController
     	  name = admDao.adminLogin(dto);
       }
       
-     
-      
-      if (name == null||name=="" ) 							// 로그인 실패시
+      if (name == null|| name=="" ) 							// 로그인 실패시
       {
          result = "redirect:memberlogin.action";
       }
-      else if(blockCount != 0 || stopDate != null) 			// 블락된 내역, 정지 내역이 있을시
+      else if(stopDate != null) 							// 블락된 내역, 정지 내역이 있을시
       {
     	  session.setAttribute("stopDate", stopDate);
           result = "/WEB-INF/views/member/MemStop.jsp";
@@ -122,19 +129,26 @@ public class LoginController
       else 													// 로그인 성공시
       {
          
-         if (loginType.equals("2")) 						// 관리자 로그인
-        	 result = "/adminmemberlist.action";
-         else 												// 업체 및 회원 로그인
-        	 result = "/WEB-INF/views/MainPage.jsp";
+    	  if (loginType.equals("2")) 		// 관리자
+    	  {
+    		  session.setAttribute("name", name);
+    		  result = "/adminmemberlist.action";
+		  }
+    	  else								// 회원 / 업체
+    	  {
+    		  session.setAttribute("name", name);
+    		  session.setAttribute("spa_cd", code);
+    		  result = "/WEB-INF/views/MainPage.jsp";
+    	  }
+        
       }
-      
-      session.setAttribute("name", name);
+ 
       session.setAttribute("id", id);
       session.setAttribute("pwd", pwd); 	 
       session.setAttribute("loginType", loginType);
       
       // 테스트
-	  // System.out.println(name+id+pwd+loginType+stopDate);
+	  //System.out.println(name+id+pwd+loginType+stopDate+code);
       
       return result;
       

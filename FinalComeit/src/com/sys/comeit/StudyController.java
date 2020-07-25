@@ -21,12 +21,12 @@ public class StudyController
 
 	// 기혜
 	// ---------------------------------------------------------------------------------
-	// 스터디방 페이지 요청
+	// 스터디방 Bf 페이지 요청
 	// ★
 	// 1. 후에 list랑 연결되면 GET 방식에서 POST 방식으로 바꾸기!
 	// 2. 사진 경로 가져오기(진짜 사진 등록되면)
 	@RequestMapping(value = "/studybfdetail.action", method = {RequestMethod.GET, RequestMethod.POST})
-	public String studyInfo(Model model, HttpServletRequest request)
+	public String studyBfInfo(Model model, HttpServletRequest request)
 	{
 		String view = null;
 		
@@ -50,6 +50,36 @@ public class StudyController
 		model.addAttribute("memImg", studyDao.memImgSearch(stu_cd));
 
 		view = "/WEB-INF/views/study/StudyBfDetail.jsp";
+
+		return view;
+	}
+	
+	// 스터디방 Af 페이지 요청
+	@RequestMapping(value = "/studyafdetail.action", method = {RequestMethod.GET, RequestMethod.POST})
+	public String studyAfInfo(Model model, HttpServletRequest request)
+	{
+		String view = null;
+		
+		IStudyDAO studyDao = sqlSession.getMapper(IStudyDAO.class);
+
+		String stu_cd = "STU1002";				// 임시 스터디 개설 코드
+
+		// 스터디방 정보
+		model.addAttribute("studyInfo", studyDao.studyInfoSearch(stu_cd));
+		// 스터디방 관심태그
+		model.addAttribute("intTag", studyDao.studyIntTagSearch(stu_cd));
+		// 스터디방 기타 관심 태그
+		model.addAttribute("etcTag", studyDao.studyEtcTagSearch(stu_cd));
+		// 스터디방 진행 요일
+		model.addAttribute("dayName", studyDao.studyDaySearch(stu_cd));
+		// 스터디장 이름
+		model.addAttribute("leaderName", studyDao.studyLeaderSearch(stu_cd));
+		// 스터디원 이름
+		model.addAttribute("joinName", studyDao.studyJoinName(stu_cd));
+		// 스터디 참여자 이미지
+		model.addAttribute("memImg", studyDao.memImgSearch(stu_cd));
+
+		view = "/WEB-INF/views/study/StudyAfDetail.jsp";
 
 		return view;
 	}

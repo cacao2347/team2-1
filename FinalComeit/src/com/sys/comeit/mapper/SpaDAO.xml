@@ -18,8 +18,8 @@
 	</select>
 	
 	<!-- 로그인 -->
-		<select id="spaLogin" resultType="java.lang.String">
-	    SELECT NAME
+		<select id="spaLogin" resultType="com.sys.comeit.SpaDTO">
+	    SELECT NAME, SPA_CD 
 		FROM TBL_SPA_JOIN
 		WHERE SPA_ID=#{spa_id}
 	 	  AND PWD=CRYPTPACK.ENCRYPT(#{pwd},#{pwd})

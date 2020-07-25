@@ -14,7 +14,7 @@ public interface IMemberDAO
 	public int memberModify(MemberDTO dto);	// 회원이 자기 정보 수정 update
 	public int memberRemove(int mid); 		// 회원탈퇴(프로시저로 탈퇴될텐데?)
 	
-	public String memberLogin(MemberDTO dto); //로그인
+	public MemberDTO memberLogin(MemberDTO dto); //로그인
 	public String memStop(String id);		// 정지 여부 확인
 	public int memBlock(String id);			// 블락 여부 확인
 	public String memId(MemberDTO dto);	// 아이디 찾기
