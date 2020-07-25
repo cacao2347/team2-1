@@ -68,6 +68,7 @@
 
   <!-- Bootstrap core JavaScript-->
   <script src="<%=cp %>/assets/js/jquery.min.js"></script>
+  <script defer src="<%=cp %>/assets/js/all.min.js"></script>
   <script src="<%=cp %>/assets/js/bootstrap.bundle.min.js"></script>
 
   <!-- Core plugin JavaScript-->
@@ -82,7 +83,7 @@
 
   <!-- Page level custom scripts -->
   <script src="<%=cp %>/assets/js/datatables-demo.js"></script>
-  
+
 
 </body>
 </html>
