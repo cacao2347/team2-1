@@ -197,11 +197,19 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                                     {
                                         //alert($.trim(data));
                                         
-                                        $('#okFile').val($.trim(data));
+			                            var dataArray = data.split("\\");
+                                        
+			                            //alert(dataArray);
+			                            
+			                            var realData = '\\'+dataArray[7]+'\\' + dataArray[8]+'\\'+ dataArray[9] +'\\'+dataArray[10];
+			                            
+			                            //alert(realData);
+			                            
+                                        $('#okFile').val(realData);
                                         
                                        //$("#img_form_url").attr("src", imgurl);
                                 
-                                       var good = $("#okFile").val();
+                                       //var good = $("#okFile").val();
                                        
                                        //alert(good);
                                        
