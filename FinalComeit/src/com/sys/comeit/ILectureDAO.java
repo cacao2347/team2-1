@@ -8,5 +8,5 @@ public interface ILectureDAO
 	public int insertEtcTag(LectureDTO dto);
 	public int etcTagCount(String etcTag);
 	public int addTagName(String etcTag);
-	
+	public int addLecturePrgTime(LectureDTO dto);
 }

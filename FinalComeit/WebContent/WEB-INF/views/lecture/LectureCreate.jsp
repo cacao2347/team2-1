@@ -30,8 +30,6 @@
 <script type="text/javascript">
 	var keyArray = new Array();
 	var dayArray = new Array();
-	var previousMin = 0;
-	var previousMax = 0;
 
 	$(function() {
 		// AJAX 요청 및 응답 처리
@@ -200,28 +198,31 @@
 
 		// 최소 인원, 모집 인원이 변할 때, 인원 유효성 체크
 		$("#minMem").change(function() {
-			previousMin = $("#minMem").val();
-			previousMax = $("#maxMem").val();
+			previousMin = $("#minMem option:selected").val();
+			previousMax = $("#maxMem option:selected").val();
 			
 			if ($("#minMem").val() > $("#maxMem").val()) 
 			{
 				alert("최대인원이 최소인원보다 적습니다.");
-				$("#minMem").val(previousMin).prop("selected", true);
-				$("#maxMem").val(previousMax).prop("selected", true);
+				$("#minMem").find('option:first').attr('selected', 'selected');
+				$("#maxMem").find('option:first').attr('selected', 'selected');
+				/* $("#minMem").val(previousMin).prop("selected", true);
+				$("#maxMem").val(previousMax).prop("selected", true); */
 			}
 		});
 
 		$("#maxMem").change(function() {
-			previousMin = $("#minMem").val();
-			previousMax = $("#maxMem").val();
 			
 			if ($("#minMem").val() > $("#maxMem").val()) 
 			{
 				alert("최대인원이 최소인원보다 적습니다.");
-				$("#minMem").val(previousMin).prop("selected", true);
-				$("#maxMem").val(previousMax).prop("selected", true);
+				$("#minMem").find('option:first').attr('selected', 'selected');
+				$("#maxMem").find('option:first').attr('selected', 'selected');
+				/* $("#minMem").val(previousMin).prop("selected", true);
+				$("#maxMem").val(previousMax).prop("selected", true); */
 			}
 		});
+		
 	});
 
 	function ajaxSpcAreaRequest() {
@@ -323,8 +324,7 @@
 					</h4>
 
 					<div>
-						<select name="area" id="area" class="area form-control"
-							style="display: inline;">
+						<select name="area" id="area" class="area form-control" style="display: inline;">
 							<option value="0">지역</option>
 							<c:forEach var="areas" items="${area }">
 								<option value="${areas.area_cd }"
@@ -349,7 +349,7 @@
 					</h4>
 					<select class="form-control" id="minMem" name="minMem"
 						style="width: 50px; padding: 0px; display: inline;">
-						<option value="0">최소인원ㅌ</option>
+						<option value="0">최소인원</option>
 						<option value="1">1</option>
 						<option value="2">2</option>
 						<option value="3">3</option>
@@ -367,7 +367,7 @@
 					<select class="form-control"
 						style="width: 50px; padding: 0px; display: inline;" id="maxMem"
 						name="maxMem">
-						<option value="0">최대인원</option>
+						<option value="100">최대인원</option>
 						<option value="1">1</option>
 						<option value="2">2</option>
 						<option value="3">3</option>

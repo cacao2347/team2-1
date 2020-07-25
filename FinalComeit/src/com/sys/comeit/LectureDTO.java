@@ -4,8 +4,32 @@ public class LectureDTO
 {
 	String lec_cd, prof_cd, spc_area_cd, lec_term_cd
 	, lec_name, crt_date, str_date, lec_intro , min_mem
-	, max_mem, int_tag_cd, etc_tag;
+	, max_mem, int_tag_cd, etc_tag, str_hrs, end_hrs, day_cd;
 	
+	public String getDay_cd()
+	{
+		return day_cd;
+	}
+	public void setDay_cd(String day_cd)
+	{
+		this.day_cd = day_cd;
+	}
+	public String getStr_hrs()
+	{
+		return str_hrs;
+	}
+	public void setStr_hrs(String str_hrs)
+	{
+		this.str_hrs = str_hrs;
+	}
+	public String getEnd_hrs()
+	{
+		return end_hrs;
+	}
+	public void setEnd_hrs(String end_hrs)
+	{
+		this.end_hrs = end_hrs;
+	}
 	public String getInt_tag_cd()
 	{
 		return int_tag_cd;

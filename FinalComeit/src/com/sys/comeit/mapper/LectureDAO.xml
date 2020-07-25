@@ -52,4 +52,11 @@
 		VALUES('INT'||SEQ_INT_TAG.NEXTVAL, #{etc_tag})
 	</insert>
 	
+	<insert id="addLecturePrgTime">
+		INSERT INTO TBL_LEC_PRG_TIME(LEG_PRG_TIME_CD, LEC_CD, DAY_CD
+		, STR_HRS, END_HRS)
+		VALUES('LECPT' || SEQ_LEC_PRG_TIME.NEXTVAL, #{lec_cd}, #{day_cd}
+		, #{str_hrs}, #{end_hrs})
+	</insert>
+	
 </mapper>
