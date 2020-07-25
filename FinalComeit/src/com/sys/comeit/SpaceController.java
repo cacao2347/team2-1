@@ -1,6 +1,8 @@
 package com.sys.comeit;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +44,6 @@ public class SpaceController
 		public String spaceDetail(Model model,HttpServletRequest request)
 		{
 			String view = null;
-
 			
 			String spa_req_cd = request.getParameter("spa_req_cd");
 			
@@ -52,6 +53,13 @@ public class SpaceController
 			model.addAttribute("spaceInfo",ispaceDAO.spaceInfoSearch(spa_req_cd));
 			// 키워드
 			model.addAttribute("spaceTag",ispaceDAO.spaceTagSearch(spa_req_cd));
+			// 시설 안내
+			model.addAttribute("fclty",ispaceDAO.spaceFcltySearch(spa_req_cd));
+			// 피드백
+			model.addAttribute("feedback",ispaceDAO.spaceFeed(spa_req_cd));
+			// 피드백 입력 체크
+			model.addAttribute("feedCheck",ispaceDAO.reqCount(spa_req_cd));
+			
 			
 			view = "WEB-INF/views/space/SpaceDetail.jsp";
 			return view;

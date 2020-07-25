@@ -17,6 +17,9 @@
 <script src="http://code.jquery.com/jquery.min.js"></script>
 <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="shortcut icon" href="<%=cp %>/assets/images/pen_1.ico" type="image/x-icon">
+<link rel="icon" href="<%=cp %>/assets/images/pen_1.ico" type="image/x-icon">
+
 <link rel="stylesheet" href="<%=cp %>/assets/css/spafeedback.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet"><style type="text/css">
 body{font-family: 'Noto Sans KR', sans-serif;}
@@ -186,43 +189,36 @@ body{font-family: 'Noto Sans KR', sans-serif;}
         <div class="row">
 		<div class="col-md-12 font-14">
 			<dl>
-				<dt>
+				<dt class="dtbr">
 					한줄 소개
 				</dt>
 				<dd>
 					${spaceInfo.one_intro }
 				</dd>
-				<dt>
+				<dt class="dtbr">
 					상세 소개
 				</dt>
 				<dd>
 					${spaceInfo.dtl_intro }
 				</dd>
-				<dt>
+				<dt class="dtbr">
 					예약시 주의사항
 				</dt>
 				<dd>
 				    ${spaceInfo.rsv_notes }
 				</dd>
-				<dt>
+				<dt class="dtbr">
 					시설 안내
 				</dt>
 				<dd>
 				<div class="row">
 					<div class="col-md-12">
-						<ul>
-							<li class="list-item">
-								시설안내1
-							</li>
-							<li class="list-item">
-								시설안내2
-							</li>
-							<li class="list-item">
-								시설안내3
-							</li>
-							<li class="list-item">
-								시설안내4
-							</li>
+						<ul class=" ">
+							<c:forEach var="fcltys" items="${fclty }">
+							<c:if test="${fcltys.spa_req_cd eq spaceInfo.spa_req_cd}">
+							<li class=""><h4 >${fcltys.content }</h4></li>
+							</c:if>
+							</c:forEach>
 						</ul>
 					</div>
 				</div>
@@ -230,8 +226,10 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 			</dl>
 		</div>
 	</div><!-- end row -->
+	
+	
+				
         
-
    <!-- 댓글 목록 영역 -->
 	<div class="feed">
 		<div class="reList">
@@ -241,9 +239,47 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 			<table class="table table-hover table-bordered">
 				<tr>
 					<!-- <th>Feedback<button type="button" class="btn btn-primary btnfeed">등록</button></th> -->
-					<th>Feedback<button type="button" class="btn btn-primary btnfeed" data-toggle="modal" data-target="#staticBackdrop2">예약하기</button></th> 
+					<th colspan="6">Feedback
+					<c:forEach var="feedChecks" items="${feedCheck }">
+					<c:if test="${feedChecks.mem_id eq  sessionScope.id}">
+					<button type="button" class="btn btn-primary btnfeed" data-toggle="modal" data-target="#staticBackdrop2">등록하기</button>
+					</c:if>
+					</c:forEach></th> 
 				</tr>
 				<tr>
+					<td class="countNum">번호</td>
+					<td>시설</td>
+					<td>친절</td>
+					<td>가격</td>
+					<td>위치</td>
+					<td>소음</td>
+				</tr>
+				<c:forEach var="feedbacks" items="${feedback }">
+				<c:if test="${feedbacks.spa_req_cd eq spaceInfo.spa_req_cd}">
+				<tr>
+					<td>
+						<c:set var="countNum" value="${countNum + 1}" />
+						<div class="countNum">${countNum }</div>
+					</td>
+					<td>
+						${feedbacks.facility }
+					</td>
+					<td>
+						${feedbacks.kindness }
+					</td>
+					<td>
+						${feedbacks.price }
+					</td>
+					<td>
+						${feedbacks.location }
+					</td>
+					<td>
+						${feedbacks.noise }
+					</td>
+				</tr>
+				</c:if>
+				</c:forEach>
+				<!-- <tr>
 					<td class="reTop">
 						<h4>홍길동</h4>
 						<h5>2020-06-19 01:05:53</h5>
@@ -263,7 +299,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 							등록된 댓글 노출 영역입니다.
 						</p>
 					</td>
-				</tr>
+				</tr> -->
 			</table>
 		</div>
 	</div>
@@ -431,7 +467,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
           </div>
         </div>
 
-	<button type="button" id="report" class="btn btnEvent" style="background-color:transparent;float: right;">
+	<button type="button" id="report" class="btn btnEvent" style="background-color:transparent;float: right;  border:0px transparent solid;outline:none;">
 		<img src="<%=cp %>/assets/images/report.png" alt="btnImages" class="btnImages" style="width: 35px;">
 	</button>
     </div>

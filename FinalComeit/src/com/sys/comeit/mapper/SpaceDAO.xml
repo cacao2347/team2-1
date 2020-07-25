@@ -8,7 +8,7 @@
 <!-- 공간 상세페이지 -->
    <!-- 공간 정보 조회 -->
 	<select id="spaceInfoSearch" resultType="com.sys.comeit.SpaReqDTO">
-		SELECT ID, SPA_CD, SPA_REQ_CD, SPA_NAME, TYPE_NAME, BUSI_NAME, RPRSN_NAME, STR_TIME, END_TIME, USE_HRS, ONE_INTRO, AREA_NAME, SPC_AREA_NAME,RSV_NOTES,DTL_INTRO 
+		SELECT ID, SPA_CD, SPA_REQ_CD, SPA_NAME, TYPE_NAME, BUSI_NAME, RPRSN_NAME, STR_TIME, END_TIME, USE_HRS, ONE_INTRO, AREA_NAME, SPC_AREA_NAME,RSV_NOTES,DTL_INTRO, 
 		(     
 		SELECT COUNT(*)
 		FROM VIEW_SPA_FEEDCOUNT 
@@ -27,6 +27,37 @@
 	 FROM VIEW_SPA_ETC_TAG
 	 WHERE SPA_REQ_CD = #{spa_req_cd}
    </select>
+   
+   <!-- 시설 안내 조회 -->
+	<select id="spaceFcltySearch" resultType="com.sys.comeit.SpaReqDTO">
+	SELECT SPA_REQ_CD, CONTENT
+	FROM TBL_FCLTY_INFO
+	WHERE SPA_REQ_CD = #{spa_req_cd}
+   </select>
+   
+   <!-- 피드백 내용 -->
+   <select id="spaceFeed" resultType="com.sys.comeit.SpaReqDTO">
+    SELECT ID,SPA_NAME,FACILITY,KINDNESS,PRICE,LOCATION,NOISE,SPA_REQ_CD
+	FROM VIEW_SPA_FEEDCOUNT
+	WHERE SPA_REQ_CD = #{spa_req_cd}
+   </select>
+   
+   <!-- 회원별 피드백 등록 여부 체크 -->
+   <select id="reqCount" resultType="com.sys.comeit.SpaReqDTO">
+	SELECT SPA_REQ_CD,SPA_CD,REQ_CD,REQ_DATE,USE_HRS,USE_TIME,MEM_NUM,MEM_ID,NAME,MEM_TEL
+	FROM
+	(
+		SELECT SPA_REQ_CD,SPA_CD,LEC_SPA_CD AS REQ_CD,REQ_DATE,USE_HRS,USE_TIME,MEM_NUM,MEM_ID,NAME,MEM_TEL
+		FROM VIEW_SPA_REQ_LEC
+		UNION ALL
+		SELECT SPA_REQ_CD,SPA_CD,STU_SPA_REQ_CD AS REQ_CD,REQ_DATE,USE_HRS,USE_TIME,MEM_NUM,MEM_ID,NAME,MEM_TEL
+		FROM VIEW_SPA_REQ_STU
+		WHERE USE_TIME <![CDATA[<]]> SYSDATE
+	)
+	WHERE SPA_REQ_CD = #{spa_req_cd}
+   </select>
+   
+
 	
 
 <!-- 공간 리스트 -->
@@ -48,11 +79,9 @@
    
    <!-- 전체 공간 개수 조회 -->
    <select id="spaceCount" resultType="java.lang.Integer">
-      <![CDATA[
       SELECT COUNT(*) AS COUNT
       FROM VIEW_SPA_MY
       WHERE CHECK_TYPE_CD LIKE #{check_type}
-      ]]>
    </select>
    
    <!-- 모든 공간 각 관심 키워드 -->

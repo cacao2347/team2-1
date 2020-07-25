@@ -142,7 +142,7 @@ body {
 			<div class="col-md-3 register-left">
 				<img src="<%=cp %>/assets/images/data.png" alt="" />
 				<h3>Welcome</h3>
-				<p>You are 30 seconds away from earning your own money!</p>
+				<p>COME-IT에 오신걸 환영합니다. 지금 바로 로그인하세요!</p>
 				<input type="submit" name="" value="메인페이지"
 					onClick="location.href='mainpage.action'" /><br />
 			</div>

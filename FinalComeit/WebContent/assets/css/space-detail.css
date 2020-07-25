@@ -1,3 +1,15 @@
+.dtbr
+{
+	margin-top: 20pt;
+}
+.countNum
+{
+	color: #f19d1f;
+}
+.heart
+{
+	color: red;
+}
 .font-14
 {
 	font-size: 14pt;
@@ -17,7 +29,7 @@
     border-radius: 0.25rem;
     font-weight: 500;
     display: inline-block;
-    color: #44576C;
+    color: #f19d1f;
 }
 .modal .modal-body {
     max-height: 590px !important;

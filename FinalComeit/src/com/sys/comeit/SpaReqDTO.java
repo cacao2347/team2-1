@@ -16,8 +16,47 @@ public class SpaReqDTO
     private String content;// 시설안내
     private String spa_tag_type_cd,tag_name; // 키워드 코드, 명
     private String feedCount; // 피드백수
+    private String facility, kindness, price, location, noise;// 시설, 친절, 가격, 위치, 소음
+	private String mem_id; //피드백을 입력한 사람 아이디
+	
     
-	   
+    
+	public String getMem_id() {
+		return mem_id;
+	}
+	public void setMem_id(String mem_id) {
+		this.mem_id = mem_id;
+	}
+	public String getFacility() {
+		return facility;
+	}
+	public void setFacility(String facility) {
+		this.facility = facility;
+	}
+	public String getKindness() {
+		return kindness;
+	}
+	public void setKindness(String kindness) {
+		this.kindness = kindness;
+	}
+	public String getPrice() {
+		return price;
+	}
+	public void setPrice(String price) {
+		this.price = price;
+	}
+	public String getLocation() {
+		return location;
+	}
+	public void setLocation(String location) {
+		this.location = location;
+	}
+	public String getNoise() {
+		return noise;
+	}
+	public void setNoise(String noise) {
+		this.noise = noise;
+	}
 	public String getFeedCount() {
 		return feedCount;
 	}

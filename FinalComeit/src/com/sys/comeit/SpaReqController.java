@@ -110,11 +110,18 @@ public class SpaReqController
 
 			System.out.println(spa_req_cd);
 
-			String[] intTagList = request.getParameterValues("intTagList"); // 선택한 모든 키워드 배열에 넣기
-			String[] etcTagList = request.getParameterValues("etcTagList"); // 선택한 모든 기타 키워드 배열에 넣기
-
-			System.out.println("그냥 관심 : " + intTagList.length);
-			System.out.println("기타 관심 : " + etcTagList.length);
+			String[] intTagList = {};
+			String[] etcTagList = {};
+			
+			if(request.getParameterValues("intTagList")!=null)
+			{
+				intTagList = request.getParameterValues("intTagList"); // 선택한 모든 관심 키워드 배열에 넣기
+			}
+			
+			if(request.getParameterValues("etcTagList")!=null)
+			{
+				etcTagList = request.getParameterValues("etcTagList"); // 선택한 모든 관심 기타 키워드 배열에 넣기
+			}
 			
 			// 공간 이미지 설정
 			String img_type_cd = "IMGT1001";
