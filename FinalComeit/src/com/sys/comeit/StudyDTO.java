@@ -5,7 +5,7 @@ public class StudyDTO
 {
 
 	private String stu_cd, str_date, cmt_date, crt_date, end_date; 		// 스터디개설코드, 시작일, 확정일, 게시글등록일
-	private String title, mem_num, content;				 		// 방제목, 인원수, 상세설명
+	private String title, content;				 					// 방제목, 인원수, 상세설명
 	private String stu_hist_cd, stu_join_cd, apntm_dat; 		// 스터디장이력코드, (스터디장)참가코드, 임명일
 	private String leader_mem_cd, leader_name;					// 스터디장 회원코드, 스터디장 이름
 	private String meet_term, area_name, spc_area_name;			// 기간, 지역명, 세부지역명 
@@ -32,6 +32,17 @@ public class StudyDTO
 	
 	private String stu_day_cd;			// 스터디 진행 요일 코드
 	private String id;					// 로그인 회원 아이디
+	private int mem_num;
+
+	public int getMem_num()
+	{
+		return mem_num;
+	}
+
+	public void setMem_num(int mem_num)
+	{
+		this.mem_num = mem_num;
+	}
 
 	public String getId()
 	{
@@ -223,14 +234,6 @@ public class StudyDTO
 	public void setTitle(String title)
 	{
 		this.title = title;
-	}
-	public String getMem_num()
-	{
-		return mem_num;
-	}
-	public void setMem_num(String mem_num)
-	{
-		this.mem_num = mem_num;
 	}
 	public String getContent()
 	{

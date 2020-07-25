@@ -14,7 +14,7 @@ public interface IStudyDAO
 	public ArrayList<StudyDTO> memImgSearch(String stu_cd);				// 참가 스터디원 이미지 조회
 	
 	public String studyInsert(StudyDTO dto);		// 스터디 개설 
-	public int studyDayInsert(StudyDTO dto);			// 스터디 진행 요일 insert
+	public int studyDayInsert(StudyDTO dto);		// 스터디 진행 요일 insert
 	public int studyIntTagInsert(StudyDTO dto);		// 스터디 관심 키워드 insert
 	public int studyEtcTagInsert(StudyDTO dto);		// 스터디 관심 기타 키워드 insert
 	public int studyEtcTagCount(String etcTag);		// 스터디 관심 기타 키워드 10개 체크
@@ -29,5 +29,4 @@ public interface IStudyDAO
 	
 	public int addTagName(String etcTag);	// 관심 키워드에 INSERT
 	
-	public String findMemCd(String id);		// 아이디로 회원코드 알아내기
 }

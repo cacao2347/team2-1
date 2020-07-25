@@ -487,7 +487,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 				class="must">*</span></label>
 			<div class="col-lg-10 form-inline">
 				<input type="text" required="required"
-					class="form-control onlyAlphabetAndNumber" id="title" name="title"
+					class="form-control" id="title" name="title"
 					data-rule-required="true" 
 					maxlength="30"
 					style="width: 85%;"> &nbsp;
