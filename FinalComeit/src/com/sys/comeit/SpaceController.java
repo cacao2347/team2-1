@@ -20,7 +20,7 @@ public class SpaceController
 			String view = null;
 
 			IAreaDAO areaDao = sqlSession.getMapper(IAreaDAO.class); // 지역
-			ISpaceDAO ispaceDAO = sqlSession.getMapper(ISpaceDAO.class); // 스터디 정보
+			ISpaceDAO ispaceDAO = sqlSession.getMapper(ISpaceDAO.class); // 공간 정보
 			
 			String check_type="CHET1001";
 			
@@ -31,6 +31,18 @@ public class SpaceController
 			model.addAttribute("spaceTags", ispaceDAO.spaceTagList());	// 모든 공간 모든 키워드 
 
 			view = "WEB-INF/views/space/SpaceList.jsp";
+
+			return view;
+		}
+		
+		// 공간 상세페이지로 이동
+		@RequestMapping(value = "/spacedetail.action", method = RequestMethod.GET)
+		public String spaceDetail(Model model)
+		{
+			String view = null;
+
+
+			view = "WEB-INF/views/space/SpaceDetail.jsp";
 
 			return view;
 		}

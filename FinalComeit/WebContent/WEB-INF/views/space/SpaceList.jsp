@@ -10,97 +10,6 @@
 <head>
 <meta charset="UTF-8">
 <title>COME-IT</title>
-<style type="text/css">
-[class*=' imghvr-'],[class^=imghvr-]
-{
-	font-family:Montserrat,sans-serif;
-	position:relative;
-	display:inline-block;
-	margin:0;
-	max-width:100%;
-	background-color:rgba(230,230,230,.7);
-	color:#666;overflow:hidden
-	;-moz-osx-font-smoothing:grayscale;
-	-webkit-backface-visibility:hidden;
-	backface-visibility:hidden;
-	-webkit-transform:translateZ(0);
-	transform:translateZ(0)
-}
-[class*=' imghvr-'] figcaption,[class^=imghvr-] figcaption
-{
-	background-color:rgba(255,255,255,.9);
-	padding:20px;
-	position:absolute;
-	top:15px;
-	bottom:15px;
-	left:15px;
-	right:15px;
-	border:1px solid rgba(0,0,0,.1)
-}
-
-[class*=' imghvr-'] a,[class^=imghvr-] a
-{ 
-	position:absolute;
-	top:0;
-	bottom:0;
-	left:0;
-	right:0;
-	z-index:1
-}
-[class*=' imghvr-'],[class*=' imghvr-'] *,[class*=' imghvr-'] :after,[class*=' imghvr-'] :before,[class*=' imghvr-']:after,[class*=' imghvr-']:before,[class^=imghvr-],[class^=imghvr-] *,[class^=imghvr-] :after,[class^=imghvr-] :before,[class^=imghvr-]:after,[class^=imghvr-]:before
-{
-	-webkit-box-sizing:border-box;
-	box-sizing:border-box;
-	-webkit-transition:all .35s ease;
-	transition:all .35s ease
-}
-
-[class*=' imghvr-push-']:hover figcaption,[class*=' imghvr-slide-']:hover figcaption,[class^=imghvr-push-]:hover figcaption,[class^=imghvr-slide-]:hover figcaption
-{
-	-webkit-transform:translate(0,0);transform:translate(0,0)
-}
-
-[class*=' imghvr-book-open-']:hover figcaption:after,[class*=' imghvr-book-open-']:hover figcaption:before,[class^=imghvr-book-open-]:hover figcaption:after,[class^=imghvr-book-open-]:hover figcaption:before
-{
-	opacity:1;
-	background-color:#fff;
-	-webkit-transform:rotateY(0);
-	transform:rotateY(0)
-}
-/* 2번째 처리 css */
-[class*=' imghvr-scale-']:before,[class^=imghvr-scale-]:before
-{
-	background-color:inherit;
-	top:15px;
-	bottom:15px;
-	left:15px;
-	right:15px;
-	position:
-	absolute;content:''
-}
-[class*=' imghvr-scale-'] figcaption,[class^=imghvr-scale-] figcaption
-{
-	opacity:0
-}
-
-[class*=' imghvr-scale-']:hover:before,[class^=imghvr-scale-]:hover:before
-{
-	top:15px;
-	bottom:15px;
-	left:15px;
-	right:15px;
-	opacity:.9
-}
-[class*=' imghvr-scale-']:hover figcaption,[class^=imghvr-scale-]:hover figcaption
-{
-	opacity:1;
-	-webkit-transition-delay:.25s;
-	transition-delay:.25s
-}
-
-.imghvr-slide-down figcaption{-webkit-transform:translateY(-120%);transform:translateY(-120%)}
-.imghvr-scale-top-left:before{bottom:100%;right:100%}
-</style>
 <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/bootstrap/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
@@ -136,7 +45,13 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                 $("input[type=checkbox]").prop("checked", false);
             }
 		});
-
+		
+		// 상세 페이지로 이동
+	   	$(".imageBtn").click(function()
+	   	{
+			var params = "spa_req_cd=" + $(this).val();
+			location.href = "/FinalComeit/spacedetail.action?"+params;
+		});
 	});
 	
 	// 지역에 따른 세부지역 불러오는 ajax
@@ -153,6 +68,11 @@ body{font-family: 'Noto Sans KR', sans-serif;}
           $("#spcArea").removeAttr("disabled");
        });
     }
+	
+ 
+   	
+  
+ 
 
 </script>
 </head>
@@ -282,8 +202,13 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 		                        <c:forEach var="spaceList" items="${space }">
 			                        <li class="col-sm-4 col-md-6" >	
 										<div class="demo">
-									      <figure class="imghvr-scale-top-left"><img src="<%=cp %>/assets/images/199.jpg" alt="53" style="width: 300px; height: 250px;">
+									      <figure class="imghvr-scale-top-left">
+									     <%--  <input type="image" class="imageBtn" value="${spaceList.area_name }" src="<%=cp %>/assets/images/199.jpg" alt="53" style="width: 300px; height: 250px;"> --%>
+									      <%-- <button type="button" class="imageBtn"  value="${spaceList.area_name }"><img src="<%=cp %>/assets/images/199.jpg" alt="53" style="width: 300px; height: 250px;"></button> --%>
+									       <%-- <input type="image" src="<%=cp %>/assets/images/199.jpg" alt="53" class="imageBtn" style="width: 300px; height: 250px;" value="${spaceList.spa_req_cd }"onclick="imageBtn(this)"> --%>
+									       <img src="<%=cp %>/assets/images/199.jpg" alt="53" style="width: 300px; height: 250px;">
 									        <figcaption>
+									        <button type="button" class="imageBtn" value="${spaceList.spa_req_cd }" style="background-color:transparent;  border:0px transparent solid; text-align: left;outline:none;" >
 									        <p><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
 									        ${spaceList.area_name} ${spaceList.spc_area_name}</p>
 									        <p><span class="glyphicon glyphicon-time" aria-hidden="true"></span>
@@ -294,16 +219,25 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 									        <p><span class="glyphicon glyphicon-home" aria-hidden="true"></span> ${spaceList.type_name}</p>
 									        <p><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> ${spaceList.busi_name}</p>
 									        </div>
-									        </figcaption><a href="javascript:;"></a>
+									        </button>
+									        </figcaption>
 									      </figure>
 									      <div class="caption">
 									      	<div class="nameAndCount">
 											<h4>${spaceList.spa_name}</h4>
 											<p class="feed"><span class="glyphicon glyphicon-heart heart" aria-hidden="true"></span>피드백수: ${spaceList.feedCount }개</p>
 											</div>
-												<p>&quot;${spaceList.one_intro}&quot;</p>
+											<p>&quot;${spaceList.one_intro}&quot;</p>
+											<p>
+											<ul class="list-study-tags">
+											<c:forEach var="spaceTagss" items="${spaceTags }">
+											<c:if test="${spaceTagss.spa_req_cd eq spaceList.spa_req_cd}">
+												<li class="stack-item">${spaceTagss.tag_name }</li>
+											</c:if>
+											</c:forEach>
+											</ul>
+											<p>
 										  </div>
-									    </div>
 			                        </li>
 								</c:forEach>
 		                    </ul>

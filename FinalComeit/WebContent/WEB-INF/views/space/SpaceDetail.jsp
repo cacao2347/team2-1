@@ -163,7 +163,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 <!-- 헤더 -->
 <div class="row">
 	<div class="col-md-12">
-	<c:import url="WEB-INF/views/header.jsp"></c:import>
+	<c:import url="/WEB-INF/views/header.jsp"></c:import>
 	</div>
 </div>
 			
@@ -461,7 +461,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 
 <div class="row">
 	<div class="col-md-12">
-	<c:import url="WEB-INF/views/footer.jsp"></c:import>
+	<c:import url="/WEB-INF/views/footer.jsp"></c:import>
 	</div>
 </div>
 

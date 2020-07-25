@@ -82,29 +82,6 @@ public class SpaReqController
 			String dtladdr = request.getParameter("dtladdr"); // 업체 상세주소
 			String web_url = null;
 			
-			
-			System.out.println(spa_cd);
-			System.out.println(num);
-			System.out.println(cafe_cd);
-			System.out.println(onein);
-			System.out.println(dtlin);
-			System.out.println(sparsv);
-			System.out.println(img_url_file);
-			System.out.println(img_url_img);
-			System.out.println(spc_area_cd);
-			System.out.println(spa);
-			System.out.println(spapeo);
-			System.out.println(spaname);
-			System.out.println(spatel);
-			System.out.println(start);
-			System.out.println(end);
-			System.out.println(max);
-			System.out.println(dtladdr);
-			
-			
-			
-			
-			
 			SpaReqDTO dto = new SpaReqDTO();
 
 			dto.setRprsn_num(num);
