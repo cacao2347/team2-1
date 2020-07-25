@@ -292,157 +292,95 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 			 });
 			 
 			 
-			 // 대표 이미지 등록
 			 $("#proImgBtn").click(function()
-	                 {
-	                	 var result = confirm('정말 등록하시겠습니까?'); 
-	                	 
-	                	 if(result) 
-	                	 { 
-	                		 //yes location.replace('index.php');
-	                		 //alert("하이");
-	                            var myFormData = new FormData();
-	                            alert(myFormData);
-	                            
-	                            var fileok = document.getElementById("uploadFile");
-	                            
-	                            var fileCheck = null;
-	                            fileCheck = $("#uploadFile").val();
+             {
+                var result = confirm('정말 등록하시겠습니까?'); 
+                
+                if(result) 
+                { 
+                   //yes location.replace('index.php');
+                   //alert("하이");
+                        var myFormData = new FormData();
+                        //alert(myFormData);
+                        
+                        var fileok = document.getElementById("uploadFile");
+                        
+                        var fileCheck = null;
+                        fileCheck = $("#uploadFile").val();
 
-	                            alert(fileCheck);
-	                            
-	                            var filename = fileok.files[0].name;
-	                            
-	                            alert(filename);
-	                            
-	                            myFormData.append("fileok", fileok.files[0]);
-	                            
-	                            if(fileCheck == false)
-	                            {
-	                                 alert("파일을 첨부해 주세요");
-	                                 return;
-	                            }
-	                            else
-	                            {
-	                               $.ajax(
-	                               {
-	                                    url: '<%=cp%>/ajaximg.action',
-	                                    type: 'POST',
-	                                    processData: false, // important
-	                                    contentType: false,//'multipart/form-data', // important
-	                                    dataType : 'text',
-	                                    data: myFormData,
-	                                    
-	                                    success : function(data)
-	                                    {
-	                                        alert($.trim(data));
-	                                        
-	                                        $('#okFile').val($.trim(data));
-	                                        
-	                                       //$("#img_form_url").attr("src", imgurl);
-	                                
-	                                       var good = $("#okFile").val();
-	                                       
-	                                       //alert(good);
-	                                       
-	                                       var pics = good.substr(101);
-	                                       
-	                                       //alert(pics);
-	                                       
-	                                       /* $("#gmd").attr("src",  '/FinalComeit/pds/saveData/back028.jpg' ); */
-	                                       
-	                                       <%-- $("#gmd").attr("src",  '<%=imagePath%>/' + pics); --%>
-	                                       
-	                                       <%-- alert(<%=cp%>); --%>
-	                                       <%-- alert(<%=imagePath%>); --%>
-	                                       <%-- alert(<%=imagePath%>/fileok.files[0]); --%>
-	                                       
-	                                       <%-- <%=imagePath%>/" + pics + " --%>
-	                                       
-	                                    }
-	                               })
-	                            }
-	                     } 
-	                	 else 
-	                     { 
-	                    	 //no 
-	                     }
+                        //alert(fileCheck);
+                        
+                        var filename = fileok.files[0].name;
+                        
+                        //alert(filename);
+                        
+                        myFormData.append("fileok", fileok.files[0]);
+                        
+                        if(fileCheck == false)
+                        {
+                             alert("파일을 첨부해 주세요");
+                             return;
+                        }
+                        else
+                        {
+                           $.ajax(
+                           {
+                                url: '<%=cp%>/ajaximg.action',
+                                type: 'POST',
+                                processData: false, // important
+                                contentType: false,//'multipart/form-data', // important
+                                dataType : 'text',
+                                data: myFormData,
+                                
+                                success : function(data)
+                                {
+                                    //alert($.trim(data));
+                                    
+                                 var dataArray = data.split("\\");
+                                    
+                                 //alert(dataArray);
+                                 
+                                 var realData = '\\'+dataArray[7]+'\\' + dataArray[8]+'\\'+ dataArray[9] +'\\'+dataArray[10];
+                                 
+                                 //alert(realData);
+                                 
+                                 realData = $.trim(realData);
+                                 
+                                    $('#okFile').val(realData);
+                                    
+                                   //$("#img_form_url").attr("src", imgurl);
+                            
+                                   //var good = $("#okFile").val();
+                                   
+                                   //alert(good);
+                                   
+                                   //var pics = good.substr(101);
+                                   
+                                   //alert(pics);
+                                   
+                                   /* $("#gmd").attr("src",  '/FinalComeit/pds/saveData/back028.jpg' ); */
+                                   
+                                   <%-- $("#gmd").attr("src",  '<%=imagePath%>/' + pics); --%>
+                                   
+                                   <%-- alert(<%=cp%>); --%>
+                                   <%-- alert(<%=imagePath%>); --%>
+                                   <%-- alert(<%=imagePath%>/fileok.files[0]); --%>
+                                   
+                                   <%-- <%=imagePath%>/" + pics + " --%>
+                                   
+                                }
+                           })
+                        }
+                 } 
+                else 
+                 { 
+                    //no 
+                 }
 
-	                            
-	                         
-	                  })
-	                         
-	                  
-	                         
-               	 var xOffset = 5;
-                 var yOffset = 15;
-                    
-               	 // 마우스 오버시 미리보기 이미지 설정 및 위치 설정
-                     $(document).on("mouseover", "#thumbnail", function (e) { //마우스 오버시
-                         // 미리보기 이미지 설정
-                         
-                         var okFile = $("#okFile").val();
+                        
                      
-                     	  if(okFile == false)
-                         {
-                     		  //alert("등록된 파일이 없습니다.");
-                     		  return;
-                         }
-                     	  else
-                     	  {
-                     		var div = $("<div>", {id: "preview"});
-                           /* var img = $("<img>", {src: $(this).attr("href")}); */
-                           
-                           //alert(pics);
-                           
-                           <%-- var img = "<img id='bye' src='<%=imagePath%>/" + pics + "' style='width: 400px; height: 200px;'>"; --%>
-                           
-                           //alert(okFile);
-                           
-                           var newpics = okFile.substr(101);
-                           
-                           var img = "<img id='bye' src='<%=imagePath%>/" + newpics + "' style='width: 400px; height: 200px;'>";
-                           
-                           //alert(img);
-                           
-                           div.append(img);
-                           
-                           $("body").append(div);
-                           
-                           <%-- $('#bye').attr('src').change(function() 
-                  	 		{
-                           	 $('#bye').attr('src','<%=imagePath%>/" + pics + "');
-                  	 		}); --%>
-
-                           // 마우스 오버에 따른 위치 설정
-                           $("#preview")
-                               .css("top", (e.pageY - xOffset) + "px")
-                               .css("left", (e.pageX + yOffset) + "px")
-                               .fadeIn("fast"); 
-                     	  }
-                         
-                         
-                     }); 
+              })
                      
-                     // 마우스 이동시 위치 변경
-                     $(document).on("mousemove", "#thumbnail", function (e) {
-                         $("#preview")
-                             .css("top", (e.pageY - xOffset) + "px")
-                             .css("left", (e.pageX + yOffset) + "px");
-                     });
-
-
-                     // 마우스 아웃시 이미지 제거
-                     $(document).on("mouseout", "#thumbnail", function () 
-                     { //마우스 아웃시
-                        $("#preview").remove()
-                     });
-			 
-			 
-			 
-			 
-			 
-			 
 
 	});
     
@@ -742,9 +680,6 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                <!-- <form action="Test_ok.jsp" method="post" enctype="multipart/form-data"> -->
                <input type="file" id="uploadFile" name="uploadFile"
                   class="form-control" accept=".gif, .jpg, .png, .jpeg" style="width: 65%;" />
-               <input type="text"
-                  class="form-control" id="thumbnail" style="width: 20%;" readonly="readonly" value="미리보기">
-               &nbsp;
                <button class="btn btn-primary" id="proImgBtn" type="button">등록</button>
                <input type="text" id="okFile" name="okFile" class="btn btn-primary">
             </div>

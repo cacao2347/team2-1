@@ -32,6 +32,19 @@ public class StudyDTO
 	
 	private String stu_day_cd;			// 스터디 진행 요일 코드
 	private String id;					// 로그인 회원 아이디
+	
+	private String stu_count;			// 참가중인 스터디 개수
+	
+	public String getStu_count()
+	{
+		return stu_count;
+	}
+
+	public void setStu_count(String stu_count)
+	{
+		this.stu_count = stu_count;
+	}
+
 	private int mem_num;
 
 	public int getMem_num()

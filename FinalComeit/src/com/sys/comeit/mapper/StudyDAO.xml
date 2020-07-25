@@ -5,11 +5,14 @@
   
 <mapper namespace="com.sys.comeit.IStudyDAO">
 
-     <!-- 스터디방 정보 조회 -->
+   <!-- 스터디방 정보 조회 -->
 	<select id="studyInfoSearch"
 		resultType="com.sys.comeit.StudyDTO">
-		SELECT DISTINCT STU_CD,CRT_DATE ,TITLE,STR_DATE,MEM_NUM, CONTENT, CMT_DATE, AREA_NAME, SPC_AREA_NAME
-		, MEET_TERM, IDNTT_TYPE, LV, CAT_NAME, SCRT_NUM, CRT_MEM_CD, END_DATE
+		SELECT STU_CD,CRT_DATE ,TITLE,STR_DATE,MEM_NUM, CONTENT, CMT_DATE,
+		STU_JOIN_CD
+		, STU_HIST_CD, APNTM_DATE, AREA_NAME, SPC_AREA_NAME
+		, MEET_TERM, IDNTT_TYPE, LV, CAT_NAME, LEADER_MEM_CD, LEADER_ID
+		, LEADER_NAME, SCRT_NUM, CRT_MEM_CD, END_DATE
 		FROM VIEW_STU_INFO
 		WHERE STU_CD=#{stu_cd}
 	</select>
@@ -71,22 +74,12 @@
 		                 WHERE STU_CD = #{stu_cd}
 		                   AND EXT_NAME IS NULL)
 	</select>
-	
-	<!-- 스터디방 참여 여부 -->
-	<select id="stuJoinMemSearch" resultType="java.lang.Integer">
-		SELECT COUNT(*) AS COUNT
-		FROM VIEW_MY_STU
-		WHERE MEM_CD = #{join_mem_cd}
-  		  AND STU_CD = #{stu_cd}
-  		  AND EXT_NAME IS NULL
-	</select>	
-   
-   
    
    <!-- 수진 추가 -->
    <!-- 전체 스터디방 조회 -->
+   <!-- 전체 스터디방 조회 -->
    <select id="studyList" resultType="com.sys.comeit.StudyDTO">
-      SELECT STU_CD, CRT_DATE, TITLE, STR_DATE, MEM_NUM, CMT_DATE, AREA_NAME, SPC_AREA_NAME, MEET_TERM, IDNTT_TYPE, LV, CAT_NAME, SCRT_NUM, END_DATE
+      SELECT STU_CD, CRT_DATE, TITLE, STR_DATE, MEM_NUM, CMT_DATE, AREA_NAME, SPC_AREA_NAME, MEET_TERM, IDNTT_TYPE, LV, CAT_NAME, SCRT_NUM, END_DATE, IMG_URL
       FROM VIEW_STU_LIST
       WHERE END_DATE <![CDATA[>]]> SYSDATE
       ORDER BY CRT_DATE DESC
@@ -138,7 +131,7 @@
 		      , #{mem_num}
 		      , #{content}
 		      , #{img_url, jdbcType=VARCHAR}
-		      , #{scrt_num, jdbcType=VARCHAR}
+		      , #{scrt_num, jdbcType=CHAR}
 		      , #{stu_cd, mode=OUT, jdbcType=VARCHAR}
 		   )
 		}
@@ -175,11 +168,10 @@
 		VALUES('SPRDY'||SEQ_STU_PRG_DAY.NEXTVAL, #{stu_cd}, #{stu_day_cd})
 	</insert>
 	
-	<!-- 로그인 아이디로 회원코드 알아내기
-	<select id="findMemCd" resultType="java.lang.String">
-		SELECT MEM_CD
-		FROM VIEW_MEM_MY
-		WHERE ID = #{id}
-   </select> -->
-   
+	<!-- 참가중인 스터디 개수 -->
+   	<select id="memStudyCount" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS STU_COUNT
+		FROM VIEW_MY_STU
+		WHERE MEM_CD = #{mem_cd}
+	</select>
 </mapper>

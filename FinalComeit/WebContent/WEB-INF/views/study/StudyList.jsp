@@ -116,7 +116,7 @@ body
 				type : "POST"
 				, url : "stuscrtcheck.action"
 				, data : params
-				, dataType : "json"
+				, dataType : "text"
 				, async:false
 				, success : function(data)
 				{
@@ -140,7 +140,7 @@ body
 				}
 				, error : function(e)
 				{
-					alert(e.responseText);
+					alert(e.responseText + "에러");
 				}
 			});
 	
@@ -166,8 +166,34 @@ body
 		{
 			// 여기서 ajax 처리로 개수 체크하기
 			
+			$.ajax(
+			{
+				type : "POST"
+				, url : "stucreatecnt.action"
+				, dataType : "text"
+				, success : function(data)
+				{
+					if(data >= 10)
+					{
+						alert("스터디는 최대 10개까지 참가 가능합니다.\n스터디 종료 후 새로운 스터디에 참가해주세요.");
+					}
+					else if(data <= 10)
+					{
+						location.href = "/FinalComeit/studycreate.action";
+					}
+					else
+					{
+						alert("판별불가");
+					}
+					
+				}
+				, error : function(e)
+				{
+					alert(e.responseText + "에러");
+				}
+			});
 			
-			location.href = "/FinalComeit/studycreate.action";
+			
 			
 		});
 		
@@ -342,7 +368,15 @@ body
 							<c:forEach var="studys" items="${study }">
 								<li class="list-study-item">
 								<div class="item-header">
+								
+								<c:choose>
+								<c:when test="${empty studys.img_url }">
 								<img class="study-logo" alt="study-logo" src="assets/images/studylogo.PNG">
+								</c:when>
+								<c:when test="${not empty studys.img_url }">
+								<img class="study-logo" alt="study-logo" src="${studys.img_url }">
+								</c:when>
+								</c:choose>
 								</div>
 								<div class="item-body">
 								<div class="firstLine">
