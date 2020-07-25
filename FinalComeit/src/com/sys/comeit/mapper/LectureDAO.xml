@@ -59,4 +59,38 @@
 		, #{str_hrs}, #{end_hrs})
 	</insert>
 	
+	<!-- 전체 강의방 조회 -->
+   <select id="lecList" resultType="com.sys.comeit.LectureDTO">
+      SELECT STU_CD, CRT_DATE, TITLE, STR_DATE, MEM_NUM, CMT_DATE
+      , AREA_NAME, SPC_AREA_NAME, MEET_TERM
+      , IDNTT_TYPE, LV, CAT_NAME, SCRT_NUM, END_DATE
+      FROM VIEW_STU_LIST
+      WHERE END_DATE <![CDATA[>]]> SYSDATE
+      ORDER BY CRT_DATE DESC
+   </select>
+   
+	<!-- 총 스터디방 개수 조회 count() -->
+   <select id="lecCount" resultType="java.lang.Integer">
+      SELECT COUNT(*) AS COUNT
+      FROM VIEW_STU_LIST
+      WHERE END_DATE <![CDATA[>]]> SYSDATE
+   </select>
+   
+   <!-- 모든 스터디방의 관심 키워드 -->
+   <select id="lecTagList" resultType="com.sys.comeit.LectureDTO">
+      <![CDATA[
+      	SELECT STU_CD, INT_TAG AS INT_TAG_NAME
+		FROM 
+		(
+		SELECT STU_CD, INT_TAG, STR_DATE, END_DATE
+		FROM VIEW_STU_TAG
+		UNION ALL
+		SELECT STU_CD, ETC_TAG, STR_DATE, END_DATE
+		FROM VIEW_STU_ETC_TAG
+		)
+		WHERE END_DATE > SYSDATE
+      ]]>
+   </select>
+   
+	
 </mapper>

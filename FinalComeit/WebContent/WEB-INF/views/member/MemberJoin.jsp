@@ -167,11 +167,12 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                             var fileok = document.getElementById("uploadFile");
                             
                             var fileCheck = null;
+                            
                             fileCheck = $("#uploadFile").val();
 
                             //alert(fileCheck);
                             
-                            var filename = fileok.files[0].name;
+                            //var filename = fileok.files[0].name;
                             
                             //alert(filename);
                             

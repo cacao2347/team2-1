@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class LectureController
@@ -124,6 +125,50 @@ public class LectureController
 		}
 
 		return view;
+	}
+	
+	
+	// 강의 리스트 화면 노출하기
+	@RequestMapping(value = "/lecturelist.action", method = RequestMethod.GET)
+	public String memberJoin(Model model, HttpServletRequest request)
+	{
+		String view = null;
+
+		IAreaDAO areaDao = sqlSession.getMapper(IAreaDAO.class); // 지역
+		ILevelDAO levelDao = sqlSession.getMapper(ILevelDAO.class); // 레벨
+
+		ILectureDAO lecDao = sqlSession.getMapper(ILectureDAO.class); // 스터디 정보
+
+		model.addAttribute("area", areaDao.areaList());
+		model.addAttribute("level", levelDao.levelList());
+
+		model.addAttribute("study", lecDao.lecList()); // 실제 스터디 리스트
+		model.addAttribute("count", lecDao.lecCount());
+
+		model.addAttribute("studyTags", lecDao.lecTagList()); // 모든 스터디의 모든 키워드
+
+		view = "WEB-INF/views/study/StudyList.jsp";
+
+		return view;
+	}
+
+	// 강의 리스트에서 강의 클릭 시 비밀번호 확인 AJAX 처리
+	@ResponseBody
+	@RequestMapping(value = "/lecscrtcheck.action", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String checkSpaIdAjax(HttpServletRequest request, Model model)
+	{
+
+		IStudyDAO studyDao = sqlSession.getMapper(IStudyDAO.class); // 스터디 정보
+
+		String stu_cd = request.getParameter("stu_cd");
+		System.out.println("스터디코드 : " + stu_cd);
+
+		String scrt_num = studyDao.studyScrt(request.getParameter("stu_cd"));
+		System.out.println("비밀번호 : " + scrt_num);
+
+		return String.valueOf(scrt_num);
+
 	}
 
 }
