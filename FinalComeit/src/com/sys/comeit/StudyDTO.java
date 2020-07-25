@@ -31,6 +31,17 @@ public class StudyDTO
 	// 대표이미지, 스터디신분, 레벨코드, 신분코드
 	
 	private String stu_day_cd;			// 스터디 진행 요일 코드
+	private String id;					// 로그인 회원 아이디
+
+	public String getId()
+	{
+		return id;
+	}
+
+	public void setId(String id)
+	{
+		this.id = id;
+	}
 
 	public String getStu_day_cd()
 	{

@@ -166,5 +166,11 @@
 		VALUES('SPRDY'||SEQ_STU_PRG_DAY.NEXTVAL, #{stu_cd}, ${stu_day_cd})
 	</insert>
 	
+	<!-- 로그인 아이디로 회원코드 알아내기
+	<select id="findMemCd" resultType="java.lang.String">
+		SELECT MEM_CD
+		FROM VIEW_MEM_MY
+		WHERE ID = #{id}
+   </select> -->
    
 </mapper>

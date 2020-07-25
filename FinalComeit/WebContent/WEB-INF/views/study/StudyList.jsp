@@ -125,7 +125,7 @@ body
 						if(result=="" || result==null)
 							return;
 						else if(result == data)
-							location.href = "/FinalComeit/studydetail.action";
+							location.href = "/FinalComeit/studydetail.action?stu_cd=" + $(this).val();
 						else if(result != data)
 							alert("비밀번호가 틀렸습니다!");
 					}

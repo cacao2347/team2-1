@@ -28,4 +28,6 @@ public interface IStudyDAO
 	public String studyScrt(String stu_cd);			// 스터디방의 비밀번호 확인
 	
 	public int addTagName(String etcTag);	// 관심 키워드에 INSERT
+	
+	public String findMemCd(String id);		// 아이디로 회원코드 알아내기
 }

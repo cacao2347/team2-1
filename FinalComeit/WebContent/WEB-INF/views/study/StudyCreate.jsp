@@ -480,7 +480,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 	</div>
 	<div class="col-md-8">
 	<form id="joinForm" class="form-horizontal" role="form" method="post"
-		action="memberinsert.action">
+		action="studycreate.action">
 
 		<div class="form-group " id="divTitle">
 			<label for="inputTitle" class="col-lg-2 control-label">제목<span
@@ -631,6 +631,25 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 					placeholder="시작날짜를 선택하세요." style="width: 40%;"/>
 			</div>
 			
+		</div>
+		
+		<!-- 스터디 카테고리 -->
+		<div class="form-group" id="divCat">
+			<label for="inputCat" class="col-lg-2 control-label">카테고리<span
+				class="must">*</span></label>
+			<div class="col-lg-10">
+
+				<select name="stuCat" required="required" id="term"
+					class="posiSel form-control" style="width: 40%;">
+					<option value="0">카테고리 선택</option>
+					
+					<c:forEach var="stuCats" items="${stuCat }">
+						<option value="${stuCats.stu_cat_cd }">${stuCats.cat_name }
+						</option>
+					</c:forEach>
+				</select>
+
+			</div>
 		</div>
 		
 		<!-- 기간 -->
