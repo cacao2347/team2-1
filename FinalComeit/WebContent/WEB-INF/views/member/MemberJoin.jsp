@@ -162,18 +162,18 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                 		 //yes location.replace('index.php');
                 		 //alert("하이");
                             var myFormData = new FormData();
-                            alert(myFormData);
+                            //alert(myFormData);
                             
                             var fileok = document.getElementById("uploadFile");
                             
                             var fileCheck = null;
                             fileCheck = $("#uploadFile").val();
 
-                            alert(fileCheck);
+                            //alert(fileCheck);
                             
                             var filename = fileok.files[0].name;
                             
-                            alert(filename);
+                            //alert(filename);
                             
                             myFormData.append("fileok", fileok.files[0]);
                             
@@ -195,7 +195,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                                     
                                     success : function(data)
                                     {
-                                        alert($.trim(data));
+                                        //alert($.trim(data));
                                         
                                         $('#okFile').val($.trim(data));
                                         
@@ -205,7 +205,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                                        
                                        //alert(good);
                                        
-                                       var pics = good.substr(101);
+                                       //var pics = good.substr(101);
                                        
                                        //alert(pics);
                                        
@@ -259,7 +259,19 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                             
                             //alert(okFile);
                             
-                            var newpics = okFile.substr(101);
+                            // 문자열 반대로 뒤집기 → 참고 사이트 https://gocoding.tistory.com/153
+                            // 1. 파일 경로를 역슬래쉬로 자르는데 자바스크립트상에서는 '\' 하나가 먹히지 않으므로 '\\' 두개를 써줘야한다. 
+                            var okSlice = okFile.split("\\");
+                            //alert(okSlice);
+                            // 2. 역슬래쉬를 자른 경로를 경로의 뒤의 문자부터 순서대로 붙여준다.
+                            var reverse = okSlice.reverse().join("\\");
+                            //alert(reverse);
+                            
+                            // 3. 2번의 경로를 0번째부터 역슬래시가 있는 길이까지 잘라준다. ex) 아이유.jpg
+                            //    예시와 같이 파일명과 확장명을 가져온다.
+                            var newpics = reverse.substring( 0, reverse.indexOf("\\"));
+                            
+                            //alert(slice);
                             
                             var img = "<img id='bye' src='<%=imagePath%>/" + newpics + "' style='width: 400px; height: 200px;'>";
                             
@@ -348,9 +360,13 @@ body{font-family: 'Noto Sans KR', sans-serif;}
     var ext = this.value.match(/\.(.+)$/)[1];
     switch (ext) {
         case 'jpg':
+        case 'JPG':
         case 'jpeg':
+        case 'JPEG':
         case 'png':
+        case 'PNG' :
         case 'gif':
+        case 'GIF':
             $('#proImgBtn').attr('disabled', false);
             break;
         default:
@@ -1021,7 +1037,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                   class="form-control" id="thumbnail" style="width: 20%;" readonly="readonly" value="미리보기">
                &nbsp;
                <button class="btn btn-primary" id="proImgBtn" type="button">등록</button>
-               <input type="text" id="okFile" name="okFile" class="btn btn-primary">
+               <input type="hidden" id="okFile" name="okFile" class="btn btn-primary">
             </div>
          </div>
 
