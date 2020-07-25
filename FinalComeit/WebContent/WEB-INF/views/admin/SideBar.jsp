@@ -60,7 +60,7 @@
             <h4 class="collapse-header">회원 관리:</h4>
             <a class="collapse-item" href="adminmemberlist.action">회원 명단</a>
             <a class="collapse-item" href="admin_prof_list.action">강사 명단</a>
-            <a class="collapse-item" href="spacelist.action">업체 명단</a>
+            <a class="collapse-item" href="adminspalist.action">업체 명단</a>
             <a class="collapse-item" href="admin_com_appeal_list.action">업체 요청 관리</a>
             <a class="collapse-item" href="admin_space_reject_list.action">업체거부 사유목록</a>
           </div>

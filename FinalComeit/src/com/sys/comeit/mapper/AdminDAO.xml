@@ -71,4 +71,9 @@
 		WHERE LNGG_BAN_CD=#{lngg_ban_cd, jdbcType=VARCHAR}
 	</delete>
 	
+	<!-- 업체 로그인 정보 조회 list() -->
+	<select id="admspaList" resultType="com.sys.comeit.SpaDTO">
+		SELECT SPA_ID, SPA_CD, EMAIL, NAME, TEL, JOIN_DATE
+		FROM TBL_SPA_JOIN
+	</select>
 </mapper>

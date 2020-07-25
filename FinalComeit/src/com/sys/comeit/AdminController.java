@@ -58,20 +58,28 @@ public class AdminController
 		return view;
 	}
 	
-	@RequestMapping(value = "/spacelist.action", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "/adminspalist.action", method = {RequestMethod.GET, RequestMethod.POST})
 	public String spaceList(Model model)
 	{
 		String view = null;
 		
-		ISpaDAO spaDao = sqlSession.getMapper(ISpaDAO.class);
+		IAdminDAO admDao = sqlSession.getMapper(IAdminDAO.class);
 		
-		model.addAttribute("spaList", spaDao.spaList());
-		System.out.println(spaDao.spaList().get(0).getSpa_id());
-		System.out.println(spaDao.spaList().get(0).getSpa_cd());
-		System.out.println(spaDao.spaList().get(0).getName());
-		System.out.println(spaDao.spaList().get(0).getEmail());
-		System.out.println(spaDao.spaList().get(0).getJoin_date());
-		System.out.println(spaDao.spaList().get(0).getTel());
+		model.addAttribute("adminspaList", admDao.admspaList());
+		
+		System.out.println(admDao.admspaList().get(0).getSpa_id());
+		System.out.println(admDao.admspaList().get(0).getSpa_cd());
+		System.out.println(admDao.admspaList().get(0).getName());
+		System.out.println(admDao.admspaList().get(0).getEmail());
+		System.out.println(admDao.admspaList().get(0).getJoin_date());
+		System.out.println(admDao.admspaList().get(0).getTel());
+		
+		System.out.println(admDao.admspaList().get(1).getSpa_id());
+		System.out.println(admDao.admspaList().get(1).getSpa_cd());
+		System.out.println(admDao.admspaList().get(1).getName());
+		System.out.println(admDao.admspaList().get(1).getEmail());
+		System.out.println(admDao.admspaList().get(1).getJoin_date());
+		System.out.println(admDao.admspaList().get(1).getTel());
 		
 		model.addAttribute("args", "/WEB-INF/views/admin/AdminSpaceList.jsp");
 		

@@ -19,4 +19,7 @@ public interface IAdminDAO
 	
 	// 한명의 관리자에 대한 정보 리스트
 	public AdminDTO adminSearchList(String admin_cd);	// 관리자 리스트	 
+	
+	// 관리자 업체 회원 리스트 조회
+	public ArrayList<SpaDTO> admspaList();	// 회원 리스트
 }

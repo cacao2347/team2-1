@@ -40,7 +40,7 @@
                   </thead>
                   <tbody>
                   
-                  <c:forEach var="spa" items="${spaList}">
+                  <c:forEach var="spa" items="${adminspaList}">
                     <tr>
                     	<th>${spa.spa_cd }</th>
                     	<th>${spa.name }</th>
