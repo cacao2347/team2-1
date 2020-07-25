@@ -202,12 +202,12 @@ public class StudyController
 		ILevelDAO levelDao = sqlSession.getMapper(ILevelDAO.class); // 레벨
 
 		IStudyDAO studyDao = sqlSession.getMapper(IStudyDAO.class); // 스터디 정보
-
+		
 		model.addAttribute("stuCat", stuCatDao.stuCatList());
 		model.addAttribute("area", areaDao.areaList());
 		model.addAttribute("level", levelDao.levelList());
 
-		model.addAttribute("study", studyDao.studyList());
+		model.addAttribute("study", studyDao.studyList());		// 실제 스터디 리스트
 		model.addAttribute("count", studyDao.studyCount());
 
 		model.addAttribute("studyTags", studyDao.studyTagList()); // 모든 스터디의 모든 키워드
@@ -219,8 +219,7 @@ public class StudyController
 
 	// 스터디 리스트에서 스터디 클릭 시 비밀번호 확인 AJAX 처리
 	@ResponseBody
-	@RequestMapping(value = "/stuscrtcheck.action", method =
-	{ RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/stuscrtcheck.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String checkSpaIdAjax(HttpServletRequest request, Model model)
 	{
 
@@ -264,8 +263,7 @@ public class StudyController
 	}
 
 	// 스터디방 개설하기 → 프로시저 호출 및 관련 테이블 insert
-	@RequestMapping(value = "/studycreate.action", method =
-	{ RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/studycreate.action", method =	{ RequestMethod.GET, RequestMethod.POST })
 	public String studyCreate(Model model, HttpServletRequest request)
 	{
 		String view = null;
@@ -298,6 +296,7 @@ public class StudyController
 		if (img_url == "") // 대표 이미지가 없다면 null
 			img_url = null;
 
+		/*
 		System.out.println("파라미터 값");
 		System.out.println(mem_cd);		// null
 		System.out.println(spc_area_cd);
@@ -312,6 +311,7 @@ public class StudyController
 		System.out.println(img_url);
 		System.out.println(scrt_num);
 		System.out.println("파라미터 끝");
+		*/
 
 		StudyDTO dto = new StudyDTO();
 
@@ -337,9 +337,9 @@ public class StudyController
 
 		String[] dayList = request.getParameterValues("dayList"); // 선택한 모든 요일
 
-		System.out.println("그냥 관심 : " + intTagList.length);
-		System.out.println("기타 관심 : " + etcTagList.length);
-		System.out.println("요일 : " + dayList.length);
+		//System.out.println("그냥 관심 : " + intTagList.length);
+		//System.out.println("기타 관심 : " + etcTagList.length);
+		//System.out.println("요일 : " + dayList.length);
 
 		if (stu_cd != null)
 		{
@@ -349,7 +349,7 @@ public class StudyController
 				{
 					dto.setInt_tag_cd(intTagList[i]); // 자바를 키워드에 세팅하고
 
-					System.out.println("각 관심 : " + intTagList[i]);
+					//System.out.println("각 관심 : " + intTagList[i]);
 
 					studyDao.studyIntTagInsert(dto); // 회원관심 키워드 insert 실행시키기
 				}
@@ -361,7 +361,7 @@ public class StudyController
 					// value에 따른 코드 뽑아내는 dao 호출
 
 					dto.setEtc_tag_cd(etcTagList[i]); // 기타태그를 키워드에 세팅하고
-					System.out.println("각 기타 : " + etcTagList[i]);
+					//System.out.println("각 기타 : " + etcTagList[i]);
 
 					studyDao.studyEtcTagInsert(dto); // 기타 키워드 insert 실행시키기
 
@@ -374,10 +374,10 @@ public class StudyController
 			}
 			if (dayList.length > 0)
 			{
-				for (int i = 0; i < dayList.length; i++)
+				for (int i = 0; i < dayList.length; i++)	// 선택한 모든 요일
 				{
 					dto.setStu_day_cd(dayList[i]);
-					System.out.println("각 요일 : " + dayList[i]);
+					//System.out.println("각 요일 : " + dayList[i]);
 
 					studyDao.studyDayInsert(dto); // 진행 요일에 insert 시키기
 				}
@@ -395,5 +395,7 @@ public class StudyController
 
 		return view;
 	}
+	
+	
 
 }
