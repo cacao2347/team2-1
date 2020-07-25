@@ -63,7 +63,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 <body class="stopBody">
 <div class="row">
 	<div class="col-md-12">
-	<c:import url="header.jsp"></c:import>
+	<c:import url="/WEB-INF/views/header.jsp"></c:import>
 	</div>
 </div>
 <!-- 본문 영역 -->
@@ -107,7 +107,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 </div>
 <div class="row">
 	<div class="col-md-12">
-	
+		
 	</div>
 </div>
 

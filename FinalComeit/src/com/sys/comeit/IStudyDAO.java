@@ -29,4 +29,8 @@ public interface IStudyDAO
 	
 	public int addTagName(String etcTag);	// 관심 키워드에 INSERT
 	
+	public String findMemCd(String id);		// 아이디로 회원코드 알아내기
+	
+	public int stuJoinMemSearch(StudyDTO dto);
+	
 }

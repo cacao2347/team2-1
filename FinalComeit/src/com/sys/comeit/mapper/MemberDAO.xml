@@ -176,7 +176,7 @@
 	</select>
 	
 	<!-- 멤버 참여 스터디 -->
-		<!-- 참여중인 스터디방 조회 -->
+	<!-- 참여중인 스터디방 조회 -->
    <select id="modalStudyList" resultType="com.sys.comeit.MemberDTO">
     <![CDATA[
      SELECT STU_TITLE AS JOIN_STU_TITLE

@@ -71,15 +71,20 @@ public class LoginController
           
           // 멤버 이름, 멤버코드 조회
           member = memDao.memberLogin(dto);
-          
-          // 멤버 정지 내역 조회
-          stopDate = memDao.memStop(id);
-          
+         
           // 멤버 이름,코드 받기
-          if (! member.getName().isEmpty())
+          if (member == null)			// 로그인 정보 없을시
+          {
+        	  result = "redirect:memberlogin.action";
+              return result;
+          }
+          else
           {
         	  name = member.getName();
         	  code = member.getMem_cd();
+        	  
+              // 멤버 정지 내역 조회
+              stopDate = memDao.memStop(id);
           }
           
       }
@@ -93,18 +98,23 @@ public class LoginController
     	  // 업체 이름 조회
     	  spa = spaDao.spaLogin(dto);
     	  
-    	  // 업체 정지 내역 조회
-    	  stopDate = spaDao.spaStop(id);
-    	  
     	  // 업체 블락 조회
     	  //blockCount = spaDao.spaBlock(id);
     	  
     	  // 업체 코드 받기
-    	  if (!spa.getName().isEmpty()) 
-    	  {
-    		  name = spa.getName();
+    	  if (spa == null)				// 로그인 정보 없을시
+          {
+        	  result = "redirect:memberlogin.action";
+              return result;
+          }
+          else
+          {
+        	  name = spa.getName();
     		  code = spa.getSpa_cd();
-    	  }
+
+        	  // 업체 정지 내역 조회
+        	  stopDate = spaDao.spaStop(id);
+          }
     		  
       }
       else if(loginType.equals("2"))
@@ -117,11 +127,8 @@ public class LoginController
     	  name = admDao.adminLogin(dto);
       }
       
-      if (name == null|| name=="" ) 							// 로그인 실패시
-      {
-         result = "redirect:memberlogin.action";
-      }
-      else if(stopDate != null) 							// 정지 내역이 있을시
+      
+      if(stopDate != null) 							// 정지 내역이 있을시
       {
     	  session.setAttribute("stopDate", stopDate);
           result = "/WEB-INF/views/member/MemStop.jsp";
@@ -131,15 +138,18 @@ public class LoginController
          
     	  if (loginType.equals("2")) 		// 관리자
     	  {
+    		  session.setAttribute("name", name);
     		  result = "/adminmemberlist.action";
 		  }
     	  else if (loginType.equals("1"))   // 업체
     	  {
+    		  session.setAttribute("name", name);
     		  session.setAttribute("spa_cd", code);
     		  result = "/WEB-INF/views/MainPage.jsp";
     	  }			
     	  else 								// 회원
     	  {
+    		  session.setAttribute("name", name);
     		  session.setAttribute("mem_cd", code);
     		  result = "/WEB-INF/views/MainPage.jsp";
 		  }
@@ -148,7 +158,6 @@ public class LoginController
  
       session.setAttribute("id", id);
       session.setAttribute("pwd", pwd);
-      session.setAttribute("name", name);
       session.setAttribute("loginType", loginType);
       
       // 테스트
