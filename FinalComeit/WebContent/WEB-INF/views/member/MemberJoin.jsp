@@ -202,13 +202,17 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                                         
                                      //alert(dataArray);
                                      
-                                     var realData = '\\'+dataArray[7]+'\\' + dataArray[8]+'\\'+ dataArray[9] +'\\'+dataArray[10];
+                                     var realData = '/'+dataArray[7]+'/' + dataArray[8]+'/'+ dataArray[9] +'/'+dataArray[10];
+                                     
+                                     var miriData = '\\'+dataArray[7]+'\\' + dataArray[8]+'\\'+ dataArray[9] +'\\'+dataArray[10];
                                      
                                      //alert(realData);
                                      
                                      realData = $.trim(realData);
+                                     miriData = $.trim(miriData);
                                      
-                                        $('#okFile').val(realData);
+                                     $('#okFile').val(realData);
+                                     $('#miriFile').val(miriData);
                                         
                                        //$("#img_form_url").attr("src", imgurl);
                                 
@@ -252,9 +256,9 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                       $(document).on("mouseover", "#thumbnail", function (e) { //마우스 오버시
                           // 미리보기 이미지 설정
                           
-                          var okFile = $("#okFile").val();
+                          var miriFile = $("#miriFile").val();
                       
-                           if(okFile == false)
+                           if(miriFile == false)
                           {
                               //alert("등록된 파일이 없습니다.");
                               return;
@@ -270,7 +274,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                             
                             // 문자열 반대로 뒤집기 → 참고 사이트 https://gocoding.tistory.com/153
                             // 1. 파일 경로를 역슬래쉬로 자르는데 자바스크립트상에서는 '\' 하나가 먹히지 않으므로 '\\' 두개를 써줘야한다. 
-                            var okSlice = okFile.split("\\");
+                            var okSlice = miriFile.split("\\");
                             //alert(okSlice);
                             // 2. 역슬래쉬를 자른 경로를 경로의 뒤의 문자부터 순서대로 붙여준다.
                             var reverse = okSlice.reverse().join("\\");
@@ -1044,6 +1048,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                &nbsp;
                <button class="btn btn-primary" id="proImgBtn" type="button">등록</button>
                <input type="hidden" id="okFile" name="okFile" class="btn btn-primary">
+               <input type="hidden" id="miriFile" name="miriFile" class="btn btn-primary">
             </div>
          </div>
 

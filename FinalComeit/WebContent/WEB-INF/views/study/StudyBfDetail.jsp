@@ -4,7 +4,14 @@
 <%
    request.setCharacterEncoding("UTF-8");
    String cp = request.getContextPath();
+   
+   String imagePath = cp + "/pds/saveData";
+   
+   System.out.println(imagePath);
+   //System.out.println(cp);
+   
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -305,7 +312,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                      <c:forEach var="memImg" items="${memImg }">
                         <c:if test="${memImg.join_mem_cd eq leaderName.leader_mem_cd}">
                            <div class="leaderImg">
-                              <img src="<%=cp %>${memImg.mem_img }" alt="" class="img-circle memImg" />
+                              <img src="${memImg.mem_img}" alt="" class="img-circle memImg" />
                            </div><!-- end .leaderImg -->
                         </c:if>
                      </c:forEach>
@@ -331,7 +338,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                            <c:forEach var="memImg" items="${memImg }">
                               <c:if test="${memImg.join_mem_cd eq joinName.join_mem_cd}">
                                  <div class="leaderImg">
-                                    <img src="<%=cp %>${memImg.mem_img }" alt="" class="img-circle memImg" />
+                                    <img src="${memImg.mem_img}" alt="" class="img-circle memImg" />
                                  </div><!-- end .leaderImg -->
                               </c:if>
                            </c:forEach>
