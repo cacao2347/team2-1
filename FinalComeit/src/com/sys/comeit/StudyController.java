@@ -1,8 +1,9 @@
 package com.sys.comeit;
 
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,66 +25,149 @@ public class StudyController
 		// ★
 		// 1. 후에 list랑 연결되면 GET 방식에서 POST 방식으로 바꾸기!
 		// 2. 사진 경로 가져오기(진짜 사진 등록되면)
-		@RequestMapping(value = "/studydetail.action", method = {RequestMethod.GET, RequestMethod.POST})
-		public String studyInfo(Model model, HttpServletRequest request)
+	@RequestMapping(value = "/studydetail.action", method = {RequestMethod.GET, RequestMethod.POST})
+	public String studyInfo(Model model, HttpServletRequest request)
+	{
+		String view = null;
+		
+		IStudyDAO studyDao = sqlSession.getMapper(IStudyDAO.class);
+
+		String stu_cd = "STU1002";				// 임시 스터디 개설 코드
+
+		// 스터디방 정보
+		model.addAttribute("studyInfo", studyDao.studyInfoSearch(stu_cd));
+		// 스터디방 관심태그
+		model.addAttribute("intTag", studyDao.studyIntTagSearch(stu_cd));
+		// 스터디방 기타 관심 태그
+		model.addAttribute("etcTag", studyDao.studyEtcTagSearch(stu_cd));
+		// 스터디방 진행 요일
+		model.addAttribute("dayName", studyDao.studyDaySearch(stu_cd));
+		// 스터디장 이름
+		model.addAttribute("leaderName", studyDao.studyLeaderSearch(stu_cd));
+		// 스터디원 이름
+		model.addAttribute("joinName", studyDao.studyJoinName(stu_cd));
+		// 스터디 참여자 이미지
+		model.addAttribute("memImg", studyDao.memImgSearch(stu_cd));
+
+		view = "/WEB-INF/views/study/StudyBfDetail.jsp";
+
+		return view;
+	}
+	
+	
+	// 스터디장 모달창 정보 leaderMemCd
+	@RequestMapping(value = "/leaderinfomodal.action", method = {RequestMethod.GET, RequestMethod.POST})
+	public String leaderInfoModal(Model model, HttpServletRequest request)
+	{
+		String view = null;
+		
+		IMemberDAO memberDao = sqlSession.getMapper(IMemberDAO.class);
+		
+		MemberDTO dto = new MemberDTO();
+		
+		dto = memberDao.memModalList(request.getParameter("leaderMemCd"));
+		ArrayList<MemberDTO> intTagSearch = memberDao.memIntTagSearch(request.getParameter("leaderMemCd"));
+		ArrayList<MemberDTO> stuTitle = memberDao.modalStudyList(request.getParameter("leaderMemCd"));
+		
+
+		String name = dto.getName();
+		String idntt = dto.getIdntt();
+		String memContent = dto.getMem_content();
+		String intTag = "/";
+		String joinStudy = "";
+	
+		
+		for (int i = 0; i < intTagSearch.size(); i++) 
 		{
-			String view = null;
-			
-			IStudyDAO studyDao = sqlSession.getMapper(IStudyDAO.class);
-
-			String stu_cd = "STU1002";				// 임시 스터디 개설 코드
-
-			// 스터디방 정보
-			model.addAttribute("studyInfo", studyDao.studyInfoSearch(stu_cd));
-			// 스터디방 관심태그
-			model.addAttribute("intTag", studyDao.studyIntTagSearch(stu_cd));
-			// 스터디방 기타 관심 태그
-			model.addAttribute("etcTag", studyDao.studyEtcTagSearch(stu_cd));
-			// 스터디방 진행 요일
-			model.addAttribute("dayName", studyDao.studyDaySearch(stu_cd));
-			// 스터디장 이름
-			model.addAttribute("leaderName", studyDao.studyLeaderSearch(stu_cd));
-			// 스터디원 이름
-			model.addAttribute("joinName", studyDao.studyJoinName(stu_cd));
-			// 스터디 참여자 이미지
-			model.addAttribute("memImg", studyDao.memImgSearch(stu_cd));
-
-			view = "/WEB-INF/views/study/StudyBfDetail.jsp";
-
-			return view;
+			intTag += intTagSearch.get(i).getInt_tag();
+			intTag += "/";
 		}
 		
-		
-		// 스터디장 모달창 정보
-		@RequestMapping(value = "/leaderinfomodal.action", method = {RequestMethod.GET, RequestMethod.POST})
-		public String leaderInfoModal(Model model, HttpServletRequest request)
+		if (!stuTitle.isEmpty()) 
 		{
-			String view = null;
+			joinStudy = "/";
 			
-			String leaderMemCd = request.getParameter("leaderMemCd");
-			IMemberDAO memberDao = sqlSession.getMapper(IMemberDAO.class);
-			
-			model.addAttribute("leaderModalInfo", memberDao.memModalList(leaderMemCd));
-			
-			view = "/WEB-INF/views/study/StudyBfDetail.jsp";
-			
-			return view;
+			for (int i = 0; i < stuTitle.size(); i++) 
+			{
+				joinStudy += stuTitle.get(i).getJoin_stu_title();
+				joinStudy += "/";
+			}
 		}
-		
-		
-		// 스터디원 모달창 정보
-		@RequestMapping(value = "/meminfomodal.action", method = {RequestMethod.GET, RequestMethod.POST})
-		public String memInfoModal(Model model, HttpServletRequest request)
+		else 
 		{
-			String view = null;
-			
-			String joinMemCd = request.getParameter("joinMemCd");
-			
-			
-			
-			return view;
+			joinStudy += "없음";
 		}
+		// 테스트
+		// System.out.println(intTag);
+		
+		model.addAttribute("name", name);
+		model.addAttribute("idntt", idntt);
+		model.addAttribute("memContent", memContent);
+		model.addAttribute("intTag", intTag);
+		model.addAttribute("joinStudy", joinStudy);
+		
+		view = "/WEB-INF/views/member/AjaxMemModal.jsp";
+		
+		return view;
+	}
+	
+	
+	// 스터디원 모달창 정보
+	@RequestMapping(value = "/meminfomodal.action", method = {RequestMethod.GET, RequestMethod.POST})
+	public String memInfoModal(Model model, HttpServletRequest request)
+	{
+		String view = null;
+		
+		IMemberDAO memberDao = sqlSession.getMapper(IMemberDAO.class);
+		
+		MemberDTO dto = new MemberDTO();
+		
+		dto = memberDao.memModalList(request.getParameter("joinMemCd"));
+		ArrayList<MemberDTO> intTagSearch = memberDao.memIntTagSearch(request.getParameter("joinMemCd"));
+		ArrayList<MemberDTO> stuTitle = memberDao.modalStudyList(request.getParameter("joinMemCd"));
+		
 
+		String name = dto.getName();
+		String idntt = dto.getIdntt();
+		String memContent = dto.getMem_content();
+		String intTag = "/";
+		String joinStudy = "";
+	
+		
+		for (int i = 0; i < intTagSearch.size(); i++) 
+		{
+			intTag += intTagSearch.get(i).getInt_tag();
+			intTag += "/";
+		}
+		
+		if (!stuTitle.isEmpty()) 
+		{
+			joinStudy = "/";
+			
+			for (int i = 0; i < stuTitle.size(); i++) 
+			{
+				joinStudy += stuTitle.get(i).getJoin_stu_title();
+				joinStudy += "/";
+			}
+		}
+		else 
+		{
+			joinStudy += "없음";
+		}
+		// 테스트
+		// System.out.println(intTag);
+		
+		model.addAttribute("name", name);
+		model.addAttribute("idntt", idntt);
+		model.addAttribute("memContent", memContent);
+		model.addAttribute("intTag", intTag);
+		model.addAttribute("joinStudy", joinStudy);
+		
+		view = "/WEB-INF/views/member/AjaxMemModal.jsp";
+		
+		return view;
+		
+	}
 
 	// 수진
 	// ---------------------------------------------------------------------------------

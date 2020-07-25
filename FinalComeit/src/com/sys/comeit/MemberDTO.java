@@ -14,7 +14,17 @@ public class MemberDTO
 	// 기혜 추가 
 	private int sincerity, embrace, communication, skill, leadership; // 스터디 평가 내역
 	private int pnlt_cnt;											  // 패널티 받은 내역
+	private String join_stu_title;
 	
+	
+
+	public String getJoin_stu_title() {
+		return join_stu_title;
+	}
+
+	public void setJoin_stu_title(String join_stu_title) {
+		this.join_stu_title = join_stu_title;
+	}
 
 	public void setPnlt_cnt(int pnlt_cnt)
 	{

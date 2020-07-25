@@ -36,4 +36,8 @@ public interface IMemberDAO
 	public MemberDTO studyEval(String mem_cd);		// 스터디 평가 내역
 	public int pnltCount(String mem_cd);			// 패널티 개수
 	
+	public ArrayList<MemberDTO> memIntTagSearch(String mem_cd);	// 멤버 관심, 기타 키워드
+	
+	public ArrayList<MemberDTO> modalStudyList(String mem_cd);
+	
 }
