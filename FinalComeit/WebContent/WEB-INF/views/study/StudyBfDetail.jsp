@@ -4,14 +4,7 @@
 <%
    request.setCharacterEncoding("UTF-8");
    String cp = request.getContextPath();
-   
-   String imagePath = cp + "/pds/saveData";
-   
-   System.out.println(imagePath);
-   //System.out.println(cp);
-   
 %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -127,6 +120,31 @@ body{font-family: 'Noto Sans KR', sans-serif;}
     	  });	
       });// end 스터디원 모달 정보요청
       
+      // 스터디원 참가 요청 
+      $(".joinStudyBtn").click(function() 
+      {
+    	  var params = "stuCode=" +$(this).val();
+    	  
+    	  $.ajax(
+         {
+             type : "POST"
+             , url : "studyjoin.action"
+             , data : params
+             , dataType : "text"
+             , success : function(args)
+             { 
+            	 alert(args);
+            	 
+             }
+             , error : function(e) 
+             {
+              	alert(e.responseText);
+             }
+            
+         
+         });  
+	  });
+      
       
       $(".outBtn").click(function() 
       {
@@ -202,7 +220,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                   </div>
                   <!-- 스터디장 : 커밋 , 회원 : 참가, 스터디원 : 퇴장 으로 노출 -->
                   <div class="jrBtn pull-right">
-                     <input type="button" value="참가" class="btn btn-lg btn-primary" />
+                  	<button type="button" class="btn btn-lg btn-primary joinStudyBtn" value="${studyInfo.stu_cd }">참가</button>
                      <img src="<%=cp %>/assets/images/report.png" alt="" class="report" onclick=""/>
                   </div><!-- end .button -->
                </div><!-- end.stuTitle -->
@@ -212,7 +230,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                <div class="stuInfo">
                   <!-- 활동 기간 -->
                   <div class="stuTerm">
-                     <span class="glyphicon glyphicon-calendar icon"></span>
+                     <span class="glyphicon glyphicon-calendar icon icTerm"></span>
                      <h4>활동 기간</h4><br>
                      <span class="term">${studyInfo.str_date } ~ ${studyInfo.end_date }&nbsp;&nbsp;&nbsp;&nbsp;${studyInfo.meet_term }개월</span><br />
                      └ <c:forEach var="dayName" items="${dayName }">
@@ -223,14 +241,14 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                   
                   <!-- 활동 지역 -->
                   <div class="stuArea">
-                     <span class="glyphicon glyphicon-map-marker icon"></span>
+                     <span class="glyphicon glyphicon-map-marker icon icArea"></span>
                      <h4>활동 지역</h4><br />
                      <span class="area">${studyInfo.area_name } ${studyInfo.spc_area_name }</span>
                   </div><!-- end .stuArea -->
                   
                   <!-- 키워드 -->
                   <div class="stuKey">
-                     <span class="glyphicon glyphicon-tags icon"></span>
+                     <span class="glyphicon glyphicon-tags icon icKey"></span>
                      <h4>키워드</h4><br>
                      <c:forEach var="intTag" items="${intTag }">
                            <ul class="list-study-tags">
@@ -246,7 +264,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                   
                   <!-- 예상 레벨 -->
                   <div class="stuLevel">
-                     <span class="glyphicon glyphicon-blackboard icon"></span>
+                     <span class="glyphicon glyphicon-blackboard icon icLv"></span>
                      <h4>예상 레벨</h4><br>
                      <span class="level">${studyInfo.lv }</span>
                   </div>
@@ -310,11 +328,26 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                   <!-- <h3>스터디장</h3> -->
                   <div class="memLeader" id="member1">
                      <c:forEach var="memImg" items="${memImg }">
+                        
                         <c:if test="${memImg.join_mem_cd eq leaderName.leader_mem_cd}">
-                           <div class="leaderImg">
-                              <img src="${memImg.mem_img}" alt="" class="img-circle memImg" />
-                           </div><!-- end .leaderImg -->
+                        
+                              	<div class="leaderImg">
+                              	
+                              		<c:choose>
+                              		<c:when test="${empty memImg.mem_img  }">
+                              		<img src="<%=cp %>/assets/images/basic.png" alt="" class="img-circle memImg" />
+                              		</c:when>
+                              		<c:when test="${not empty memImg.mem_img }">
+                              		<img src="${memImg.mem_img }" alt="" class="img-circle memImg" />
+                              		</c:when>
+                              		
+                              		</c:choose>
+                                    
+                                    
+                                 </div><!-- end .leaderImg -->
+                        
                         </c:if>
+                       
                      </c:forEach>
                      
                      <div class="leaderInfo">
@@ -337,9 +370,21 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                            
                            <c:forEach var="memImg" items="${memImg }">
                               <c:if test="${memImg.join_mem_cd eq joinName.join_mem_cd}">
-                                 <div class="leaderImg">
-                                    <img src="${memImg.mem_img}" alt="" class="img-circle memImg" />
+                              
+                              <div class="leaderImg">
+                              
+                                    <c:choose>
+                              		<c:when test="${empty memImg.mem_img  }">
+                              		<img src="<%=cp %>/assets/images/basic.png" alt="" class="img-circle memImg" />
+                              		</c:when>
+                              		<c:when test="${not empty memImg.mem_img }">
+                              		<img src="${memImg.mem_img }" alt="" class="img-circle memImg" />
+                              		</c:when>
+                              		
+                              		</c:choose>
+                                    
                                  </div><!-- end .leaderImg -->
+                              
                               </c:if>
                            </c:forEach>
                            <div class="leaderInfo">

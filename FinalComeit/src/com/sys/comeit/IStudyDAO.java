@@ -35,4 +35,7 @@ public interface IStudyDAO
 	
 	public int memStudyCount(String mem_cd);				// 참가중인 스터디방 개수 조회
 	
+	
+	public int joinMemNum(String stu_cd);		// 전체 참가중인 스터디원 조회
+	public int joinStudy(StudyDTO dto);			// 스터디 참가
 }

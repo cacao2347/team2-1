@@ -148,76 +148,51 @@ $(document).ready(function ()
 		$('#modal').unbind('touchmove');
 		
 	};
+	
+	
+
+	
 
 	/* 출석 차트 */
-	google.charts.load('current', {
-		packages : [ 'corechart', 'bar' ]
-	});
+	google.charts.load('current', {packages: ['corechart', 'bar']});
 	google.charts.setOnLoadCallback(drawBasic);
 
 	function drawBasic() {
 
-		var data = new google.visualization.DataTable();
-		data.addColumn('timeofday', 'Time of Day');
-		data.addColumn('number', 'Attendance rate');
+        var data = google.visualization.arrayToDataTable([
+        ['Element', 'Density', { role: '#1457bc' }],
+        ['김홍경', 10, '#1457bc'],            // RGB value
+        ['이채빈', 10.49, '#1457bc'],            // English color name
+        ['강수경', 19.30, '#1457bc'],
 
-		data.addRows([ [ {
-			v : [ 8, 0, 0 ],
-			f : '8 am'
-		}, 1 ], [ {
-			v : [ 9, 0, 0 ],
-			f : '9 am'
-		}, 2 ], [ {
-			v : [ 10, 0, 0 ],
-			f : '10 am'
-		}, 3 ], [ {
-			v : [ 11, 0, 0 ],
-			f : '11 am'
-		}, 4 ], [ {
-			v : [ 12, 0, 0 ],
-			f : '12 pm'
-		}, 5 ], [ {
-			v : [ 13, 0, 0 ],
-			f : '1 pm'
-		}, 6 ], [ {
-			v : [ 14, 0, 0 ],
-			f : '2 pm'
-		}, 7 ], [ {
-			v : [ 15, 0, 0 ],
-			f : '3 pm'
-		}, 8 ], [ {
-			v : [ 16, 0, 0 ],
-			f : '4 pm'
-		}, 9 ], [ {
-			v : [ 17, 0, 0 ],
-			f : '5 pm'
-		}, 10 ], ]);
+      ['김태균', 21.45, 'color: #1457bc' ], // CSS-style declaration
+      ['정민화', 21.45, 'color: #1457bc' ],
+     ]);
 
-		var options = {
-			title : '우리 방 출석률',
-			hAxis : {
-				title : 'Member Name',
-				format : 'h:mm a',
-				viewWindow : {
-					min : [ 7, 30, 0 ],
-					max : [ 17, 30, 0 ]
-				}
-			},
-			vAxis : {
-				title : '모임 회차'
-			}
-		};
+     var options = {
+       title: 'Motivation Level Throughout the Day',
+       hAxis: {
+         title: 'Time of Day',
+         format: 'h:mm a',
+         viewWindow: {
+           min: [7, 15, 0],
+           max: [10, 30, 0]
+         }
+       },
+       vAxis: {
+         title: 'Rating (scale of 1-10)'
+       }
+     };
 
-		var chart = new google.visualization.ColumnChart(document
-				.getElementById('chart_div'));
+     var chart = new google.visualization.ColumnChart(
+       document.getElementById('chart_div'));
 
-		chart.draw(data, options);
-	}
+     chart.draw(data, options);
+   }
 
 	// 캘린더
 	document.addEventListener('DOMContentLoaded', function() {
 
-		//var events = readData();
 		var calendarEl = document.getElementById('calendar');
 
 		var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -235,7 +210,6 @@ $(document).ready(function ()
 			defaultView : 'dayGridMonth',
 			defaultDate : new Date(),
 			dateClick : function() {
-				//alert('수진');
 
 			},
 			header : {
@@ -260,9 +234,6 @@ $(document).ready(function ()
 
 				calendar.unselect()
 			},
-			/* dateClick: function(info) {
-				alert('Clicked on: ' + info.dateStr);
-			}, */
 			eventClick : function(info) {
 
 				if (confirm("정말 삭제하시겠습니까?")) {
@@ -356,7 +327,7 @@ $(document).ready(function ()
                <div class="stuInfo">
                   <!-- 활동 기간 -->
                   <div class="stuTerm">
-                     <span class="glyphicon glyphicon-calendar icon"></span>
+                     <span class="glyphicon glyphicon-calendar icon icTerm"></span>
                      <h4>활동 기간</h4><br>
                      <span class="term">${studyInfo.str_date } ~ ${studyInfo.end_date }&nbsp;&nbsp;&nbsp;&nbsp;${studyInfo.meet_term }개월</span><br />
                      └ <c:forEach var="dayName" items="${dayName }">
@@ -367,14 +338,14 @@ $(document).ready(function ()
                   
                   <!-- 활동 지역 -->
                   <div class="stuArea">
-                     <span class="glyphicon glyphicon-map-marker icon"></span>
+                     <span class="glyphicon glyphicon-map-marker icon icArea"></span>
                      <h4>활동 지역</h4><br />
                      <span class="area">${studyInfo.area_name } ${studyInfo.spc_area_name }</span>
                   </div><!-- end .stuArea -->
                   
                   <!-- 키워드 -->
                   <div class="stuKey">
-                     <span class="glyphicon glyphicon-tags icon"></span>
+                     <span class="glyphicon glyphicon-tags icon icKey"></span>
                      <h4>키워드</h4><br>
                      <c:forEach var="intTag" items="${intTag }">
                            <ul class="list-study-tags">
@@ -390,14 +361,14 @@ $(document).ready(function ()
                   
                   <!-- 예상 레벨 -->
                   <div class="stuLevel">
-                     <span class="glyphicon glyphicon-blackboard icon"></span>
+                     <span class="glyphicon glyphicon-blackboard icon icLv"></span>
                      <h4>예상 레벨</h4><br>
                      <span class="level">${studyInfo.lv }</span>
                   </div>
                   
                   <!-- 상세 설명 -->
                   <div class="stuCurr">
-                     <span class="glyphicon glyphicon-bookmark icon"></span>
+                     <span class="glyphicon glyphicon-bookmark icon icCrr"></span>
                      <h4>상세 설명</h4><br />
                      <p style="white-space: pre-line;" class="curr">${studyInfo.content }</p>
                      <%-- <span class="curr">${studyInfo.content }</span> --%>
@@ -405,6 +376,13 @@ $(document).ready(function ()
                
             
                </div><!-- end .stuInfo -->
+               
+               <!-- 출석 차트 -->
+               <div style="width: 800px;">
+               
+			  <div id="chart_div" class="attChart"></div>
+			</div>		
+               
             </div><!-- end .col-md-8 -->
             </c:if>
             <!-- 스터디원 정보 -->

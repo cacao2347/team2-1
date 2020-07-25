@@ -5,6 +5,27 @@
 	color: #e78e08;
 }
 
+.stuArea > .icArea
+{
+	color: #ca0909;
+}
+
+.stuKey > .icKey
+{
+	color: #06066e;
+}
+
+.stuLevel > .icLv
+{
+	color: #ce6868;
+}
+
+.stuTerm > .icTerm
+{
+	color: #555;
+}
+
+
 body .padding
 {
 	padding-top: 60px;
@@ -195,6 +216,7 @@ html, body
 	height: 200px; */
 	border-radius: 10px;
 	width: 100%;
+	height: 300px;
 }
 
 .stuTitle
@@ -342,7 +364,7 @@ html, body
 	width: 100%;
 	height: 120px;
 	border-bottom: 1px solid #D8D8D8;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 }
 
 .stuInfo > .stuTerm,
