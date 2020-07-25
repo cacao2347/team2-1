@@ -25,7 +25,7 @@ public class StudyController
 	// ★
 	// 1. 후에 list랑 연결되면 GET 방식에서 POST 방식으로 바꾸기!
 	// 2. 사진 경로 가져오기(진짜 사진 등록되면)
-	@RequestMapping(value = "/studybfdetail.action", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "/studydetail.action", method = {RequestMethod.GET, RequestMethod.POST})
 	public String studyBfInfo(Model model, HttpServletRequest request)
 	{
 		String view = null;
@@ -53,7 +53,7 @@ public class StudyController
 
 		return view;
 	}
-	
+	/*
 	// 스터디방 Af 페이지 요청
 	@RequestMapping(value = "/studyafdetail.action", method = {RequestMethod.GET, RequestMethod.POST})
 	public String studyAfInfo(Model model, HttpServletRequest request)
@@ -83,7 +83,7 @@ public class StudyController
 
 		return view;
 	}
-	
+	*/
 	
 	// 스터디장 모달창 정보 leaderMemCd
 	@RequestMapping(value = "/leaderinfomodal.action", method = {RequestMethod.GET, RequestMethod.POST})

@@ -293,7 +293,6 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                           
                            <div class="out">
                               <input type="button" value="방출" class="btn btn-sm outBtn" />
-                              <input type="button" class="btn btn-sm btn-primary manBtn" value="위임" />
                            </div><!-- end .out -->
                      </div><!-- end .search-modal-content -->                     
                      </div><!-- end .searchModal -->   
