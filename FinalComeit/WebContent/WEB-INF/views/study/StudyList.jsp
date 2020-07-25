@@ -116,6 +116,7 @@ body
 				, url : "stuscrtcheck.action"
 				, data : params
 				, dataType : "json"
+				, async:false
 				, success : function(data)
 				{
 					if(data != 0)
@@ -125,13 +126,13 @@ body
 						if(result=="" || result==null)
 							return;
 						else if(result == data)
-							location.href = "/FinalComeit/studydetail.action?stu_cd=" + $(this).val();
+							location.href = "/FinalComeit/studydetail.action?" + params;
 						else if(result != data)
 							alert("비밀번호가 틀렸습니다!");
 					}
 					else
 					{
-						location.href = "/FinalComeit/studydetail.action?stu_cd=" + $(this).val();
+						location.href = "/FinalComeit/studydetail.action?" + params;
 					}
 						
 					
