@@ -155,12 +155,12 @@ body{font-family: 'Noto Sans KR', sans-serif;}
          
          $("#proImgBtn").click(function()
                  {
-                	 var result = confirm('정말 등록하시겠습니까?'); 
-                	 
-                	 if(result) 
-                	 { 
-                		 //yes location.replace('index.php');
-                		 //alert("하이");
+                    var result = confirm('정말 등록하시겠습니까?'); 
+                    
+                    if(result) 
+                    { 
+                       //yes location.replace('index.php');
+                       //alert("하이");
                             var myFormData = new FormData();
                             //alert(myFormData);
                             
@@ -197,14 +197,16 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                                     {
                                         //alert($.trim(data));
                                         
-			                            var dataArray = data.split("\\");
+                                     var dataArray = data.split("\\");
                                         
-			                            //alert(dataArray);
-			                            
-			                            var realData = '\\'+dataArray[7]+'\\' + dataArray[8]+'\\'+ dataArray[9] +'\\'+dataArray[10];
-			                            
-			                            //alert(realData);
-			                            
+                                     //alert(dataArray);
+                                     
+                                     var realData = '\\'+dataArray[7]+'\\' + dataArray[8]+'\\'+ dataArray[9] +'\\'+dataArray[10];
+                                     
+                                     //alert(realData);
+                                     
+                                     realData = $.trim(realData);
+                                     
                                         $('#okFile').val(realData);
                                         
                                        //$("#img_form_url").attr("src", imgurl);
@@ -231,9 +233,9 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                                })
                             }
                      } 
-                	 else 
+                    else 
                      { 
-                    	 //no 
+                        //no 
                      }
 
                             
@@ -242,28 +244,26 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                          
                   
                          
-                	 var xOffset = 5;
+                    var xOffset = 5;
                      var yOffset = 15;
                      
-                	 // 마우스 오버시 미리보기 이미지 설정 및 위치 설정
+                    // 마우스 오버시 미리보기 이미지 설정 및 위치 설정
                       $(document).on("mouseover", "#thumbnail", function (e) { //마우스 오버시
                           // 미리보기 이미지 설정
                           
                           var okFile = $("#okFile").val();
                       
-                      	  if(okFile == false)
+                           if(okFile == false)
                           {
-                      		  //alert("등록된 파일이 없습니다.");
-                      		  return;
+                              alert("등록된 파일이 없습니다.");
+                              return;
                           }
-                      	  else
-                      	  {
-                      		var div = $("<div>", {id: "preview"});
+                           else
+                           {
+                            var div = $("<div>", {id: "preview"});
                             /* var img = $("<img>", {src: $(this).attr("href")}); */
                             
                             //alert(pics);
-                            
-                            <%-- var img = "<img id='bye' src='<%=imagePath%>/" + pics + "' style='width: 400px; height: 200px;'>"; --%>
                             
                             //alert(okFile);
                             
@@ -289,17 +289,12 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                             
                             $("body").append(div);
                             
-                            <%-- $('#bye').attr('src').change(function() 
-                   	 		{
-                            	 $('#bye').attr('src','<%=imagePath%>/" + pics + "');
-                   	 		}); --%>
-
                             // 마우스 오버에 따른 위치 설정
                             $("#preview")
                                 .css("top", (e.pageY - xOffset) + "px")
                                 .css("left", (e.pageX + yOffset) + "px")
                                 .fadeIn("fast"); 
-                      	  }
+                           }
                           
                           
                       }); 
@@ -589,10 +584,10 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                   }
               }
               if(selectedText.trim()=="")
-  		     {
-  		    	alert("공백은 입력할 수 없습니다.");
-  		    	return;
-  		     }
+             {
+               alert("공백은 입력할 수 없습니다.");
+               return;
+             }
                
                  // 키워드 개수 제한
                if(elementCount == 5)
