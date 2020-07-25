@@ -1,6 +1,7 @@
 package com.sys.comeit;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface IStudyDAO
 {
@@ -38,4 +39,8 @@ public interface IStudyDAO
 	
 	public int joinMemNum(String stu_cd);		// 전체 참가중인 스터디원 조회
 	public int joinStudy(StudyDTO dto);			// 스터디 참가
+	
+	public int studySearchCount(StudyDTO dto);	// 검색완료된 스터디방 개수
+	
+	public List<StudyDTO> getListData(StudyDTO dto);	// 검색완료된 스터디방
 }

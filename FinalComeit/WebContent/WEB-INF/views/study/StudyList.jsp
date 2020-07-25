@@ -25,7 +25,6 @@ body
 {
 	font-family: 'Noto Sans KR', sans-serif !important;
 }
-
 </style>
 
 <script type="text/javascript">
@@ -71,13 +70,9 @@ body
 		// 검색 버튼 클릭 시
 		$("#searchBtn").click(function()
 		{
-			/* var k = $(this).val();
-			$(".list-study").hide();
-			
-			//alert(k);
-			var temp = $(".list-study > ul > li > item-body > firstLine > listTitle > study-title:contains('" + k + "')");
-			
-			$(temp).parent().show(); */
+			f = document.searchForm;
+			f.action = "<%=cp %>/studylist.action";
+			f.submit();
 			
 			
 			
@@ -231,7 +226,6 @@ body
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-			<form method="post" >
 			<div class="row">
 				<div class="col-md-2">
 				</div>
@@ -350,9 +344,19 @@ body
 					<div class="row">
 						<div class="col-md-12">
 						<div class="form-inline search">
-							<input type="text" class="form-control tag" id="tag" placeholder="기술 태그">
+						
+						<form name="searchForm" method="post">
+							<select name="searchKey" class="form-control selectField" style="width: 20%;">
+								<option value="tag">키워드</option>
+								<option value="title">제목</option>
+							</select>
+							
+							<input type="text" name="searchValue" placeholder="관심 키워드 또는 스터디방 제목으로 검색하세요!" class="form-control boxTF" style="width: 70%;">
+							<input type="button" value="검색" class="btn btn-primary searchBtn" id="searchBtn" style="width: 9%">
+						</form>
+							<!-- <input type="text" class="form-control tag" id="tag" placeholder="기술 태그">
 							<input type="text" class="form-control title" id="title" placeholder="스터디방 제목">
-							<button type="button" id="searchBtn" class="btn btn-primary searchBtn">검색</button>
+							<button type="button" id="searchBtn" class="btn btn-primary searchBtn">검색</button> -->
 						</div>
 						</div>
 					</div>
@@ -463,7 +467,7 @@ body
 					<!-- 페이징 영역 -->
 					<div class="row paging">
 					<div class="col-md-12">
-						<nav>
+						<!-- <nav>
 							<ul class="pagination">
 				            <li class="page-item"><a href="#" class="page-link">Previous</a></li>
 				            <li class="page-item"><a href="#" class="page-link">1</a></li>
@@ -478,14 +482,20 @@ body
 				            <li class="page-item"><a href="#" class="page-link">10</a></li>
 				            <li class="page-item"><a href="#" class="page-link">Next</a></li>
 				            </ul>
-						</nav>
+						</nav> -->
+						
+						<!-- 페이징 처리에 따른 페이지 인덱스 적용 -->
+						<c:if test="${dataCount != 0 }">
+							<div align="center">
+								${pageIndexList }
+							</div>
+						</c:if>
 					</div>
 					</div><!-- 페이징 영역 끝 -->
 					
 				</div>
 				
 			</div>
-		</form>
 		</div>
 	</div>
 </div>

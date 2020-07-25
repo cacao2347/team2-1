@@ -35,6 +35,49 @@ public class StudyDTO
 	
 	private String stu_count;			// 참가중인 스터디 개수
 	
+	private String searchKey, searchValue;	// 검색 키, 검색 단어
+	private int start, end;			// 페이지 시작 / 끝
+	
+	public String getSearchKey()
+	{
+		return searchKey;
+	}
+
+	public int getStart()
+	{
+		return start;
+	}
+
+	public void setStart(int start)
+	{
+		this.start = start;
+	}
+
+	public int getEnd()
+	{
+		return end;
+	}
+
+	public void setEnd(int end)
+	{
+		this.end = end;
+	}
+
+	public void setSearchKey(String searchKey)
+	{
+		this.searchKey = searchKey;
+	}
+
+	public String getSearchValue()
+	{
+		return searchValue;
+	}
+
+	public void setSearchValue(String searchValue)
+	{
+		this.searchValue = searchValue;
+	}
+
 	public String getStu_count()
 	{
 		return stu_count;
