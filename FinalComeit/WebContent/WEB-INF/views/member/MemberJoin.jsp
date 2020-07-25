@@ -255,7 +255,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                       
                            if(okFile == false)
                           {
-                              alert("등록된 파일이 없습니다.");
+                              //alert("등록된 파일이 없습니다.");
                               return;
                           }
                            else
