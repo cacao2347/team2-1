@@ -20,12 +20,12 @@ public class StudyController
 	private SqlSession sqlSession;
 
 	// 기혜
-		// ---------------------------------------------------------------------------------
-		// 스터디방 페이지 요청
-		// ★
-		// 1. 후에 list랑 연결되면 GET 방식에서 POST 방식으로 바꾸기!
-		// 2. 사진 경로 가져오기(진짜 사진 등록되면)
-	@RequestMapping(value = "/studydetail.action", method = {RequestMethod.GET, RequestMethod.POST})
+	// ---------------------------------------------------------------------------------
+	// 스터디방 페이지 요청
+	// ★
+	// 1. 후에 list랑 연결되면 GET 방식에서 POST 방식으로 바꾸기!
+	// 2. 사진 경로 가져오기(진짜 사진 등록되면)
+	@RequestMapping(value = "/studybfdetail.action", method = {RequestMethod.GET, RequestMethod.POST})
 	public String studyInfo(Model model, HttpServletRequest request)
 	{
 		String view = null;
