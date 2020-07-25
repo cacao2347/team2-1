@@ -10,11 +10,11 @@
 <head>
 <meta charset="UTF-8">
 <title>LectureCreate.jsp</title>
-<link rel="stylesheet" type="text/css"
-	href="<%=cp%>/assets/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="<%=cp%>/assets/css/bootstrap.min.css">
 <link rel="stylesheet" href="<%=cp%>/assets/css/blog-post.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="<%=cp%>/assets/css/lectureCreate.css">
+<link rel="stylesheet" type="text/css" href="<%=cp%>/assets/css/join.css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <style type="text/css">
 
@@ -40,7 +40,26 @@
 		// submit 하기 전에 입력폼 유효성 검사
 		$("#insertBtn").click(function() 
 		{	
-			
+			if ($("#lecName").val() == "" || $("#lecIntro").val() == "" || $("#lecFee").val() == ""
+				|| $("#spcArea").val() == 0 || $("#minMem").val() == 0 || $("#maxMem").val() == 100
+				|| $("#startTime").val() == -1 || $("#endTime") == -1)
+            {
+             	$("#err").html("필수 입력 항목이 누락되었습니다.");
+             	$("#err").css("display", "inline");
+             	return;
+            }
+			else if($("#stuKey").children().length == 0)
+            {
+               $("#err").html("관심 키워드는 최소 한 개 이상 선택해야 합니다.");
+               $("#err").css("display", "inline");
+               return;
+            }
+			else if($("#weekBox").children().length == 0)
+			{
+				$("#err").html("모임 지정요일은 최소 한 개 이상 선택해야 합니다.");
+	            $("#err").css("display", "inline");
+	            return;
+			}
 			
 			$("#joinForm").submit();
 		});
@@ -156,6 +175,14 @@
 							selectedText = $("#week option:checked").text();
 							selectedValue = $("#week option:checked").val();
 							elementCount = $(".dayTag").length;
+							
+							// 기본 설정값("요일")이 들어가지 않도록 필터링
+							if(selectedValue == 0)
+							{
+								alert("요일을 추가해 주세요.");
+								return;
+							}
+							
 
 							for (var i = 0; i < dayArray.length; i++) {
 								if (selectedValue == dayArray[i]) {
@@ -198,6 +225,12 @@
 		$("#keyResetBtn").click(function() {
 			$(".stuKeyBox").empty();
 			keyArray = [];
+		});
+		
+		// 요일 삭제 버튼
+		$("#dayResetBtn").click(function() {
+			$(".weekBox").empty();
+			dayArray = [];
 		});
 
 		// 최소 인원, 모집 인원이 변할 때, 인원 유효성 체크
@@ -527,6 +560,10 @@
 					<div class="upload">
 						<input type="button" name="insertBtn" id="insertBtn" value="개설" class="btn btn-primary" />
 					</div>
+					
+					<div class="errMsg">
+                          <span id="err"></span>
+                    </div>
 					<!-- end .upload -->
 				</div>
 				<!-- end .button -->
