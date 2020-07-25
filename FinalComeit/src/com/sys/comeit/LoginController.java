@@ -121,7 +121,7 @@ public class LoginController
       {
          result = "redirect:memberlogin.action";
       }
-      else if(stopDate != null) 							// 블락된 내역, 정지 내역이 있을시
+      else if(stopDate != null) 							// 정지 내역이 있을시
       {
     	  session.setAttribute("stopDate", stopDate);
           result = "/WEB-INF/views/member/MemStop.jsp";
@@ -131,20 +131,24 @@ public class LoginController
          
     	  if (loginType.equals("2")) 		// 관리자
     	  {
-    		  session.setAttribute("name", name);
     		  result = "/adminmemberlist.action";
 		  }
-    	  else								// 회원 / 업체
+    	  else if (loginType.equals("1"))   // 업체
     	  {
-    		  session.setAttribute("name", name);
     		  session.setAttribute("spa_cd", code);
     		  result = "/WEB-INF/views/MainPage.jsp";
-    	  }
+    	  }			
+    	  else 								// 회원
+    	  {
+    		  session.setAttribute("mem_cd", code);
+    		  result = "/WEB-INF/views/MainPage.jsp";
+		  }
         
       }
  
       session.setAttribute("id", id);
-      session.setAttribute("pwd", pwd); 	 
+      session.setAttribute("pwd", pwd);
+      session.setAttribute("name", name);
       session.setAttribute("loginType", loginType);
       
       // 테스트
