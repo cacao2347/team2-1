@@ -1,3 +1,6 @@
+.modal .modal-body {
+    max-height: 590px !important;
+}
 body .container
 {
 	padding-top: 40px;

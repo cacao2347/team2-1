@@ -190,7 +190,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 						<div class="row">
 							<div class="col-md-12">
 								<div class="create">
-								<c:if test="${not empty id}" >
+								<c:if test="${not empty sessionScope.spa_cd && sessionScope.loginType=='1'}" >
 									<button type="button" class="btn btn-primary btn-sm createBtn" onClick="location.href='spacreate.action'">공간 개설</button>
 								</c:if>
 								</div>
@@ -237,6 +237,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 											</c:forEach>
 											</ul>
 											<p>
+										  </div>
 										  </div>
 			                        </li>
 								</c:forEach>
