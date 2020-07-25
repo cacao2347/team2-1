@@ -121,7 +121,8 @@
 							<td>${admin.tel }</td>
 							<td>${admin.email }</td>
 							<td>${admin.grds_name }</td>
-
+						
+						<c:if test="{admin.grds_id}"></c:if>
 							<td id="btnTbl">
 								<button type="button" class="btn btn-default btn-xs adminModBtn"
 								value=${admin.admin_cd }>수정</button>
@@ -130,6 +131,17 @@
 								<button type="button" class="btn btn-default btn-xs adminDelBtn"
 								value=${admin.admin_cd }>삭제</button>
 							</tr>
+							
+							<c:choose>
+								<c:when test="${empty id }">
+									<button type="button" class="btn btn-link bFtitleBtn" value="${lecs.lec_cd }">${lecs.lec_name}</button>
+								</c:when>
+								
+								<c:when test="${not empty id }">
+									<button type="button" class="btn btn-link titleBtn" value="${lecs.lec_cd}">${lecs.lec_name}</button>
+								</c:when>
+							</c:choose>
+							
 					</c:forEach>
 					
                   </tbody>

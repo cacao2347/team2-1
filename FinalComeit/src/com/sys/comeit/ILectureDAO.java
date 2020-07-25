@@ -1,6 +1,7 @@
 package com.sys.comeit;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface ILectureDAO
 {
@@ -20,4 +21,8 @@ public interface ILectureDAO
 	public ArrayList<LectureDTO> lecHrDaySearch(String lec_cd);			// 강의 요일, 시간 키워드 태그 조회 
 	
 	public int lecCount();						// 강의방 개수 조회
+	
+	public int lecSearchCount(LectureDTO dto);	// 검색완료된 스터디방 개수
+	
+	public List<LectureDTO> getListData(LectureDTO dto);	// 검색완료된 스터디방
 }

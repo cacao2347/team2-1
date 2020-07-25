@@ -147,7 +147,7 @@ body
 				{
 					if(data >= 10)
 					{
-						alert("스터디는 최대 10개까지 참가 가능합니다.\n스터디 종료 후 새로운 스터디에 참가해주세요.");
+						alert("강의는 최대 10개까지 참가 가능합니다.\n강의 종료 후 새로운 강의에 참가해주세요.");
 					}
 					else if(data <= 10)
 					{
@@ -167,7 +167,7 @@ body
 			
 			
 			
-		});*/
+		});
 		
 	});
 	
@@ -384,7 +384,7 @@ body
 					<!-- 페이징 영역 -->
 					<div class="row paging">
 					<div class="col-md-12">
-						<nav>
+						<!-- <nav>
 							<ul class="pagination">
 				            <li class="page-item"><a href="#" class="page-link">Previous</a></li>
 				            <li class="page-item"><a href="#" class="page-link">1</a></li>
@@ -399,7 +399,13 @@ body
 				            <li class="page-item"><a href="#" class="page-link">10</a></li>
 				            <li class="page-item"><a href="#" class="page-link">Next</a></li>
 				            </ul>
-						</nav>
+						</nav> -->
+						<!-- 페이징 처리에 따른 페이지 인덱스 적용 -->
+						<c:if test="${dataCount != 0 }">
+							<div align="center">
+								${pageIndexList }
+							</div>
+						</c:if>
 					</div>
 					</div><!-- 페이징 영역 끝 -->
 					

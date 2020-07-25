@@ -50,6 +50,63 @@ public class LectureDTO
 	{
 		this.int_lec_cd = int_lec_cd;
 	}
+	
+	private String id;					// 로그인 회원 아이디
+	
+	private String lec_count;			// 참가중인 스터디 개수
+	
+	public String getId()
+	{
+		return id;
+	}
+	public void setId(String id)
+	{
+		this.id = id;
+	}
+	public String getLec_count()
+	{
+		return lec_count;
+	}
+	public void setLec_count(String lec_count)
+	{
+		this.lec_count = lec_count;
+	}
+	public String getSearchKey()
+	{
+		return searchKey;
+	}
+	public void setSearchKey(String searchKey)
+	{
+		this.searchKey = searchKey;
+	}
+	public String getSearchValue()
+	{
+		return searchValue;
+	}
+	public void setSearchValue(String searchValue)
+	{
+		this.searchValue = searchValue;
+	}
+	public int getStart()
+	{
+		return start;
+	}
+	public void setStart(int start)
+	{
+		this.start = start;
+	}
+	public int getEnd()
+	{
+		return end;
+	}
+	public void setEnd(int end)
+	{
+		this.end = end;
+	}
+
+	private String searchKey, searchValue;	// 검색 키, 검색 단어
+	private int start, end;			// 페이지 시작 / 끝
+	
 	public String getArea_name()
 	{
 		return area_name;

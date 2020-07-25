@@ -1,5 +1,10 @@
 package com.sys.comeit;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
@@ -9,6 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.sys.comeit.util.MyUtil;
 
 @Controller
 public class LectureController
@@ -142,25 +149,105 @@ public class LectureController
 	
 	// 강의 리스트 화면 노출하기
 	@RequestMapping(value = "/lecturelist.action", method = {RequestMethod.GET, RequestMethod.POST})
-	public String memberJoin(Model model, HttpServletRequest request)
+	public String memberJoin(Model model, HttpServletRequest request) throws UnsupportedEncodingException
 	{
 		String view = null;
 
 		IAreaDAO areaDao = sqlSession.getMapper(IAreaDAO.class); // 지역
-		ILevelDAO levelDao = sqlSession.getMapper(ILevelDAO.class); // 레벨
-
 		ILectureDAO lecDao = sqlSession.getMapper(ILectureDAO.class); // 스터디 정보
 		
 		String lec_cd = "LEC1004";
 		
 		model.addAttribute("area", areaDao.areaList());
-		model.addAttribute("level", levelDao.levelList());
 
 		model.addAttribute("lec", lecDao.lecList()); // 실제 스터디 리스트
 		model.addAttribute("count", lecDao.lecCount());
 
 		model.addAttribute("lecTags", lecDao.lecIntTagSearch(lec_cd)); // 하나의 스터디의 모든 키워드
 		model.addAttribute("lecHrDays", lecDao.lecHrDaySearch(lec_cd));  // 하나의 스터디의 요일, 시간
+		
+		// 페이징 처리 --------------------------------------
+
+		MyUtil util = new MyUtil();
+
+		String pageNum = request.getParameter("pageNum"); // 페이지 번호? 왜 삭제 버튼에서..?
+
+		int currentPage = 1;
+		if (pageNum != null && pageNum.length() != 0)
+		{
+			currentPage = Integer.parseInt(pageNum);
+		}
+
+		String searchKey = null;
+		String searchValue = null;
+
+		searchKey = request.getParameter("searchKey");
+		searchValue = request.getParameter("searchValue");
+
+		if (searchKey == null)
+		{
+			searchKey = "int_tag_name";
+			searchValue = "";
+		}
+
+		if (request.getMethod().equalsIgnoreCase("GET"))
+		{
+			searchValue = URLDecoder.decode(searchValue, "UTF-8");
+		}
+
+		LectureDTO dto = new LectureDTO();
+
+		dto.setSearchKey(searchKey);
+		dto.setSearchValue(searchValue);
+
+		// 전체 데이터 개수
+		int dataCount = lecDao.lecSearchCount(dto); // 검색 완료된 데이터 개수
+
+		// 전체 페이지 수 구하기
+		int numPerPage = 10;
+		int totalPage = util.getPageCount(numPerPage, dataCount);
+
+		// 전체 페이지 수 보다 현재 표시할 페이지가 큰 경우
+		if (totalPage < currentPage)
+		{
+			currentPage = totalPage;
+		}
+
+		// 테이블에서 가져올 리스트들의 시작과 끝 위치
+		int start = (currentPage - 1) * numPerPage + 1;
+		int end = currentPage * numPerPage;
+
+		System.out.println("start : " + start);
+		System.out.println("end : " + end);
+
+		dto.setStart(start);
+		dto.setEnd(end);
+
+		// 테이블에서 리스트를 출력할 데이터 가져오기
+		List<LectureDTO> lecture = lecDao.getListData(dto);
+
+		String params = "";
+		if (searchValue != null && searchValue.length() != 0)
+		{
+			searchValue = URLEncoder.encode(searchKey, "UTF-8");
+			params = "searchKey=" + searchKey + "&searchValue=" + searchValue;
+		}
+
+		String cp = request.getContextPath();
+
+		// 페이징 처리
+		String listUrl = cp + "/lecturelist.action";
+		if (params.length() != 0)
+		{
+			listUrl += "?" + params;
+		}
+
+		String pageIndexList = util.pageIndexList(currentPage, totalPage, listUrl);
+
+		// 포워딩할 studylist.jsp 에 넘겨준다.
+		request.setAttribute("lecture", lecture);
+		request.setAttribute("pageIndexList", pageIndexList);
+		request.setAttribute("dataCount", dataCount);
 		
 
 		view = "WEB-INF/views/lecture/LectureList.jsp";

@@ -68,29 +68,6 @@
       ORDER BY CRT_DATE DESC
    </select>
    
-	<!-- 총 스터디방 개수 조회 count() -->
-   <select id="lecCount" resultType="java.lang.Integer">
-      SELECT COUNT(*) AS COUNT
-      FROM VIEW_LEC_INFO
-      WHERE END_DATE <![CDATA[>]]> SYSDATE
-   </select>
-   
-   <!-- 모든 스터디방의 관심 키워드 -->
-   <select id="lecTagList" resultType="com.sys.comeit.LectureDTO">
-      <![CDATA[
-      	SELECT STU_CD, INT_TAG AS INT_TAG_NAME
-		FROM 
-		(
-		SELECT STU_CD, INT_TAG, STR_DATE, END_DATE
-		FROM VIEW_STU_TAG
-		UNION ALL
-		SELECT STU_CD, ETC_TAG, STR_DATE, END_DATE
-		FROM VIEW_STU_ETC_TAG
-		)
-		WHERE END_DATE > SYSDATE
-      ]]>
-   </select>
-   
    <!-- 강의방 관심 태그 조회 -->
 	<select id="lecIntTagSearch"
 		resultType="com.sys.comeit.LectureDTO">
@@ -107,5 +84,49 @@
 		AND LEC_CD = #{lec_cd}
 	</select>
 	
+	<!-- 총 스터디방 개수 조회 count() -->
+    <select id="lecCount" resultType="java.lang.Integer">
+      SELECT COUNT(*) AS COUNT
+      FROM VIEW_LEC_INFO
+      WHERE END_DATE <![CDATA[>]]> SYSDATE
+    </select>
 	
+	<!-- 페이징 처리 -->
+	<!-- 검색완료된 스터디방 개수 조회 studySearchCount() -->
+	<select id="lecSearchCount" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS COUNT
+		FROM VIEW_LEC_INFO
+		WHERE END_DATE <![CDATA[>]]> SYSDATE
+		<if test="searchValue != null and !searchValue.equals('')">
+			WHERE #{searchKey} LIKE '%'||#{searchValue}||'%'
+		</if>
+	</select>
+	
+	<select id="getListData" resultType="com.sys.comeit.LectureDTO">
+		SELECT *
+		FROM
+		(
+		    SELECT ROWNUM AS RNUM
+		     , DATA.* 
+		    FROM 
+		    (
+		        SELECT LEC_CD, NAME, AREA_NAME, SPC_AREA_NAME, LEC_NAME, LEC_TERM, CRT_DATE
+           			 , STR_DATE , LEC_FEE , LEC_INTRO , MIN_MEM , MAX_MEM , IMG_URL, END_DATE
+      			FROM VIEW_LEC_INFO
+		        <choose>
+		        	<when test="searchValue != null">
+		        		WHERE LEC_NAME LIKE '%'||#{searchValue}||'%'
+				        ORDER BY LEC_CD DESC
+				    ) DATA
+				)
+				WHERE RNUM <![CDATA[>]]>= #{start} AND RNUM <![CDATA[<]]>=#{end}
+		        	</when>
+		        	<otherwise>
+		        		ORDER BY LEC_CD DESC
+				    ) DATA
+				)
+				WHERE RNUM <![CDATA[>]]>= #{start} AND RNUM <![CDATA[<]]>=#{end}
+		        	</otherwise>
+		        </choose>
+	</select>
 </mapper>
