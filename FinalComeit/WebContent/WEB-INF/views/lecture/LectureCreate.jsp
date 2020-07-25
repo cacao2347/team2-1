@@ -48,13 +48,16 @@
              	$("#err").css("display", "inline");
              	return;
             }
-			else if($("#stuKey").children().length == 0)
+			
+			if($(".stuKeyBox").children().length == 0)
             {
+			   alert($("#stuKeyBox").children().length);
                $("#err").html("관심 키워드는 최소 한 개 이상 선택해야 합니다.");
                $("#err").css("display", "inline");
                return;
             }
-			else if($("#weekBox").children().length == 0)
+			
+			if($(".weekBox").children().length == 0)
 			{
 				$("#err").html("모임 지정요일은 최소 한 개 이상 선택해야 합니다.");
 	            $("#err").css("display", "inline");
