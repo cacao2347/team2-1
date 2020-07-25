@@ -141,7 +141,7 @@ public class LectureController
 	
 	
 	// 강의 리스트 화면 노출하기
-	@RequestMapping(value = "/lecturelist.action", method = RequestMethod.GET)
+	@RequestMapping(value = "/lecturelist.action", method = {RequestMethod.GET, RequestMethod.POST})
 	public String memberJoin(Model model, HttpServletRequest request)
 	{
 		String view = null;
@@ -150,16 +150,20 @@ public class LectureController
 		ILevelDAO levelDao = sqlSession.getMapper(ILevelDAO.class); // 레벨
 
 		ILectureDAO lecDao = sqlSession.getMapper(ILectureDAO.class); // 스터디 정보
-
+		
+		String lec_cd = "LEC1004";
+		
 		model.addAttribute("area", areaDao.areaList());
 		model.addAttribute("level", levelDao.levelList());
 
-		model.addAttribute("study", lecDao.lecList()); // 실제 스터디 리스트
+		model.addAttribute("lec", lecDao.lecList()); // 실제 스터디 리스트
 		model.addAttribute("count", lecDao.lecCount());
 
-		model.addAttribute("studyTags", lecDao.lecTagList()); // 모든 스터디의 모든 키워드
+		model.addAttribute("lecTags", lecDao.lecIntTagSearch(lec_cd)); // 하나의 스터디의 모든 키워드
+		model.addAttribute("lecHrDays", lecDao.lecHrDaySearch(lec_cd));  // 하나의 스터디의 요일, 시간
+		
 
-		view = "WEB-INF/views/study/StudyList.jsp";
+		view = "WEB-INF/views/lecture/LectureList.jsp";
 
 		return view;
 	}
@@ -170,7 +174,6 @@ public class LectureController
 	{ RequestMethod.GET, RequestMethod.POST })
 	public String checkSpaIdAjax(HttpServletRequest request, Model model)
 	{
-
 		IStudyDAO studyDao = sqlSession.getMapper(IStudyDAO.class); // 스터디 정보
 
 		String stu_cd = request.getParameter("stu_cd");

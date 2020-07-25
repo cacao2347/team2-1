@@ -1,3 +1,4 @@
 eclipse.preferences.version=1
+encoding//WebContent/WEB-INF/views/lecture/LectureList.jsp=UTF-8
 encoding//src/com/sys/comeit/AreaDTO.java=UTF-8
 encoding//src/com/sys/comeit/IAdminDAO.java=UTF-8

@@ -18,13 +18,183 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+<style type="text/css">
+
+body
+{
+	font-family: 'Noto Sans KR', sans-serif !important;
+}
+
+</style>
+
+<script type="text/javascript">
+
+	$(function()
+	{
+		// AJAX 요청 및 응답 처리
+        ajaxSpcAreaRequest();
+		
+     	// 지역명이 바뀌면 상세지역 ajax 호출
+		$("#area").change(function()
+		{
+		   ajaxSpcAreaRequest();
+		   
+		});
+		
+		$("#allCheck").click(function()	
+		{  
+			if ($("#allCheck").is(':checked')) {
+                $("input[type=checkbox]").prop("checked", true);
+            } else {
+                $("input[type=checkbox]").prop("checked", false);
+            }
+		});
+
+		
+		
+		
+		// 강의 각각 리스트 클릭 시 (로그인 전)
+		$(".bFtitleBtn").click(function()
+		{
+			var result = confirm("로그인 후 이용 가능합니다.\n확인 버튼 클릭 시 로그인 페이지로 이동합니다.");
+			
+			if(result)
+			{
+				location.href = "/FinalComeit/memberlogin.action";
+			}
+			else if(result==null)
+			{
+				return;
+			}
+			
+		});
+		
+		
+		
+		// 강의 각각 리스트 클릭 시 (로그인 후)
+		$(".titleBtn").click(function()
+		{
+			//var params = "scrtCheck" + $
+			//alert($(".stu_cd").val());
+			
+			//$(location).attr("href", "employeeupdateform.action?employeeId=" + $(this).val());
+			
+			alert($(this).val());
+			
+			var params = "lec_cd=" + $(this).val();
+			
+			$.ajax(
+			{
+				type : "POST"
+				, url : "stuscrtcheck.action"
+				, data : params
+				, dataType : "text"
+				, async:false
+				, success : function(data)
+				{
+					if(data != 0)
+					{
+						var result = prompt("비밀번호를 입력해 주세요 : ");
+						
+						if(result=="" || result==null)
+							return;
+						else if(result == data)
+							location.href = "/FinalComeit/lecturedetail.action?" + params;
+						else if(result != data)
+							alert("비밀번호가 틀렸습니다!");
+					}
+					else
+					{
+						location.href = "/FinalComeit/lecturedetail.action?" + params;
+					}
+						
+					
+				}
+				, error : function(e)
+				{
+					alert(e.responseText + "에러");
+				}
+			});
+	
+		});
+		
+		// 강의 개설 버튼 클릭 시 (로그인 전)
+		$("#bFcreateBtn").click(function()
+		{
+			var result = confirm("로그인 후 이용 가능합니다.\n확인 버튼 클릭 시 로그인 페이지로 이동합니다.");
+			
+			if(result)
+			{
+				location.href = "/FinalComeit/memberlogin.action";
+			}
+			else if(result==null)
+			{
+				return;
+			}
+		});
+		
+		// 강의 개설 버튼 클릭 시 (로그인 후)
+		$("#createBtn").click(function()
+		{
+			// 여기서 ajax 처리로 개수 체크하기
+			
+			$.ajax(
+			{
+				type : "POST"
+				, url : "lecturecreatecnt.action"
+				, dataType : "text"
+				, success : function(data)
+				{
+					if(data >= 10)
+					{
+						alert("스터디는 최대 10개까지 참가 가능합니다.\n스터디 종료 후 새로운 스터디에 참가해주세요.");
+					}
+					else if(data <= 10)
+					{
+						location.href = "/FinalComeit/lecturecreate.action";
+					}
+					else
+					{
+						alert("판별불가");
+					}
+					
+				}
+				, error : function(e)
+				{
+					alert(e.responseText + "에러");
+				}
+			});
+			
+			
+			
+		});*/
+		
+	});
+	
+	// 지역에 따른 세부지역 불러오는 ajax
+    function ajaxSpcAreaRequest()
+    {
+
+       $.post("areaajax.action",
+       {
+          area_cd : $("#area").children("option:selected").val()
+       }, function(data)
+       {
+          //alert(data);
+          $("#spcAreadd").html(data);
+          $("#spcArea").removeAttr("disabled");
+       });
+    }
+	
+
+</script>
 
 
 </head>
 <body class="">
 <div class="row">
 	<div class="col-md-12">
-	<c:import url="WEB-INF/views/header.jsp"></c:import>
+	<c:import url="/WEB-INF/views/header.jsp"></c:import>
 	</div>
 </div>
 			
@@ -50,20 +220,20 @@
 					<dl class="region">
 						<dt>지역</dt>
 						<dd>
-							<select name="region" class="form-control">
-								<option value="전체">전체</option>
-								<option value="서울">서울</option>
-								<option value="인천">인천</option>
+							<select name="area" id="area" class="area form-control">
+								<option value="0">전체</option>
+								<c:forEach var="areas" items="${area }">
+									<option value="${areas.area_cd }"
+										${areas.area_cd == spcArea.area_cd ? "selected= \"selected\"" : ""}>
+										${areas.area_name }</option>
+								</c:forEach>
 							</select>
 						</dd>
-						  
- 						<dd>
-							<select name="regDetail" class="form-control">
-								<option value="전체">전체</option>
-								<option value="마포구">마포구</option>
-								<option value="양천구">양천구</option>
-							</select>
+						
+						<dd id="spcAreadd">
+							
 						</dd>
+						
 					</dl><!-- end region -->
 					
 					<dl class="inwon">
@@ -122,175 +292,90 @@
 					<!-- 리스트 영역 -->
 					<div class="row list">
 						<div class="col-md-12">
-						99개의 강의
+						${count }개의 강의에서 수강인원을 모집중입니다!
 						</div>
 						<div class="col-md-12">
 						<ul class="list-study">
-							<li class="list-study-item">
+						
+							<c:forEach var="lecs" items="${lec }">
+								<li class="list-study-item">
 								<div class="item-header">
-								<img class="study-logo" alt="study-logo" src="assets/images/basic.png">
+								
+								<c:choose>
+								<c:when test="${empty lecs.img_url }">
+								<img class="study-logo" alt="study-logo" src="assets/images/studylogo.PNG">
+								</c:when>
+								<c:when test="${not empty lecs.img_url }">
+								<img class="study-logo" alt="study-logo" src="${lecs.img_url }">
+								</c:when>
+								</c:choose>
 								</div>
 								<div class="item-body">
 								<div class="firstLine">
 									<div class="listTitle">
-										<h4 class="study-title" style="font-weight: bold;">한 달만에 마스터 하는 자바</h4>
+										<h4 class="study-title" style="font-weight: bold;">
+										
+										<c:choose>
+										<c:when test="${empty id }">
+											<button type="button" class="btn btn-link bFtitleBtn" value="${lecs.lec_cd }">${lecs.lec_name}</button>
+										</c:when>
+										
+										<c:when test="${not empty id }">
+											<button type="button" class="btn btn-link titleBtn" value="${lecs.lec_cd}">${lecs.lec_name}</button>
+										</c:when>
+										</c:choose>
+										
+										
+										</h4>
 									</div>
+									
 								</div>
-
-								<div class="row">
-									<div class="col-md-6">
-										<h5 class="study-date">2020-06-16 ~ 2020-07-15</h5>
-										<h5 class="study-term">1개월</h5>
-									</div>
-									<div class="col-md-6 text-right">
-										<h5 style="color: red;">300,000원</h5>
-									</div>
-								</div>
-								
-								<ul class="study-info">
-									<li class="level"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> 강사 서팔광</li>
-									<li class="location"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> 서울 마포구</li>
-									<li class="numb"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> 월, 수</li>
-									<li class="numb"><span class="glyphicon glyphicon-time" aria-hidden="true"></span> 13시~15시</li>
-								</ul>
-								<ul class="list-study-tags">
-									<li class="stack-item">Java</li>
-									<li class="stack-item">Oracle</li>
-									<li class="stack-item">잘가르침</li>
-								</ul>
-								</div>
-							</li>
-							<li class="list-study-item">
-								<div class="item-header">
-								<img class="study-logo" alt="study-logo" src="assets/images/basic.png">
-								</div>
-								<div class="item-body">
-								<h4 class="study-title" style="font-weight: bold;">Python 초급과정</h4>
 								<div class="form-inline">
-									
-									<div class="row">
-										<div class="col-md-6">
-											<h5 class="study-date">2020-05-16 ~ 2020-08-15</h5>
-											<h5 class="study-term">3개월</h5>
-										</div>
-										<div class="col-md-6 text-right">
-											<h5 style="color: red;">140,000원</h5>
-										</div>
-									</div>
-									
+									<h5 class="study-date">${lecs.str_date} ~ ${lecs.end_date}</h5>
+									<h5 class="study-term">${lecs.lec_term}</h5>
 								</div>
-								
+								<!-- sleeping하고싶다 -->
 								<ul class="study-info">
-									<li class="level"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> 강사 추득만</li>
-									<li class="location"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> 서울 영등포구</li>
-									<li class="numb"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> 목, 금</li>
-									<li class="numb"><span class="glyphicon glyphicon-time" aria-hidden="true"></span> 13시~15시</li>
+									<li class="pencil"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> ${lecs.name }</li>
+									<li class="location"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> ${lecs.area_name } ${lecs.spc_area_name }</li>
+									<li class="numb"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> ${lecs.min_mem }~${lecs.max_mem }명</li>
+									<c:forEach var="lecHrDayss" items="${lecHrDays }">
+									<li class="day"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>${lecHrDayss.day_name}</li>
+									<li class="lec_time"><span class="glyphicon glyphicon-time" aria-hidden="true"></span>${lecHrDayss.str_hrs}시 ~ ${lecHrDayss.end_hrs}시</li>
+									</c:forEach>
 								</ul>
+
+								
 								<ul class="list-study-tags">
-									<li class="stack-item">Python</li>
-									<li class="stack-item">초심자</li>
+								<c:forEach var="lecTagss" items="${lecTags }">
+									<li class="stack-item">${lecTagss.int_tag}</li>
+								</c:forEach>
 								</ul>
+
 								</div>
+								
 							</li>
-							<li class="list-study-item">
-								<div class="item-header">
-								<img class="study-logo" alt="study-logo" src="assets/images/basic.png">
-								</div>
-								<div class="item-body">
-								<h4 class="study-title" style="font-weight: bold;">웹 사이트 만들기</h4>
-								
-								<div class="row">
-									<div class="col-md-6">
-										<h5 class="study-date">2020-01-16 ~ 2020-07-15</h5>
-										<h5 class="study-term">6개월</h5>
-									</div>
-									<div class="col-md-6 text-right">
-										<h5 style="color: red;">300,000원</h5>
-									</div>
-								</div>
-								
-								<ul class="study-info">
-									<li class="level"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> 강사 곽팔의</li>
-									<li class="location"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> 서울 마포구</li>
-									<li class="numb"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> 토, 일</li>
-									<li class="numb"><span class="glyphicon glyphicon-time" aria-hidden="true"></span> 13시~15시</li>
-								</ul>
-								<ul class="list-study-tags">
-									<li class="stack-item">Java</li>
-									<li class="stack-item">Oracle</li>
-									<li class="stack-item">JavaScript</li>
-									<li class="stack-item">HTML</li>
-									<li class="stack-item">CSS</li>
-								</ul>
-								</div>
-							</li>
-							<li class="list-study-item">
-								<div class="item-header">
-								<img class="study-logo" alt="study-logo" src="assets/images/basic.png">
-								</div>
-								<div class="item-body">
-								<h4 class="study-title" style="font-weight: bold;">C++로 게임 만들기</h4>
-								
-								<div class="row">
-									<div class="col-md-6">
-										<h5 class="study-date">2020-01-16 ~ 2020-07-15</h5>
-										<h5 class="study-term">6개월</h5>
-									</div>
-									<div class="col-md-6 text-right">
-										<h5 style="color: red;">1,800,000원</h5>
-									</div>
-								</div>
-								
-								<ul class="study-info">
-									<li class="level"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> 강사 권필쌍</li>
-									<li class="location"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> 서울 마포구</li>
-									<li class="numb"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> 일</li>
-									<li class="numb"><span class="glyphicon glyphicon-time" aria-hidden="true"></span> 13시~15시</li>
-								</ul>
-								<ul class="list-study-tags">
-									<li class="stack-item">C++</li>
-									<li class="stack-item">게임제작</li>
-								</ul>
-								</div>
-							</li>
-							<li class="list-study-item">
-								<div class="item-header">
-								<img class="study-logo" alt="study-logo" src="assets/images/basic.png">
-								</div>
-								<div class="item-body">
-								<h4 class="study-title" style="font-weight: bold;">침팬지도 이해하는 Java배우기</h4>
-								
-								<div class="row">
-									<div class="col-md-6">
-										<h5 class="study-date">2020-01-16 ~ 2020-07-15</h5>
-										<h5 class="study-term">6개월</h5>
-									</div>
-									<div class="col-md-6 text-right">
-										<h5 style="color: red;">800,000원</h5>
-									</div>
-								</div>
-								
-								<ul class="study-info">
-									<li class="level"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> 강사 도엽철</li>
-									<li class="location"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> 서울 마포구</li>
-									<li class="numb"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> 화, 수, 목</li>
-									<li class="numb"><span class="glyphicon glyphicon-time" aria-hidden="true"></span> 13시~15시</li>
-								</ul>
-								<ul class="list-study-tags">
-									<li class="stack-item">Java</li>
-									<li class="stack-item">침팬지	</li>
-								</ul>
-								</div>
-							</li>
+							
+							</c:forEach>
 						</ul>
 						
 						</div>
 					</div><!-- 리스트 영역 끝 -->
+	
 					
 					<div class="row">
 					<div class="col-md-12">
 						<div class="create">
-							<button type="button" class="btn btn-primary btn-sm createBtn">강의 개설</button>
+							<c:choose>
+							
+							<c:when test="${empty id }">
+								<button type="button" id="bFcreateBtn" class="btn btn-primary btn-sm createBtn">강의 개설</button>
+							</c:when>
+							
+							<c:when test="${not empty id }">
+								<button type="button" id="createBtn" class="btn btn-primary btn-sm createBtn">강의 개설</button>
+							</c:when>
+							</c:choose>
 						</div>
 					</div>
 					</div>
@@ -327,7 +412,7 @@
 </div>
 <div class="row">
 	<div class="col-md-12">
-	<c:import url="WEB-INF/views/footer.jsp"></c:import>
+	<c:import url="/WEB-INF/views/footer.jsp"></c:import>
 	</div>
 </div>
 </body>

@@ -2,13 +2,105 @@ package com.sys.comeit;
 
 public class LectureDTO
 {
-	String lec_cd, prof_cd, spc_area_cd, lec_term_cd
-	, lec_name, crt_date, str_date, lec_intro , min_mem
-	, max_mem, int_tag_cd, etc_tag, str_hrs, end_hrs, day_cd;
+	private String lec_cd, prof_cd, spc_area_cd, lec_term_cd, area_name, spc_area_name
+	, lec_name, name, crt_date, str_date, lec_intro , min_mem
+	, max_mem, int_tag_cd, etc_tag, str_hrs, end_hrs, day_cd
+	, lec_term, img_url, end_date;
 	
+	private String int_tag_name, etc_tag_name, int_lec_cd;	// 관심 키워드 태그, 기타 관심 키워드 태그
+	private String int_tag, day_name;
+	
+	public String getDay_name()
+	{
+		return day_name;
+	}
+	public void setDay_name(String day_name)
+	{
+		this.day_name = day_name;
+	}
+	public String getInt_tag()
+	{
+		return int_tag;
+	}
+	public void setInt_tag(String int_tag)
+	{
+		this.int_tag = int_tag;
+	}
+	public String getInt_tag_name()
+	{
+		return int_tag_name;
+	}
+	public void setInt_tag_name(String int_tag_name)
+	{
+		this.int_tag_name = int_tag_name;
+	}
+	public String getEtc_tag_name()
+	{
+		return etc_tag_name;
+	}
+	public void setEtc_tag_name(String etc_tag_name)
+	{
+		this.etc_tag_name = etc_tag_name;
+	}
+	public String getInt_lec_cd()
+	{
+		return int_lec_cd;
+	}
+	public void setInt_lec_cd(String int_lec_cd)
+	{
+		this.int_lec_cd = int_lec_cd;
+	}
+	public String getArea_name()
+	{
+		return area_name;
+	}
+	public void setArea_name(String area_name)
+	{
+		this.area_name = area_name;
+	}
+	public String getSpc_area_name()
+	{
+		return spc_area_name;
+	}
+	public void setSpc_area_name(String spc_area_name)
+	{
+		this.spc_area_name = spc_area_name;
+	}
 	public String getDay_cd()
 	{
 		return day_cd;
+	}
+	public String getName()
+	{
+		return name;
+	}
+	public void setName(String name)
+	{
+		this.name = name;
+	}
+	public String getLec_term()
+	{
+		return lec_term;
+	}
+	public void setLec_term(String lec_term)
+	{
+		this.lec_term = lec_term;
+	}
+	public String getImg_url()
+	{
+		return img_url;
+	}
+	public void setImg_url(String img_url)
+	{
+		this.img_url = img_url;
+	}
+	public String getEnd_date()
+	{
+		return end_date;
+	}
+	public void setEnd_date(String end_date)
+	{
+		this.end_date = end_date;
 	}
 	public void setDay_cd(String day_cd)
 	{
@@ -46,7 +138,7 @@ public class LectureDTO
 	{
 		this.etc_tag = etc_tag;
 	}
-	int lec_fee;
+	private int lec_fee;
 	
 	public String getLec_cd()
 	{

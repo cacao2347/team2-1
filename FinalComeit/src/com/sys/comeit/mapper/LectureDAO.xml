@@ -61,10 +61,9 @@
 	
 	<!-- 전체 강의방 조회 -->
    <select id="lecList" resultType="com.sys.comeit.LectureDTO">
-      SELECT STU_CD, CRT_DATE, TITLE, STR_DATE, MEM_NUM, CMT_DATE
-      , AREA_NAME, SPC_AREA_NAME, MEET_TERM
-      , IDNTT_TYPE, LV, CAT_NAME, SCRT_NUM, END_DATE
-      FROM VIEW_STU_LIST
+      SELECT LEC_CD, NAME, AREA_NAME, SPC_AREA_NAME, LEC_NAME, LEC_TERM, CRT_DATE
+           , STR_DATE , LEC_FEE , LEC_INTRO , MIN_MEM , MAX_MEM , IMG_URL, END_DATE
+      FROM VIEW_LEC_INFO
       WHERE END_DATE <![CDATA[>]]> SYSDATE
       ORDER BY CRT_DATE DESC
    </select>
@@ -72,7 +71,7 @@
 	<!-- 총 스터디방 개수 조회 count() -->
    <select id="lecCount" resultType="java.lang.Integer">
       SELECT COUNT(*) AS COUNT
-      FROM VIEW_STU_LIST
+      FROM VIEW_LEC_INFO
       WHERE END_DATE <![CDATA[>]]> SYSDATE
    </select>
    
@@ -92,5 +91,21 @@
       ]]>
    </select>
    
+   <!-- 강의방 관심 태그 조회 -->
+	<select id="lecIntTagSearch"
+		resultType="com.sys.comeit.LectureDTO">
+		SELECT LEC_CD, INT_TAG
+		FROM VIEW_LEC_KEYWORD
+		WHERE LEC_CD = #{lec_cd}
+	</select>
+	
+	<!-- 강의 요일, 시간 조회 -->
+	<select id="lecHrDaySearch" resultType="com.sys.comeit.LectureDTO">
+		SELECT PT.LEC_CD AS LEC_CD, D.DAY_NAME AS DAY_NAME, PT.STR_HRS AS STR_HRS, PT.END_HRS AS END_HRS
+		FROM TBL_LEC_PRG_TIME PT, TBL_DAY D
+		WHERE PT.DAY_CD = D.DAY_CD(+)
+		AND LEC_CD = #{lec_cd}
+	</select>
+	
 	
 </mapper>
