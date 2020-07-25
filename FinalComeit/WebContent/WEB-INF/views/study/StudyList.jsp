@@ -131,7 +131,7 @@ body
 					}
 					else
 					{
-						location.href = "/FinalComeit/studydetail.action";
+						location.href = "/FinalComeit/studydetail.action?stu_cd=" + $(this).val();
 					}
 						
 					
