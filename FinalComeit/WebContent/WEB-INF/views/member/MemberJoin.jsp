@@ -472,6 +472,14 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                $("#err").css("display", "inline");
                return;
             }
+            
+            if($("#stuKeyBox").children().length == 0)
+            {
+               $("#err").html("관심 키워드는 최소 한 개 이상 선택해야 합니다.");
+               $("#err").css("display", "inline");
+               return;
+            }
+            
    
             /*
             if( $("input:radio[name='provisionyn']:radio[value='N']") == true)
@@ -508,12 +516,6 @@ body{font-family: 'Noto Sans KR', sans-serif;}
             {
                //alert("영문,숫자, 특수문자 중 2가지 이상을 혼합하여 입력해주세요.");
                $("#err").html("패스워드는 영문,숫자, 특수문자 중 2가지 이상을 혼합하여 입력해주세요.");
-               $("#err").css("display", "inline");
-               return;
-            }
-            else if($("#stuKeyBox").children().length == 0)
-            {
-               $("#err").html("관심 키워드는 최소 한 개 이상 선택해야 합니다.");
                $("#err").css("display", "inline");
                return;
             }

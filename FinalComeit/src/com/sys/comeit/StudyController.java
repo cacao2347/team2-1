@@ -332,9 +332,19 @@ public class StudyController
 
 		String stu_cd = dto.getStu_cd(); // out 변수인 pk 담기
 
-		String[] intTagList = request.getParameterValues("intTagList"); // 선택한 모든 관심 키워드 배열에 넣기
-		String[] etcTagList = request.getParameterValues("etcTagList"); // 선택한 모든 관심 기타 키워드 배열에 넣기
-
+		String[] intTagList = {};
+		String[] etcTagList = {};
+		
+		if(request.getParameterValues("intTagList")!=null)
+		{
+			intTagList = request.getParameterValues("intTagList"); // 선택한 모든 관심 키워드 배열에 넣기
+		}
+		
+		if(request.getParameterValues("etcTagList")!=null)
+		{
+			etcTagList = request.getParameterValues("etcTagList"); // 선택한 모든 관심 기타 키워드 배열에 넣기
+		}
+		
 		String[] dayList = request.getParameterValues("dayList"); // 선택한 모든 요일
 
 		//System.out.println("그냥 관심 : " + intTagList.length);

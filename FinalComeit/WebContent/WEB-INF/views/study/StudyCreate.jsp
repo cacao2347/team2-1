@@ -115,6 +115,20 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 					return;
 				}
 				
+				if($("#stuKeyBox").children().length == 0)
+	            {
+	               $("#err").html("관심 키워드는 최소 한 개 이상 선택해야 합니다.");
+	               $("#err").css("display", "inline");
+	               return;
+	            }
+				
+				if($("#stuDayBox").children().length == 0)
+	            {
+	               $("#err").html("모임 요일은 최소 한 개 이상 선택해야 합니다.");
+	               $("#err").css("display", "inline");
+	               return;
+	            }
+				
 				// 최종 submit
 				$("#joinForm").submit();
 	
