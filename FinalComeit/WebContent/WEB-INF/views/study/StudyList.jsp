@@ -52,14 +52,15 @@ body
 		});
 
 		
-		// 카테고리
-		// 언어 클릭 시
+		// 카테고리 클릭 시
+		$(".stuCatBtn").click(function()
+		{
+			//alert($(this).val());
+			//location.href = "/FinalComeit/studylistcat.action?stu_cat_cd=" + $(this).val();
+			
+			
+		});
 		
-		// 면접 클릭 시
-		
-		// 자격증 클릭 시
-		
-		// 기타 클릭 시
 		
 		
 		
@@ -163,7 +164,11 @@ body
 		// 스터디방 개설 버튼 클릭 시 (로그인 후)
 		$("#createBtn").click(function()
 		{
+			// 여기서 ajax 처리로 개수 체크하기
+			
+			
 			location.href = "/FinalComeit/studycreate.action";
+			
 		});
 		
 	});
@@ -223,7 +228,7 @@ body
 							<dd><a href="">면접</a></dd>
 							<dd><a href="">자격증</a></dd>
 							<dd><a href="">기타</a></dd> -->
-							<dd><a href="">${stuCats.cat_name }</a></dd>
+							<dd><button type="button" class="btn btn-link stuCatBtn" value="${stuCats.stu_cat_cd }">${stuCats.cat_name }</button></dd>
 						
 						</c:forEach>
 						
