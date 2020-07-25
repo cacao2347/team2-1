@@ -5,6 +5,7 @@
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
 %>
+<!-- 안녕 -->
 <!DOCTYPE html>
 <html>
 <head>
