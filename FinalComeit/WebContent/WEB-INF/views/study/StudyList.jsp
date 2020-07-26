@@ -372,15 +372,15 @@ body
 							<c:forEach var="studys" items="${study }">
 								<li class="list-study-item">
 								<div class="item-header">
-								
-								<c:choose>
+								<img class="study-logo" alt="study-logo" src="assets/images/studylogo.PNG">
+								<%-- <c:choose>
 								<c:when test="${empty studys.img_url }">
 								<img class="study-logo" alt="study-logo" src="assets/images/studylogo.PNG">
 								</c:when>
 								<c:when test="${not empty studys.img_url }">
 								<img class="study-logo" alt="study-logo" src="${studys.img_url }">
 								</c:when>
-								</c:choose>
+								</c:choose> --%>
 								</div>
 								<div class="item-body">
 								<div class="firstLine">
