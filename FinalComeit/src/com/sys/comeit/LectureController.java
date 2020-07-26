@@ -276,5 +276,22 @@ public class LectureController
 		return String.valueOf(scrt_num);
 
 	}
+	
+	@RequestMapping(value = "/lecturedetail.action", method =
+		{ RequestMethod.GET, RequestMethod.POST })
+		public String lectureDetail(Model model, HttpServletRequest request)
+		{
+			String view = "";
+			
+			ILectureDAO lectureDao = sqlSession.getMapper(ILectureDAO.class);
+			
+			String lec_cd = "LEC1007";
+			
+			model.addAttribute("lecInfo", lectureDao.lectureInfo(lec_cd));
+			
+			view = "WEB-INF/views/lecture/LectureProfessorDetail.jsp";
+			
+			return view;
+		}
 
 }

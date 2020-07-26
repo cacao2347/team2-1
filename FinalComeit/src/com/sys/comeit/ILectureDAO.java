@@ -14,6 +14,8 @@ public interface ILectureDAO
 	public int addTagName(String etcTag);
 	public int addLecturePrgTime(LectureDTO dto);
 	
+	public LectureDTO lectureInfo(String lec_cd); // 강의 상세페이지 정보 뿌려주기
+	
 	public ArrayList<LectureDTO> lecList();			// 강의 리스트
 	public ArrayList<LectureDTO> lecTagList();		// 모든 강의 키워드들
 	

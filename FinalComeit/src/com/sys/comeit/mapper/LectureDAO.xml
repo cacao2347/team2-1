@@ -135,4 +135,10 @@
 		        </choose>
 	</select>
 	
+	<select id="lectureInfo" resultType="com.sys.comeit.LectureDTO" parameterType="java.lang.String">
+		SELECT LEC_NAME, LEC_INTRO, STR_DATE, STR_DATE - 30 AS END_DATE, LEC_FEE, MIN_MEM, MAX_MEM, IMG_URL, SPC_AREA_NAME
+		FROM VIEW_LEC_INFO
+		WHERE LEC_CD = #{lec_cd}
+	</select>
+	
 </mapper>
