@@ -38,6 +38,7 @@ public class StudyDTO
 	private String searchKey, searchValue;	// 검색 키, 검색 단어
 	private int start, end;			// 페이지 시작 / 끝
 	
+	
 	public String getSearchKey()
 	{
 		return searchKey;

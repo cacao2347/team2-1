@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.sys.comeit.IStudyNoticeDAO">
+
+	<!-- 1번방 공지사항 게시판의 전체 리스트 확인 -->
+	<select id="studyNoticeList" resultType="com.sys.comeit.StudyDTO">
+      SELECT STU_CD, STU_NTC_CD, STU_NTC_PNT_CD, STU_JOIN_CD, TITLE
+     		, CRT_DATE, CONTENT, HITS, DEL_DATE
+		FROM VIEW_STU_NTC
+		WHERE STU_CD = #{stu_cd}
+		  AND STU_NTC_PNT_CD = STU_NTC_CD
+   </select>
+
+	<!-- 공지사항 게시글 등록 -->
+	<select id="studyNoticeInsert" parameterType="com.sys.comeit.StudyNoticeDTO" statementType="CALLABLE">
+		{ CALL PRC_STU_NTC
+		   (
+		      #{stu_join_cd}
+		      , #{title}
+		      , #{content}
+		   )
+		}
+	</select>
+	
+	<!-- 공지사항 댓글 등록 -->
+	<insert id="studyNoticeReInsert">
+		INSERT INTO TBL_STU_NTC(STU_NTC_CD, STU_NTC_CD2, STU_JOIN_CD, TITLE, CRT_DATE, CONTENT)
+		VALUES('STNT'||SEQ_STU_NTC.NEXTVAL, #{stu_ntc_pnt_cd}, #{stu_join_cd}, #{title}, SYSDATE, #{content})
+	</insert>
+	
+	<!-- 공지사항 댓글 삭제 -->
+	<delete id="studyNoticeReDelete">
+		SELECT STU_CD, STU_NTC_CD, STU_NTC_PNT_CD, STU_JOIN_CD, TITLE
+		     , CRT_DATE, CONTENT, HITS, DEL_DATE
+		FROM VIEW_STU_NTC
+		WHERE STU_CD = #{stu_cd}
+		  AND STU_NTC_PNT_CD = #{stu_ntc_pnt_cd}
+		  AND STU_NTC_PNT_CD != STU_NTC_CD
+		  AND STU_NTC_CD = #{stu_ntc_cd}
+	</delete>
+	
+	<!-- 공지사항 게시글 수정 -->
+
+	<!-- 공지사항 게시글 삭제 → 부모코드로 삭제 -->
+	
+	<!-- 1번방의 2번 게시물의 데이터 뽑기 -->
+	<select id="studyNoticeDetail" resultType="com.sys.comeit.StudyNoticeDTO">
+		SELECT STU_CD, STU_NTC_CD, STU_NTC_PNT_CD, STU_JOIN_CD, TITLE
+		     , CRT_DATE, CONTENT, HITS, DEL_DATE
+		FROM VIEW_STU_NTC
+		WHERE STU_CD = #{stu_cd}
+		  AND STU_NTC_PNT_CD = #{stu_ntc_pnt_cd}
+		  AND STU_NTC_PNT_CD = STU_NTC_CD
+	</select>
+	
+	<!-- 1번방의 2번 게시물의 댓글 리스트 -->
+	<select id="studyNoticeReList" resultType="com.sys.comeit.StudyNoticeDTO">
+		SELECT STU_CD, STU_NTC_CD, STU_NTC_PNT_CD, STU_JOIN_CD, TITLE
+		     , CRT_DATE, CONTENT, HITS, DEL_DATE
+		FROM VIEW_STU_NTC
+		WHERE STU_CD = #{stu_cd}
+		  AND STU_NTC_PNT_CD = #{stu_ntc_pnt_cd}
+		  AND STU_NTC_PNT_CD != STU_NTC_CD
+	</select>
+	
+	<!-- 1번방의 2번 공지사항의 댓글 개수 확인 -->
+	<select id="studyReCount" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS COUNT
+		FROM VIEW_STU_NTC
+		WHERE STU_CD = #{stu_cd}
+		  AND STU_NTC_PNT_CD = #{stu_ntc_pnt_cd}
+		  AND STU_NTC_PNT_CD != STU_NTC_CD
+	</select>
+	
+</mapper>
