@@ -46,12 +46,13 @@
 				//alert("성공" + data);
 				$(".container").html(data);
 				
+				/*
 				$(".listTitle").click(function()
 				{
 					alert("클릭");
 					$("#tableForm").submit();
 					
-					
+				*/	
 				});
 			}
 			, error : function(e)
