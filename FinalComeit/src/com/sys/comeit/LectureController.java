@@ -163,7 +163,7 @@ public class LectureController
 		
 		model.addAttribute("area", areaDao.areaList());
 
-		model.addAttribute("lec", lecDao.lecList()); // 실제 스터디 리스트
+		//model.addAttribute("lec", lecDao.lecList()); // 실제 스터디 리스트
 		model.addAttribute("count", lecDao.lecCount());
 		
 		
@@ -186,11 +186,13 @@ public class LectureController
 		String searchValue = null;
 
 		searchKey = request.getParameter("searchKey");
+		System.out.println("searchKey : " + searchKey);
 		searchValue = request.getParameter("searchValue");
+		System.out.println("searchValue : " +searchValue);
 
 		if (searchKey == null)
 		{
-			searchKey = "int_tag_name";
+			searchKey = "LEC_NAME";
 			searchValue = "";
 		}
 
@@ -203,10 +205,12 @@ public class LectureController
 
 		dto.setSearchKey(searchKey);
 		dto.setSearchValue(searchValue);
-
+		
+		/* lecDao.getListData(dto); */
+		
 		// 전체 데이터 개수
 		int dataCount = lecDao.lecSearchCount(dto); // 검색 완료된 데이터 개수
-
+		
 		// 전체 페이지 수 구하기
 		int numPerPage = 10;
 		int totalPage = util.getPageCount(numPerPage, dataCount);
@@ -228,7 +232,7 @@ public class LectureController
 		dto.setEnd(end);
 
 		// 테이블에서 리스트를 출력할 데이터 가져오기
-		List<LectureDTO> lecture = lecDao.getListData(dto);
+		List<LectureDTO> lec = lecDao.getListData(dto);
 
 		String params = "";
 		if (searchValue != null && searchValue.length() != 0)
@@ -247,35 +251,18 @@ public class LectureController
 		}
 
 		String pageIndexList = util.pageIndexList(currentPage, totalPage, listUrl);
-
+		System.out.println("pageIndexList : " + pageIndexList);
+		
 		// 포워딩할 studylist.jsp 에 넘겨준다.
-		request.setAttribute("lecture", lecture);
+		request.setAttribute("lec", lec);
 		request.setAttribute("pageIndexList", pageIndexList);
 		request.setAttribute("dataCount", dataCount);
-		
 
 		view = "WEB-INF/views/lecture/LectureList.jsp";
 
 		return view;
 	}
 
-	// 강의 리스트에서 강의 클릭 시 비밀번호 확인 AJAX 처리
-	@ResponseBody
-	@RequestMapping(value = "/lecscrtcheck.action", method =
-	{ RequestMethod.GET, RequestMethod.POST })
-	public String checkSpaIdAjax(HttpServletRequest request, Model model)
-	{
-		IStudyDAO studyDao = sqlSession.getMapper(IStudyDAO.class); // 스터디 정보
-
-		String stu_cd = request.getParameter("stu_cd");
-		System.out.println("스터디코드 : " + stu_cd);
-
-		String scrt_num = studyDao.studyScrt(request.getParameter("stu_cd"));
-		System.out.println("비밀번호 : " + scrt_num);
-
-		return String.valueOf(scrt_num);
-
-	}
 	
 	@RequestMapping(value = "/lecturedetail.action", method =
 		{ RequestMethod.GET, RequestMethod.POST })

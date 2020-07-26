@@ -103,7 +103,7 @@
 		FROM VIEW_LEC_INFO
 		WHERE END_DATE <![CDATA[>]]> SYSDATE
 		<if test="searchValue != null and !searchValue.equals('')">
-			WHERE #{searchKey} LIKE '%'||#{searchValue}||'%'
+			AND ${searchKey} LIKE '%${searchValue}%'
 		</if>
 	</select>
 	
@@ -118,19 +118,20 @@
 		        SELECT LEC_CD, NAME, AREA_NAME, SPC_AREA_NAME, LEC_NAME, LEC_TERM, CRT_DATE
            			 , STR_DATE , LEC_FEE , LEC_INTRO , MIN_MEM , MAX_MEM , IMG_URL, END_DATE
       			FROM VIEW_LEC_INFO
+      			WHERE END_DATE <![CDATA[>]]> SYSDATE
 		        <choose>
 		        	<when test="searchValue != null">
-		        		WHERE LEC_NAME LIKE '%'||#{searchValue}||'%'
+		        		AND ${searchKey} LIKE '%${searchValue}%'
 				        ORDER BY LEC_CD DESC
 				    ) DATA
 				)
-				WHERE RNUM <![CDATA[>]]>= #{start} AND RNUM <![CDATA[<]]>=#{end}
+				WHERE RNUM <![CDATA[>]]>= #{start} AND RNUM <![CDATA[<]]>= #{end}
 		        	</when>
 		        	<otherwise>
 		        		ORDER BY LEC_CD DESC
 				    ) DATA
 				)
-				WHERE RNUM <![CDATA[>]]>= #{start} AND RNUM <![CDATA[<]]>=#{end}
+				WHERE RNUM <![CDATA[>]]>= #{start} AND RNUM <![CDATA[<]]>= #{end}
 		        	</otherwise>
 		        </choose>
 	</select>

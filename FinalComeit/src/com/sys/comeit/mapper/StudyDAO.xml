@@ -211,7 +211,7 @@
 		FROM VIEW_STU_LIST
 		WHERE END_DATE <![CDATA[>]]> SYSDATE
 		<if test="searchValue != null and !searchValue.equals('')">
-			WHERE #{searchKey} LIKE '%'||#{searchValue}||'%'
+			AND ${searchKey} LIKE '%${searchValue}%'
 		</if>
 	</select>
 	
@@ -228,7 +228,7 @@
 		        FROM VIEW_STU_LIST
 		        <choose>
 		        	<when test="searchValue != null">
-		        		WHERE TITLE LIKE '%'||#{searchValue}||'%'
+		        		WHERE ${searchKey} LIKE '%${searchValue}%'
 				        ORDER BY STU_CD DESC
 				    ) DATA
 				)

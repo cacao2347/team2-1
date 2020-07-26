@@ -332,11 +332,13 @@ public class StudyController
 		String searchValue = null;
 
 		searchKey = request.getParameter("searchKey");
+		System.out.println("searchKey : " + searchKey);
 		searchValue = request.getParameter("searchValue");
+		System.out.println("searchValue : " +searchValue);
 
 		if (searchKey == null)
 		{
-			searchKey = "int_tag_name";
+			searchKey = "title";
 			searchValue = "";
 		}
 

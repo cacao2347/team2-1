@@ -347,7 +347,6 @@ body
 						
 						<form name="searchForm" method="post">
 							<select name="searchKey" class="form-control selectField" style="width: 20%;">
-								<option value="tag">키워드</option>
 								<option value="title">제목</option>
 							</select>
 							

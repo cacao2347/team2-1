@@ -51,7 +51,14 @@ body
 		});
 
 		
-		
+		// 검색 버튼 클릭 시
+		$("#searchBtn").click(function()
+		{
+			f = document.searchForm;
+			f.action = "<%=cp %>/lecturelist.action";
+			f.submit();
+			
+		});
 		
 		// 강의 각각 리스트 클릭 시 (로그인 전)
 		$(".bFtitleBtn").click(function()
@@ -70,7 +77,7 @@ body
 		});
 		
 		
-		
+		/*
 		// 강의 각각 리스트 클릭 시 (로그인 후)
 		$(".titleBtn").click(function()
 		{
@@ -117,6 +124,7 @@ body
 			});
 	
 		});
+		*/
 		
 		// 강의 개설 버튼 클릭 시 (로그인 전)
 		$("#bFcreateBtn").click(function()
@@ -270,20 +278,22 @@ body
 				
 					<!-- 검색 영역 -->
 					<div class="row">
-						<div class="col-md-4">
-							<div class="form-inline search">
-								<input type="text" class="form-control tag" id="tag" placeholder="기술 태그" style="width:100%">
-							</div>
+						<div class="col-md-12">
+						<div class="form-inline search">
+						
+						<form name="searchForm" method="post">
+							<select name="searchKey" class="form-control selectField" style="width: 20%;">
+								<option value="lec_name">제목</option>
+								<option value="name">강사명</option>
+							</select>
+							
+							<input type="text" name="searchValue" placeholder="관심 키워드 또는 스터디방 제목으로 검색하세요!" class="form-control boxTF" style="width: 70%;">
+							<input type="button" value="검색" class="btn btn-primary searchBtn" id="searchBtn" style="width: 9%">
+						</form>
+							<!-- <input type="text" class="form-control tag" id="tag" placeholder="기술 태그">
+							<input type="text" class="form-control title" id="title" placeholder="스터디방 제목">
+							<button type="button" id="searchBtn" class="btn btn-primary searchBtn">검색</button> -->
 						</div>
-						<div class="col-md-8">
-							<div class="form-inline search text-right">
-								<select class="form-control">
-									  <option>제목</option>
-									  <option>강사명</option>
-								</select>
-								<input type="text" class="form-control title" id="title" placeholder="강의 제목">
-								<button type="button" class="btn btn-primary searchBtn">검색</button>
-							</div>
 						</div>
 					</div>
 					
