@@ -29,11 +29,6 @@
 		// ajax처리
 		ajaxStudyNoticeList();
 		
-		
-		$(".listTitle").click(function()
-		{
-			location.href = "/FinalComeit/studynoticedetail.action";
-		});
 	});
 	
 	function ajaxStudyNoticeList()
@@ -51,6 +46,13 @@
 				//alert("성공" + data);
 				$(".container").html(data);
 				
+				$(".listTitle").click(function()
+				{
+					alert("클릭");
+					$("#tableForm").submit();
+					
+					
+				});
 			}
 			, error : function(e)
 			{
@@ -144,7 +146,7 @@
 			
 	</div><!-- end .row --> --%>
 	
-	<input type="hidden" id="studyCode" value="<%=stu_cd%>">
+	
 	<div class="row searchRow">
 	<div class="col-md-12 form-inline">
 		<input type="text" style="width: 10%;" class="form-control" value="제목" readonly="readonly"/>
@@ -159,9 +161,13 @@
 	
 	<div class="row">
 		
-		<!-- 실제 테이블 -->
-		<div class="col-md-12 container">
-		</div>
+		<form id="tableForm" class="form-horizontal" role="form" method="post" action="studynoticedetail.action">
+		<input type="hidden" id="studyCode" name="stu_cd" value="<%=stu_cd%>">
+			<!-- 실제 테이블 -->
+			<div class="col-md-12 container">
+			</div>
+		</form>
+		
 		
 	</div><!-- end .row -->
 	<div class="row">

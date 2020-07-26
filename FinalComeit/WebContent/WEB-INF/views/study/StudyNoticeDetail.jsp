@@ -5,6 +5,9 @@
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
 %>
+<%
+	String stu_cd = request.getParameter("stu_cd");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,12 +20,58 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp %>/assets/js/bootstrap.min.js"></script>
 
+<script type="text/javascript">
+
+	$(function()
+	{
+		
+		// ajax처리
+		ajaxStudyNoticeDetail();
+		
+	});
+	
+	function ajaxStudyNoticeDetail()
+	{
+		var params = "stu_cd=" + $("#studyCode").val() + "&stu_ntc_pnt_cd=" $("#stu_ntc_pnt_cd").val();
+		
+		$.ajax(
+		{
+			type : "POST"
+			, url : "studynoticedetailshow.action"
+			, data : params
+			, dataType : "text"
+			, success : function(data)
+			{
+				//alert("성공" + data);
+				$(".container").html(data);
+				
+				$(".goListBtn").click(function()
+				{
+					alert("클릭");
+					//$("#tableForm").submit();
+					
+				});
+			}
+			, error : function(e)
+			{
+				alert(e.responseText + "에러");
+			}
+		});
+	}
+	
+</script>
+
 </head>
 <body>
 
 <div class="container-fluid">
 
-	<!-- 상세내용 영역 -->
+<!-- 실제 데이터 -->
+<div class="container">
+
+</div>
+
+<!-- 	<!-- 상세내용 영역
 	<div class="row">
 		<div class="col-md-2">
 		</div>
@@ -53,9 +102,9 @@
 		</div>
 		<div class="col-md-2">
 		</div>
-	</div><!-- 상세내용 영역 끝 -->
+	</div>상세내용 영역 끝
 	
-	<!-- 버튼 영역 -->
+	버튼 영역
 	<div class="row">
 		<div class="col-md-2">
 		</div>
@@ -86,9 +135,9 @@
 		</div>
 		<div class="col-md-2">
 		</div>
-	</div><!-- 버튼 영역 끝-->
+	</div>버튼 영역 끝
 	
-	<!-- 댓글 목록 영역 -->
+	댓글 목록 영역
 	<div class="row">
 		<div class="col-md-2">
 		</div>
@@ -124,7 +173,7 @@
 		</div>
 	</div>
 	
-	<!-- 댓글 등록 영역 -->
+	댓글 등록 영역
 	<div class="row">
 		<div class="col-md-2">
 		</div>
@@ -144,7 +193,9 @@
 		</div>
 		<div class="col-md-2">
 		</div>
-	</div>
+	</div> -->
+	<input type="hidden" id="studyCode" value="<%=stu_cd%>">
+	<input type="hidden" id="stu_ntc_pnt_cd" value="${noticeDetail.stu_ntc_pnt_cd }">
 </div>
 
 </body>

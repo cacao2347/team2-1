@@ -16,7 +16,7 @@
 		<tr>
 			<td>${studyNoticeLists.row_num }</td>
 			<td>
-			<button class="btn btn-link listTitle" value="${studyNoticeLists. stu_ntc_pnt_cd}">${studyNoticeLists.title }</button>
+			<button class="btn btn-link listTitle" name="stu_ntc_pnt_cd" value="${studyNoticeLists. stu_ntc_pnt_cd}">${studyNoticeLists.title }</button>
 			</td>
 			<td>${studyNoticeLists.stu_join_name }</td>
 			<td>${studyNoticeLists.crt_date }</td>

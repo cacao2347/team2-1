@@ -54,8 +54,8 @@
 	
 	<!-- 1번방의 2번 게시물의 데이터 뽑기 -->
 	<select id="studyNoticeDetail" resultType="com.sys.comeit.StudyNoticeDTO">
-		SELECT STU_CD, STU_NTC_CD, STU_NTC_PNT_CD, STU_JOIN_CD, TITLE
-		     , CRT_DATE, CONTENT, HITS, DEL_DATE
+		SELECT STU_CD, STU_NTC_CD, STU_NTC_PNT_CD, STU_JOIN_NAME, MEM_CD, STU_JOIN_CD, TITLE
+     		, CRT_DATE, CONTENT, HITS, DEL_DATE
 		FROM VIEW_STU_NTC
 		WHERE STU_CD = #{stu_cd}
 		  AND STU_NTC_PNT_CD = #{stu_ntc_pnt_cd}
