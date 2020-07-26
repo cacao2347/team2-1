@@ -29,10 +29,7 @@ public class StudyController
 
 	// 기혜
 	// ---------------------------------------------------------------------------------
-	// 스터디방 Bf 페이지 요청
 	// ★
-	// 1. 후에 list랑 연결되면 GET 방식에서 POST 방식으로 바꾸기!
-	// 2. 사진 경로 가져오기(진짜 사진 등록되면)
 	@RequestMapping(value = "/studydetail.action", method = {RequestMethod.GET, RequestMethod.POST})
 	public String studyBfInfo(Model model, HttpServletRequest request)
 	{
@@ -50,7 +47,7 @@ public class StudyController
 
 		// 오늘 날짜 구하기
 		Date sysdate = new Date();
-		SimpleDateFormat date = new SimpleDateFormat("yyyy-mm-dd");
+		SimpleDateFormat date = new SimpleDateFormat("YYYY-MM-DD");
 		int strDateCompare = 0;
 		
 		// 스터디방 정보 조회
@@ -108,9 +105,9 @@ public class StudyController
 	// 스터디 참가
 	@ResponseBody
 	@RequestMapping(value = "/studyjoin.action", method = {RequestMethod.GET, RequestMethod.POST})
-	public String studyJoin(Model model, HttpServletRequest request)
+	public int studyJoin(Model model, HttpServletRequest request)
 	{
-		String view = null;
+		//String view = null;
 		
 		HttpSession session = request.getSession();
 		IStudyDAO studyDao = sqlSession.getMapper(IStudyDAO.class);
@@ -122,10 +119,12 @@ public class StudyController
 		// 스터디방 정보 조회
 		StudyDTO dto = studyDao.studyInfoSearch(stu_cd);
 		
+		
 		// 오늘 날짜 구하기
 		Date sysdate = new Date();
-		SimpleDateFormat date = new SimpleDateFormat("yyyy-mm-dd");
+		SimpleDateFormat date = new SimpleDateFormat("YYYY-MM-DD");
 		int strDateCompare = 0;
+		int insertRslt = 0;
 		
 		// 시작일 확정일 비교
 		if (dto != null)
@@ -135,44 +134,38 @@ public class StudyController
 			
 			int joinMem = studyDao.joinMemNum(stu_cd);
 			
-			if (strDateCompare < 0 && joinMem < dto.getMem_num()) 	// 시작일 전 + 모집인원이 다 차지 않은 경우
-			{
-				StudyDTO stuDto = new StudyDTO();
-				stuDto.setStu_cd(stu_cd);
-				stuDto.setJoin_mem_cd(mem_cd);
-				
-				int insertRslt = studyDao.joinStudy(stuDto);
-				
-				if (insertRslt == 1) 
-					view = "참가가 완료되었습니다.";
-				
-			}
-			else if (strDateCompare >= 1) 						// 시작일이 지난 경우
-			{	
-				view = "이미 스터디를 시작한 방입니다. 참가가 불가능합니다.";
-			} 							
-			else 
-			{
-				view = "인원이 모집되어 참가하실 수 없습니다.";
-			}
+			
+			// 방에 참가중인지 아닌지 여부
+			StudyDTO mem = new StudyDTO();
+			mem.setJoin_mem_cd(mem_cd);
+			mem.setStu_cd(stu_cd);
+			int myJoin = studyDao.stuJoinMemSearch(mem);
+			
+			// 시작일 전 + 모집인원이 다 차지 않은 경우 + 방에 참가중이지 않은 경우
+			if (strDateCompare <= 0 && joinMem < dto.getMem_num() && myJoin == 0) 	
+				insertRslt = studyDao.joinStudy(mem);
+								
+			// 테스트
+			//System.out.println(view + strDateCompare + strDate +testDate + "/" + sysdate);
 			
 		}
 		
-		return view;
+		return insertRslt;
+	
 	}
 	
 	
 	// 스터디 커밋
 	@ResponseBody
 	@RequestMapping(value = "/leadercommit.action", method = {RequestMethod.GET, RequestMethod.POST})
-	public String leaderCommit(Model model, HttpServletRequest request)
+	public int leaderCommit(Model model, HttpServletRequest request)
 	{
 		
 		IStudyDAO studyDao = sqlSession.getMapper(IStudyDAO.class);
 		
 		int result = studyDao.studyCommit("stuCode");
 		
-		return String.valueOf(result);
+		return result;
 	}
 	
 	

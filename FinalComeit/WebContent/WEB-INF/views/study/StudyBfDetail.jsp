@@ -126,7 +126,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
       $(".joinStudyBtn").click(function() 
       {
     	  var params = "stuCode=" +$(this).val();
-    	  
+    	
     	  $.ajax(
          {
              type : "POST"
@@ -135,7 +135,11 @@ body{font-family: 'Noto Sans KR', sans-serif;}
              , dataType : "text"
              , success : function(args)
              { 
-            	 alert(args);
+            	 
+            	 if (args == 1) 
+					alert("참가가 완료 되었습니다.")
+			 	 else
+			 		 alert("참가가 불가능한 방 입니다.")
             	 
              }
              , error : function(e) 
@@ -143,8 +147,11 @@ body{font-family: 'Noto Sans KR', sans-serif;}
               	alert(e.responseText);
              }
             
-         
+             
          });  
+    	  
+    	  reload();
+    	  
 	  });
       
       // 스터디장 커밋 버튼 클릭
@@ -218,6 +225,11 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 		
 	};
 	
+	// 다시 로드
+	function reload() 
+	{
+		location.reload();	
+	}
  
 </script>
 
@@ -258,6 +270,8 @@ body{font-family: 'Noto Sans KR', sans-serif;}
       <!-- 방 정보 -->
       <div class="col-md-8">
          <div class="row">
+         
+        <form method="post" id="infoForm" name="infoForm"> 
          <c:if test="${!empty studyInfo}" >
             <div class="col-md-8">
                <!-- 스터디방 제목 -->
@@ -341,7 +355,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
             </c:if>
             <!-- 스터디원 정보 -->
             
-            <form method="post" id="infoForm" name="infoForm">
+            
             <div class="col-md-4 ">
             <!-- 모달 -->
                      <div id="modal" class="searchModal">
