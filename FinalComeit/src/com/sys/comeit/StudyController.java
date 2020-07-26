@@ -33,16 +33,15 @@ public class StudyController
 	// ★
 	// 1. 후에 list랑 연결되면 GET 방식에서 POST 방식으로 바꾸기!
 	// 2. 사진 경로 가져오기(진짜 사진 등록되면)
-	@RequestMapping(value = "/studydetail.action", method =
-	{ RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/studydetail.action", method = {RequestMethod.GET, RequestMethod.POST})
 	public String studyBfInfo(Model model, HttpServletRequest request)
 	{
 		HttpSession session = request.getSession();
-
-		String mem_cd = (String) session.getAttribute("mem_cd");
-
+		
+		String mem_cd = (String)session.getAttribute("mem_cd");
+		
 		String view = null;
-
+		
 		IStudyDAO studyDao = sqlSession.getMapper(IStudyDAO.class);
 
 		String stuCd = request.getParameter("stu_cd");
@@ -53,34 +52,37 @@ public class StudyController
 		Date sysdate = new Date();
 		SimpleDateFormat date = new SimpleDateFormat("yyyy-mm-dd");
 		int strDateCompare = 0;
-
+		
 		// 스터디방 정보 조회
 		StudyDTO dto = studyDao.studyInfoSearch(stuCd);
 
+		
 		// 시작일 확정일 비교
 		if (dto != null)
 		{
 			String strDate = dto.getStr_date();
 			strDateCompare = date.format(sysdate).compareTo(strDate);
-
-			if (strDateCompare < 0) // 시작일 전
+			
+			if (strDateCompare < 0) 		// 시작일 전
 			{
 				view = "/WEB-INF/views/study/StudyBfDetail.jsp";
-			} else // 시작일 또는 시작일보다 큼
+			}
+			else 							// 시작일 또는 시작일보다 큼
 			{
 				StudyDTO search = new StudyDTO();
 				search.setJoin_mem_cd(mem_cd);
 				search.setStu_cd(stuCd);
-
-				// 참여 여부
+				
+				// 참여 여부 				
 				int joinMem = studyDao.stuJoinMemSearch(search);
-
-				if (dto.getCmt_date() != null && joinMem != 0)
+				
+				if (dto.getCmt_date()!=null && joinMem != 0) 
 					view = "/WEB-INF/views/study/StudyAfDetail.jsp";
-				else
+				else 
 					view = "/WEB-INF/views/study/StudyBfDetail.jsp";
 			}
-
+			
+			
 			// 스터디방 정보
 			model.addAttribute("studyInfo", dto);
 			// 스터디방 관심태그
@@ -95,173 +97,198 @@ public class StudyController
 			model.addAttribute("joinName", studyDao.studyJoinName(stuCd));
 			// 스터디 참여자 이미지
 			model.addAttribute("memImg", studyDao.memImgSearch(stuCd));
-
+			
+			
 		}
-
+		
+		
 		return view;
 	}
-
+	
 	// 스터디 참가
-	@RequestMapping(value = "/studyjoin.action", method =
-	{ RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	@RequestMapping(value = "/studyjoin.action", method = {RequestMethod.GET, RequestMethod.POST})
 	public String studyJoin(Model model, HttpServletRequest request)
 	{
 		String view = null;
-
+		
 		HttpSession session = request.getSession();
 		IStudyDAO studyDao = sqlSession.getMapper(IStudyDAO.class);
-
+		
 		// 멤버 코드
-		String mem_cd = (String) session.getAttribute("mem_cd");
+		String mem_cd = (String)session.getAttribute("mem_cd"); 
 		String stu_cd = request.getParameter("stuCode");
-
+		
 		// 스터디방 정보 조회
 		StudyDTO dto = studyDao.studyInfoSearch(stu_cd);
-
+		
 		// 오늘 날짜 구하기
 		Date sysdate = new Date();
 		SimpleDateFormat date = new SimpleDateFormat("yyyy-mm-dd");
 		int strDateCompare = 0;
-
+		
 		// 시작일 확정일 비교
 		if (dto != null)
 		{
 			String strDate = dto.getStr_date();
 			strDateCompare = date.format(sysdate).compareTo(strDate);
-
+			
 			int joinMem = studyDao.joinMemNum(stu_cd);
-
-			if (strDateCompare < 0 && joinMem < dto.getMem_num()) // 시작일 전 + 모집인원이 다 차지 않은 경우
+			
+			if (strDateCompare < 0 && joinMem < dto.getMem_num()) 	// 시작일 전 + 모집인원이 다 차지 않은 경우
 			{
 				StudyDTO stuDto = new StudyDTO();
 				stuDto.setStu_cd(stu_cd);
 				stuDto.setJoin_mem_cd(mem_cd);
-
+				
 				int insertRslt = studyDao.joinStudy(stuDto);
-
-				if (insertRslt == 1)
+				
+				if (insertRslt == 1) 
 					view = "참가가 완료되었습니다.";
-
-			} else if (strDateCompare >= 1) // 시작일이 지난 경우
-			{
+				
+			}
+			else if (strDateCompare >= 1) 						// 시작일이 지난 경우
+			{	
 				view = "이미 스터디를 시작한 방입니다. 참가가 불가능합니다.";
-			} else
+			} 							
+			else 
 			{
 				view = "인원이 모집되어 참가하실 수 없습니다.";
 			}
-
+			
 		}
-
+		
 		return view;
 	}
-
-	// 스터디장 모달창 정보
-	@RequestMapping(value = "/leaderinfomodal.action", method =
-	{ RequestMethod.GET, RequestMethod.POST })
+	
+	
+	// 스터디 커밋
+	@ResponseBody
+	@RequestMapping(value = "/leadercommit.action", method = {RequestMethod.GET, RequestMethod.POST})
+	public String leaderCommit(Model model, HttpServletRequest request)
+	{
+		
+		IStudyDAO studyDao = sqlSession.getMapper(IStudyDAO.class);
+		
+		int result = studyDao.studyCommit("stuCode");
+		
+		return String.valueOf(result);
+	}
+	
+	
+	
+	// 스터디장 모달창 정보 
+	@RequestMapping(value = "/leaderinfomodal.action", method = {RequestMethod.GET, RequestMethod.POST})
 	public String leaderInfoModal(Model model, HttpServletRequest request)
 	{
 		String view = null;
-
+		
 		IMemberDAO memberDao = sqlSession.getMapper(IMemberDAO.class);
-
+		
 		MemberDTO dto = new MemberDTO();
-
+		
 		dto = memberDao.memModalList(request.getParameter("leaderMemCd"));
 		ArrayList<MemberDTO> intTagSearch = memberDao.memIntTagSearch(request.getParameter("leaderMemCd"));
 		ArrayList<MemberDTO> stuTitle = memberDao.modalStudyList(request.getParameter("leaderMemCd"));
-
+		
 		String name = dto.getName();
 		String idntt = dto.getIdntt();
 		String memContent = dto.getMem_content();
 		String intTag = "/";
 		String joinStudy = "";
-
-		for (int i = 0; i < intTagSearch.size(); i++)
+	
+		
+		for (int i = 0; i < intTagSearch.size(); i++) 
 		{
 			intTag += intTagSearch.get(i).getInt_tag();
 			intTag += "/";
 		}
-
-		if (!stuTitle.isEmpty())
+		
+		if (!stuTitle.isEmpty()) 
 		{
 			joinStudy = "/";
-
-			for (int i = 0; i < stuTitle.size(); i++)
+			
+			for (int i = 0; i < stuTitle.size(); i++) 
 			{
 				joinStudy += stuTitle.get(i).getJoin_stu_title();
 				joinStudy += "/";
 			}
-		} else
+		}
+		else 
 		{
 			joinStudy += "없음";
 		}
 		// 테스트
 		// System.out.println(intTag);
-
+		
+		
 		model.addAttribute("name", name);
 		model.addAttribute("idntt", idntt);
 		model.addAttribute("memContent", memContent);
 		model.addAttribute("intTag", intTag);
 		model.addAttribute("joinStudy", joinStudy);
-
+		
 		view = "/WEB-INF/views/member/AjaxMemModal.jsp";
-
+		
 		return view;
 	}
-
+	
+	
 	// 스터디원 모달창 정보
-	@RequestMapping(value = "/meminfomodal.action", method =
-	{ RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/meminfomodal.action", method = {RequestMethod.GET, RequestMethod.POST})
 	public String memInfoModal(Model model, HttpServletRequest request)
 	{
 		String view = null;
-
+		
 		IMemberDAO memberDao = sqlSession.getMapper(IMemberDAO.class);
-
+		
 		MemberDTO dto = new MemberDTO();
-
+		
 		dto = memberDao.memModalList(request.getParameter("joinMemCd"));
 		ArrayList<MemberDTO> intTagSearch = memberDao.memIntTagSearch(request.getParameter("joinMemCd"));
 		ArrayList<MemberDTO> stuTitle = memberDao.modalStudyList(request.getParameter("joinMemCd"));
+		
 
 		String name = dto.getName();
 		String idntt = dto.getIdntt();
 		String memContent = dto.getMem_content();
 		String intTag = "/";
 		String joinStudy = "";
-
-		for (int i = 0; i < intTagSearch.size(); i++)
+	
+		
+		for (int i = 0; i < intTagSearch.size(); i++) 
 		{
 			intTag += intTagSearch.get(i).getInt_tag();
 			intTag += "/";
 		}
-
-		if (!stuTitle.isEmpty())
+		
+		if (!stuTitle.isEmpty()) 
 		{
 			joinStudy = "/";
-
-			for (int i = 0; i < stuTitle.size(); i++)
+			
+			for (int i = 0; i < stuTitle.size(); i++) 
 			{
 				joinStudy += stuTitle.get(i).getJoin_stu_title();
 				joinStudy += "/";
 			}
-		} else
+		}
+		else 
 		{
 			joinStudy += "없음";
 		}
 		// 테스트
 		// System.out.println(intTag);
-
+		
 		model.addAttribute("name", name);
 		model.addAttribute("idntt", idntt);
 		model.addAttribute("memContent", memContent);
 		model.addAttribute("intTag", intTag);
 		model.addAttribute("joinStudy", joinStudy);
-
+		
 		view = "/WEB-INF/views/member/AjaxMemModal.jsp";
-
+		
 		return view;
-
+		
 	}
 
 	// 수진

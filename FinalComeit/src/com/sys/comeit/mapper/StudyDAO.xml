@@ -8,11 +8,8 @@
    <!-- 스터디방 정보 조회 -->
 	<select id="studyInfoSearch"
 		resultType="com.sys.comeit.StudyDTO">
-		SELECT STU_CD,CRT_DATE ,TITLE,STR_DATE,MEM_NUM, CONTENT, CMT_DATE,
-		STU_JOIN_CD
-		, STU_HIST_CD, APNTM_DATE, AREA_NAME, SPC_AREA_NAME
-		, MEET_TERM, IDNTT_TYPE, LV, CAT_NAME, LEADER_MEM_CD, LEADER_ID
-		, LEADER_NAME, SCRT_NUM, CRT_MEM_CD, END_DATE
+		SELECT DISTINCT STU_CD,CRT_DATE ,TITLE,STR_DATE,MEM_NUM, CONTENT, CMT_DATE, AREA_NAME, SPC_AREA_NAME
+		, MEET_TERM, IDNTT_TYPE, LV, CAT_NAME, SCRT_NUM, CRT_MEM_CD, END_DATE, MEM_NUM
 		FROM VIEW_STU_INFO
 		WHERE STU_CD=#{stu_cd}
 	</select>
@@ -74,15 +71,46 @@
 		                 WHERE STU_CD = #{stu_cd}
 		                   AND EXT_NAME IS NULL)
 	</select>
+	
+	<!-- 스터디방 참여 여부 -->
+	<select id="stuJoinMemSearch" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS COUNT
+		FROM VIEW_MY_STU
+		WHERE MEM_CD = #{join_mem_cd}
+  		  AND STU_CD = #{stu_cd}
+  		  AND EXT_NAME IS NULL
+	</select>	
+   
+   <!-- 전체 참가중인 스터디원 조회 -->
+   <select id="joinMemNum" resultType="java.lang.Integer">
+	   	SELECT COUNT(*) AS COUNT
+		FROM TBL_STU_JOIN SJ, TBL_STU_EXT SE
+		WHERE SJ.STU_JOIN_CD = SE.STU_JOIN_CD(+)
+		  AND EXT_DATE IS NULL
+		  AND STU_CD = #{stu_cd}
+   </select>
+   
+   <!-- 스터디 참가  -->
+   <insert id="joinStudy">
+	   	INSERT INTO TBL_STU_JOIN(STU_JOIN_CD, STU_CD, MEM_CD, JOIN_DATE) 
+		VALUES('STJOI'||SEQ_STU_JOIN.NEXTVAL, #{stu_cd}, #{join_mem_cd}, SYSDATE)
+   </insert>
+   
+   <!-- 스터디 커밋 -->
+   <update id="studyCommit">
+   		UPDATE TBL_STU
+		SET CMT_DATE = TO_DATE(SYSDATE, 'yyyy-mm-dd')
+		WHERE STU_CD = #{stu_cd}
+   </update>
+   
    
    <!-- 수진 추가 -->
    <!-- 전체 스터디방 조회 -->
-   <!-- 전체 스터디방 조회 -->
    <select id="studyList" resultType="com.sys.comeit.StudyDTO">
-      SELECT STU_CD, CRT_DATE, TITLE, STR_DATE, MEM_NUM, CMT_DATE, AREA_NAME, SPC_AREA_NAME, MEET_TERM, IDNTT_TYPE, LV, CAT_NAME, SCRT_NUM, END_DATE, IMG_URL
+      SELECT STU_CD, CRT_DATE, TITLE, STR_DATE, MEM_NUM, CMT_DATE, AREA_NAME, SPC_AREA_NAME, MEET_TERM, IDNTT_TYPE, LV, CAT_NAME, SCRT_NUM, END_DATE
       FROM VIEW_STU_LIST
       WHERE END_DATE <![CDATA[>]]> SYSDATE
-      ORDER BY STU_CD DESC
+      ORDER BY CRT_DATE DESC
    </select>
    
    <!-- 전체 스터디방 개수 조회 -->
@@ -131,7 +159,7 @@
 		      , #{mem_num}
 		      , #{content}
 		      , #{img_url, jdbcType=VARCHAR}
-		      , #{scrt_num, jdbcType=CHAR}
+		      , #{scrt_num, jdbcType=VARCHAR}
 		      , #{stu_cd, mode=OUT, jdbcType=VARCHAR}
 		   )
 		}
@@ -168,49 +196,11 @@
 		VALUES('SPRDY'||SEQ_STU_PRG_DAY.NEXTVAL, #{stu_cd}, #{stu_day_cd})
 	</insert>
 	
-	<!-- 참가중인 스터디 개수 -->
-   	<select id="memStudyCount" resultType="java.lang.Integer">
-		SELECT COUNT(*) AS STU_COUNT
-		FROM VIEW_MY_STU
-		WHERE MEM_CD = #{mem_cd}
-	</select>
-	
-	<!-- 페이징 처리 -->
-	<!-- 검색완료된 스터디방 개수 조회 studySearchCount() -->
-	<select id="studySearchCount" resultType="java.lang.Integer">
-		SELECT COUNT(*) AS COUNT
-		FROM VIEW_STU_LIST
-		WHERE END_DATE <![CDATA[>]]> SYSDATE
-		<if test="searchValue != null and !searchValue.equals('')">
-			WHERE #{searchKey} LIKE '%'||#{searchValue}||'%'
-		</if>
-	</select>
-	
-	<select id="getListData" resultType="com.sys.comeit.StudyDTO">
-		SELECT *
-		FROM
-		(
-		    SELECT ROWNUM AS RNUM
-		     , DATA.* 
-		    FROM 
-		    (
-		        SELECT STU_CD, CRT_DATE, TITLE, STR_DATE, MEM_NUM, CMT_DATE, AREA_NAME, SPC_AREA_NAME
-		             , MEET_TERM, IDNTT_TYPE, LV, CAT_NAME, SCRT_NUM, END_DATE, IMG_URL
-		        FROM VIEW_STU_LIST
-		        <choose>
-		        	<when test="searchValue != null">
-		        		WHERE TITLE LIKE '%'||#{searchValue}||'%'
-				        ORDER BY STU_CD DESC
-				    ) DATA
-				)
-				WHERE RNUM <![CDATA[>]]>= #{start} AND RNUM <![CDATA[<]]>=#{end}
-		        	</when>
-		        	<otherwise>
-		        		ORDER BY STU_CD DESC
-				    ) DATA
-				)
-				WHERE RNUM <![CDATA[>]]>= #{start} AND RNUM <![CDATA[<]]>=#{end}
-		        	</otherwise>
-		        </choose>
-	</select>
+	<!-- 로그인 아이디로 회원코드 알아내기
+	<select id="findMemCd" resultType="java.lang.String">
+		SELECT MEM_CD
+		FROM VIEW_MEM_MY
+		WHERE ID = #{id}
+   </select> -->
+   
 </mapper>

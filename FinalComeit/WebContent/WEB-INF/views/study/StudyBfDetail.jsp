@@ -45,11 +45,13 @@ body{font-family: 'Noto Sans KR', sans-serif;}
     	    	  var infoData = args.split('-');
     	    	 
     	    	  // 정보 담기
+    	    	  
 				  $("#modalName").text(infoData[0]);
 		    	  $("#modalIdntt").text(infoData[1]);
 		    	  $("#memContent").text(infoData[2]); 
 		    	  $("#modalTag").text(infoData[3]);
 		    	  $("#memJoinStu").text(infoData[4]);
+		    	  
 				  
 		    	  // 모달창 보여주기
 		    	  $("#modal").show();
@@ -145,10 +147,56 @@ body{font-family: 'Noto Sans KR', sans-serif;}
          });  
 	  });
       
+      // 스터디장 커밋 버튼 클릭
+      $(".commitBtn").click(function() 
+      {
+			var params = "stuCode=" + $(this).val();
+			
+			var now = new Date();
+			
+			var today = now.getFullYear() + "-" + (now.getMonth() + 1) + "-" + now.getDate();
+			
+			
+			if (condition) {
+				
+			}
+			
+			$.ajax(
+			{
+				 type : "POST"
+	             , url : "leadercommit.action"
+	             , data : params
+	             , dataType : "text"
+	             , success : function(data)
+	             { 
+	            	 alert(data);
+	            	 
+	            	 if (data == 1) 
+	            	 {
+	            		 alert("확정이 완료되었습니다."); 
+	            		 $('.commitBtn').attr('disabled', true);
+	            	 }
+	            	 else
+	            	 {
+	            		 alert("확정이 실패되었습니다.");
+	            	 }
+	            		 
+	            	 
+	             }
+	             , error : function(e) 
+	             {
+	              	alert(e.responseText);
+	             }
+			});
+			
+	  });
+      
       
       $(".outBtn").click(function() 
       {
             var outRsn = prompt("불합리한 방출은 사이트 이용에 제한이 있을 수 있습니다.\n방출 사유를 입력하세요.");
+            
+            
             
       });
       
@@ -215,12 +263,22 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                <!-- 스터디방 제목 -->
                <div class="stuTitle">
                   <div class="title">
-                     <h1>${studyInfo.title }</h1>
-                     
+                     <h2>${studyInfo.title }</h2>
                   </div>
                   <!-- 스터디장 : 커밋 , 회원 : 참가, 스터디원 : 퇴장 으로 노출 -->
                   <div class="jrBtn pull-right">
+                   	<c:if test="${sessionScope.mem_cd eq leaderName.leader_mem_cd && empty studyInfo.cmt_date}">
+                   	<input type="hidden" name="" id="strDate" value="${studyInfo.str_date }"/>
+                  	<button type="button" class="btn btn-lg btn-primary commitBtn" value="${studyInfo.stu_cd }">COMMIT</button>
+                  	</c:if>
+                  	<c:if test="${sessionScope.mem_cd eq leaderName.leader_mem_cd && not empty studyInfo.cmt_date}">
+                  	<button type="button" class="btn btn-lg btn-primary commitBtn" value="${studyInfo.stu_cd }" disabled="disabled">COMMIT</button>
+                  	</c:if>
+                  	
+                  	
+                  	 <c:if test="${sessionScope.mem_cd ne leaderName.leader_mem_cd }">
                   	<button type="button" class="btn btn-lg btn-primary joinStudyBtn" value="${studyInfo.stu_cd }">참가</button>
+                  	</c:if>
                      <img src="<%=cp %>/assets/images/report.png" alt="" class="report" onclick=""/>
                   </div><!-- end .button -->
                </div><!-- end.stuTitle -->
@@ -317,38 +375,35 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                            </div><!-- end .userStu -->
                           
                            <div class="out">
+                            <c:if test="${sessionScope.mem_cd eq leaderName.leader_mem_cd }">
                               <input type="button" value="방출" class="btn btn-sm outBtn" />
+                            </c:if>
                            </div><!-- end .out -->
                      </div><!-- end .search-modal-content -->                     
                      </div><!-- end .searchModal -->   
             
                <div class="stuMem">
                
-               
-                  <!-- <h3>스터디장</h3> -->
+               <!-- <h3>스터디장</h3> -->
                   <div class="memLeader" id="member1">
+                  
+                  
+                 <div class="leaderImg">
+				
+					<c:set var="imgCount" value="${imgCount=0 }"/>
                      <c:forEach var="memImg" items="${memImg }">
-                        
                         <c:if test="${memImg.join_mem_cd eq leaderName.leader_mem_cd}">
-                        
-                              	<div class="leaderImg">
-                              	
-                              		<c:choose>
-                              		<c:when test="${empty memImg.mem_img  }">
-                              		<img src="<%=cp %>/assets/images/basic.png" alt="" class="img-circle memImg" />
-                              		</c:when>
-                              		<c:when test="${not empty memImg.mem_img }">
-                              		<img src="${memImg.mem_img }" alt="" class="img-circle memImg" />
-                              		</c:when>
-                              		
-                              		</c:choose>
-                                    
-                                    
-                                 </div><!-- end .leaderImg -->
-                        
+                              <c:set var="imgCount" value="${imgCount=1 }"/>	
+                              	<img src="${memImg.mem_img }" alt="" class="img-circle memImg" />
                         </c:if>
-                       
                      </c:forEach>
+                     
+                     <c:if test="${imgCount==0 }" >
+                     	<img src="<%=cp %>/assets/images/basic.png" alt="" class="img-circle memImg" />
+                     </c:if>
+                   </div><!-- end .leaderImg -->  
+                     
+                     
                      
                      <div class="leaderInfo">
                         <span class="glyphicon glyphicon-ok ok"></span>
@@ -362,13 +417,11 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                   </div><!-- end .memLeader -->
                   
                   
-                  
                <!--    <h3>스터디원</h3> -->
-                  <c:forEach var="joinName" items="${joinName }">
+                 <c:forEach var="joinName" items="${joinName }">
                      <c:if test="${joinName.stu_join_name ne leaderName.leader_name}">
                         <div class="memLeader" id="">
-                           
-                           <c:forEach var="memImg" items="${memImg }">
+                          <c:forEach var="memImg" items="${memImg }">
                               <c:if test="${memImg.join_mem_cd eq joinName.join_mem_cd}">
                               
                               <div class="leaderImg">
@@ -387,6 +440,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                               
                               </c:if>
                            </c:forEach>
+                           
                            <div class="leaderInfo">
                               <h4>Study Member</h4><br>
                               <span class="name">${joinName.stu_join_name }</span>
@@ -397,9 +451,8 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                            </div><!-- end .leaderInfo -->
                         </div><!-- end .memLeader -->
                      </c:if>
+                     
                   </c:forEach>
-
-                  
                </div><!-- end .stuMem -->
       		
                

@@ -43,4 +43,6 @@ public interface IStudyDAO
 	public int studySearchCount(StudyDTO dto);	// 검색완료된 스터디방 개수
 	
 	public List<StudyDTO> getListData(StudyDTO dto);	// 검색완료된 스터디방
+	
+	public int studyCommit(String stu_cd);		// 스터디 커밋
 }

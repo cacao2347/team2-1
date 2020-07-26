@@ -11,7 +11,7 @@
 
 .stuKey > .icKey
 {
-	color: #06066e;
+	color: #077e07;
 }
 
 .stuLevel > .icLv
@@ -225,7 +225,7 @@ body .padding
 }
 
 
-.title > h1 , .stuArea > h4 , .stuMem > h3 , .leaderInfo > h4
+.title > h2 , .stuArea > h4 , .stuMem > h3 , .leaderInfo > h4
 , .stuTerm > h4 , .stuKey > h4 , .stuLevel > h4
 , .stuCurr > h4, .leaderInfo > .name
 {

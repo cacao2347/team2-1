@@ -60,12 +60,6 @@ $(document).ready(function ()
 		            e.stopPropagation();
 		          });
 		          
-		          
-		          $("#histBtn").click(function() 
-		          {
-						
-				  });
-		          
 	    	 
 			  }
     	  	  , error : function(e) 
@@ -149,46 +143,6 @@ $(document).ready(function ()
 		
 	};
 	
-	
-
-	
-
-	/* 출석 차트 */
-	google.charts.load('current', {packages: ['corechart', 'bar']});
-	google.charts.setOnLoadCallback(drawBasic);
-
-	function drawBasic() {
-
-        var data = google.visualization.arrayToDataTable([
-        ['Element', 'Density', { role: '#1457bc' }],
-        ['김홍경', 10, '#1457bc'],            // RGB value
-        ['이채빈', 10.49, '#1457bc'],            // English color name
-        ['강수경', 19.30, '#1457bc'],
-
-      ['김태균', 21.45, 'color: #1457bc' ], // CSS-style declaration
-      ['정민화', 21.45, 'color: #1457bc' ],
-     ]);
-
-     var options = {
-       title: 'Motivation Level Throughout the Day',
-       hAxis: {
-         title: 'Time of Day',
-         format: 'h:mm a',
-         viewWindow: {
-           min: [7, 15, 0],
-           max: [10, 30, 0]
-         }
-       },
-       vAxis: {
-         title: 'Rating (scale of 1-10)'
-       }
-     };
-
-     var chart = new google.visualization.ColumnChart(
-       document.getElementById('chart_div'));
-
-     chart.draw(data, options);
-   }
 
 	// 캘린더
 	document.addEventListener('DOMContentLoaded', function() {
@@ -312,12 +266,17 @@ $(document).ready(function ()
                <!-- 스터디방 제목 -->
                <div class="stuTitle">
                   <div class="title">
-                     <h1>${studyInfo.title }</h1>
+                     <h2>${studyInfo.title }</h2>
                      
                   </div>
                   <!-- 스터디장 : 커밋 , 회원 : 참가, 스터디원 : 퇴장 으로 노출 -->
                   <div class="jrBtn pull-right">
-                     <input type="button" value="참가" class="btn btn-lg btn-primary" />
+                     <c:if test="${sessionScope.mem_cd eq leaderName.leader_mem_cd }">
+                  	 <button type="button" class="btn btn-lg btn-primary commitBtn" value="${studyInfo.stu_cd }" disabled="disabled">COMMIT</button>
+                  	</c:if>
+                  	 <c:if test="${sessionScope.mem_cd ne leaderName.leader_mem_cd }">
+                  	<button type="button" class="btn btn-lg btn-primary joinStudyBtn" value="${studyInfo.stu_cd }">참가</button>
+                  	</c:if>
                      <img src="<%=cp %>/assets/images/report.png" alt="" class="report" onclick=""/>
                   </div><!-- end .button -->
                </div><!-- end.stuTitle -->
@@ -377,12 +336,6 @@ $(document).ready(function ()
             
                </div><!-- end .stuInfo -->
                
-               <!-- 출석 차트 -->
-               <div style="width: 800px;">
-               
-			  <div id="chart_div" class="attChart"></div>
-			</div>		
-               
             </div><!-- end .col-md-8 -->
             </c:if>
             <!-- 스터디원 정보 -->
@@ -420,25 +373,38 @@ $(document).ready(function ()
                               <span class="joinStu" id="memJoinStu"></span>
                            </div><!-- end .userStu -->
                           
+                          
+                          <c:if test="${sessionScope.mem_cd eq  leaderName.leader_mem_cd}">
                            <div class="out">
                               <input type="button" value="방출" class="btn btn-sm outBtn" />
                               <input type="button" class="btn btn-sm btn-primary manBtn" id="histBtn" value="위임" />
                            </div><!-- end .out -->
+                          </c:if>
+                           
                      </div><!-- end .search-modal-content -->                     
                      </div><!-- end .searchModal -->   
             
                <div class="stuMem">
                
-               
-                  <!-- <h3>스터디장</h3> -->
-                  <div class="memLeader" id="member1">
+          <!-- <h3>스터디장</h3> -->
+          <div class="memLeader" id="member1">
+                  
+                  
+				<div class="leaderImg">
+				
+					<c:set var="imgCount" value="${imgCount=0 }"/>
                      <c:forEach var="memImg" items="${memImg }">
                         <c:if test="${memImg.join_mem_cd eq leaderName.leader_mem_cd}">
-                           <div class="leaderImg">
-                              <img src="<%=cp %>${memImg.mem_img }" alt="" class="img-circle memImg" />
-                           </div><!-- end .leaderImg -->
+                              <c:set var="imgCount" value="${imgCount=1 }"/>	
+                              	<img src="${memImg.mem_img }" alt="" class="img-circle memImg" />
                         </c:if>
                      </c:forEach>
+                     
+                     <c:if test="${imgCount==0 }" >
+                     	<img src="<%=cp %>/assets/images/basic.png" alt="" class="img-circle memImg" />
+                     </c:if>
+                   </div><!-- end .leaderImg -->  
+                     
                      
                      <div class="leaderInfo">
                         <span class="glyphicon glyphicon-ok ok"></span>
@@ -452,19 +418,30 @@ $(document).ready(function ()
                   </div><!-- end .memLeader -->
                   
                   
-                  
                <!--    <h3>스터디원</h3> -->
                   <c:forEach var="joinName" items="${joinName }">
                      <c:if test="${joinName.stu_join_name ne leaderName.leader_name}">
                         <div class="memLeader" id="">
-                           
-                           <c:forEach var="memImg" items="${memImg }">
+                          <c:forEach var="memImg" items="${memImg }">
                               <c:if test="${memImg.join_mem_cd eq joinName.join_mem_cd}">
-                                 <div class="leaderImg">
-                                    <img src="<%=cp %>${memImg.mem_img }" alt="" class="img-circle memImg" />
+                              
+                              <div class="leaderImg">
+                              
+                                    <c:choose>
+                              		<c:when test="${empty memImg.mem_img  }">
+                              		<img src="<%=cp %>/assets/images/basic.png" alt="" class="img-circle memImg" />
+                              		</c:when>
+                              		<c:when test="${not empty memImg.mem_img }">
+                              		<img src="${memImg.mem_img }" alt="" class="img-circle memImg" />
+                              		</c:when>
+                              		
+                              		</c:choose>
+                                    
                                  </div><!-- end .leaderImg -->
+                              
                               </c:if>
                            </c:forEach>
+                         
                            <div class="leaderInfo">
                               <h4>Study Member</h4><br>
                               <span class="name">${joinName.stu_join_name }</span>
@@ -475,17 +452,17 @@ $(document).ready(function ()
                            </div><!-- end .leaderInfo -->
                         </div><!-- end .memLeader -->
                      </c:if>
+                     
                   </c:forEach>
-
-                  
                </div><!-- end .stuMem -->
       		
-               
-               <!-- 스터디장에게만 보일 수정 / 폐쇄 버튼 -->
+               <!-- 
+               관리자에게만 보일 폐쇄 버튼
                <div class="roomBtn">
-                  <input type="button" value="방 정보 수정" class="btn modBtn" />
                   <input type="button" value="폐쇄" class="btn delBtn" />
-               </div><!-- end .roomBtn -->
+               </div>end .roomBtn
+                -->
+               
             </div>
             
             </form>
