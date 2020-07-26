@@ -487,7 +487,10 @@ $(document).ready(function ()
 		<div class="col-md-8">
 			<div class="row">
 				<div class="col-md-12">
-				<c:import url="StudyTab.jsp"></c:import>
+				
+				<c:import url="StudyTab.jsp">
+					<c:param name="stu_cd" value="${studyInfo.stu_cd }"></c:param>
+				</c:import>
 				
 				</div>
 			</div>

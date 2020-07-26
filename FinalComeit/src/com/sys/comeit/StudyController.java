@@ -163,7 +163,9 @@ public class StudyController
 		
 		IStudyDAO studyDao = sqlSession.getMapper(IStudyDAO.class);
 		
-		int result = studyDao.studyCommit("stuCode");
+		String stu_cd = request.getParameter("stuCode");
+		
+		int result = studyDao.studyCommit(stu_cd);
 		
 		return result;
 	}

@@ -159,15 +159,6 @@ body{font-family: 'Noto Sans KR', sans-serif;}
       {
 			var params = "stuCode=" + $(this).val();
 			
-			var now = new Date();
-			
-			var today = now.getFullYear() + "-" + (now.getMonth() + 1) + "-" + now.getDate();
-			
-			
-			if (condition) {
-				
-			}
-			
 			$.ajax(
 			{
 				 type : "POST"
@@ -195,6 +186,8 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 	              	alert(e.responseText);
 	             }
 			});
+			
+			 reload();
 			
 	  });
       
@@ -282,7 +275,6 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                   <!-- 스터디장 : 커밋 , 회원 : 참가, 스터디원 : 퇴장 으로 노출 -->
                   <div class="jrBtn pull-right">
                    	<c:if test="${sessionScope.mem_cd eq leaderName.leader_mem_cd && empty studyInfo.cmt_date}">
-                   	<input type="hidden" name="" id="strDate" value="${studyInfo.str_date }"/>
                   	<button type="button" class="btn btn-lg btn-primary commitBtn" value="${studyInfo.stu_cd }">COMMIT</button>
                   	</c:if>
                   	<c:if test="${sessionScope.mem_cd eq leaderName.leader_mem_cd && not empty studyInfo.cmt_date}">
