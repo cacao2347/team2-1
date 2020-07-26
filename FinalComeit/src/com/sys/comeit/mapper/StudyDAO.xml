@@ -5,7 +5,7 @@
   
 <mapper namespace="com.sys.comeit.IStudyDAO">
 
-   <!-- 스터디방 정보 조회 -->
+    <!-- 스터디방 정보 조회 -->
 	<select id="studyInfoSearch"
 		resultType="com.sys.comeit.StudyDTO">
 		SELECT DISTINCT STU_CD,CRT_DATE ,TITLE,STR_DATE,MEM_NUM, CONTENT, CMT_DATE, AREA_NAME, SPC_AREA_NAME
