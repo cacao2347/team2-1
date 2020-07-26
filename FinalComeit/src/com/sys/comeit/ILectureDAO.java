@@ -17,12 +17,12 @@ public interface ILectureDAO
 	public ArrayList<LectureDTO> lecList();			// 강의 리스트
 	public ArrayList<LectureDTO> lecTagList();		// 모든 강의 키워드들
 	
-	public ArrayList<LectureDTO> lecIntTagSearch(String lec_cd);		// 강의 관심 키워드 태그 조회
-	public ArrayList<LectureDTO> lecHrDaySearch(String lec_cd);			// 강의 요일, 시간 키워드 태그 조회 
-	
 	public int lecCount();						// 강의방 개수 조회
 	
 	public int lecSearchCount(LectureDTO dto);	// 검색완료된 스터디방 개수
 	
 	public List<LectureDTO> getListData(LectureDTO dto);	// 검색완료된 스터디방
+	
+	public ArrayList<LectureDTO> lecHrDaySearch();	// 모든 요일 빼오는 리스트
+	
 }

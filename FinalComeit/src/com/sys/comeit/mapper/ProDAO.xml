@@ -9,5 +9,11 @@
 		SELECT PROF_CD, MEM_CD, BANK_CD, CAREER, CRT_DATE, ACNT_NUM
 		FROM TBL_PROF
 	</select>
+	
+	<select id="getProfcd" resultType="java.lang.String">
+		SELECT PROF_CD
+		FROM TBL_PROF
+		WHERE MEM_CD = #{mem_cd}
+	</select>
 		
 </mapper>

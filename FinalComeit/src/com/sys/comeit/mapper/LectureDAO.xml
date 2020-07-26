@@ -76,12 +76,17 @@
 		WHERE LEC_CD = #{lec_cd}
 	</select>
 	
+	<!-- 모든 스터디방의 관심 키워드 -->
+   <select id="lecTagList" resultType="com.sys.comeit.LectureDTO">
+		SELECT LEC_CD, INT_TAG
+		FROM VIEW_LEC_KEYWORD
+   </select>
+   
 	<!-- 강의 요일, 시간 조회 -->
 	<select id="lecHrDaySearch" resultType="com.sys.comeit.LectureDTO">
 		SELECT PT.LEC_CD AS LEC_CD, D.DAY_NAME AS DAY_NAME, PT.STR_HRS AS STR_HRS, PT.END_HRS AS END_HRS
 		FROM TBL_LEC_PRG_TIME PT, TBL_DAY D
 		WHERE PT.DAY_CD = D.DAY_CD(+)
-		AND LEC_CD = #{lec_cd}
 	</select>
 	
 	<!-- 총 스터디방 개수 조회 count() -->
@@ -129,4 +134,5 @@
 		        	</otherwise>
 		        </choose>
 	</select>
+	
 </mapper>

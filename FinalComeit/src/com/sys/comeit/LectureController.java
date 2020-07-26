@@ -6,6 +6,7 @@ import java.net.URLEncoder;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -152,19 +153,22 @@ public class LectureController
 	public String memberJoin(Model model, HttpServletRequest request) throws UnsupportedEncodingException
 	{
 		String view = null;
-
+		
 		IAreaDAO areaDao = sqlSession.getMapper(IAreaDAO.class); // 지역
 		ILectureDAO lecDao = sqlSession.getMapper(ILectureDAO.class); // 스터디 정보
 		
-		String lec_cd = "LEC1004";
+		
+		//String lec_cd = 
+		//System.out.println(lec_cd);
 		
 		model.addAttribute("area", areaDao.areaList());
 
 		model.addAttribute("lec", lecDao.lecList()); // 실제 스터디 리스트
 		model.addAttribute("count", lecDao.lecCount());
-
-		model.addAttribute("lecTags", lecDao.lecIntTagSearch(lec_cd)); // 하나의 스터디의 모든 키워드
-		model.addAttribute("lecHrDays", lecDao.lecHrDaySearch(lec_cd));  // 하나의 스터디의 요일, 시간
+		
+		
+		model.addAttribute("lecTags", lecDao.lecTagList()); // 하나의 스터디의 모든 키워드
+		model.addAttribute("lecHrDays", lecDao.lecHrDaySearch());  // 하나의 스터디의 요일, 시간
 		
 		// 페이징 처리 --------------------------------------
 

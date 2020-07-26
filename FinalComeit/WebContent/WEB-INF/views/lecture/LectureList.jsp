@@ -334,21 +334,29 @@ body
 									<h5 class="study-date">${lecs.str_date} ~ ${lecs.end_date}</h5>
 									<h5 class="study-term">${lecs.lec_term}</h5>
 								</div>
-								<!-- sleeping하고싶다 -->
+								
 								<ul class="study-info">
 									<li class="pencil"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> ${lecs.name }</li>
 									<li class="location"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> ${lecs.area_name } ${lecs.spc_area_name }</li>
 									<li class="numb"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> ${lecs.min_mem }~${lecs.max_mem }명</li>
-									<c:forEach var="lecHrDayss" items="${lecHrDays }">
+									
+								</ul>
+								
+								<ul class="study-info">
+								<c:forEach var="lecHrDayss" items="${lecHrDays }">
+									<c:if test="${lecs.lec_cd eq lecHrDayss.lec_cd }">
 									<li class="day"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>${lecHrDayss.day_name}</li>
 									<li class="lec_time"><span class="glyphicon glyphicon-time" aria-hidden="true"></span>${lecHrDayss.str_hrs}시 ~ ${lecHrDayss.end_hrs}시</li>
+									</c:if>
 									</c:forEach>
 								</ul>
 
 								
 								<ul class="list-study-tags">
 								<c:forEach var="lecTagss" items="${lecTags }">
+								<c:if test="${lecs.lec_cd eq lecTagss.lec_cd }">
 									<li class="stack-item">${lecTagss.int_tag}</li>
+								</c:if>
 								</c:forEach>
 								</ul>
 
