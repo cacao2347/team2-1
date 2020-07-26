@@ -7,8 +7,17 @@ public class StudyNoticeDTO
 	// , 게시글코드, 부모게시글코드, 삭제일, 스터디방 코드
 	private String row_num, title, stu_join_cd, stu_join_name, crt_date, hits, content, re_count;
 	private String stu_ntc_cd, stu_ntc_pnt_cd, del_date, stu_cd;
+	private String mem_cd;
 	
 	
+	public String getMem_cd()
+	{
+		return mem_cd;
+	}
+	public void setMem_cd(String mem_cd)
+	{
+		this.mem_cd = mem_cd;
+	}
 	public String getStu_cd()
 	{
 		return stu_cd;

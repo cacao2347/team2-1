@@ -25,7 +25,7 @@ public class StudyNoticeController
 
 	// 스터디 리스트 화면 노출하기
 	@RequestMapping(value = "/studynoticelist.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public String memberJoin(Model model, HttpServletRequest request) throws UnsupportedEncodingException
+	public String studyNoticeList(Model model, HttpServletRequest request) throws UnsupportedEncodingException
 	{
 		String view = null;
 
@@ -33,13 +33,23 @@ public class StudyNoticeController
 		
 		String stu_cd = request.getParameter("stu_cd");
 		
-		model.addAttribute("studyNoticeList", studyNoticeDao.studyNoticeList(stu_cd));
+		System.out.println("받은 스터디코드" + stu_cd);
+		
+		//model.addAttribute("studyNoticeList", studyNoticeDao.studyNoticeList(stu_cd));
+		
+		ArrayList<StudyNoticeDTO> studyNoticeList = studyNoticeDao.studyNoticeList(stu_cd);
+		
+		model.addAttribute("studyNoticeList", studyNoticeList);
 		
 		
 
-		view = "WEB-INF/views/study/StudyNoticeList.jsp";
+		view = "WEB-INF/views/study/AjaxStudyNoticeList.jsp";
 
 		return view;
 	}
+	
+	
+	
+	
 
 }

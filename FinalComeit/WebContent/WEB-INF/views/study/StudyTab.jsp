@@ -4,6 +4,9 @@
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
 %>
+<%
+	String studyCode = request.getParameter("stu_cd");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,11 +60,13 @@
 
         <div id="tab1" class="tab_content">
             <!--Content-->
-            <c:import url="StudyNoticeList.jsp"></c:import>
+            <c:import url="StudyNoticeList.jsp">
+            	<c:param name="stu_cd" value="<%=studyCode %>"></c:param>
+            </c:import>
         </div>
 
         <div id="tab2" class="tab_content">
-           <!--Content-->
+           <!--Content--> 
            <c:import url="StudyDateList.jsp"></c:import>
         </div>
 

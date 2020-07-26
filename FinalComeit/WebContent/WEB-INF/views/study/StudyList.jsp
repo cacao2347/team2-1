@@ -387,11 +387,11 @@ body
 										<h4 class="study-title" style="font-weight: bold;">
 										
 										<c:choose>
-										<c:when test="${empty id }">
+										<c:when test="${empty sessionScope.id }">
 											<button type="button" class="btn btn-link bFtitleBtn" value="${studys.stu_cd }">[${studys.cat_name }] ${studys.title }</button>
 										</c:when>
 										
-										<c:when test="${not empty id }">
+										<c:when test="${not empty sessionScope.id }">
 											<button type="button" class="btn btn-link titleBtn" value="${studys.stu_cd }">[${studys.cat_name }] ${studys.title }</button>
 										</c:when>
 										</c:choose>
@@ -449,11 +449,11 @@ body
 						<div class="create">
 							<c:choose>
 							
-							<c:when test="${empty id }">
+							<c:when test="${empty sessionScope.id }">
 								<button type="button" id="bFcreateBtn" class="btn btn-primary btn-sm createBtn">스터디방 개설</button>
 							</c:when>
 							
-							<c:when test="${not empty id }">
+							<c:when test="${not empty sessionScope.id }">
 								<button type="button" id="createBtn" class="btn btn-primary btn-sm createBtn">스터디방 개설</button>
 							</c:when>
 							</c:choose>

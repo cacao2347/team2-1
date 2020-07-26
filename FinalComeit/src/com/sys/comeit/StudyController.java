@@ -292,7 +292,7 @@ public class StudyController
 	// 스터디 리스트 화면 노출하기
 	@RequestMapping(value = "/studylist.action", method =
 	{ RequestMethod.GET, RequestMethod.POST })
-	public String memberJoin(Model model, HttpServletRequest request) throws UnsupportedEncodingException
+	public String studyList(Model model, HttpServletRequest request) throws UnsupportedEncodingException
 	{
 		String view = null;
 
