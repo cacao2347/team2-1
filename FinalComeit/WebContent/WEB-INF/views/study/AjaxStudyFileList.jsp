@@ -1,0 +1,64 @@
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	<div class="row searchRow">
+	
+		<!-- 
+			<div class="col-md-12">
+				<select name="" id="" class="form-control searchSel">
+				<option value="title">제목</option>
+				<option value="author">작성자</option>
+				</select>
+				<input type="text" id="" class="searchBox form-control" placeholder="검색어를 입력하세요."/>
+				<button type="button" class="search btn btn-primary">검색</button>
+			</div>
+		 -->
+		
+	</div><!-- end .row .searchRow -->
+<table class="table">
+	<thead class="thead-dark">
+		<tr>
+			<th>번호</th>
+			<th>제목</th>
+			<th>작성자</th>
+			<th>작성일</th>
+			<th>조회수</th>
+		</tr>
+	</thead>
+	
+	<tbody>
+	<c:forEach var="studyFileList" items="${studyFileList }">
+		<tr>
+			<td>${studyFileList.row_num }</td>
+			<td>
+			<button class="btn btn-link listTitle" value="${studyFileList.oput_cd }">${studyFileList.title }</button>
+			</td>
+			<td>${studyFileList.name }</td>
+			<td>${studyFileList.crt_date }</td>
+			<td>${studyFileList.hits }</td>
+		</tr>
+	</c:forEach>
+		</tbody>
+</table>
+
+<div class="col-md-12">
+			<div class="paging"> 
+				<ul class="pagination">
+				<li class="page-item"><a href="#" class="page-link">Previous</a></li>
+				<li class="page-item"><a href="#" class="page-link">1</a></li>
+				<li class="page-item"><a href="#" class="page-link">2</a></li>
+				<li class="page-item"><a href="#" class="page-link">3</a></li>
+				<li class="page-item"><a href="#" class="page-link">4</a></li>
+				<li class="page-item"><a href="#" class="page-link">5</a></li>
+				<li class="page-item"><a href="#" class="page-link">6</a></li>
+				<li class="page-item"><a href="#" class="page-link">7</a></li>
+				<li class="page-item"><a href="#" class="page-link">8</a></li>
+				<li class="page-item"><a href="#" class="page-link">9</a></li>
+				<li class="page-item"><a href="#" class="page-link">10</a></li>
+				<li class="page-item"><a href="#" class="page-link">Next</a></li>
+				</ul>
+			</div>
+			
+			<button type="button" class="add btn btn-primary pull-right">등록</button>
+		
+		
+		</div><!-- end .col-md-12 -->

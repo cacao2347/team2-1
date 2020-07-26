@@ -77,7 +77,9 @@
    
          <div id="tab4" class="tab_content">
            <!--Content-->
-           <c:import url="StudyFileList.jsp"></c:import>
+           <c:import url="StudyFileList.jsp">
+           		<c:param name="stu_cd" value="<%=studyCode %>"></c:param>
+           </c:import>
         </div>
 
 

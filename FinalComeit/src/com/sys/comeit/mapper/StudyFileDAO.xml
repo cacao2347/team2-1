@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sys.comeit.IStudyFileDAO">
+
+<!-- 스터디방 별 산출물 게시판 전체 리스트 확인 -->
+<select id="studyFileList" resultType="com.sys.comeit.StudyFileDTO">
+	SELECT ROWNUM AS ROW_NUM
+      , MEM_CD, ID, NAME, STU_CD, OPUT_CD
+      , TITLE, CONTENT, CRT_DATE, HITS
+	FROM 
+	(
+	SELECT MEM_CD, ID, NAME, STU_CD, OPUT_CD
+	      , TITLE, CONTENT, CRT_DATE, HITS, BOARD_DEL
+	FROM VIEW_STU_OPUT
+	WHERE STU_CD = #{stu_cd}
+	  AND BOARD_DEL IS NULL
+	)
+</select>
+
+<!-- 상세 내역 조회 -->
+<select id="studyFileDetail" resultType="com.sys.comeit.StudyFileDTO">
+	SELECT  ID, NAME, STU_CD, OPUT_CD
+      , TITLE, CONTENT, CRT_DATE, HITS
+	FROM VIEW_STU_OPUT
+	WHERE STU_CD = #{stu_cd}
+	  AND OPUT_CD = #{oput_cd}
+	  AND BOARD_DEL IS NULL
+</select>
+
+</mapper>
