@@ -106,11 +106,12 @@
    
    <!-- 수진 추가 -->
    <!-- 전체 스터디방 조회 -->
+   <!-- 전체 스터디방 조회 -->
    <select id="studyList" resultType="com.sys.comeit.StudyDTO">
-      SELECT STU_CD, CRT_DATE, TITLE, STR_DATE, MEM_NUM, CMT_DATE, AREA_NAME, SPC_AREA_NAME, MEET_TERM, IDNTT_TYPE, LV, CAT_NAME, SCRT_NUM, END_DATE
+      SELECT STU_CD, CRT_DATE, TITLE, STR_DATE, MEM_NUM, CMT_DATE, AREA_NAME, SPC_AREA_NAME, MEET_TERM, IDNTT_TYPE, LV, CAT_NAME, SCRT_NUM, END_DATE, IMG_URL
       FROM VIEW_STU_LIST
       WHERE END_DATE <![CDATA[>]]> SYSDATE
-      ORDER BY CRT_DATE DESC
+      ORDER BY STU_CD DESC
    </select>
    
    <!-- 전체 스터디방 개수 조회 -->
@@ -159,7 +160,7 @@
 		      , #{mem_num}
 		      , #{content}
 		      , #{img_url, jdbcType=VARCHAR}
-		      , #{scrt_num, jdbcType=VARCHAR}
+		      , #{scrt_num, jdbcType=CHAR}
 		      , #{stu_cd, mode=OUT, jdbcType=VARCHAR}
 		   )
 		}
@@ -196,11 +197,50 @@
 		VALUES('SPRDY'||SEQ_STU_PRG_DAY.NEXTVAL, #{stu_cd}, #{stu_day_cd})
 	</insert>
 	
-	<!-- 로그인 아이디로 회원코드 알아내기
-	<select id="findMemCd" resultType="java.lang.String">
-		SELECT MEM_CD
-		FROM VIEW_MEM_MY
-		WHERE ID = #{id}
-   </select> -->
+	<!-- 참가중인 스터디 개수 -->
+   	<select id="memStudyCount" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS STU_COUNT
+		FROM VIEW_MY_STU
+		WHERE MEM_CD = #{mem_cd}
+	</select>
+	
+	<!-- 페이징 처리 -->
+	<!-- 검색완료된 스터디방 개수 조회 studySearchCount() -->
+	<select id="studySearchCount" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS COUNT
+		FROM VIEW_STU_LIST
+		WHERE END_DATE <![CDATA[>]]> SYSDATE
+		<if test="searchValue != null and !searchValue.equals('')">
+			WHERE #{searchKey} LIKE '%'||#{searchValue}||'%'
+		</if>
+	</select>
+	
+	<select id="getListData" resultType="com.sys.comeit.StudyDTO">
+		SELECT *
+		FROM
+		(
+		    SELECT ROWNUM AS RNUM
+		     , DATA.* 
+		    FROM 
+		    (
+		        SELECT STU_CD, CRT_DATE, TITLE, STR_DATE, MEM_NUM, CMT_DATE, AREA_NAME, SPC_AREA_NAME
+		             , MEET_TERM, IDNTT_TYPE, LV, CAT_NAME, SCRT_NUM, END_DATE, IMG_URL
+		        FROM VIEW_STU_LIST
+		        <choose>
+		        	<when test="searchValue != null">
+		        		WHERE TITLE LIKE '%'||#{searchValue}||'%'
+				        ORDER BY STU_CD DESC
+				    ) DATA
+				)
+				WHERE RNUM <![CDATA[>]]>= #{start} AND RNUM <![CDATA[<]]>=#{end}
+		        	</when>
+		        	<otherwise>
+		        		ORDER BY STU_CD DESC
+				    ) DATA
+				)
+				WHERE RNUM <![CDATA[>]]>= #{start} AND RNUM <![CDATA[<]]>=#{end}
+		        	</otherwise>
+		        </choose>
+	</select>
    
 </mapper>

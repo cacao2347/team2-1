@@ -27,10 +27,7 @@
 	
 		
 			<div class="col-md-12">
-				<select name="" id="" class="form-control searchSel">
-					<option value="title">제목</option>
-					<option value="author">작성자</option>
-				</select>
+				<input type="text" class="form-control" value="제목" readonly="readonly"/>
 				<input type="text" id="" class="searchBox form-control" placeholder="검색어를 입력하세요."/>
 				
 				<button type="button" class="search btn btn-primary">검색</button>
@@ -54,77 +51,17 @@
 						<th>조회수</th>
 					</tr>
 				</thead>
+				
 				<tbody>
+				<c:forEach var="studyNoticeLists" items="${studyNoticeList }">
 					<tr>
-						<td>1</td>
-						<td>2020.07.02 회의 진행 사항 입니다.</td>
-						<td>김길동</td>
+						<td>${studyNoticeLists.row_num }</td>
+						<td>${studyNoticeLists.title }</td>
+						<td>${studyNoticeLists.stu_join_name }</td>
 						<td>2020-07-02</td>
 						<td>5</td>
 					</tr>
-					<tr>
-						<td>2</td>
-						<td>2020.07.03 과제입니다.</td>
-						<td>김길동</td>
-						<td>2020-07-03</td>
-						<td>5</td>
-					</tr>
-					<tr>
-						<td>3</td>
-						<td>2020.07.04 뷰페이지 진행 사항 입니다.</td>
-						<td>김길동</td>
-						<td>2020-07-04</td>
-						<td>5</td>
-					</tr>
-					<tr>
-						<td>4</td>
-						<td>2020.07.05 회의 진행 사항 입니다.</td>
-						<td>김길동</td>
-						<td>2020-07-05</td>
-						<td>5</td>
-					</tr>
-					<tr>
-						<td>5</td>
-						<td>2020.07.02 과제 진행 사항 입니다.</td>
-						<td>김길동</td>
-						<td>2020-07-06</td>
-						<td>5</td>
-					</tr>
-					<tr>
-						<td>6</td>
-						<td>2020.07.02 과제 진행 사항 입니다.</td>
-						<td>김길동</td>
-						<td>2020-07-06</td>
-						<td>5</td>
-					</tr>
-					<tr>
-						<td>7</td>
-						<td>2020.07.02 과제 진행 사항 입니다.</td>
-						<td>김길동</td>
-						<td>2020-07-06</td>
-						<td>5</td>
-					</tr>
-					<tr>
-						<td>8</td>
-						<td>2020.07.02 과제 진행 사항 입니다.</td>
-						<td>김길동</td>
-						<td>2020-07-06</td>
-						<td>5</td>
-					</tr>
-					<tr>
-						<td>9</td>
-						<td>2020.07.02 과제 진행 사항 입니다.</td>
-						<td>김길동</td>
-						<td>2020-07-06</td>
-						<td>5</td>
-					</tr>
-					<tr>
-						<td>10</td>
-						<td>2020.07.02 과제 진행 사항 입니다.</td>
-						<td>김길동</td>
-						<td>2020-07-06</td>
-						<td>5</td>
-					</tr>
+				</c:forEach>
 				</tbody>
 		</table>
 		
