@@ -38,7 +38,7 @@ public class StudyFileController
 		return view;
 	}
 	
-	// 스터디방 산출물 상세
+	// 스터디방 산출물 상세  // 첨부파일 조회하기★
 	@RequestMapping(value = "/studyfiledetail.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String studyFileDetail(Model model, HttpServletRequest request)
 	{

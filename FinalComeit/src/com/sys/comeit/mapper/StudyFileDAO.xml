@@ -21,12 +21,22 @@
 
 <!-- 상세 내역 조회 -->
 <select id="studyFileDetail" resultType="com.sys.comeit.StudyFileDTO">
-	SELECT  ID, NAME, STU_CD, OPUT_CD
+	SELECT  ID, NAME, STU_CD, OPUT_CD, MEM_CD
       , TITLE, CONTENT, CRT_DATE, HITS
 	FROM VIEW_STU_OPUT
 	WHERE STU_CD = #{stu_cd}
 	  AND OPUT_CD = #{oput_cd}
 	  AND BOARD_DEL IS NULL
+</select>
+
+<!-- 첨부파일조회 -->
+<select id="fileUrlSearch" resultType="com.sys.comeit.StudyFileDTO">
+	SELECT FILE_CD, FILE_NAME, FILE_URL
+	FROM VIEW_STU_OPUT
+	WHERE STU_CD = #{stu_cd}
+	  AND OPUT_CD = #{oput_cd}
+	  AND BOARD_DEL IS NULL
+	  AND FILE_DEL IS NULL
 </select>
 
 </mapper>
