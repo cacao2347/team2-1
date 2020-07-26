@@ -7,12 +7,8 @@
 	
 	<!-- 관리자 정보 조회 list() -->
 	<select id="adminList" resultType="com.sys.comeit.AdminDTO">
-		SELECT  A.NAME AS NAME ,  A.ADMIN_CD AS ADMIN_CD
-			 , A.TEL AS TEL, A.EMAIL AS EMAIL
-      		 , AG.GRDS_NAME AS GRDS_NAME
-		FROM TBL_ADMIN A, TBL_ADM_GRDS AG
-		WHERE A.ADM_GRDS_CD = AG.ADM_GRDS_CD(+)
-		ORDER BY A.ADMIN_CD
+		SELECT NAME, ADMIN_CD, TEL, EMAIL, GRDS_NAME
+		FROM VIEW_ADMLIST
 	</select>
 
 	<!-- 총 관리자 회원 수 조회 adminCount() -->
@@ -29,16 +25,16 @@
   		  AND PWD=CRYPTPACK.ENCRYPT(#{pwd},#{pwd})
 	</select>
 	
-	<!-- 한명의 회원의 리스트를 뽑아오는 구문 -->
+	<!-- 한명의 관리자의 리스트를 뽑아오는 구문 -->
 	<select id="adminSearchList" resultType="com.sys.comeit.AdminDTO">
-		SELECT ADMIN_CD, ADM_GRDS_CD, NAME, PWD, EMAIL, TEL
-		FROM TBL_ADMIN
+		SELECT ADMIN_CD, ADM_GRDS_NAME, NAME, PWD, EMAIL, TEL
+		FROM VIEW_ADMLIST
 		WHERE ADMIN_CD = #{admin_cd}
 	</select>
 	
 	<insert id="adminAdd" >
 		INSERT INTO TBL_ADMIN(ADMIN_CD, ADM_GRDS_CD, NAME, PWD, EMAIL, TEL)
-		VALUES('ADM'||SEQ_ADMIN.NEXTVAL ,'ADMG1002', #{name}, '1234' ,#{email}, #{tel})
+		VALUES('ADM'||SEQ_ADMIN.NEXTVAL ,#{admin_cd}, #{name}, '1234' ,#{email}, #{tel})
 		
 	</insert>
 	
@@ -55,20 +51,21 @@
 	</delete>
 	
 	<select id="banList" resultType="com.sys.comeit.BanDTO">
-		SELECT NB.LNGG_BAN_CD AS LNGG_BAN_CD, NB.BAN AS BAN, AD.NAME AS NAME, NB.CRT_DATE AS CRT_DATE
+		SELECT NB.LNGG_BAN_CD AS LNGG_BAN_CD, NB.BAN AS BAN, AD.NAME AS NAME, NB.CRT_DATE AS CRT_DATE, AD.ADMIN_CD AS ADMIN_CD
 		FROM TBL_LNGG_BAN NB, TBL_ADMIN AD
 		WHERE NB.ADMIN_CD = AD.ADMIN_CD(+)
+		ORDER BY LNGG_BAN_CD DESC
 	</select>
 	
-	<insert id="banAdd" >
+	<insert id="banAdd">
 		INSERT INTO TBL_LNGG_BAN(LNGG_BAN_CD, ADMIN_CD, BAN, CRT_DATE)
-		VALUES('LNGBN'||SEQ_LNGG_BAN.NEXTVAL, #{admin_cd}, #{ban}, SYSDATE)
+		VALUES('LNGBN'||SEQ_LNGG_BAN.NEXTVAL, '${admin_cd}', '${ban}', SYSDATE)
 	</insert>
 	
 	<delete id="banDelete">
 		DELETE
 		FROM TBL_LNGG_BAN
-		WHERE LNGG_BAN_CD=#{lngg_ban_cd, jdbcType=VARCHAR}
+		WHERE LNGG_BAN_CD=#{lngg_ban_cd}
 	</delete>
 	
 	<!-- 업체 로그인 정보 조회 list() -->
@@ -76,4 +73,6 @@
 		SELECT SPA_ID, SPA_CD, EMAIL, NAME, TEL, JOIN_DATE
 		FROM TBL_SPA_JOIN
 	</select>
+	
+	
 </mapper>

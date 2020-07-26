@@ -42,9 +42,11 @@ public class AdminController
 		HttpSession session= request.getSession();
 		String id = (String) session.getAttribute("id");
 		String pwd = (String) session.getAttribute("pwd");
+		String name = (String) session.getAttribute("name");
 		
 		System.out.println(id);
 		System.out.println(pwd);
+		System.out.println(name);
 		
 		String view = null;
 		
@@ -104,12 +106,15 @@ public class AdminController
 	}
 	
 	@RequestMapping(value = "/adminlist.action", method = {RequestMethod.GET, RequestMethod.POST})
-	public String adminList(Model model)
+	public String adminList(Model model, HttpServletRequest request)
 	{
 		String view = null;
 		
 		IAdminDAO dao = sqlSession.getMapper(IAdminDAO.class);
 		
+		//AdminDTO admin = dao.adminSearchList((String) request.getAttribute("id"));
+		
+		//model.addAttribute("admin", admin);
 		model.addAttribute("adminList", dao.adminList());
 		model.addAttribute("args", "/WEB-INF/views/admin/AdminList.jsp");
 		
@@ -133,6 +138,8 @@ public class AdminController
 	@RequestMapping(value = "/adminmodify.action", method = {RequestMethod.GET, RequestMethod.POST})
 	public String adminModify(AdminDTO dto, HttpServletRequest request)
 	{
+		HttpSession session = request.getSession();
+		
 		String view = "redirect:adminlist.action";
 
 		IAdminDAO dao = sqlSession.getMapper(IAdminDAO.class);
@@ -153,6 +160,7 @@ public class AdminController
 		dao.adminModify(dto);
 		System.out.println(dao.adminModify(dto));
 		
+		session.setAttribute("pwd", pwd);
 		return view;
 	}
 
@@ -497,12 +505,12 @@ public class AdminController
 
 	
 	@RequestMapping(value = "/banadd.action", method = {RequestMethod.GET, RequestMethod.POST})
-	public String banAdd(BanDTO dto)
+	public String banAdd(BanDTO dto, HttpServletRequest request)
 	{
 		String view = "redirect:banlist.action";
 
 		IAdminDAO dao = sqlSession.getMapper(IAdminDAO.class);
-
+		
 		System.out.println(dto.getBan());
 
 		dao.banAdd(dto);
@@ -525,6 +533,9 @@ public class AdminController
 
 		return view;
 	}
+	
+	
+	
 	
 	
 }

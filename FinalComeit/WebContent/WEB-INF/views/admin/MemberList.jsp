@@ -19,8 +19,6 @@
           <!-- Page Heading -->
           <h1 class="h3 mb-2 text-gray-800">회원명단</h1>
           <p class="mb-4">회원의 명단을 볼 수 있는 페이지입니다.
-          <a target="_blank" href="https://datatables.net">
-          official DataTables documentation</a>.</p>
 
           <!-- DataTales Example -->
           <div class="card shadow mb-4">

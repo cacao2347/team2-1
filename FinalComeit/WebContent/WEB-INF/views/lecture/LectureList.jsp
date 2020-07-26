@@ -424,6 +424,15 @@ body
 								${pageIndexList }
 							</div>
 						</c:if>
+						
+						<!-- 테이블에 데이터가 존재하지 않을 경우 -->
+						<c:if test="${dataCount == 0 }">
+							<tr style="height: 30px; background-color: #FFFFFF;">
+								<td align="center" colspan="3">
+									등록된 자료가 존재하지 않습니다.
+								</td>
+							</tr>
+						</c:if>
 					</div>
 					</div><!-- 페이징 영역 끝 -->
 					

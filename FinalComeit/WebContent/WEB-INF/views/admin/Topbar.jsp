@@ -156,7 +156,7 @@
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">${sessionScope.id}</span>
                 <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
               </a>
               <!-- Dropdown - User Information -->
@@ -207,22 +207,6 @@
     </div>
   </div>
   
-  <!-- Bootstrap core JavaScript -->
-  <script src="<%=cp %>/assets/admvendor/jquery/jquery.js"></script>
-  <script src="<%=cp %>/assets/admvendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Core plugin JavaScript -->
-  <script src="<%=cp %>/assets/admvendor/jquery-easing/jquery.easing.min.js"></script>
-
-  <!-- Custom scripts for all pages -->
-  <script src="<%=cp %>/assets/admjs/sb-admin-2.min.js"></script>
-
-  <!-- Page level plugins -->
-  <script src="<%=cp %>/assets/admvendor/chart.js/Chart.min.js"></script>
-
-  <!-- Page level custom scripts -->
-  <script src="<%=cp %>/assets/admjs/demo/chart-area-demo.js"></script>
-  <script src="<%=cp %>/assets/admjs/demo/chart-pie-demo.js"></script>        
         
 </body>
 </html>

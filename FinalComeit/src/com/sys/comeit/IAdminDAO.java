@@ -15,7 +15,7 @@ public interface IAdminDAO
 	public ArrayList<BanDTO> banList();
 	public int banDelete(String lngg_ban_cd);
 	
-	public int adminModify(AdminDTO dto);
+	public int adminModify(AdminDTO dto);	// 관리자 비밀번호 수정
 	
 	// 한명의 관리자에 대한 정보 리스트
 	public AdminDTO adminSearchList(String admin_cd);	// 관리자 리스트	 

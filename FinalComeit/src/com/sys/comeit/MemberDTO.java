@@ -11,6 +11,7 @@ public class MemberDTO
 	private String pwd;												// 비밀번호
 	
 	
+	
 	// 기혜 추가 
 	private int sincerity, embrace, communication, skill, leadership; // 스터디 평가 내역
 	private int pnlt_cnt;											  // 패널티 받은 내역

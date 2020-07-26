@@ -4,7 +4,6 @@
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
 %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,15 +35,6 @@
 		});
 		
 		
-		/* $(".btnCancel").on("click", function()
-		{
-			$("#ban").val("");
-			
-			$("#banForm").attr("action","banadd.action");
-			$("#ban").focus();
-		}); */
-		
-
 	});
 </script>
 </head>
@@ -63,6 +53,7 @@
               <h6 class="m-0 font-weight-bold text-primary">관리자명단</h6>
             </div>
             
+            <c:if test="${sessionScope.id == 'ADM1002'}">
             <div class="card-body">
             	<div class="table-responsive">
             	<form action="adminadd.action" method="post" role="form" id="adminForm">
@@ -94,6 +85,8 @@
 	            	</form>
             	</div>
             </div>
+            </c:if>
+            
             
             <div class="card-body">
               <div class="table-responsive">
@@ -105,8 +98,10 @@
                       <th>전화번호</th>
                       <th>이메일</th>
                       <th>관리자등급</th>
+                      <c:if test="${sessionScope.id == 'ADM1002'}">
                       <th>수정</th>
                       <th>삭제</th>
+                      </c:if>
                     </tr>
                   </thead>
                   <tbody>
@@ -121,26 +116,15 @@
 							<td>${admin.tel }</td>
 							<td>${admin.email }</td>
 							<td>${admin.grds_name }</td>
-						
-						<c:if test="{admin.grds_id}"></c:if>
-							<td id="btnTbl">
-								<button type="button" class="btn btn-default btn-xs adminModBtn"
-								value=${admin.admin_cd }>수정</button>
-							</td>
-							<td id="btnTbl">
-								<button type="button" class="btn btn-default btn-xs adminDelBtn"
-								value=${admin.admin_cd }>삭제</button>
-							</tr>
 							
-							<c:choose>
-								<c:when test="${empty id }">
-									<button type="button" class="btn btn-link bFtitleBtn" value="${lecs.lec_cd }">${lecs.lec_name}</button>
-								</c:when>
-								
-								<c:when test="${not empty id }">
-									<button type="button" class="btn btn-link titleBtn" value="${lecs.lec_cd}">${lecs.lec_name}</button>
-								</c:when>
-							</c:choose>
+							<c:if test="${sessionScope.id == 'ADM1002'}">
+							<td id="btnTbl">
+								<button type="button" class="btn btn-default btn-xs adminModBtn" value=${admin.admin_cd }>수정</button>
+							</td>
+							<td id="btnTbl">	
+								<button type="button" class="btn btn-default btn-xs adminDelBtn" value=${admin.admin_cd }>삭제</button>
+							</td>
+							</c:if>
 							
 					</c:forEach>
 					

@@ -33,23 +33,36 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 	$(function() 
 	{
 		$("#password").focus();
-		$(".btn-sm").click(function()
+		
+		$("#modify").click(function()
 		{
 			alert($("#name").val());
 			alert($("#password").val());
 			alert($("#phoneNumber").val());
 			alert($("#email").val());
           
-          // 최종 submit
-          $("#adminForm").submit();
+			f = document.adminForm;
+			
+			if($("#name").val()==""||$("#password").val()==""||$("#phoneNumber").val()==""||$("#email").val()=="")
+			{
+				alert("값을 입력해주세요.");
+				return;
+			}
+			else
+			{	
+				// 최종 submit
+		        $("#adminForm").submit();
+		        f.action = "<%=cp%>/admin/adminmodify.action";
+			}
+          
 		})
 		
-		$(".btnCancel").click(function()
+		$("#cancel").click(function()
 		{
-			$("#pwd").val("");
+			$("#password").val("");
 			$("#phoneNumber").val("");
 			$("#email").val("");
-			$("#pwd").focus();
+			$("#password").focus();
 			
 		})
 	})
@@ -101,8 +114,8 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 								style="text-align: left; width: 200px; height: 40px;" value="${adminSearchList.email}">
 							</div>
 
-							<button type="button" class="btn btn-default btn-sm" value="${adminSearchList.admin_cd}">수정</button>
-							<button type="button" class="btn btn-default btn-sm btnCancel">취소</button>
+							<button type="button" id="modify" class="btn btn-default btn-sm" value="${adminSearchList.admin_cd}">수정</button>
+							<button type="button" id="cancel" class="btn btn-default btn-sm btnCancel">취소</button>
 							
 							<div class="errMsg">
                           		<span id="err"></span>

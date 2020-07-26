@@ -60,10 +60,12 @@ input {
 	{
 		$(".btn-sm").click(function() 
 		{
-			var loginPwd = ${sessionScope.pwd };
+			//var loginPwd = ;
+			//alert(loginPwd);
 			var inputPwd = $("#pwd").val();
+			alert(inputPwd);
 			
-			if(loginPwd == inputPwd)
+			if("${sessionScope.pwd}" == inputPwd)
 			{
 				$("#memberForm").submit();
 			}
