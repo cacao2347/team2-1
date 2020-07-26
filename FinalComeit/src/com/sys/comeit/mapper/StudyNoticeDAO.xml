@@ -6,7 +6,7 @@
 <mapper namespace="com.sys.comeit.IStudyNoticeDAO">
 
 	<!-- 1번방 공지사항 게시판의 전체 리스트 확인 -->
-	<select id="studyNoticeList" resultType="com.sys.comeit.StudyDTO">
+	<select id="studyNoticeList" resultType="com.sys.comeit.StudyNoticeDTO">
       	SELECT ROWNUM AS ROW_NUM
 		     , STU_CD, STU_NTC_CD, STU_NTC_PNT_CD, STU_JOIN_NAME, MEM_CD, STU_JOIN_CD, TITLE
 		     , CRT_DATE, CONTENT, HITS, DEL_DATE

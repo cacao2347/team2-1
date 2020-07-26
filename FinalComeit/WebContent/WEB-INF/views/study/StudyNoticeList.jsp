@@ -46,10 +46,10 @@
 			, url : "studynoticelist.action"
 			, data : params
 			, dataType : "text"
-			, async:false
 			, success : function(data)
 			{
-				$("#container").html(data);
+				//alert("성공" + data);
+				$(".container").html(data);
 				
 			}
 			, error : function(e)
@@ -146,9 +146,9 @@
 	
 	<input type="hidden" id="studyCode" value="<%=stu_cd%>">
 	<div class="row searchRow">
-	<div class="col-md-12">
-		<input type="text" class="form-control" value="제목" readonly="readonly"/>
-		<input type="text" id="" class="searchBox form-control" placeholder="검색어를 입력하세요."/>
+	<div class="col-md-12 form-inline">
+		<input type="text" style="width: 10%;" class="form-control" value="제목" readonly="readonly"/>
+		<input type="text" style="width: 80%;"class="searchBox form-control" placeholder="검색어를 입력하세요."/>
 		
 		<button type="button" class="search btn btn-primary">검색</button>
 	</div>

@@ -3,11 +3,11 @@
 <table class="table">
 	<thead class="thead-dark">
 		<tr>
-			<th>번호</th>
-			<th>제목</th>
-			<th>작성자</th>
-			<th>작성일</th>
-			<th>조회수</th>
+			<th style="text-align: center;">번호</th>
+			<th style="text-align: center;">제목</th>
+			<th style="text-align: center;">작성자</th>
+			<th style="text-align: center;">작성일</th>
+			<th style="text-align: center;">조회수</th>
 		</tr>
 	</thead>
 	
