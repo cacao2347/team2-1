@@ -68,5 +68,18 @@ public class StudyFileController
 		return view;
 	}
 	
+	
+	// 스터디방 산출물 등록
+	@RequestMapping(value = "/studyfileadd.action", method = { RequestMethod.GET, RequestMethod.POST })
+	public String studyFileAdd(Model model, HttpServletRequest request)
+	{
+		String view = null;
+		
+		
+		view = "WEB-INF/views/study/StudyFileAdd.jsp";
+		
+		return view;
+	}
+	
 
 }

@@ -56,7 +56,7 @@
 				</ul>
 			</div>
 			
-			<button type="button" class="add btn btn-primary pull-right">등록</button>
+			<button type="button" class="add btn btn-primary pull-right file-add">등록</button>
 		
 		
 		</div><!-- end .col-md-12 -->

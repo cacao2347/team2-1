@@ -13,27 +13,40 @@
 			<th>조회수</th>
 			<td>${detail.file_hits }</td>
 		</tr>
-		<tr>
+	<!-- 	<tr>
 		<th>첨부파일</th>
 		<td colspan="6">회의록.doc</td> 
 			
-			<%-- 
-			<c:choose>
+			 -->
+		<%-- 	<c:choose>
+			<c:when test="${file ne '없음' }"> --%>
 			
-			<c:when test="${file ne '없음' }">
-			<th>첨부파일</th>	
-				<c:forEach var="file" items="${file }">	
-				<td colspan="6">${file.file_name }</td> 
-				</c:forEach>
+			<c:if test="${file ne '없음'}">
 				
-			</c:when>
+				<c:forEach var="file" items="${file }">	
+					<tr>
+					<th>첨부파일</th>	
+						
+						<td colspan="6">회의록</td> 
+						
+					</tr>	
+				</c:forEach>
+			</c:if>
+		<%-- 	</c:when>
 			<c:otherwise>
+			 --%>
+			<c:if test="${file eq '없음'}">
+			<tr>
 			<th>첨부파일</th>
-					<td colspan="6">없음</td>				
-			</c:otherwise>
+					<td colspan="6">없음</td>		
+			</tr>		
+			</c:if>
 			
-			</c:choose> --%>
-		</tr>
+	<%-- 		</c:otherwise>
+			</c:choose>  --%>
+			
+			
+	<!-- 	</tr> -->
 		<tr class="content" style="vertical-align: top; height: 300px;">
 			<td colspan="6">${detail.file_content }</td>
 		</tr>

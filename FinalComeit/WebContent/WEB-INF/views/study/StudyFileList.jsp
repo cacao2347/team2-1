@@ -74,7 +74,27 @@
 				
 				
 				// 게시글 등록버튼 클릭 시
-				
+				$(".file-add").click(function()
+				{
+					
+					$.ajax(
+					{
+						type : "POST"
+						, url : "studyfileadd.action"
+						, data : params
+						, dataType : "text"
+						, async:false
+						, success : function(args)
+						{
+							$(".filelist").html(args);
+							
+							$(".file-cancel").click(function()
+							{
+								ajaxStudyFileList();
+							});
+						}
+					});
+				});
 				
 				
 				

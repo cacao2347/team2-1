@@ -24,9 +24,8 @@
 
 	<!-- 상세내용 영역 -->
 	<div class="row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-8">
+		
+		<div class="col-md-12">
 			<table class="table detail">
 				<tr>
 					<th>제목 *</th>
@@ -38,7 +37,8 @@
 					<th>작성자</th>
 					<td>홍길동</td>
 					<th>작성일</th>
-					<td>2020-06-18</td>
+					<td><input type="text" readonly="readonly" value="현재 날짜"
+					style="border: none;"/></td>
 				</tr>
 				<tr>
 					<th>첨부파일</th>
@@ -54,15 +54,13 @@
 				</tr>
 			</table>
 		</div>
-		<div class="col-md-2">
-		</div>
+	
 	</div><!-- 상세내용 영역 끝 -->
 	
 	<!-- 버튼 영역 -->
 	<div class="row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-8">
+	
+		<div class="col-md-12">
 		
 			<div class="bottom">
 				<div class="errMsg">
@@ -72,17 +70,18 @@
 				<button type="button" class="btn btn-primary btn-lg btm">
 					등록
 				</button>
-				<button type="button" class="btn btn-lg btm">
+			<!-- 	<button type="reset" class="btn btn-lg btm">
 					리셋
-				</button>
-				<button type="button" class="btn btn-lg btm cancel">
+				</button> -->
+			<!-- 	<input type="reset" value="리셋" class="btn btn-lg btm"/> -->
+				<button type="button" class="btn btn-lg btm file-cancel">
 					취소
 				</button>
 			
 			</div>
 		</div>
-		<div class="col-md-2">
-		</div>
+		
+		
 	</div><!-- 버튼 영역 끝-->
 	
 	
