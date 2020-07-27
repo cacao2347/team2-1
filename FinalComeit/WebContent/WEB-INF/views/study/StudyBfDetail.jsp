@@ -127,6 +127,8 @@ body{font-family: 'Noto Sans KR', sans-serif;}
       {
     	  var params = "stuCode=" +$(this).val();
     	
+    	  // location href
+    	  
     	  $.ajax(
          {
              type : "POST"

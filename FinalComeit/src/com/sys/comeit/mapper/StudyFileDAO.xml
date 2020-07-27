@@ -6,26 +6,26 @@
 
 <!-- 스터디방 별 산출물 게시판 전체 리스트 확인 -->
 <select id="studyFileList" resultType="com.sys.comeit.StudyFileDTO">
-	SELECT ROWNUM AS ROW_NUM
-      , MEM_CD, ID, NAME, STU_CD, OPUT_CD
-      , TITLE, CONTENT, CRT_DATE, HITS
+	SELECT ROWNUM AS FILE_ROW_NUM
+      , MEM_CD AS FILE_MEM_CD, ID AS FILE_ID, NAME AS FILE_MEM_NAME, STU_CD AS FILE_STU_CD, OPUT_CD AS FILE_OPUT_CD
+      , TITLE AS FILE_TITLE, CONTENT AS FILE_CONTENT, CRT_DATE AS FILE_CRT_DATE,HITS AS FILE_HITS
 	FROM 
 	(
 	SELECT MEM_CD, ID, NAME, STU_CD, OPUT_CD
 	      , TITLE, CONTENT, CRT_DATE, HITS, BOARD_DEL
 	FROM VIEW_STU_OPUT
-	WHERE STU_CD = #{stu_cd}
+	WHERE STU_CD = #{file_stu_cd}
 	  AND BOARD_DEL IS NULL
 	)
 </select>
 
 <!-- 상세 내역 조회 -->
 <select id="studyFileDetail" resultType="com.sys.comeit.StudyFileDTO">
-	SELECT  ID, NAME, STU_CD, OPUT_CD, MEM_CD
-      , TITLE, CONTENT, CRT_DATE, HITS
+	SELECT ID AS FILE_MEM_ID, NAME AS FILE_MEM_NAME, STU_CD AS FILE_STU_CD, OPUT_CD AS FILE_OPUT_CD, MEM_CD AS FILE_MEM_CD
+      , TITLE AS FILE_TITLE, CONTENT AS FILE_CONTENT, CRT_DATE AS FILE_CRT_DATE, HITS AS FILE_HITS
 	FROM VIEW_STU_OPUT
-	WHERE STU_CD = #{stu_cd}
-	  AND OPUT_CD = #{oput_cd}
+	WHERE STU_CD = #{file_stu_cd}
+	  AND OPUT_CD = #{file_oput_cd}
 	  AND BOARD_DEL IS NULL
 </select>
 
@@ -33,8 +33,8 @@
 <select id="fileUrlSearch" resultType="com.sys.comeit.StudyFileDTO">
 	SELECT FILE_CD, FILE_NAME, FILE_URL
 	FROM VIEW_STU_OPUT
-	WHERE STU_CD = #{stu_cd}
-	  AND OPUT_CD = #{oput_cd}
+	WHERE STU_CD = #{file_stu_cd}
+	  AND OPUT_CD = #{file_oput_cd}
 	  AND BOARD_DEL IS NULL
 	  AND FILE_DEL IS NULL
 </select>
