@@ -93,7 +93,7 @@
    <!-- 스터디 참가  -->
    <insert id="joinStudy">
 	   	INSERT INTO TBL_STU_JOIN(STU_JOIN_CD, STU_CD, MEM_CD, JOIN_DATE) 
-		VALUES('STJOI'||SEQ_STU_JOIN.NEXTVAL, #{stu_cd}, #{join_mem_cd}, SYSDATE)
+		VALUES('STJOI'||SEQ_STU_JOIN.NEXTVAL, #{stu_cd}, #{join_mem_cd}, TO_DATE(TO_CHAR(SYSDATE), 'YYYY-MM-DD'))
    </insert>
    
    <!-- 스터디 커밋 -->

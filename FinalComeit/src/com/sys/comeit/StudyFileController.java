@@ -50,10 +50,16 @@ public class StudyFileController
 		String oput_cd = request.getParameter("oput_cd");
 		
 		StudyFileDTO dto = new StudyFileDTO();
-		dto.setStu_cd(stu_cd);
-		dto.setOput_cd(oput_cd);
+		dto.setFile_stu_cd(stu_cd);
+		dto.setFile_oput_cd(oput_cd);
 		
 		StudyFileDTO detail = fileDao.studyFileDetail(dto);
+		ArrayList<StudyFileDTO> file = fileDao.fileUrlSearch(dto);
+		
+		if (!file.isEmpty())
+			model.addAttribute("file", file);
+		else
+			model.addAttribute("file", "없음");
 		
 		model.addAttribute("detail", detail);
 		
@@ -62,4 +68,5 @@ public class StudyFileController
 		return view;
 	}
 	
+
 }

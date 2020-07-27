@@ -3,124 +3,124 @@ package com.sys.comeit;
 public class StudyFileDTO
 {
 	// 회원 아이디 , 회원코드, 이름(작성자), 스터디 참가 코드, 스터디 코드
-	private String id, mem_cd, name, stu_join_cd, stu_cd;
+	private String file_mem_id, file_mem_cd, file_mem_name, file_stu_join_cd, file_stu_cd;
 	
 	// 게시판 코드, 제목, 내용, 작성일, 조회수, 게시글 삭제일
-	private String oput_cd, title, content, crt_date, hits, board_del;
+	private String file_oput_cd, file_title, file_content, file_crt_date, file_hits, file_board_del;
 	
 	// 파일 코드, 파일 이름, 파일 url, 파일 삭제일
-	private String file_cd, file_name, file_url, file_del, row_num;
-
+	private String file_cd, file_name, file_url, file_del, file_row_num;
 	
 	// getter / setter 구성
-	public String getId()
+
+	public String getFile_id()
 	{
-		return id;
+		return file_mem_id;
 	}
 
-	public void setId(String id)
+	public void setFile_id(String file_id)
 	{
-		this.id = id;
+		this.file_mem_id = file_id;
 	}
 
-	public String getMem_cd()
+	public String getFile_mem_cd()
 	{
-		return mem_cd;
+		return file_mem_cd;
 	}
 
-	public void setMem_cd(String mem_cd)
+	public void setFile_mem_cd(String file_mem_cd)
 	{
-		this.mem_cd = mem_cd;
+		this.file_mem_cd = file_mem_cd;
 	}
 
-	public String getName()
+	public String getFile_mem_name()
 	{
-		return name;
+		return file_mem_name;
 	}
 
-	public void setName(String name)
+	public void setFile_mem_name(String file_mem_name)
 	{
-		this.name = name;
+		this.file_mem_name = file_mem_name;
 	}
 
-	public String getStu_join_cd()
+	public String getFile_stu_join_cd()
 	{
-		return stu_join_cd;
+		return file_stu_join_cd;
 	}
 
-	public void setStu_join_cd(String stu_join_cd)
+	public void setFile_stu_join_cd(String file_stu_join_cd)
 	{
-		this.stu_join_cd = stu_join_cd;
+		this.file_stu_join_cd = file_stu_join_cd;
 	}
 
-	public String getStu_cd()
+	public String getFile_stu_cd()
 	{
-		return stu_cd;
+		return file_stu_cd;
 	}
 
-	public void setStu_cd(String stu_cd)
+	public void setFile_stu_cd(String file_stu_cd)
 	{
-		this.stu_cd = stu_cd;
+		this.file_stu_cd = file_stu_cd;
 	}
 
-	public String getOput_cd()
+	public String getFile_oput_cd()
 	{
-		return oput_cd;
+		return file_oput_cd;
 	}
 
-	public void setOput_cd(String oput_cd)
+	public void setFile_oput_cd(String file_oput_cd)
 	{
-		this.oput_cd = oput_cd;
+		this.file_oput_cd = file_oput_cd;
 	}
 
-	public String getTitle()
+	public String getFile_title()
 	{
-		return title;
+		return file_title;
 	}
 
-	public void setTitle(String title)
+	public void setFile_title(String file_title)
 	{
-		this.title = title;
+		this.file_title = file_title;
 	}
 
-	public String getContent()
+	public String getFile_content()
 	{
-		return content;
+		return file_content;
 	}
 
-	public void setContent(String content)
+	public void setFile_content(String file_content)
 	{
-		this.content = content;
+		this.file_content = file_content;
 	}
 
-	public String getCrt_date()
+	public String getFile_crt_date()
 	{
-		return crt_date;
+		return file_crt_date;
 	}
 
-	public void setCrt_date(String crt_date)
+	public void setFile_crt_date(String file_crt_date)
 	{
-		this.crt_date = crt_date;
+		this.file_crt_date = file_crt_date;
 	}
 
-	public String getHits()
+	public String getFile_hits()
 	{
-		return hits;
+		return file_hits;
 	}
 
-	public void setHits(String hits)
+	public void setFile_hits(String file_hits)
 	{
-		this.hits = hits;
+		this.file_hits = file_hits;
 	}
 
-	public String getBoard_del()
+	public String getFile_board_del()
 	{
-		return board_del;
+		return file_board_del;
 	}
 
-	public void setBoard_del(String board_del)
+	public void setFile_board_del(String file_board_del)
 	{
-		this.board_del = board_del;
+		this.file_board_del = file_board_del;
 	}
 
 	public String getFile_cd()
@@ -162,15 +162,19 @@ public class StudyFileDTO
 	{
 		this.file_del = file_del;
 	}
-	
-	public String getRow_num()
+
+	public String getFile_row_num()
 	{
-		return row_num;
+		return file_row_num;
 	}
 
-	public void setRow_num(String row_num)
+	public void setFile_row_num(String file_row_num)
 	{
-		this.row_num = row_num;
+		this.file_row_num = file_row_num;
 	}
+
+	
+
+	
 
 }

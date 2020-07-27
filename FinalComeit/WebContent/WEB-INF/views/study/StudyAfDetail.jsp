@@ -275,7 +275,7 @@ $(document).ready(function ()
                   	 <button type="button" class="btn btn-lg btn-primary commitBtn" value="${studyInfo.stu_cd }" disabled="disabled">COMMIT</button>
                   	</c:if>
                   	 <c:if test="${sessionScope.mem_cd ne leaderName.leader_mem_cd }">
-                  	<button type="button" class="btn btn-lg btn-primary joinStudyBtn" value="${studyInfo.stu_cd }">참가</button>
+                  	<button type="button" class="btn btn-lg btn-primary joinStudyBtn" value="${studyInfo.stu_cd }">퇴장</button>
                   	</c:if>
                      <img src="<%=cp %>/assets/images/report.png" alt="" class="report" onclick=""/>
                   </div><!-- end .button -->

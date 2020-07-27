@@ -46,8 +46,9 @@
 			, success : function(data)
 			{
 				
-				$(".container").html(data);
+				$(".filelist").html(data);
 				
+				// 게시글 상세 정보 보기 클릭했을때
 				$(".listTitle").click(function()
 				{
 					var send = params + "&oput_cd=" + $(this).val();
@@ -61,10 +62,19 @@
 						, async:false
 						, success : function(args)
 						{
-							$(".container").html(args);
+							$(".filelist").html(args);
+							
+							$(".fileListBtn").click(function()
+							{
+								ajaxStudyFileList();
+							});
 						}
 					});
 				});
+				
+				
+				// 게시글 등록버튼 클릭 시
+				
 				
 				
 				
@@ -75,7 +85,6 @@
 			}
 		});
 		
-		
 	}
 	
 	
@@ -84,14 +93,13 @@
 </head>
 <body>
 
-<input type="hidden" id="studyCode" value="<%=stu_cd%>">
+
 
 <div class="container-fluid">
 
 	<div class="row">
-		
-		
-		<div class="col-md-12 container">
+	
+		<div class="col-md-12 container filelist">
 		
 			<!-- 게시글이 나올 div 영역 -->
       

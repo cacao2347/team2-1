@@ -2,7 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	<div class="row searchRow">
 	
-		<!-- 
 			<div class="col-md-12">
 				<select name="" id="" class="form-control searchSel">
 				<option value="title">제목</option>
@@ -11,7 +10,6 @@
 				<input type="text" id="" class="searchBox form-control" placeholder="검색어를 입력하세요."/>
 				<button type="button" class="search btn btn-primary">검색</button>
 			</div>
-		 -->
 		
 	</div><!-- end .row .searchRow -->
 <table class="table">
@@ -28,13 +26,13 @@
 	<tbody>
 	<c:forEach var="studyFileList" items="${studyFileList }">
 		<tr>
-			<td>${studyFileList.row_num }</td>
+			<td>${studyFileList.file_row_num }</td>
 			<td>
-			<button class="btn btn-link listTitle" value="${studyFileList.oput_cd }">${studyFileList.title }</button>
+			<button class="btn btn-link listTitle" value="${studyFileList.file_oput_cd }">${studyFileList.file_title }</button>
 			</td>
-			<td>${studyFileList.name }</td>
-			<td>${studyFileList.crt_date }</td>
-			<td>${studyFileList.hits }</td>
+			<td>${studyFileList.file_mem_name }</td>
+			<td>${studyFileList.file_crt_date }</td>
+			<td>${studyFileList.file_hits }</td>
 		</tr>
 	</c:forEach>
 		</tbody>

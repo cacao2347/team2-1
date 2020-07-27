@@ -1,24 +1,41 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<table class="table detail">
+<table class="table detail" style="margin-top: 30px;">
 		<tr>
 			<th style="text-align: center; background-color: #EEEEEE">제목</th>
-			<td colspan="6">${detail.title }</td>
+			<td colspan="6">${detail.file_title }</td>
 		</tr>
 		<tr class="tit" style="text-align: center;">
 			<th>작성자</th>
-			<td>${detail.name }</td>
+			<td>${detail.file_mem_name }</td>
 			<th>작성일</th>
-			<td>${detail.crt_date }</td>
+			<td>${detail.file_crt_date }</td>
 			<th>조회수</th>
-			<td>${detail.hits }</td>
+			<td>${detail.file_hits }</td>
 		</tr>
 		<tr>
+		<th>첨부파일</th>
+		<td colspan="6">회의록.doc</td> 
+			
+			<%-- 
+			<c:choose>
+			
+			<c:when test="${file ne '없음' }">
+			<th>첨부파일</th>	
+				<c:forEach var="file" items="${file }">	
+				<td colspan="6">${file.file_name }</td> 
+				</c:forEach>
+				
+			</c:when>
+			<c:otherwise>
 			<th>첨부파일</th>
-			<td colspan="6">회의록.doc</td>
+					<td colspan="6">없음</td>				
+			</c:otherwise>
+			
+			</c:choose> --%>
 		</tr>
-		<tr class="content" style="vertical-align: top; height: 400px;">
-			<td colspan="6">${detail.content }</td>
+		<tr class="content" style="vertical-align: top; height: 300px;">
+			<td colspan="6">${detail.file_content }</td>
 		</tr>
 		<tr>
 			<td colspan="6" style="text-align: left;">이전글 : 산출물의 아홉 번째 게시글 제목입니다.</td>
@@ -31,17 +48,11 @@
 	<div class="row">
 		
 		<div class="col-md-12">
-		<!-- 
-			<div class="repBtn">
-				<button type="button" class="btn btn-link">
-				신고
-				</button>
-			</div>
-		 -->	
+	
 			<div class="btns">
 			
 			
-			<c:if test="${detail.mem_cd eq sessionScope.mem_cd }"> 
+			<c:if test="${detail.file_mem_cd eq sessionScope.mem_cd }"> 
 				<div class="leftBtn" style="display: inline-block;">
 					<button type="button" class="btn">
 						수정
@@ -53,7 +64,8 @@
 			</c:if>
 				
 				<div class="rightBtn">
-					<button type="button" class="btn btn-primary" style="float: right;">
+					<button type="button" class="btn btn-primary fileListBtn" style="float: right;"
+					value="${detail.file_stu_cd }">
 						목록
 					</button>
 				</div>
