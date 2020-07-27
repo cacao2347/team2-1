@@ -73,9 +73,6 @@ body
 			f = document.searchForm;
 			f.action = "<%=cp %>/studylist.action";
 			f.submit();
-			
-			
-			
 		});
 		
 		// 스터디 각각 리스트 클릭 시 (로그인 전)

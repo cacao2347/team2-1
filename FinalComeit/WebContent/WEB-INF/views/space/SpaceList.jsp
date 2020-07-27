@@ -52,7 +52,16 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 			var params = "spa_req_cd=" + $(this).val();
 			location.href = "/FinalComeit/spacedetail.action?"+params;
 		});
+		
+		 // 검색 버튼 클릭 시
+		$("#searchBtn").click(function()
+		{
+			f = document.searchForm;
+			f.action = "<%=cp %>/spalist.action";
+			f.submit();
+		});
 	});
+	
 	
 	// 지역에 따른 세부지역 불러오는 ajax
     function ajaxSpcAreaRequest()
@@ -159,22 +168,23 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 				<div class="col-md-6">
 				
 					<!-- 검색 영역 -->
-					<div class="row">
+					<div class="row form-inline">
+						<form name="searchForm" method="get">
+							<select name="searchKey" class="form-control selectField" style="width: 20%;">
+								<option value="spa_name">공간명</option>
+							</select>
+							
+							<input type="text" id="title" name="title" placeholder="공간명으로 검색하세요!" class="form-control title" style="width: 70%;">
+							<input type="button" value="검색" class="btn btn-primary searchBtn" id="searchBtn" style="width: 9%">
+						</form>
+					
 						<div class="col-md-4">
-							<div class="form-inline search">
+							<!-- <div class="form-inline search">
 								<input type="text" class="form-control tag" id="tag" placeholder="키워드" style="width: 150px;">
 							    <button type="button" class="btn btn-primary searchBtn" style="width: 60px;">검색</button>
-							</div>
+							</div> -->
 						</div>
 						<div class="col-md-8">
-							<div class="form-inline search text-right">
-								<select class="form-control">
-									  <option>공간명</option>
-									  <option>상호명</option>
-								</select>
-								<input type="text" class="form-control title" id="title">
-								<button type="button" class="btn btn-primary searchBtn">검색</button>
-							</div>
 						</div>
 					</div>
 					
@@ -244,11 +254,20 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 				        </div>
 					</div>
 				</div><!-- 리스트 영역 끝 -->
-					
-				
+				<!-- 페이징 영역 -->
+				<div class="row paging">
+				<div class="col-md-12">
+					<!-- 페이징 처리에 따른 페이지 인덱스 적용 -->
+					<c:if test="${count != 0 }">
+						<div align="center">
+							${pageIndexList }
+						</div>
+					</c:if>
+				</div>
+				</div><!-- 페이징 영역 끝 -->
 			</div>
 		</div>
-	</div>
+		</div>
 </div>
 <div class="row">
 	<div class="col-md-12">

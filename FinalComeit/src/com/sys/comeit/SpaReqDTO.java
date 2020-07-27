@@ -2,59 +2,120 @@ package com.sys.comeit;
 
 public class SpaReqDTO
 {
-	private String spa_req_cd, spa_cd, spa_type,type_name;//등록요청 코드, 업체코드, 업체타입
+	private String spa_req_cd, spa_cd, spa_type,type_name,spa_id;//등록요청 코드, 업체코드, 업체타입, 업체 아이디
     private String one_intro,dtl_intro, rsv_notes, req_date; //한줄 소개, 상세소개, 주의사항, 등록요청일
-    private int use_hrs, str_time, end_time;//최대 이용시간, 시작시간, 종료시간
+    private int use_hrs, str_time, end_time,mem_num;//최대 이용시간, 시작시간, 종료시간
     private String busi_name, spa_name, dtl_addr, tel; // 상호명, 공간명, 상세주소, 전화번호
     private String rprsn_name, spa_addr; //대표자명, 사업장 주소
-    private String web_url, file_url;//웹사이트, 사업자번호파일
+    private String web_url, file_url,check_type;//웹사이트, 사업자번호파일,승인여부
     private String area_name, spc_area_name;						// 지역명, 세부지역명
     private String rprsn_num,img_url ; //사업자번호, 대표이미지
     private String spc_area_cd; //세부지역코드
-    private String int_tag, etc_tag;						// 관심키워드, 기타관심키워드
-    private String img_type_cd;	// 이미지 타입
-    private String content;// 시설안내
+    private String int_tag, etc_tag,img_type_cd,content;	// 관심키워드, 기타관심키워드,이미지 타입, 시설안내
     private String spa_tag_type_cd,tag_name; // 키워드 코드, 명
     private String feedCount; // 피드백수
-    private String facility, kindness, price, location, noise;// 시설, 친절, 가격, 위치, 소음
-	private String mem_id; //피드백을 입력한 사람 아이디
+    private int facility, kindness, price, location, noise;// 시설, 친절, 가격, 위치, 소음
+	private String mem_id,req_cd; //피드백을 입력한 사람 아이디,요청 코드
+	private String stu_hist_cd,use_time;// 스터디장코드, 실제사용시간, 인원수
 	
-    
-    
+	public String getSpa_id() {
+		return spa_id;
+	}
+	public void setSpa_id(String spa_id) {
+		this.spa_id = spa_id;
+	}
+	public String getCheck_type() {
+		return check_type;
+	}
+	public void setCheck_type(String check_type) {
+		this.check_type = check_type;
+	}
+	// 검색
+	private String searchKey, searchValue;	// 검색 키, 검색 단어
+	private int start, end;			// 페이지 시작 / 끝
+	
+	public int getStart() {
+		return start;
+	}
+	public void setStart(int start) {
+		this.start = start;
+	}
+	public int getEnd() {
+		return end;
+	}
+	public void setEnd(int end) {
+		this.end = end;
+	}
+	public String getSearchKey() {
+		return searchKey;
+	}
+	public void setSearchKey(String searchKey) {
+		this.searchKey = searchKey;
+	}
+	public String getSearchValue() {
+		return searchValue;
+	}
+	public void setSearchValue(String searchValue) {
+		this.searchValue = searchValue;
+	}
+	public String getUse_time() {
+		return use_time;
+	}
+	public void setUse_time(String use_time) {
+		this.use_time = use_time;
+	}
+	public int getMem_num() {
+		return mem_num;
+	}
+	public void setMem_num(int mem_num) {
+		this.mem_num = mem_num;
+	}
+	public String getStu_hist_cd() {
+		return stu_hist_cd;
+	}
+	public void setStu_hist_cd(String stu_hist_cd) {
+		this.stu_hist_cd = stu_hist_cd;
+	}
+	public String getReq_cd() {
+		return req_cd;
+	}
+	public void setReq_cd(String req_cd) {
+		this.req_cd = req_cd;
+	}
 	public String getMem_id() {
 		return mem_id;
 	}
 	public void setMem_id(String mem_id) {
 		this.mem_id = mem_id;
 	}
-	public String getFacility() {
+	public int getFacility() {
 		return facility;
 	}
-	public void setFacility(String facility) {
+	public void setFacility(int facility) {
 		this.facility = facility;
 	}
-	public String getKindness() {
+	public int getKindness() {
 		return kindness;
 	}
-	public void setKindness(String kindness) {
+	public void setKindness(int kindness) {
 		this.kindness = kindness;
 	}
-	public String getPrice() {
+	public int getPrice() {
 		return price;
 	}
-	public void setPrice(String price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
-	public String getLocation() {
+	public int getLocation() {
 		return location;
 	}
-	public void setLocation(String location) {
+	public void setLocation(int location) {
 		this.location = location;
 	}
-	public String getNoise() {
+	public int getNoise() {
 		return noise;
 	}
-	public void setNoise(String noise) {
+	public void setNoise(int noise) {
 		this.noise = noise;
 	}
 	public String getFeedCount() {

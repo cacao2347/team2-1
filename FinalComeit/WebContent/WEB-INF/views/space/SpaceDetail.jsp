@@ -28,16 +28,20 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 <script type="text/javascript">
 	/* 달력 */
 	$(document).ready(function(){
-	    var date_input=$('input[name="date"]'); //our date input has the name "date"
+	    var date_input=$('input[name="date"]');
 	    var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
 	    var options={
-	      format: 'yyyy/mm/dd',
+	      language:'kr',
+	      format: 'yyyy-mm-dd',
 	      container: container,
 	      todayHighlight: true,
 	      autoclose: true,
 	    };
 	    date_input.datepicker(options);
+	   
 	  });
+	
+	
 	
 	/* 피드백 */
 	 $(document).ready(function() {
@@ -138,7 +142,96 @@ body{font-family: 'Noto Sans KR', sans-serif;}
        $('#slider5 a').html('<label><span class="glyphicon glyphicon-chevron-left"></span>'+$spa5+'<span class="glyphicon glyphicon-chevron-right"></span></label>');
     } 
     
-    $(document).ready(function () { $('head').append('<style type="text/css">.modal .modal-body {max-height: ' + ($('body').height() * .8) + 'px;}.modal-open .modal{overflow-y: hidden !important;overflow-x: hidden !important;}</style>'); });
+    $(document).ready(function () 
+    { 
+    	$('head').append('<style type="text/css">.modal .modal-body {max-height: ' + ($('body').height() * .8) + 'px;}.modal-open .modal{overflow-y: hidden !important;overflow-x: hidden !important;}</style>'); 
+    	
+        
+        // 모달창 값 보내기(피드백)
+        $("#feedBtn").click(function()
+       	{
+        	$.ajax(
+  			{
+  				type : "POST"
+  				, url : "feedinsert.action"
+  			    , data : {"cd":$(this).val(),
+  			    	"spa1":$("#spa1").val(),
+  					"spa2":$("#spa2").val(),
+  					"spa3":$("#spa3").val(),
+  					"spa4":$("#spa4").val(),
+  					"spa5":$("#spa5").val(),
+  					} 
+  				, success : function()
+  				{
+  					alert("피드백 등록 성공!");
+  				}
+  				, error : function(e)
+  				{
+  					alert("이미 등록된 피드백이 있습니다.");
+  				}
+  			});
+        	feedEnd();
+       	});
+        
+        
+        $(".onlyNumber").keyup(function(event){
+            if (!(event.keyCode >=37 && event.keyCode<=40)) {
+                var inputVal = $(this).val();
+                $(this).val(inputVal.replace(/[^0-9]/gi,''));
+            }
+        });
+        
+        /* $(".spaReq").click(function()
+        {
+        	alert($("#spaReqCd").val());
+        	alert($("#date").val());
+        	alert($("#time").val());
+        	alert($("#import").val());
+        	alert($("#reqNum").val());
+        	
+        	if ($("#date").val() == "" || $("#time").val() == 0
+	           || $("#import").val() == 0|| $("#reqNum").val() == 0 )
+	          {
+	             alert("필수항목 누락");
+	             return;
+	          }
+	          $("#reqForm").submit();
+        }); */
+        
+        // 모달창 값 보내기(예약하기)
+        $(".spaReq").click(function()
+       	{
+        	$.ajax(
+  			{
+  				type : "POST"
+  				, url : "reqinsert.action"
+  			    , data : {"spaReqCd":$(this).val(),
+  			    	"date":$("#date").val(),
+  					"time":$("#time").val(),
+  					"import":$("#import").val(),
+  					"reqNum":$("#reqNum").val(),
+  					} 
+  				, success : function()
+  				{
+  					alert("예약이 성공적으로 완료되었습니다.");
+  				}
+  				, error : function(e)
+  				{
+  					alert("예약이 실패되었습니다.");
+  				}
+  			});
+        	feedEnd();
+       	});
+        
+    });
+    
+    function feedEnd() {
+    	location.reload();
+	}
+    
+    
+    	
+
 
 </script>
 </head>
@@ -240,9 +333,11 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 				<tr>
 					<!-- <th>Feedback<button type="button" class="btn btn-primary btnfeed">등록</button></th> -->
 					<th colspan="6">Feedback
+					<c:set var="countFeed" value="${countFeed = 1 }" />
 					<c:forEach var="feedChecks" items="${feedCheck }">
-					<c:if test="${feedChecks.mem_id eq  sessionScope.id}">
-					<button type="button" class="btn btn-primary btnfeed" data-toggle="modal" data-target="#staticBackdrop2">등록하기</button>
+					<c:if test="${feedChecks.mem_id eq  sessionScope.id && countFeed eq 1}">
+					<c:set var="countFeed" value="${countFeed + 1}" />
+					<button type="button"  class="btn btn-primary btnfeed" data-toggle="modal" data-target="#staticBackdrop2">등록하기</button>
 					</c:if>
 					</c:forEach></th> 
 				</tr>
@@ -358,17 +453,17 @@ body{font-family: 'Noto Sans KR', sans-serif;}
             		 <input type="hidden" id="spa5" class="form-control">
             		</div>
           			</div>
-          			<div class="price-slider" style="margin-top: 15px;">
+          			<!-- <div class="price-slider" style="margin-top: 15px;">
            			 <h4 class="great1"  style="color: #336699; font-weight: bold;">상세후기</h4>
            			 <span>공간에 대한 상세 피드백 후기를 남겨주세요! (선택사항)</span>
 					<div class="deev">
             			<textarea rows="5" cols="60"></textarea>
             		</div>
-          			</div>
+          			</div> -->
 
           <div class="form-group">
             <div class="col-sm-12">
-              <button type="submit" class="btn btn-primary btn-lg btn-block">등록하기 <span class="glyphicon glyphicon-chevron-right pull-right" style="padding-right: 10px;"></span></button>
+              <button type="button" value="${feeCdd}" id="feedBtn" class="btn btn-primary btn-lg btn-block">피드백등록 <span class="glyphicon glyphicon-chevron-right pull-right" style="padding-right: 10px;"></span></button>
             </div>
           </div>
 </div>
@@ -425,6 +520,8 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 					      <div class="modal-body mbody">
 					      	
 					      	
+					      	<form action="reqinsert.action" id="reqForm" name="reqForm" method="post" >
+					      	<%-- <input type="hidden" name="spaReqCd" id="spaReqCd" value="${spaceInfo.spa_req_cd}"> --%>
 					      	<table class="table" style="margin-top: 30px;">
 					      		
 					      		<tr>
@@ -436,29 +533,29 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 								      </div>
 					      			</td>
 					      			<td style="border-top:none">
-					      				<label class="control-label" for="date">시간</label>
-					      				<input type="text" class="form-control" style="width: 150px;" placeholder="예) 3(숫자만 입력)">
+					      				<label class="control-label" for="time">총 이용시간</label>
+					      				<input type="text" id="time" name="time" class="form-control onlyNumber" style="width: 150px;" placeholder="예)2(숫자만 입력)">
 					      			</td>
 					      		</tr>
 					      		<tr>
 					      			<td><div class="rsnTit">예약정보</div></td>
 					      			<td>
 					      			  <div class="form-group">
-								        <label class="control-label" for="tot">총 이용시간</label>
-								        <input type="text" class="form-control" style="width: 150px;" id="tot" placeholder="예) 2(숫자만 입력)">
+								        <label class="control-label" for="import">이용시작시간</label>
+								        <input type="text" id="import" name="import" class="form-control onlyNumber" style="width: 150px;" id="tot" placeholder="예)오전9시 = 9(숫자만 입력)">
 								      </div>
 					      			</td>
 					      			<td >
-					      				<div class="form-group"><label class="control-label" for="peo">인원수</label>
-					      				<input type="text" class="form-control content" id="peo" style="width: 150px;"  placeholder="예) 2(숫자만 입력)"></div>
+					      				<div class="form-group"><label class="control-label" for="reqNum">인원수</label>
+					      				<input type="text" id="reqNum" name="reqNum" class="form-control content onlyNumber" id="peo" style="width: 150px;"  placeholder="예) 2(숫자만 입력)"></div>
 					      			</td>
 					      		</tr>
 					      			
 					      	</table>
-					      	
+					      	</form>
 					      </div>
 					      <div class="modal-footer">
-					        <button type="button" class="btn btn-primary">확인</button>
+					        <button type="button" value="${spaceInfo.spa_req_cd }" class="btn btn-primary spaReq">확인</button>
 					      </div>
 					    </div>
 					  </div>
