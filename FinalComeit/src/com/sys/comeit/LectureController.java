@@ -47,11 +47,16 @@ public class LectureController
 	public String lectureInsert(Model model, HttpServletRequest request)
 	{
 		ILectureDAO lectureDao = sqlSession.getMapper(ILectureDAO.class);
-
+		IProDAO proDao = sqlSession.getMapper(IProDAO.class);
+		
+		HttpSession session = request.getSession();
+		
 		String view = "";
+		String mem_cd = "";
+		mem_cd = (String) session.getAttribute("mem_cd");
 
 		// String lec_cd = request.getParameter("id");
-		String prof_cd = "PROF1001"; //
+		String prof_cd = proDao.lecCreateCheck2(mem_cd); //
 		String spc_area_cd = request.getParameter("spcArea");
 		String lec_term_cd = request.getParameter("lecTerm");
 		String lec_name = request.getParameter("lecName"); //
@@ -143,6 +148,8 @@ public class LectureController
 			}
 
 		}
+		
+		view = "redirect:lecturelist.action";
 
 		return view;
 	}
@@ -153,22 +160,26 @@ public class LectureController
 	public String memberJoin(Model model, HttpServletRequest request) throws UnsupportedEncodingException
 	{
 		String view = null;
+		String mem_cd = null;
+		int mem_cd_check = 0;
+		
+		// mem_cd 를 받기 위한 세션 생성
+		HttpSession session = request.getSession();
 		
 		IAreaDAO areaDao = sqlSession.getMapper(IAreaDAO.class); // 지역
-		ILectureDAO lecDao = sqlSession.getMapper(ILectureDAO.class); // 스터디 정보
-		
-		
-		//String lec_cd = 
-		//System.out.println(lec_cd);
+		ILectureDAO lecDao = sqlSession.getMapper(ILectureDAO.class); // 강의
+		IProDAO proDao = sqlSession.getMapper(IProDAO.class); // 강사
+
+		// 세션을 통해 mem_cd를 얻어오고 해당 회원이 강사인지 아닌지 판단 하기 위한 변수
+		mem_cd = (String) session.getAttribute("mem_cd");
+		mem_cd_check = proDao.lecCreateCheck(mem_cd);
 		
 		model.addAttribute("area", areaDao.areaList());
-
-		//model.addAttribute("lec", lecDao.lecList()); // 실제 스터디 리스트
+		//model.addAttribute("lec", lecDao.lecList()); // 실제 강의 리스트
 		model.addAttribute("count", lecDao.lecCount());
-		
-		
-		model.addAttribute("lecTags", lecDao.lecTagList()); // 하나의 스터디의 모든 키워드
-		model.addAttribute("lecHrDays", lecDao.lecHrDaySearch());  // 하나의 스터디의 요일, 시간
+		model.addAttribute("lecTags", lecDao.lecTagList()); // 하나의 강의의 모든 키워드
+		model.addAttribute("lecHrDays", lecDao.lecHrDaySearch());  // 하나의 강의의 요일, 시간
+		model.addAttribute("mem_cd_check", mem_cd_check); // 멤버 코드 LectureList.jsp 페이지로 넘기기
 		
 		// 페이징 처리 --------------------------------------
 
@@ -253,7 +264,7 @@ public class LectureController
 		String pageIndexList = util.pageIndexList(currentPage, totalPage, listUrl);
 		System.out.println("pageIndexList : " + pageIndexList);
 		
-		// 포워딩할 studylist.jsp 에 넘겨준다.
+		// 포워딩할 LectureList.jsp 에 넘겨준다.
 		request.setAttribute("lec", lec);
 		request.setAttribute("pageIndexList", pageIndexList);
 		request.setAttribute("dataCount", dataCount);
@@ -272,15 +283,15 @@ public class LectureController
 				String view = "";
 				int profCheck = 0; // 강의 상세 페이지를 호출하는 회원이 강사인지 아닌지 판단하는 변수
 				
-				// HttpSession session = request.getSession("");
-				// String mem_cd = session.getAttribute("mem_cd");
+				HttpSession session = request.getSession();
 				
 				ILectureDAO lectureDao = sqlSession.getMapper(ILectureDAO.class);
 				IProDAO proDao = sqlSession.getMapper(IProDAO.class);
 				
-				String lec_cd = "LEC1024";	
-				String mem_cd = "MEMC1037"; // 해당 강의의 강사 mem_cd 
-				String mem_cd_session = "MEMC1037"; // 해당 페이지에 접속하는 mem_cd
+				// 강의코드 받기
+				String lec_cd = request.getParameter("lec_cd");
+				String mem_cd = lectureDao.findMemcd(lec_cd); // 해당 강의의 강사 mem_cd 
+				String mem_cd_session = (String) session.getAttribute("mem_cd"); // 해당 페이지에 접속하는 mem_cd
 				
 				profCheck = lectureDao.checkProfcd(lec_cd, mem_cd_session);
 				

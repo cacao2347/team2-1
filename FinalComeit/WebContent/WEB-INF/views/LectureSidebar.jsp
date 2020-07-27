@@ -57,18 +57,14 @@ footer {
 					alt="myimg" style="width: 180px; height: 200px;">
 			</h4>
 			<ul class="nav nav-pills nav-stacked">
-				<li class="active" style="text-align: center;">아이유 님의 프로필</li>
+				<li class="active" style="text-align: center;">${profInfo.name } 님의 프로필</li>
 				<li style="text-align: center;">◎85cm</li>
 				<li><textarea name="" id="" cols="20" rows="5">강사이력
-						·ㅇㅇ대학
-						컴퓨터공학과 졸업
-						⦁ 무슨무슨 기업 근무(2017~2020)
+						${profInfo.career }
 				</textarea></li>
 				<li>강사소개</li>
 				<li><textarea name="" id="" cols="20" rows="10">
-						안녕하세요 아이유입니다.
-						 저는 ㅇㅇ대학 컴공과를 졸업하여…
-						  웹개발 경력 n년차이며...
+						${profInfo.prof_intro }
   						</textarea>
   				</li>
 			</ul>

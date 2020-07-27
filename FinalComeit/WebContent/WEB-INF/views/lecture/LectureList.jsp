@@ -77,54 +77,17 @@ body
 		});
 		
 		
-		/*
+		
 		// 강의 각각 리스트 클릭 시 (로그인 후)
 		$(".titleBtn").click(function()
 		{
-			//var params = "scrtCheck" + $
-			//alert($(".stu_cd").val());
-			
-			//$(location).attr("href", "employeeupdateform.action?employeeId=" + $(this).val());
-			
 			alert($(this).val());
 			
 			var params = "lec_cd=" + $(this).val();
-			
-			$.ajax(
-			{
-				type : "POST"
-				, url : "stuscrtcheck.action"
-				, data : params
-				, dataType : "text"
-				, async:false
-				, success : function(data)
-				{
-					if(data != 0)
-					{
-						var result = prompt("비밀번호를 입력해 주세요 : ");
-						
-						if(result=="" || result==null)
-							return;
-						else if(result == data)
-							location.href = "/FinalComeit/lecturedetail.action?" + params;
-						else if(result != data)
-							alert("비밀번호가 틀렸습니다!");
-					}
-					else
-					{
-						location.href = "/FinalComeit/lecturedetail.action?" + params;
-					}
-						
-					
-				}
-				, error : function(e)
-				{
-					alert(e.responseText + "에러");
-				}
-			});
+			location.href = "/FinalComeit/lecturedetail.action?" + params;
 	
 		});
-		*/
+		
 		
 		// 강의 개설 버튼 클릭 시 (로그인 전)
 		$("#bFcreateBtn").click(function()
@@ -144,9 +107,19 @@ body
 		// 강의 개설 버튼 클릭 시 (로그인 후)
 		$("#createBtn").click(function()
 		{
+			if(${mem_cd_check} == 0)
+			{
+				alert("강사 회원이 아닙니다.");
+				return;
+			}
+			else
+			{
+				location.href = "/FinalComeit/lecturecreate.action";
+			}
+			
 			// 여기서 ajax 처리로 개수 체크하기
 			
-			$.ajax(
+			/* $.ajax(
 			{
 				type : "POST"
 				, url : "lecturecreatecnt.action"
@@ -171,9 +144,7 @@ body
 				{
 					alert(e.responseText + "에러");
 				}
-			});
-			
-			
+			}); */
 			
 		});
 		

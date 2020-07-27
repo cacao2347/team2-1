@@ -16,6 +16,7 @@ public interface ILectureDAO
 	public int addTagName(String etcTag);
 	public int addLecturePrgTime(LectureDTO dto);
 	public int checkProfcd(@Param("lec_cd") String lec_cd, @Param("mem_cd") String mem_cd);
+	public String findMemcd(String lec_cd);
 	
 	public ArrayList<LectureDTO> lecIntTagSearch(String lec_cd);	// 한 강의의 관심키워드 뿌려주기
 	

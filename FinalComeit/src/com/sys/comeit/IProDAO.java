@@ -12,4 +12,6 @@ public interface IProDAO
 {
 	public ArrayList<ProDTO> proList();
 	public ProDTO profInfo(String mem_cd);
+	public int lecCreateCheck(String mem_cd);
+	public String lecCreateCheck2(String mem_cd);
 }

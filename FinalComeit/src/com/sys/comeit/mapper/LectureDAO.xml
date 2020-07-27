@@ -141,10 +141,19 @@
 		WHERE LEC_CD = #{lec_cd}
 	</select>
 	
+	<!-- 강의 상세 페이지 접근 시 해당 회원이 강의의 강사인지 아닌지 판단 -->
+	<!-- 해당 강의의 강사가 아니면 Student Page로 해당 강의의 강사이면
+			Professor Page 로 접근 -->
 	<select id="checkProfcd" resultType="java.lang.Integer">
 		SELECT COUNT(*) AS COUNT
 		FROM VIEW_PROF_CHECK
 		WHERE LEC_CD = #{lec_cd} AND MEM_CD = #{mem_cd}
+	</select>
+	
+	<select id="findMemcd" resultType="java.lang.String" parameterType="java.lang.String">
+		SELECT MEM_CD
+		FROM VIEW_FIND_MEM_CD
+		WHERE LEC_CD = #{lec_cd}
 	</select>
 	
 </mapper>
