@@ -10,14 +10,16 @@
 <meta charset="UTF-8">
 <title>SpaceMy.jsp</title>
 <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/space-manage.css">
-
+<link rel="shortcut icon" href="<%=cp %>/assets/images/pen_1.ico" type="image/x-icon">
+<link rel="icon" href="<%=cp %>/assets/images/pen_1.ico" type="image/x-icon">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
 <%-- <link rel="stylesheet" type="text/css" href="<%=cp %>/assets/css/bootstrap/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
-
  --%>
  <style type="text/css">
+ body{font-family: 'Noto Sans KR', sans-serif;}
 .modal {
         text-align: center;
 }
@@ -41,7 +43,7 @@
 <body>
 <div class="headerrow">
 	<div class="col-md-12">
-	<c:import url="header.jsp"></c:import>
+	<c:import url="/WEB-INF/views/header.jsp"></c:import>
 	</div>
 </div>
 			
@@ -90,7 +92,7 @@
 
 <div class="row">
 	<div class="col-md-12">
-	<c:import url="footer.jsp"></c:import>
+	<c:import url="/WEB-INF/views/footer.jsp"></c:import>
 	</div>
 </div>
 </body>

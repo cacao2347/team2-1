@@ -64,4 +64,16 @@ public class SpaceController
 			view = "WEB-INF/views/space/SpaceDetail.jsp";
 			return view;
 		}
+		
+		// 공간 마이페이지로 이동
+		@RequestMapping(value = "/spacemy.action", method = RequestMethod.GET)
+		public String spaceMy(Model model,HttpServletRequest request)
+		{
+			String view = null;
+			
+			
+			view = "WEB-INF/views/space/SpaceMy.jsp";
+			return view;
+		}
+		
 }

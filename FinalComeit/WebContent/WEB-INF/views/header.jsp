@@ -28,6 +28,7 @@
 </head>
 
 <body class="boheader">
+<c:set var = "loginType" scope = "session" value = "${sessionScope.loginType }"/>
 <!------ Include the above in your HEAD tag ---------->
 <div class="header">
   <nav class="navbar navbar-inverse">
@@ -60,7 +61,14 @@
 			    <li><a href="/FinalComeit/spajoin.action">업체 Singup</a></li>
 			</c:when>
 			<c:when test="${not empty idCheck}">
-			    <li><a href="#">${name } MyPage</a></li>
+				<c:choose>
+           		 <c:when  test="${loginType eq '0'}">
+					<li><a href="#">${name } MyPage</a></li>
+				 </c:when>
+				 <c:when  test="${loginType eq '1'}">
+				    <li><a href="/FinalComeit/spacemy.action">${name } MyPage</a></li>
+				 </c:when>
+				 </c:choose>
 			    <li><a href="/FinalComeit/logout.action">logout</a></li>
 			</c:when>
 			</c:choose>

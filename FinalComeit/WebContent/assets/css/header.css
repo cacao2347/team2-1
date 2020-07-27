@@ -17,10 +17,10 @@ body.boheader .header
 .navbar-inverse
 {
 	border-bottom-color: #052463 !important;
-	border-left: none;
-	border-right: none;
+	border-left: none !important;
+	border-right: none !important;
 	background-color:white !important;
-	border-top: none;
+	border-top: none !important;
 }
 .navbar-inverse .navbar-toggle
 {
@@ -119,6 +119,6 @@ body.boheader .header
 }
 .navbar-header:hover
 {
-	background-colo:#2c4b69;
+	background-color:#2c4b69;
 	color: white;
 }
