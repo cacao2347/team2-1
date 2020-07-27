@@ -103,7 +103,7 @@
 		FROM VIEW_LEC_INFO
 		WHERE END_DATE <![CDATA[>]]> SYSDATE
 		<if test="searchValue != null and !searchValue.equals('')">
-			AND ${searchKey} LIKE '%${searchValue}%'
+			WHERE #{searchKey} LIKE '%'||#{searchValue}||'%'
 		</if>
 	</select>
 	
@@ -118,28 +118,33 @@
 		        SELECT LEC_CD, NAME, AREA_NAME, SPC_AREA_NAME, LEC_NAME, LEC_TERM, CRT_DATE
            			 , STR_DATE , LEC_FEE , LEC_INTRO , MIN_MEM , MAX_MEM , IMG_URL, END_DATE
       			FROM VIEW_LEC_INFO
-      			WHERE END_DATE <![CDATA[>]]> SYSDATE
 		        <choose>
 		        	<when test="searchValue != null">
-		        		AND ${searchKey} LIKE '%${searchValue}%'
+		        		WHERE LEC_NAME LIKE '%'||#{searchValue}||'%'
 				        ORDER BY LEC_CD DESC
 				    ) DATA
 				)
-				WHERE RNUM <![CDATA[>]]>= #{start} AND RNUM <![CDATA[<]]>= #{end}
+				WHERE RNUM <![CDATA[>]]>= #{start} AND RNUM <![CDATA[<]]>=#{end}
 		        	</when>
 		        	<otherwise>
 		        		ORDER BY LEC_CD DESC
 				    ) DATA
 				)
-				WHERE RNUM <![CDATA[>]]>= #{start} AND RNUM <![CDATA[<]]>= #{end}
+				WHERE RNUM <![CDATA[>]]>= #{start} AND RNUM <![CDATA[<]]>=#{end}
 		        	</otherwise>
 		        </choose>
 	</select>
 	
 	<select id="lectureInfo" resultType="com.sys.comeit.LectureDTO" parameterType="java.lang.String">
-		SELECT LEC_NAME, LEC_INTRO, STR_DATE, STR_DATE - 30 AS END_DATE, LEC_FEE, MIN_MEM, MAX_MEM, IMG_URL, SPC_AREA_NAME
+		SELECT LEC_NAME, LEC_INTRO, STR_DATE, STR_DATE - 30 AS END_DATE, LEC_FEE, MIN_MEM, MAX_MEM, IMG_URL, SPC_AREA_NAME, LEC_CD
 		FROM VIEW_LEC_INFO
 		WHERE LEC_CD = #{lec_cd}
+	</select>
+	
+	<select id="checkProfcd" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS COUNT
+		FROM VIEW_PROF_CHECK
+		WHERE LEC_CD = #{lec_cd} AND MEM_CD = #{mem_cd}
 	</select>
 	
 </mapper>

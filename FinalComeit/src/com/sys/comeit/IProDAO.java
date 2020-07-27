@@ -11,5 +11,5 @@ import java.util.ArrayList;
 public interface IProDAO
 {
 	public ArrayList<ProDTO> proList();
-	
+	public ProDTO profInfo(String mem_cd);
 }

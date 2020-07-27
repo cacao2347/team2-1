@@ -3,6 +3,8 @@ package com.sys.comeit;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 public interface ILectureDAO
 {
 	// 강의 개설 메소드
@@ -13,6 +15,9 @@ public interface ILectureDAO
 	public int etcTagCount(String etcTag);
 	public int addTagName(String etcTag);
 	public int addLecturePrgTime(LectureDTO dto);
+	public int checkProfcd(@Param("lec_cd") String lec_cd, @Param("mem_cd") String mem_cd);
+	
+	public ArrayList<LectureDTO> lecIntTagSearch(String lec_cd);	// 한 강의의 관심키워드 뿌려주기
 	
 	public LectureDTO lectureInfo(String lec_cd); // 강의 상세페이지 정보 뿌려주기
 	

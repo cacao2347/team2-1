@@ -10,9 +10,15 @@
 		FROM TBL_PROF
 	</select>
 	
-	<select id="getProfcd" resultType="java.lang.String">
+	<!-- <select id="getProfcd" resultType="java.lang.String">
 		SELECT PROF_CD
 		FROM TBL_PROF
+		WHERE MEM_CD = #{mem_cd}
+	</select> -->
+	
+	<select id="profInfo" resultType="com.sys.comeit.ProDTO">
+		SELECT NAME, IMG_URL, CAREER, PROF_INTRO, MEM_CD
+		FROM VIEW_PROF_INFO
 		WHERE MEM_CD = #{mem_cd}
 	</select>
 		

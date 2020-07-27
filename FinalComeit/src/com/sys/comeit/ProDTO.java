@@ -2,7 +2,38 @@ package com.sys.comeit;
 
 public class ProDTO
 {
-	private String prof_cd, mem_cd, bank_cd, career, crt_date, acnt_num;
+	private String prof_cd, mem_cd, bank_cd, career, crt_date, acnt_num, name, prof_intro
+	, img_url;
+
+	public String getImg_url()
+	{
+		return img_url;
+	}
+
+	public void setImg_url(String img_url)
+	{
+		this.img_url = img_url;
+	}
+
+	public String getName()
+	{
+		return name;
+	}
+
+	public void setName(String name)
+	{
+		this.name = name;
+	}
+
+	public String getProf_intro()
+	{
+		return prof_intro;
+	}
+
+	public void setProf_intro(String prof_intro)
+	{
+		this.prof_intro = prof_intro;
+	}
 
 	public String getProf_cd()
 	{

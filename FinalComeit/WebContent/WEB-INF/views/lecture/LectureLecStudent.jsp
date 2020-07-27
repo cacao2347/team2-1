@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>LectureProfessorDetail.jsp</title>
+<title>LectureLecStudent.jsp</title>
 <link rel="stylesheet" type="text/css"
 	href="<%=cp%>/assets/css/lectureprofessordetail.css">
 <link rel="stylesheet" type="text/css"
@@ -24,7 +24,6 @@
 	src="http://code.jquery.com/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/assets/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-
 	$(document).ready(function() {
 
 		$("#member1").mouseover(function() {
@@ -157,8 +156,7 @@
 							
 							<!-- 버튼 영역 -->
 							<div class="text-right">
-								<input type="button" value="강의 수정" class="btn btn-lg btn-primary join" />
-								<input type="button" value="강의 삭제" class="btn btn-lg btn-secondary join" />
+								<input type="button" value="강의 신청" class="btn btn-lg btn-primary join" />
 							</div>
 
 						</div>
@@ -176,10 +174,11 @@
 		</div>
 		<!-- end .row -->
 
+
 	</div>
 	<!-- end .container-fluid -->
 	
-		<div class="row">
+<div class="row">
 			<div class="col-md-2">
 			</div>
 			<div class="col-md-8">
