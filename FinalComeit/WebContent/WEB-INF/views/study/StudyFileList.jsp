@@ -96,8 +96,6 @@
 					});
 				});
 				
-				
-				
 			}
 			, error : function(e)
 			{
