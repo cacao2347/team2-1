@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -82,7 +83,7 @@ table.ui-datepicker-calendar { display:none; }
 </form>
 <br>
 <div class="radio">
-    <label for="foo1">
+<!--     <label for="foo1">
         <input type="radio" name="ra" id="foo1">
         전체
     </label>
@@ -93,18 +94,18 @@ table.ui-datepicker-calendar { display:none; }
     <label for="foo3">
         <input type="radio"name="ra" id="foo3">
         거부
-    </label>
+    </label> -->
 </div>
 	<div>
+	<h4>스터디 요청</h4>
 	    <ul>
-	        <li class="menu" style="margin-top: 20px;">
-	            <a>업체명1</a>
+	        <li class="menu"style="margin-top: 20px;">
 	            <ul>
 	                <li style="margin-top: 30px;">
 	               		<table class="table table-hover table-bordered">
 	               		<thead>
 	               			<tr>
-	               				<th>아이디</th>
+	               				<th>이름</th>
 	               				<th>날짜</th>
 	               				<th>요청시간</th>
 	               				<th>인원</th>
@@ -113,102 +114,26 @@ table.ui-datepicker-calendar { display:none; }
 	               			</tr>
 	               		</thead>
 	               		<tbody>
+	               		<c:forEach var="reqCheckList" items="${reqCheck }">
 	               			<tr>
-	               				<td>길동</td>
-	               				<td>2020.07.12</td>
-	               				<td>오후1시~3시</td>
-	               				<td>4명</td>
-	               				<td>2020.07.04</td>
+	               				<td>${reqCheckList.name }</td>
+	               				<td>${reqCheckList.use_time }</td>
+	               				<td>${reqCheckList.use_hrs}</td>
+	               				<td>${reqCheckList.mem_num}</td>
+	               				<td>${reqCheckList.req_date}</td>
 	               				<td>
+	               					<c:if test="${reqCheckList.type eq 'YES'}">
 	               					<button class="btn btn-primary">승인</button>
+	               					</c:if>
+	               					<c:if test="${reqCheckList.type eq 'NO'}">
+	               					<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#staticBackdrop">거부</button>
+	               					</c:if>
 	               				</td>
 	               			</tr>
-	               			<tr>
-	               				<td>길동</td>
-	               				<td>2020.07.13</td>
-	               				<td>오후1시~4시</td>
-	               				<td>4명</td>
-	               				<td>2020.07.06</td>
-	               				<td>
-	               					<button class="btn btn-secondary">거부</button>
-	               				</td>
-	               			</tr>
+	               			</c:forEach>
 	               		</tbody>
 	               		</table>
-	               		<br>
-	               		<!-- 페이징 영역 -->
-						<div class="paging text-center">
-							<div class="col-md-12">
-								<nav>
-									<ul class="pagination">
-						            <li class="page-item"><a href="#" class="page-link">Previous</a></li>
-						            <li class="page-item"><a href="#" class="page-link">1</a></li>
-						            <li class="page-item"><a href="#" class="page-link">2</a></li>
-						            <li class="page-item"><a href="#" class="page-link">3</a></li>
-						            <li class="page-item"><a href="#" class="page-link">4</a></li>
-						            <li class="page-item"><a href="#" class="page-link">Next</a></li>
-						            </ul>
-								</nav>
-							</div>
-						</div>
 					</li>
-	            </ul>
-	        </li>
-	        <li class="menu" style="margin-top: 20px;">
-	            <a>업체명2</a>
-	            <ul>
-	                <li style="margin-top: 30px;">
-	                <table class="table table-hover table-bordered">
-	               		<thead>
-	               			<tr>
-	               				<th>아이디</th>
-	               				<th>날짜</th>
-	               				<th>요청시간</th>
-	               				<th>인원</th>
-	               				<th>요청한날</th>
-	               				<th>승인여부</th>
-	               			</tr>
-	               		</thead>
-	               		<tbody>
-	               			<tr>
-	               				<td>길동</td>
-	               				<td>2020.07.12</td>
-	               				<td>오후1시~2시</td>
-	               				<td>4명</td>
-	               				<td>2020.07.07</td>
-	               				<td>
-	               					<button class="btn btn-secondary">거부</button>
-	               				</td>
-	               			</tr>
-	               			<tr>
-	               				<td>길동</td>
-	               				<td>2020.07.13</td>
-	               				<td>오후2시~5시</td>
-	               				<td>4명</td>
-	               				<td>2020.07.08</td>
-	               				<td>
-	               					<button class="btn btn-primary">승인</button>
-	               				</td>
-	               			</tr>
-	               		</tbody>
-	               		</table>
-	               		<br>
-	               		<!-- 페이징 영역 -->
-						<div class="paging text-center">
-							<div class="col-md-12">
-								<nav>
-									<ul class="pagination">
-						            <li class="page-item"><a href="#" class="page-link">Previous</a></li>
-						            <li class="page-item"><a href="#" class="page-link">1</a></li>
-						            <li class="page-item"><a href="#" class="page-link">2</a></li>
-						            <li class="page-item"><a href="#" class="page-link">3</a></li>
-						            <li class="page-item"><a href="#" class="page-link">4</a></li>
-						            <li class="page-item"><a href="#" class="page-link">Next</a></li>
-						            </ul>
-								</nav>
-							</div>
-						</div>
-	               		</li>
 	            </ul>
 	        </li>
 	    </ul>

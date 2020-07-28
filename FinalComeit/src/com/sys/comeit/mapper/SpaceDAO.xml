@@ -152,9 +152,24 @@
    
    <!-- 마이페이지 그래프 -->
    <select id="googleChart" resultType="com.sys.comeit.SpaReqDTO">
-		SELECT SPA_REQ_CD, SUM(FACILITY) AS FACILITY,SUM(KINDNESS) AS KINDNESS, SUM(PRICE) AS PRICE, SUM(LOCATION) AS LOCATION, SUM(NOISE) AS NOISE
+		SELECT SPA_REQ_CD, SUM(FACILITY) AS FACILITY,SUM(KINDNESS) AS KINDNESS, SUM(PRICE) AS PRICE, SUM(LOCATION) AS LOCATION, SUM(NOISE) AS NOISE,COUNT(*) AS COUNT
 		FROM VIEW_SPA_FEEDCOUNT
 		WHERE ID= #{spa_id}
 		GROUP BY SPA_REQ_CD
    </select>
+   
+   <!-- 예약 내역 관리 -->
+   <select id="SpaReqCheck" resultType="com.sys.comeit.SpaReqDTO">
+		SELECT DISTINCT SPA_REQ_CD,SPA_ID,SPA_CD,REQ_CD,REQ_DATE,USE_HRS,USE_TIME,MEM_NUM,MEM_ID,NAME,MEM_TEL,TYPE
+		FROM VIEW_FEEDCHECK
+		WHERE SPA_ID=#{spa_id}
+   </select>
+   
+    <!-- 예약 요청 관리 -->
+   <select id="SpaReq" resultType="com.sys.comeit.SpaReqDTO">
+		SELECT DISTINCT STU_SPA_REQ_CD,SPA_REQ_CD,CHECK_TYPE_CD,REQ_DATE,USE_HRS,USE_TIME,MEM_NUM,PRCS_DATE,NAME,MEM_ID,SPA_ID
+		FROM VIEW_STU_SPA_REQ
+		WHERE SPA_ID=#{spa_id}
+   </select>
+   
 </mapper>

@@ -14,10 +14,29 @@ public class SpaReqDTO
     private String int_tag, etc_tag,img_type_cd,content;	// 관심키워드, 기타관심키워드,이미지 타입, 시설안내
     private String spa_tag_type_cd,tag_name; // 키워드 코드, 명
     private String feedCount; // 피드백수
-    private int facility, kindness, price, location, noise;// 시설, 친절, 가격, 위치, 소음
-	private String mem_id,req_cd; //피드백을 입력한 사람 아이디,요청 코드
+    private int facility, kindness, price, location, noise, count;// 시설, 친절, 가격, 위치, 소음, 피드백 평균 구할 개수
+	private String mem_id,req_cd,name,type; //피드백을 입력한 사람 아이디,요청 코드, 요청한사람 실명, 승인거부 여부
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 	private String stu_hist_cd,use_time;// 스터디장코드, 실제사용시간, 인원수
 	
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
 	public String getSpa_id() {
 		return spa_id;
 	}

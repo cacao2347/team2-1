@@ -252,8 +252,8 @@ public class SpaceController
 			
 			model.addAttribute("MyInfo",ispaceDAO.MyInfoSearch(spa_id));	// 본인이 등록한 공간 중 승인된 공간 관리
 			model.addAttribute("TotData",ispaceDAO.googleChart(spa_id));
-			
-			
+			model.addAttribute("reqCheck",ispaceDAO.SpaReqCheck(spa_id));	//마이페이지 공간 예약 내역 관리
+			model.addAttribute("req",ispaceDAO.SpaReq(spa_id));	//마이페이지 공간 예약 요청 관리
 			
 			view = "WEB-INF/views/space/SpaceMy.jsp";
 			return view;

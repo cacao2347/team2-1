@@ -25,6 +25,7 @@
 	list.push("${TotData.price}");
 	list.push("${TotData.location}");
 	list.push("${TotData.noise}");
+	list.push("${TotData.count}");
 	</c:forEach>
 
 	function drawVisualization() { 
@@ -35,6 +36,7 @@
 		    var price= list[2];
 		    var location= list[3];
 		    var noise= list[4];
+		    var count=list[5];
 		}
 		//alert(facility);
 		//alert(kindness);
@@ -45,7 +47,7 @@
 		var data = google.visualization.arrayToDataTable([
 				['년도', {label: '시설', type: 'number'},{label: '친절', type: 'number'}, {label: '가격', type: 'number'},
 					{label: '위치', type: 'number'} , {label: '소음', type: 'number'}],
-				['2020',  facility, kindness, price, location, noise],
+				['2020',  facility/count, kindness/count, price/count, location/count, noise/count],
 			]);
 		var options = {
 				title : '업체명',
@@ -99,10 +101,11 @@
          <div  style="margin-top: 30px;">
 		 <div class="item">
                   <ul class="thumbnails" style="list-style:none;" >
-                      <c:forEach var="MyInfoList" items="${MyInfo }">
-                      <c:if test="${empty MyInfoList}">
-                      	등록된 공간이 없습니다.
+                  
+                  <c:if test="${empty MyInfo}">
+                      	<p>등록된 공간이 없습니다. 지금바로 공간을 등록하세요!</p>
                       </c:if>
+                      <c:forEach var="MyInfoList" items="${MyInfo }">
 
                        <li class="col-sm-4 col-md-5" >	
 						<div class="demo">
@@ -135,18 +138,22 @@
 						  </div>
 						  </div>
                        </li>
+                       <c:if test="${not empty MyInfoList}">
+                       <div class="col-md-6" id="chart_div" style="width: 100%; height: 350px; margin-top: -35px; margin-bottom: 45px;">
+      					</div>
+      					<div class="upandde" style="margin-left: 30px;">
+							<button type="submit" class="btn btn-primary">수정</button>
+							<button type="submit" class="btn btn-secondary">삭제</button>
+						</div>
+      					</c:if>
 				</c:forEach>
                   </ul>
-                  <div class="col-md-6" id="chart_div" style="width: 100%; height: 350px; margin-top: -35px;">
-      		</div>
+                  
              </div>
         </div>
         
         <br>
-        <div class="upandde" style="margin-left: 30px;">
-			<button type="submit" class="btn btn-primary">수정</button>
-			<button type="submit" class="btn btn-secondary">삭제</button>
-		</div>
+        
 		<br><br>
       
      

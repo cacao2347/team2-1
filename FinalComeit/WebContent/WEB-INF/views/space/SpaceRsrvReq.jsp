@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,16 +28,16 @@
 </head>
 
 <body>
+
 	<div>
 	    <ul>
 	        <li class="menu"style="margin-top: 20px;">
-	            <a>업체명1</a>
 	            <ul>
 	                <li style="margin-top: 30px;">
 	               		<table class="table table-hover table-bordered">
 	               		<thead>
 	               			<tr>
-	               				<th>아이디</th>
+	               				<th>이름</th>
 	               				<th>날짜</th>
 	               				<th>요청시간</th>
 	               				<th>인원</th>
@@ -45,109 +46,27 @@
 	               			</tr>
 	               		</thead>
 	               		<tbody>
+	               		<c:forEach var="reqList" items="${req }">
 	               			<tr>
-	               				<td>길동</td>
-	               				<td>2020.07.12</td>
-	               				<td>오후1시~3시</td>
-	               				<td>4명</td>
-	               				<td>2020.07.04</td>
+	               				<td>${reqList.name }</td>
+	               				<td>${reqList.use_time }</td>
+	               				<td>${reqList.use_hrs}</td>
+	               				<td>${reqList.mem_num}</td>
+	               				<td>${reqList.req_date}</td>
 	               				<td>
 	               					<button class="btn btn-primary">승인</button>
 	               					<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#staticBackdrop">거부</button>
 	               				</td>
 	               			</tr>
-	               			<tr>
-	               				<td>길동</td>
-	               				<td>2020.07.13</td>
-	               				<td>오후1시~4시</td>
-	               				<td>4명</td>
-	               				<td>2020.07.06</td>
-	               				<td>
-	               					<button class="btn btn-primary">승인</button>
-	               					<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#staticBackdrop">거부</button>
-	               				</td>
-	               			</tr>
+	               		</c:forEach>
 	               		</tbody>
 	               		</table>
-	               		<!-- 페이징 영역 -->
-						<div class="paging text-center">
-							<div class="col-md-12">
-								<nav>
-									<ul class="pagination">
-						            <li class="page-item"><a href="#" class="page-link">Previous</a></li>
-						            <li class="page-item"><a href="#" class="page-link">1</a></li>
-						            <li class="page-item"><a href="#" class="page-link">2</a></li>
-						            <li class="page-item"><a href="#" class="page-link">3</a></li>
-						            <li class="page-item"><a href="#" class="page-link">4</a></li>
-						            <li class="page-item"><a href="#" class="page-link">Next</a></li>
-						            </ul>
-								</nav>
-							</div>
-						</div>
 					</li>
-	            </ul>
-	        </li>
-	        <li class="menu" style="margin-top: 20px;">
-	            <a>업체명2</a>
-	            <ul>
-	                <li style="margin-top: 30px;">
-	                <table class="table table-hover table-bordered">
-	               		<thead>
-	               			<tr>
-	               				<th>아이디</th>
-	               				<th>날짜</th>
-	               				<th>요청시간</th>
-	               				<th>인원</th>
-	               				<th>요청한날</th>
-	               				<th>승인여부</th>
-	               			</tr>
-	               		</thead>
-	               		<tbody>
-	               			<tr>
-	               				<td>길동</td>
-	               				<td>2020.07.12</td>
-	               				<td>오후1시~2시</td>
-	               				<td>4명</td>
-	               				<td>2020.07.07</td>
-	               				<td>
-	               					<button class="btn btn-primary">승인</button>
-	               					<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#staticBackdrop">거부</button>
-	               				</td>
-	               			</tr>
-	               			<tr>
-	               				<td>길동</td>
-	               				<td>2020.07.13</td>
-	               				<td>오후2시~5시</td>
-	               				<td>4명</td>
-	               				<td>2020.07.08</td>
-	               				<td>
-	               					<button class="btn btn-primary">승인</button>
-	               					<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#staticBackdrop">거부</button>
-	               				</td>
-	               			</tr>
-	               		</tbody>
-	               		</table>
-	               		<!-- 페이징 영역 -->
-						<div class="paging text-center">
-							<div class="col-md-12">
-								<nav>
-									<ul class="pagination">
-						            <li class="page-item"><a href="#" class="page-link">Previous</a></li>
-						            <li class="page-item"><a href="#" class="page-link">1</a></li>
-						            <li class="page-item"><a href="#" class="page-link">2</a></li>
-						            <li class="page-item"><a href="#" class="page-link">3</a></li>
-						            <li class="page-item"><a href="#" class="page-link">4</a></li>
-						            <li class="page-item"><a href="#" class="page-link">Next</a></li>
-						            </ul>
-								</nav>
-							</div>
-						</div>
-	               		</li>
 	            </ul>
 	        </li>
 	    </ul>
 	</div>
-	
+	 
 					<!-- 모달 -->
 					<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 					  <div class="modal-dialog modal-dialog-centered">
