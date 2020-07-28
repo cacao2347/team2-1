@@ -1,6 +1,10 @@
 package com.sys.comeit;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,6 +15,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.sys.comeit.util.MyUtil;
+
 @Controller
 public class StudyFileController
 {
@@ -19,7 +25,7 @@ public class StudyFileController
 	
 	// 스터디방 별 산출물 게시물 리스트
 	@RequestMapping(value = "/studyfilelist.action", method = { RequestMethod.GET, RequestMethod.POST })
-	public String studyFileList(Model model, HttpServletRequest request)
+	public String studyFileList(Model model, HttpServletRequest request) throws UnsupportedEncodingException
 	{
 		String view = null;
 		
@@ -27,13 +33,91 @@ public class StudyFileController
 		
 		String stu_cd = request.getParameter("stu_cd");
 		
-		ArrayList<StudyFileDTO> studyFileList = fileDao.studyFileList(stu_cd);
+		//ArrayList<StudyFileDTO> studyFileList = fileDao.studyFileList(stu_cd);
 		
-		model.addAttribute("studyFileList", studyFileList);
+		//model.addAttribute("studyFileList", studyFileList);
+		
+		// 페이징 처리 ----------------
+		
+		MyUtil util = new MyUtil();
+		
+		String pageNum = request.getParameter("pageNum");
+		
+		int currentPage = 1;
+		if (pageNum != null && pageNum.length() != 0)
+			currentPage = Integer.parseInt(pageNum);
+
+		String searchKey = null;
+		String searchValue = null;
+		
+		searchKey = request.getParameter("searchKey");
+		searchValue = request.getParameter("searchValue");
+		
+		if (searchKey == null)
+		{
+			searchKey = "title";
+			searchValue = "";
+		}
+		
+		if (request.getMethod().equals("GET"))
+		{
+			searchValue = URLDecoder.decode(searchValue, "UTF-8");
+		}
+		
+		StudyFileDTO pagingDto = new StudyFileDTO();
+		
+		pagingDto.setFile_stu_cd(stu_cd);
+		pagingDto.setSearchKey(searchKey);
+		pagingDto.setSearchValue(searchValue);
+		
+		// 전체 데이터 개수
+		int dataCount = fileDao.searchFileCount(pagingDto);
+		
+		// 전체 페이지 수 구하기
+		int numPerPage = 5;
+		int totalPage = util.getPageCount(numPerPage, dataCount);
+		
+		// 전체 페이지 수 보다 현재 표시할 페이지가 큰 경우
+		if (totalPage < currentPage)
+			currentPage = totalPage;
+		
+		// 테이블에서 가져올 리스트들의 시작과 끝 위치
+		int start = (currentPage - 1) * numPerPage + 1;
+		int end = currentPage * numPerPage;
+		
+		pagingDto.setStart(start);
+		pagingDto.setEnd(end);
+		
+		// 출력할 데이터
+		ArrayList<StudyFileDTO> studyFileList = fileDao.getFileListData(pagingDto);
+		
+		String params = "";
+		if (searchValue != null && searchValue.length() != 0)
+		{
+			searchValue = URLEncoder.encode(searchKey, "UTF-8");
+			params = "searchKey=" + searchKey + "&searchValue=" + searchValue;
+		}
+		
+		String cp = request.getContextPath();
+
+		// 페이징 처리
+		String listUrl = cp + "/studylist.action";
+		if (params.length() != 0)
+			listUrl += "?" + params;
+		
+		String pageIndexList = util.pageIndexList(currentPage, totalPage, listUrl);
+		
+		// 포워딩 할 데이터 넘겨주기
+		request.setAttribute("studyFileList", studyFileList);
+		request.setAttribute("pageIndexList", pageIndexList);
+		request.setAttribute("dataCount", dataCount);
+		
+		// 테스트
+		//System.out.println(stu_cd);
+		System.out.println("start : " + start);
+		System.out.println("end : " + end);
 		
 		view = "WEB-INF/views/study/AjaxStudyFileList.jsp";
-		
-		System.out.println(stu_cd);
 		
 		return view;
 	}

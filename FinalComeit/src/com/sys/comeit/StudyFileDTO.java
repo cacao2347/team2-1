@@ -11,7 +11,63 @@ public class StudyFileDTO
 	// 파일 코드, 파일 이름, 파일 url, 파일 삭제일
 	private String file_cd, file_name, file_url, file_del, file_row_num;
 	
+	// 검색 키, 검색 단어
+	private String searchKey, searchValue;
+	
+	// 페이지 시작 / 끝
+	private int start, end;			
+	
 	// getter / setter 구성
+	
+	public String getFile_mem_id()
+	{
+		return file_mem_id;
+	}
+
+	public void setFile_mem_id(String file_mem_id)
+	{
+		this.file_mem_id = file_mem_id;
+	}
+
+	public String getSearchKey()
+	{
+		return searchKey;
+	}
+
+	public void setSearchKey(String searchKey)
+	{
+		this.searchKey = searchKey;
+	}
+
+	public String getSearchValue()
+	{
+		return searchValue;
+	}
+
+	public void setSearchValue(String searchValue)
+	{
+		this.searchValue = searchValue;
+	}
+
+	public int getStart()
+	{
+		return start;
+	}
+
+	public void setStart(int start)
+	{
+		this.start = start;
+	}
+
+	public int getEnd()
+	{
+		return end;
+	}
+
+	public void setEnd(int end)
+	{
+		this.end = end;
+	}
 
 	public String getFile_id()
 	{

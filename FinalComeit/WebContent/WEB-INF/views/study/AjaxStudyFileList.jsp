@@ -40,7 +40,7 @@
 
 <div class="col-md-12">
 			<div class="paging"> 
-				<ul class="pagination">
+			<!-- 	<ul class="pagination">
 				<li class="page-item"><a href="#" class="page-link">Previous</a></li>
 				<li class="page-item"><a href="#" class="page-link">1</a></li>
 				<li class="page-item"><a href="#" class="page-link">2</a></li>
@@ -53,7 +53,13 @@
 				<li class="page-item"><a href="#" class="page-link">9</a></li>
 				<li class="page-item"><a href="#" class="page-link">10</a></li>
 				<li class="page-item"><a href="#" class="page-link">Next</a></li>
-				</ul>
+				</ul> -->
+				
+				<c:if test="${dataCount != 0 }">
+					<div align="center">
+						${pageIndexList }
+					</div>
+				</c:if>
 			</div>
 			
 			<button type="button" class="add btn btn-primary pull-right file-add">등록</button>
