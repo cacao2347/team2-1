@@ -420,28 +420,34 @@ $(document).ready(function ()
                   
                <!--    <h3>스터디원</h3> -->
                   <c:forEach var="joinName" items="${joinName }">
+                     <%-- <c:set var="countImg" value="${countImg=0 }"/> --%>
                      <c:if test="${joinName.stu_join_name ne leaderName.leader_name}">
                         <div class="memLeader" id="">
+                          <%--   
+                        <div class="leaderImg">
+						                    
                           <c:forEach var="memImg" items="${memImg }">
+                          
                               <c:if test="${memImg.join_mem_cd eq joinName.join_mem_cd}">
-                              
-                              <div class="leaderImg">
-                              
-                                    <c:choose>
-                              		<c:when test="${empty memImg.mem_img  }">
-                              		<img src="<%=cp %>/assets/images/basic.png" alt="" class="img-circle memImg" />
-                              		</c:when>
-                              		<c:when test="${not empty memImg.mem_img }">
+									<c:set var="countImg" value="${countImg=1 }"/>                                
                               		<img src="${memImg.mem_img }" alt="" class="img-circle memImg" />
-                              		</c:when>
-                              		
-                              		</c:choose>
-                                    
-                                 </div><!-- end .leaderImg -->
-                              
                               </c:if>
+                              
                            </c:forEach>
-                         
+                          
+                           <c:if test="${countImg==0 }">
+                              		<img src="<%=cp %>/assets/images/basic.png" alt="" class="img-circle memImg" />
+                          	</c:if>
+                          	
+                          	<img src="<%=cp %>/assets/images/basic.png" alt="" class="img-circle memImg" />
+                          </div><!-- end .leaderImg -->
+                           --%>
+                           
+                           
+                          <div class="leaderImg">
+								<img src="<%=cp %>/assets/images/basic.png" alt="" class="img-circle memImg" />
+							</div><!-- end .leaderImg -->
+                          
                            <div class="leaderInfo">
                               <h4>Study Member</h4><br>
                               <span class="name">${joinName.stu_join_name }</span>

@@ -125,35 +125,14 @@ body{font-family: 'Noto Sans KR', sans-serif;}
       // 스터디원 참가 요청 
       $(".joinStudyBtn").click(function() 
       {
-    	  var params = "stuCode=" +$(this).val();
+    	  
+    	  $(location).attr("href", "studyjoin.action?stuCode=" + $(this).val());	  
+    	  
+    	  if ($("#insertResult").val() != 1)
+			 alert("참가하실 수 없는 스터디 방입니다.")
+		  else
+			  alert("참가가 완료 되었습니다.")
     	
-    	  // location href
-    	  
-    	  $.ajax(
-         {
-             type : "POST"
-             , url : "studyjoin.action"
-             , data : params
-             , dataType : "text"
-             , success : function(args)
-             { 
-            	 
-            	 if (args == 1) 
-					alert("참가가 완료 되었습니다.")
-			 	 else
-			 		 alert("참가가 불가능한 방 입니다.")
-            	 
-             }
-             , error : function(e) 
-             {
-              	alert(e.responseText);
-             }
-            
-             
-         });  
-    	  
-    	  reload();
-    	  
 	  });
       
       // 스터디장 커밋 버튼 클릭
@@ -275,6 +254,7 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                      <h2>${studyInfo.title }</h2>
                   </div>
                   <!-- 스터디장 : 커밋 , 회원 : 참가, 스터디원 : 퇴장 으로 노출 -->
+                  <input type="hidden" name="" id="insertResult" value="${insertResult }"/>
                   <div class="jrBtn pull-right">
                    	<c:if test="${sessionScope.mem_cd eq leaderName.leader_mem_cd && empty studyInfo.cmt_date}">
                   	<button type="button" class="btn btn-lg btn-primary commitBtn" value="${studyInfo.stu_cd }">COMMIT</button>
@@ -429,25 +409,18 @@ body{font-family: 'Noto Sans KR', sans-serif;}
                  <c:forEach var="joinName" items="${joinName }">
                      <c:if test="${joinName.stu_join_name ne leaderName.leader_name}">
                         <div class="memLeader" id="">
-                          <c:forEach var="memImg" items="${memImg }">
+                         <%--  <c:forEach var="memImg" items="${memImg }">
                               <c:if test="${memImg.join_mem_cd eq joinName.join_mem_cd}">
                               
-                              <div class="leaderImg">
-                              
-                                    <c:choose>
-                              		<c:when test="${empty memImg.mem_img  }">
-                              		<img src="<%=cp %>/assets/images/basic.png" alt="" class="img-circle memImg" />
-                              		</c:when>
-                              		<c:when test="${not empty memImg.mem_img }">
-                              		<img src="${memImg.mem_img }" alt="" class="img-circle memImg" />
-                              		</c:when>
-                              		
-                              		</c:choose>
-                                    
-                                 </div><!-- end .leaderImg -->
+                           
                               
                               </c:if>
-                           </c:forEach>
+                           </c:forEach> --%>
+                           
+                              <div class="leaderImg">
+                              <img src="<%=cp %>/assets/images/basic.png" alt="" class="img-circle memImg" />
+                                    
+                                 </div><!-- end .leaderImg -->
                            
                            <div class="leaderInfo">
                               <h4>Study Member</h4><br>

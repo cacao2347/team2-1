@@ -103,11 +103,10 @@ public class StudyController
 	}
 	
 	// 스터디 참가
-	@ResponseBody
 	@RequestMapping(value = "/studyjoin.action", method = {RequestMethod.GET, RequestMethod.POST})
-	public int studyJoin(Model model, HttpServletRequest request)
+	public String studyJoin(Model model, HttpServletRequest request)
 	{
-		//String view = null;
+		String view = null;
 		
 		HttpSession session = request.getSession();
 		IStudyDAO studyDao = sqlSession.getMapper(IStudyDAO.class);
@@ -118,7 +117,7 @@ public class StudyController
 		
 		// 스터디방 정보 조회
 		StudyDTO dto = studyDao.studyInfoSearch(stu_cd);
-		
+		//System.out.println(dto.getStu_cd());
 		
 		// 오늘 날짜 구하기
 		Date sysdate = new Date();
@@ -133,7 +132,7 @@ public class StudyController
 			strDateCompare = date.format(sysdate).compareTo(strDate);
 			
 			int joinMem = studyDao.joinMemNum(stu_cd);
-			
+			//System.out.println(joinMem);
 			
 			// 방에 참가중인지 아닌지 여부
 			StudyDTO mem = new StudyDTO();
@@ -141,16 +140,22 @@ public class StudyController
 			mem.setStu_cd(stu_cd);
 			int myJoin = studyDao.stuJoinMemSearch(mem);
 			
+			System.out.println(myJoin);
+			
 			// 시작일 전 + 모집인원이 다 차지 않은 경우 + 방에 참가중이지 않은 경우
 			if (strDateCompare <= 0 && joinMem < dto.getMem_num() && myJoin == 0) 	
 				insertRslt = studyDao.joinStudy(mem);
 								
 			// 테스트
-			//System.out.println(view + strDateCompare + strDate +testDate + "/" + sysdate);
+			System.out.println(insertRslt+ stu_cd);
+			
+			model.addAttribute("insertResult", insertRslt);
 			
 		}
 		
-		return insertRslt;
+		view = "redirect:studydetail.action?stu_cd="+stu_cd;
+		
+		return view;
 	
 	}
 	
@@ -189,24 +194,24 @@ public class StudyController
 		String name = dto.getName();
 		String idntt = dto.getIdntt();
 		String memContent = dto.getMem_content();
-		String intTag = "/";
+		String intTag = "/ ";
 		String joinStudy = "";
 	
 		
 		for (int i = 0; i < intTagSearch.size(); i++) 
 		{
 			intTag += intTagSearch.get(i).getInt_tag();
-			intTag += "/";
+			intTag += " /";
 		}
 		
 		if (!stuTitle.isEmpty()) 
 		{
-			joinStudy = "/";
+			joinStudy = "/ ";
 			
 			for (int i = 0; i < stuTitle.size(); i++) 
 			{
 				joinStudy += stuTitle.get(i).getJoin_stu_title();
-				joinStudy += "/";
+				joinStudy += " /";
 			}
 		}
 		else 
@@ -247,24 +252,24 @@ public class StudyController
 		String name = dto.getName();
 		String idntt = dto.getIdntt();
 		String memContent = dto.getMem_content();
-		String intTag = "/";
+		String intTag = "/ ";
 		String joinStudy = "";
 	
 		
 		for (int i = 0; i < intTagSearch.size(); i++) 
 		{
 			intTag += intTagSearch.get(i).getInt_tag();
-			intTag += "/";
+			intTag += " /";
 		}
 		
 		if (!stuTitle.isEmpty()) 
 		{
-			joinStudy = "/";
+			joinStudy = "/ ";
 			
 			for (int i = 0; i < stuTitle.size(); i++) 
 			{
 				joinStudy += stuTitle.get(i).getJoin_stu_title();
-				joinStudy += "/";
+				joinStudy += " /";
 			}
 		}
 		else 
