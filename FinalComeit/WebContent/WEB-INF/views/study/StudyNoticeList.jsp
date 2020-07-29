@@ -31,6 +31,7 @@
 		
 	});
 	
+	// 이 스터디방에 대한 공지사항 리스트 뿌려주는 ajax
 	function ajaxStudyNoticeList()
 	{
 		var params = "stu_cd=" + $("#studyCode").val();
@@ -41,19 +42,21 @@
 			, url : "studynoticelist.action"
 			, data : params
 			, dataType : "text"
+			, async: false
 			, success : function(data)
 			{
 				//alert("성공" + data);
-				$(".container").html(data);
+				// 여기부터 하기
+				$(".noticeList").html(data);
 				
-				/*
+				
 				$(".listTitle").click(function()
 				{
 					alert("클릭");
 					$("#tableForm").submit();
-					
-				*/	
+				
 				});
+				
 			}
 			, error : function(e)
 			{
@@ -165,7 +168,7 @@
 		<form id="tableForm" class="form-horizontal" role="form" method="post" action="studynoticedetail.action">
 		<input type="hidden" id="studyCode" name="stu_cd" value="<%=stu_cd%>">
 			<!-- 실제 테이블 -->
-			<div class="col-md-12 container">
+			<div class="col-md-12 noticeList">
 			</div>
 		</form>
 		
