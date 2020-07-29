@@ -141,7 +141,7 @@
                        <c:if test="${not empty MyInfoList}">
                        <div class="col-md-6" id="chart_div" style="width: 100%; height: 350px; margin-top: -35px; margin-bottom: 45px;">
       					</div>
-      					<div class="upandde" style="margin-left: 30px;">
+      					<div class="upandde col-md-4"  style="margin-left: 30px;">
 							<button type="submit" class="btn btn-primary">수정</button>
 							<button type="submit" class="btn btn-secondary">삭제</button>
 						</div>

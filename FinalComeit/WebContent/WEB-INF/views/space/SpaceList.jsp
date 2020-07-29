@@ -204,11 +204,11 @@ body{font-family: 'Noto Sans KR', sans-serif;}
 								</div>
 							</div>
 						</div>
-						<div class="col-md-12" style="margin-top: 30px;">
+						<div class="col-md-12" style="margin-top: 30px; margin-left: 40pt;">
 						 <div class="item">
 		                    <ul class="thumbnails" style="list-style:none;" >
 		                        <c:forEach var="spaceList" items="${space }">
-			                        <li class="col-sm-4 col-md-6" >	
+			                        <li class="col-sm-4 col-md-5" >	
 										<div class="demo">
 									      <figure class="imghvr-scale-top-left">
 									     <%--  <input type="image" class="imageBtn" value="${spaceList.area_name }" src="<%=cp %>/assets/images/199.jpg" alt="53" style="width: 300px; height: 250px;"> --%>
