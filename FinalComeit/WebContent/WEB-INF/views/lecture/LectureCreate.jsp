@@ -239,16 +239,21 @@
 		// 최소 인원, 모집 인원이 변할 때, 인원 유효성 체크
 		$("#minMem").change(function() {
 			
-			alert("최소인원 : " + $("#minMem").val());
-			alert("최대인원 : " + $("#maxMem").val());
 			minMem = $("#minMem").val();
 			maxMem = $("#maxMem").val();
 			
+			alert("최소인원 : " + minMem);
+			alert("최대인원 : " + maxMem);
+			
 			if (minMem > maxMem) 
 			{
-				alert("최대인원이 최소인원보다 적습니다.");
-				$("#minMem").find('option:first').attr('selected', 'selected');
-				$("#maxMem").find('option:first').attr('selected', 'selected');
+				alert("최대인원이 최소인원보다 적습니다.1");
+				
+				$("#minMem").val($("#minMem option:first").val());
+				$("#maxMem").val($("#maxMem option:first").val());
+				
+				/* $("#minMem").find('option:first').attr('selected', 'selected');
+				$("#maxMem").find('option:first').attr('selected', 'selected'); */
 				/* $("#minMem").val(previousMin).prop("selected", true);
 				$("#maxMem").val(previousMax).prop("selected", true); */
 			}
@@ -257,16 +262,21 @@
 		// 최소 인원, 모집 인원이 변할 때, 인원 유효성 체크
 		$("#maxMem").change(function() {
 			
-			alert("최소인원 : " + $("#minMem").val());
-			alert("최대인원 : " + $("#maxMem").val());
 			minMem = $("#minMem").val();
 			maxMem = $("#maxMem").val();
 			
+			alert("최소인원 : " + minMem);
+			alert("최대인원 : " + maxMem);
+			
 			if (minMem > maxMem) 
 			{
-				alert("최대인원이 최소인원보다 적습니다.");
-				$("#minMem").find('option:first').attr('selected', 'selected');
-				$("#maxMem").find('option:first').attr('selected', 'selected');
+				alert("최대인원이 최소인원보다 적습니다.2");
+				
+				$("#minMem").val($("#minMem option:first").val());
+				$("#maxMem").val($("#maxMem option:first").val());
+				
+				/* $("#minMem").find('option:first').attr('selected', 'selected');
+				$("#maxMem").find('option:first').attr('selected', 'selected'); */
 				/* $("#minMem").val(previousMin).prop("selected", true);
 				$("#maxMem").val(previousMax).prop("selected", true); */
 			}
@@ -398,16 +408,16 @@
 					</h4>
 					<select class="form-control" id="minMem" name="minMem"
 						style="width: 50px; padding: 0px; display: inline;">
-						<option value="0">최소인원</option>
-						<option value="1">1</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
-						<option value="4">4</option>
-						<option value="5">5</option>
-						<option value="6">6</option>
-						<option value="7">7</option>
-						<option value="8">8</option>
-						<option value="9">9</option>
+						<option value="00">최소인원</option>
+						<option value="01">1</option>
+						<option value="02">2</option>
+						<option value="03">3</option>
+						<option value="04">4</option>
+						<option value="05">5</option>
+						<option value="06">6</option>
+						<option value="07">7</option>
+						<option value="08">8</option>
+						<option value="09">9</option>
 						<option value="10">10</option>
 					</select> <span class="m">명</span> <br>
 					<h4>
@@ -416,16 +426,16 @@
 					<select class="form-control"
 						style="width: 50px; padding: 0px; display: inline;" id="maxMem"
 						name="maxMem">
-						<option value="100">최대인원</option>
-						<option value="1">1</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
-						<option value="4">4</option>
-						<option value="5">5</option>
-						<option value="6">6</option>
-						<option value="7">7</option>
-						<option value="8">8</option>
-						<option value="9">9</option>
+						<option value="99">최대인원</option>
+						<option value="01">1</option>
+						<option value="02">2</option>
+						<option value="03">3</option>
+						<option value="04">4</option>
+						<option value="05">5</option>
+						<option value="06">6</option>
+						<option value="07">7</option>
+						<option value="08">8</option>
+						<option value="09">9</option>
 						<option value="10">10</option>
 					</select> <span class="m">명</span>
 
