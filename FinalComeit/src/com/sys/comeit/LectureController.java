@@ -172,7 +172,11 @@ public class LectureController
 
 		// 세션을 통해 mem_cd를 얻어오고 해당 회원이 강사인지 아닌지 판단 하기 위한 변수
 		mem_cd = (String) session.getAttribute("mem_cd");
-		mem_cd_check = proDao.lecCreateCheck(mem_cd);
+		
+		if(mem_cd != null)
+		{
+			mem_cd_check = proDao.lecCreateCheck(mem_cd);
+		}
 		
 		model.addAttribute("area", areaDao.areaList());
 		//model.addAttribute("lec", lecDao.lecList()); // 실제 강의 리스트
