@@ -25,7 +25,7 @@
   		  AND PWD=CRYPTPACK.ENCRYPT(#{pwd},#{pwd})
 	</select>
 	
-	<!-- 한명의 관리자의 리스트를 뽑아오는 구문 -->
+	<!-- 한명의 관리자의 리스트를 뽑아오는 구문 ㅎㅇ-->
 	<select id="adminSearchList" resultType="com.sys.comeit.AdminDTO">
 		SELECT ADMIN_CD, ADM_GRDS_NAME, NAME, PWD, EMAIL, TEL
 		FROM VIEW_ADMLIST
