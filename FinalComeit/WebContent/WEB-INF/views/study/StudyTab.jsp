@@ -52,7 +52,6 @@
    		 <li><a href="#tab3">캘린더</a></li>
             <li><a href="#tab4">산출물 관리</a></li>
          <li><a href="#tab5">모임 장소</a></li>
-         <li><a href="#tab6">투표</a></li> 
     </ul>
 
     <!--탭 콘텐츠 영역 -->
@@ -86,11 +85,6 @@
          <div id="tab5" class="tab_content">
            <!--Content-->
            <c:import url="StudySpaceList.jsp"></c:import>
-        </div>
-
-         <div id="tab6" class="tab_content">
-           <!--Content-->
-           <c:import url="StudyVoteList.jsp"></c:import>
         </div>
 
     </div>

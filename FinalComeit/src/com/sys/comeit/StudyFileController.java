@@ -121,7 +121,7 @@ public class StudyFileController
 		return view;
 	}
 	
-	// 스터디방 산출물 상세  // 첨부파일 조회하기★
+	// 스터디방 산출물 상세 
 	@RequestMapping(value = "/studyfiledetail.action", method = { RequestMethod.GET, RequestMethod.POST })
 	public String studyFileDetail(Model model, HttpServletRequest request)
 	{
@@ -132,11 +132,21 @@ public class StudyFileController
 		String stu_cd = request.getParameter("stu_cd");
 		String oput_cd = request.getParameter("oput_cd");
 		
+		//System.out.println("파일코드"+oput_cd);
+		
 		StudyFileDTO dto = new StudyFileDTO();
 		dto.setFile_stu_cd(stu_cd);
 		dto.setFile_oput_cd(oput_cd);
 		
+		// 산출물 게시판 조회
 		StudyFileDTO detail = fileDao.studyFileDetail(dto);
+		if (detail != null)
+			model.addAttribute("detail", detail);
+		
+		// 테스트
+		//System.out.println(detail.getFile_title());
+		
+		// 첨부파일 조회
 		ArrayList<StudyFileDTO> file = fileDao.fileUrlSearch(dto);
 		
 		if (!file.isEmpty())
@@ -144,7 +154,6 @@ public class StudyFileController
 		else
 			model.addAttribute("file", "없음");
 		
-		model.addAttribute("detail", detail);
 		
 		view = "WEB-INF/views/study/AjaxStudyFileDetail.jsp";
 		

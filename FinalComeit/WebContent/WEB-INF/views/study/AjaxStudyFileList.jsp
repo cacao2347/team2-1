@@ -3,12 +3,12 @@
 	<div class="row searchRow">
 	
 			<div class="col-md-12">
-				<select name="" id="" class="form-control searchSel">
+				<select name="" id="searchSel" class="form-control searchSel">
 				<option value="title">제목</option>
-				<option value="author">작성자</option>
+				<option value="name">작성자</option>
 				</select>
-				<input type="text" id="" class="searchBox form-control" placeholder="검색어를 입력하세요."/>
-				<button type="button" class="search btn btn-primary">검색</button>
+				<input type="text" id="searchBox" class="searchBox form-control" placeholder="검색어를 입력하세요."/>
+				<button type="button" class="fileSearch btn btn-primary">검색</button>
 			</div>
 		
 	</div><!-- end .row .searchRow -->

@@ -96,6 +96,29 @@
 					});
 				});
 				
+				/*
+				// 검색 버튼 클릭 시
+				$(".fileSearch").click(function()
+				{
+					
+					var searVal = params + "&searchKey=" + $("#searchSel option:selected").val()
+									+ "&searchValue=" + $("#searchBox").val();
+					
+					$.ajax(
+					{
+						type : "POST"
+						, url : "studyfilelist.action"
+						, data : searVal
+						, dataType : "text"
+						, async:false
+						, success : function(search)
+						{
+							$(".filelist").html(args);
+						}
+					});
+				});
+				*/
+				
 			}
 			, error : function(e)
 			{

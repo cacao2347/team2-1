@@ -42,7 +42,7 @@
 }
 
 .col-md-12> .searchSel ,.col-md-12 > .searchBox
-, .col-md-12 > .search
+, .col-md-12 > .fileSearch
 {
 	display: inline-block;
 }
