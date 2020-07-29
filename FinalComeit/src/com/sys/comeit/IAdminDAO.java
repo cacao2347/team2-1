@@ -1,6 +1,7 @@
 package com.sys.comeit;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface IAdminDAO
 {
@@ -22,4 +23,18 @@ public interface IAdminDAO
 	
 	// 관리자 업체 회원 리스트 조회
 	public ArrayList<SpaDTO> admspaList();	// 회원 리스트
+	
+	// 관리자 업체 요청 관리
+	public ArrayList<SpaReqDTO> adminComAppealList();	// 회원 리스트
+	
+	// 관리자 업체 요청 확인 업데이트 메소드
+	public int spaCheckMod(String spa_req_cd);
+	
+	// 관리자 업체 요청 승인/거부 업데이트 메소드
+	public int spaConfirmMod(AdmSpaReqDTO dto);
+	
+	public int comapplSearchCount(AdmSpaReqDTO dto);	// 검색완료된 업체요청 개수
+	
+	public List<AdmSpaReqDTO> comapplListData(AdmSpaReqDTO dto);	// 검색완료된 업체요청
+	
 }

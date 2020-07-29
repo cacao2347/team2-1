@@ -25,7 +25,7 @@
   		  AND PWD=CRYPTPACK.ENCRYPT(#{pwd},#{pwd})
 	</select>
 	
-	<!-- 한명의 관리자의 리스트를 뽑아오는 구문 ㅎㅇ-->
+	<!-- 한명의 관리자의 리스트를 뽑아오는 구문 -->
 	<select id="adminSearchList" resultType="com.sys.comeit.AdminDTO">
 		SELECT ADMIN_CD, ADM_GRDS_NAME, NAME, PWD, EMAIL, TEL
 		FROM VIEW_ADMLIST
@@ -59,7 +59,7 @@
 	
 	<insert id="banAdd">
 		INSERT INTO TBL_LNGG_BAN(LNGG_BAN_CD, ADMIN_CD, BAN, CRT_DATE)
-		VALUES('LNGBN'||SEQ_LNGG_BAN.NEXTVAL, '${admin_cd}', '${ban}', SYSDATE)
+		VALUES('LNGBN'||SEQ_LNGG_BAN.NEXTVAL, #{admin_cd}, #{ban}, SYSDATE)
 	</insert>
 	
 	<delete id="banDelete">
@@ -73,6 +73,65 @@
 		SELECT SPA_ID, SPA_CD, EMAIL, NAME, TEL, JOIN_DATE
 		FROM TBL_SPA_JOIN
 	</select>
+	
+	<!-- 업체 요청 관리 list() -->
+	<select id="adminComAppealList" resultType="com.sys.comeit.AdmSpaReqDTO">
+		SELECT SPA_REQ_CD, SPA_NAME, SPA_ID, COM_NAME, REQ_DATE, TYPE, PRCS_DATE, ADM_NAME
+		FROM VIEW_SPAREQLIST
+	</select>
+	
+	
+	<update id="spaCheckMod">
+		UPDATE TBL_SPA_REQ
+		SET CHECK_TYPE_CD = 'CHET1003'
+		WHERE SPA_REQ_CD = #{spa_req_cd}
+	</update>
+	
+	<update id="spaConfirmMod">
+		UPDATE TBL_SPA_REQ
+		SET ADMIN_CD = #{admin_cd} , CHECK_TYPE_CD = #{check_type_cd}
+		  , PRCS_DATE = SYSDATE
+		WHERE SPA_REQ_CD = #{spa_req_cd}
+	</update>
+	
+	<!-- 페이징 처리 -->
+	<!-- 검색완료된 스터디방 개수 조회 studySearchCount() -->
+	<select id="comapplSearchCount" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS COUNT
+		FROM VIEW_SPAREQLIST
+		<if test="searchValue != null and !searchValue.equals('')">
+			WHERE ${searchKey} LIKE '%${searchValue}%'
+		</if>
+	</select>
+	
+	<select id="comapplListData" resultType="com.sys.comeit.AdmSpaReqDTO">
+		SELECT *
+		FROM
+		(
+		    SELECT ROWNUM AS RNUM
+		     , DATA.* 
+		    FROM 
+		    (
+		        SELECT SPA_REQ_CD, SPA_NAME, SPA_ID, COM_NAME, REQ_DATE
+		             , TYPE, PRCS_DATE, ADM_NAME, CHECK_TYPE_CD
+                FROM VIEW_SPAREQLIST
+		        <choose>
+		        	<when test="searchValue != null">
+		        		WHERE ${searchKey} LIKE '%${searchValue}%'
+				        ORDER BY SPA_REQ_CD DESC
+				    ) DATA
+				)
+				WHERE RNUM <![CDATA[>]]>= #{start} AND RNUM <![CDATA[<]]>=#{end}
+		        	</when>
+		        	<otherwise>
+		        		ORDER BY SPA_REQ_CD DESC
+				    ) DATA
+				)
+				WHERE RNUM <![CDATA[>]]>= #{start} AND RNUM <![CDATA[<]]>=#{end}
+		        	</otherwise>
+		        </choose>
+	</select>
+	
 	
 	
 </mapper>

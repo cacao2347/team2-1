@@ -6,8 +6,13 @@
 
 package com.sys.comeit;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.List;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -18,6 +23,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.SessionScope;
+
+import com.sys.comeit.util.MyUtil;
 
 @Controller
 public class AdminController
@@ -68,20 +75,6 @@ public class AdminController
 		IAdminDAO admDao = sqlSession.getMapper(IAdminDAO.class);
 		
 		model.addAttribute("adminspaList", admDao.admspaList());
-		
-		System.out.println(admDao.admspaList().get(0).getSpa_id());
-		System.out.println(admDao.admspaList().get(0).getSpa_cd());
-		System.out.println(admDao.admspaList().get(0).getName());
-		System.out.println(admDao.admspaList().get(0).getEmail());
-		System.out.println(admDao.admspaList().get(0).getJoin_date());
-		System.out.println(admDao.admspaList().get(0).getTel());
-		
-		System.out.println(admDao.admspaList().get(1).getSpa_id());
-		System.out.println(admDao.admspaList().get(1).getSpa_cd());
-		System.out.println(admDao.admspaList().get(1).getName());
-		System.out.println(admDao.admspaList().get(1).getEmail());
-		System.out.println(admDao.admspaList().get(1).getJoin_date());
-		System.out.println(admDao.admspaList().get(1).getTel());
 		
 		model.addAttribute("args", "/WEB-INF/views/admin/AdminSpaceList.jsp");
 		
@@ -181,16 +174,122 @@ public class AdminController
 
 	
 	@RequestMapping(value = "/admin_com_appeal_list.action", method = {RequestMethod.GET, RequestMethod.POST})
-	public String adminComAppealList(Model model)
+	public String adminComAppealList(Model model, HttpServletRequest request) throws UnsupportedEncodingException
 	{
 		String view = null;
 		
 		IAdminDAO dao = sqlSession.getMapper(IAdminDAO.class);
 		
-		//model.addAttribute("list", 筌뤿굝�뼊);
-		// model.addAttribute("list", dao.list());
+		//model.addAttribute("ComApList", dao.adminComAppealList());
 		model.addAttribute("args", "/WEB-INF/views/admin/AdminComAppealList.jsp");
 		
+		// 페이징 처리 --------------------------------------
+
+		MyUtil util = new MyUtil();
+
+		String pageNum = request.getParameter("pageNum"); // 페이지 번호? 왜 삭제 버튼에서..?
+
+		int currentPage = 1;
+		if (pageNum != null && pageNum.length() != 0)
+		{
+			currentPage = Integer.parseInt(pageNum);
+		}
+
+		String searchKey = null;
+		String searchValue = null;
+
+		if(searchValue == "승인"|| searchValue =="승인완료")
+		{
+			searchValue = "YES";
+		}
+		
+		if(searchValue == "거부"|| searchValue =="거부완료")
+		{
+			searchValue = "NO";
+		}
+		
+		
+		
+		searchKey = request.getParameter("searchKey");
+		System.out.println("searchKey : " + searchKey);
+		searchValue = request.getParameter("searchValue");
+		if(searchValue == "확인")
+		{
+			searchValue = "CHECK";
+		}
+		System.out.println("searchValue : " +searchValue);
+
+		if (searchKey == null)
+		{
+			searchKey = "TYPE";
+			searchValue = "";
+		}
+		
+		
+		
+		
+		if (request.getMethod().equalsIgnoreCase("GET"))
+		{
+			searchValue = URLDecoder.decode(searchValue, "UTF-8");
+		}
+
+		AdmSpaReqDTO dto = new AdmSpaReqDTO();
+
+		dto.setSearchKey(searchKey);
+		dto.setSearchValue(searchValue);
+		
+		/* lecDao.getListData(dto); */
+		
+		// 전체 데이터 개수
+		int dataCount = dao.comapplSearchCount(dto); // 검색 완료된 데이터 개수
+		
+		// 전체 페이지 수 구하기
+		int numPerPage = 10;
+		int totalPage = util.getPageCount(numPerPage, dataCount);
+
+		// 전체 페이지 수 보다 현재 표시할 페이지가 큰 경우
+		if (totalPage < currentPage)
+		{
+			currentPage = totalPage;
+		}
+
+		// 테이블에서 가져올 리스트들의 시작과 끝 위치
+		int start = (currentPage - 1) * numPerPage + 1;
+		int end = currentPage * numPerPage;
+
+		System.out.println("start : " + start);
+		System.out.println("end : " + end);
+
+		dto.setStart(start);
+		dto.setEnd(end);
+
+		// 테이블에서 리스트를 출력할 데이터 가져오기
+		List<AdmSpaReqDTO> ComApList = dao.comapplListData(dto);
+
+		String params = "";
+		if (searchValue != null && searchValue.length() != 0)
+		{
+			searchValue = URLEncoder.encode(searchKey, "UTF-8");
+			params = "searchKey=" + searchKey + "&searchValue=" + searchValue;
+		}
+
+		String cp = request.getContextPath();
+
+		// 페이징 처리
+		String listUrl = cp + "/admin_com_appeal_list.action";
+		if (params.length() != 0)
+		{
+			listUrl += "?" + params;
+		}
+
+		String pageIndexList = util.pageIndexList(currentPage, totalPage, listUrl);
+		System.out.println("pageIndexList : " + pageIndexList);
+		
+		// 포워딩할 studylist.jsp 에 넘겨준다.
+		request.setAttribute("ComApList", ComApList);
+		request.setAttribute("pageIndexList", pageIndexList);
+		request.setAttribute("dataCount", dataCount);
+				
 		view = "/WEB-INF/views/admin/PageLayout.jsp";
 		
 		return view;
@@ -534,7 +633,54 @@ public class AdminController
 		return view;
 	}
 	
+	// 관리자 업체 요청 확인
+	@RequestMapping(value = "/ajaxcpcheck.action", method = {RequestMethod.GET, RequestMethod.POST})
+	public String ajaxCpCheck(HttpServletRequest request)
+	{
+
+		String view = null;
+		
+		IAdminDAO dao = sqlSession.getMapper(IAdminDAO.class); 
+		
+		String spa_req_cd = request.getParameter("spa_req_cd");
+		System.out.println(spa_req_cd);
+		
+		dao.spaCheckMod(spa_req_cd);
+		view = "WEB-INF/views/admin/admin_com_appeal_list.action";
+
+		return view;
+
+	}
 	
+	// 관리자 업체 요청 승인/거부
+	@RequestMapping(value = "/ajaxcpconfirm.action", method = {RequestMethod.GET, RequestMethod.POST})
+	public String selectAjax(HttpServletRequest request)
+	{
+
+		String view = null;
+		
+		IAdminDAO dao = sqlSession.getMapper(IAdminDAO.class); 
+		
+		String admin_cd = request.getParameter("admin_cd");
+		String spa_req_cd = request.getParameter("spa_req_cd");
+		String check_type_cd = request.getParameter("check_type_cd");
+		
+		System.out.println(spa_req_cd);
+		System.out.println(check_type_cd);
+		
+		AdmSpaReqDTO dto = new AdmSpaReqDTO();
+		
+		dto.setAdmin_cd(admin_cd);
+		dto.setSpa_req_cd(spa_req_cd);
+		dto.setCheck_type_cd(check_type_cd);
+		
+		dao.spaConfirmMod(dto);
+		
+		view = "WEB-INF/views/admin/admin_com_appeal_list.action";
+
+		return view;
+
+	}
 	
 	
 	
