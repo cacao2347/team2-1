@@ -57,6 +57,7 @@
 	               					<button class="btn btn-primary">승인</button>
 	               					<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#staticBackdrop">거부</button>
 	               				</td>
+	               				
 	               			</tr>
 	               		</c:forEach>
 	               		</tbody>
