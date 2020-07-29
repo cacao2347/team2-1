@@ -6,21 +6,29 @@
     font-size: 14pt !important;
     padding: 0!important;
 }
+.cat .checkboxcat input, .inwon .radioNum input, .level .checkboxLevel input
+{
+   width: 30px;
+}
+.filterDiv
+{
+   text-align: center;
+}
 a, .btn-link
 {
-	color: #033158 !important;
+   color: #033158 !important;
 }
 ul :hover 
 {
-	background-color: #f9fbff;
+   background-color: #f9fbff;
 }
 .sub
 {
-	text-align: right;
+   text-align: right;
 }
 .pagination
 {
-	margin:0 auto; 
+   margin:0 auto; 
 
 } 
 .paging
@@ -35,63 +43,63 @@ ul :hover
 }
 .firstLine .listTitle, .firstLine .lock
 {
-	display: inline-block;
+   display: inline-block;
 }
 .firstLine .lock
 {
-	float: right;
-	margin: 2.25%
+   float: right;
+   margin: 2.25%
 }
 .create
 {
-	margin-top: 20px;
-	position: relative;
+   margin-top: 20px;
+   position: relative;
 }
 .createBtn
 {
-	position: absolute;
-	bottom: 0;
-	right: 0;	
+   position: absolute;
+   bottom: 0;
+   right: 0;   
 }
 .study-img
 {
-	margin-top: 20px;
-	width: 100%;
-	height:255px;
-	border-radius: 10px;
+   margin-top: 20px;
+   width: 100%;
+   height:255px;
+   border-radius: 10px;
 }
 
 .content
 {
-	margin-top: 20px;
-	margin-bottom: 20px;
-	
+   margin-top: 20px;
+   margin-bottom: 20px;
+   
 }
 .study-date
 {
-	margin-right: 20px;
+   margin-right: 20px;
 }
 .search
 {
-	margin: 0 auto;
+   margin: 0 auto;
 }
 .list
 {
-	margin-top: 20px;
-	margin-bottom: 20px;
+   margin-top: 20px;
+   margin-bottom: 20px;
 }
 dt
 {
-	margin-bottom: 10px;
-	font-size: 14pt;
-	font-weight: bold;
+   margin-bottom: 10px;
+   font-size: 14pt;
+   font-weight: bold;
 }
 dd
 {
-	font-family: 나눔고딕;
-	font-weight: bold;
-	color: #4a4a4a;
-	margin-left: 2px;
+   font-family: 나눔고딕;
+   font-weight: bold;
+   color: #4a4a4a;
+   margin-left: 2px;
 }
 
 .list-study {
@@ -101,8 +109,8 @@ dd
     font-size: 0;
 }
 .list-study .list-study-item {
-	border: 1px solid #c0c0c0;
-	border-radius: 10px;
+   border: 1px solid #c0c0c0;
+   border-radius: 10px;
     display: flex;
     position: relative;
     color: #263747;
@@ -112,7 +120,7 @@ dd
 }
 
 .list-study .list-study-item .study-logo {
-	margin: 2px;
+   margin: 2px;
     width: auto;
     max-width: 16rem;
     height: auto;
@@ -176,17 +184,17 @@ dd
 
 .search > input.tag
 {
-	width: 30%;
+   width: 30%;
 }
 .search > input.title
 {
-	width: 58%;
+   width: 58%;
 }
 .search > button.searchBtn
 {
-	width: 10%;
+   width: 10%;
 }
 div > h5
 {
-	display: inline;
+   display: inline;
 }

@@ -30,15 +30,16 @@ public class StudyController
 	// 기혜
 	// ---------------------------------------------------------------------------------
 	// ★
-	@RequestMapping(value = "/studydetail.action", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "/studydetail.action", method =
+	{ RequestMethod.GET, RequestMethod.POST })
 	public String studyBfInfo(Model model, HttpServletRequest request)
 	{
 		HttpSession session = request.getSession();
-		
-		String mem_cd = (String)session.getAttribute("mem_cd");
-		
+
+		String mem_cd = (String) session.getAttribute("mem_cd");
+
 		String view = null;
-		
+
 		IStudyDAO studyDao = sqlSession.getMapper(IStudyDAO.class);
 
 		String stuCd = request.getParameter("stu_cd");
@@ -49,37 +50,34 @@ public class StudyController
 		Date sysdate = new Date();
 		SimpleDateFormat date = new SimpleDateFormat("YYYY-MM-DD");
 		int strDateCompare = 0;
-		
+
 		// 스터디방 정보 조회
 		StudyDTO dto = studyDao.studyInfoSearch(stuCd);
 
-		
 		// 시작일 확정일 비교
 		if (dto != null)
 		{
 			String strDate = dto.getStr_date();
 			strDateCompare = date.format(sysdate).compareTo(strDate);
-			
-			if (strDateCompare < 0) 		// 시작일 전
+
+			if (strDateCompare < 0) // 시작일 전
 			{
 				view = "/WEB-INF/views/study/StudyBfDetail.jsp";
-			}
-			else 							// 시작일 또는 시작일보다 큼
+			} else // 시작일 또는 시작일보다 큼
 			{
 				StudyDTO search = new StudyDTO();
 				search.setJoin_mem_cd(mem_cd);
 				search.setStu_cd(stuCd);
-				
-				// 참여 여부 				
+
+				// 참여 여부
 				int joinMem = studyDao.stuJoinMemSearch(search);
-				
-				if (dto.getCmt_date()!=null && joinMem != 0) 
+
+				if (dto.getCmt_date() != null && joinMem != 0)
 					view = "/WEB-INF/views/study/StudyAfDetail.jsp";
-				else 
+				else
 					view = "/WEB-INF/views/study/StudyBfDetail.jsp";
 			}
-			
-			
+
 			// 스터디방 정보
 			model.addAttribute("studyInfo", dto);
 			// 스터디방 관심태그
@@ -94,201 +92,193 @@ public class StudyController
 			model.addAttribute("joinName", studyDao.studyJoinName(stuCd));
 			// 스터디 참여자 이미지
 			model.addAttribute("memImg", studyDao.memImgSearch(stuCd));
-			
-			
+
 		}
-		
-		
+
 		return view;
 	}
-	
+
 	// 스터디 참가
-	@RequestMapping(value = "/studyjoin.action", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "/studyjoin.action", method =
+	{ RequestMethod.GET, RequestMethod.POST })
 	public String studyJoin(Model model, HttpServletRequest request)
 	{
 		String view = null;
-		
+
 		HttpSession session = request.getSession();
 		IStudyDAO studyDao = sqlSession.getMapper(IStudyDAO.class);
-		
+
 		// 멤버 코드
-		String mem_cd = (String)session.getAttribute("mem_cd"); 
+		String mem_cd = (String) session.getAttribute("mem_cd");
 		String stu_cd = request.getParameter("stuCode");
-		
+
 		// 스터디방 정보 조회
 		StudyDTO dto = studyDao.studyInfoSearch(stu_cd);
-		//System.out.println(dto.getStu_cd());
-		
+		// System.out.println(dto.getStu_cd());
+
 		// 오늘 날짜 구하기
 		Date sysdate = new Date();
 		SimpleDateFormat date = new SimpleDateFormat("YYYY-MM-DD");
 		int strDateCompare = 0;
 		int insertRslt = 0;
-		
+
 		// 시작일 확정일 비교
 		if (dto != null)
 		{
 			String strDate = dto.getStr_date();
 			strDateCompare = date.format(sysdate).compareTo(strDate);
-			
+
 			int joinMem = studyDao.joinMemNum(stu_cd);
-			//System.out.println(joinMem);
-			
+			// System.out.println(joinMem);
+
 			// 방에 참가중인지 아닌지 여부
 			StudyDTO mem = new StudyDTO();
 			mem.setJoin_mem_cd(mem_cd);
 			mem.setStu_cd(stu_cd);
 			int myJoin = studyDao.stuJoinMemSearch(mem);
-			
+
 			System.out.println(myJoin);
-			
+
 			// 시작일 전 + 모집인원이 다 차지 않은 경우 + 방에 참가중이지 않은 경우
-			if (strDateCompare <= 0 && joinMem < dto.getMem_num() && myJoin == 0) 	
+			if (strDateCompare <= 0 && joinMem < dto.getMem_num() && myJoin == 0)
 				insertRslt = studyDao.joinStudy(mem);
-								
+
 			// 테스트
-			System.out.println(insertRslt+ stu_cd);
-			
+			System.out.println(insertRslt + stu_cd);
+
 			model.addAttribute("insertResult", insertRslt);
-			
+
 		}
-		
-		view = "redirect:studydetail.action?stu_cd="+stu_cd;
-		
+
+		view = "redirect:studydetail.action?stu_cd=" + stu_cd;
+
 		return view;
-	
+
 	}
-	
-	
+
 	// 스터디 커밋
 	@ResponseBody
-	@RequestMapping(value = "/leadercommit.action", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "/leadercommit.action", method =
+	{ RequestMethod.GET, RequestMethod.POST })
 	public int leaderCommit(Model model, HttpServletRequest request)
 	{
-		
+
 		IStudyDAO studyDao = sqlSession.getMapper(IStudyDAO.class);
-		
+
 		String stu_cd = request.getParameter("stuCode");
-		
+
 		int result = studyDao.studyCommit(stu_cd);
-		
+
 		return result;
 	}
-	
-	
-	
-	// 스터디장 모달창 정보 
-	@RequestMapping(value = "/leaderinfomodal.action", method = {RequestMethod.GET, RequestMethod.POST})
+
+	// 스터디장 모달창 정보
+	@RequestMapping(value = "/leaderinfomodal.action", method =
+	{ RequestMethod.GET, RequestMethod.POST })
 	public String leaderInfoModal(Model model, HttpServletRequest request)
 	{
 		String view = null;
-		
+
 		IMemberDAO memberDao = sqlSession.getMapper(IMemberDAO.class);
-		
+
 		MemberDTO dto = new MemberDTO();
-		
+
 		dto = memberDao.memModalList(request.getParameter("leaderMemCd"));
 		ArrayList<MemberDTO> intTagSearch = memberDao.memIntTagSearch(request.getParameter("leaderMemCd"));
 		ArrayList<MemberDTO> stuTitle = memberDao.modalStudyList(request.getParameter("leaderMemCd"));
-		
-		String name = dto.getName();
-		String idntt = dto.getIdntt();
-		String memContent = dto.getMem_content();
-		String intTag = "/ ";
-		String joinStudy = "";
-	
-		
-		for (int i = 0; i < intTagSearch.size(); i++) 
-		{
-			intTag += intTagSearch.get(i).getInt_tag();
-			intTag += " /";
-		}
-		
-		if (!stuTitle.isEmpty()) 
-		{
-			joinStudy = "/ ";
-			
-			for (int i = 0; i < stuTitle.size(); i++) 
-			{
-				joinStudy += stuTitle.get(i).getJoin_stu_title();
-				joinStudy += " /";
-			}
-		}
-		else 
-		{
-			joinStudy += "없음";
-		}
-		// 테스트
-		// System.out.println(intTag);
-		
-		
-		model.addAttribute("name", name);
-		model.addAttribute("idntt", idntt);
-		model.addAttribute("memContent", memContent);
-		model.addAttribute("intTag", intTag);
-		model.addAttribute("joinStudy", joinStudy);
-		
-		view = "/WEB-INF/views/member/AjaxMemModal.jsp";
-		
-		return view;
-	}
-	
-	
-	// 스터디원 모달창 정보
-	@RequestMapping(value = "/meminfomodal.action", method = {RequestMethod.GET, RequestMethod.POST})
-	public String memInfoModal(Model model, HttpServletRequest request)
-	{
-		String view = null;
-		
-		IMemberDAO memberDao = sqlSession.getMapper(IMemberDAO.class);
-		
-		MemberDTO dto = new MemberDTO();
-		
-		dto = memberDao.memModalList(request.getParameter("joinMemCd"));
-		ArrayList<MemberDTO> intTagSearch = memberDao.memIntTagSearch(request.getParameter("joinMemCd"));
-		ArrayList<MemberDTO> stuTitle = memberDao.modalStudyList(request.getParameter("joinMemCd"));
-		
 
 		String name = dto.getName();
 		String idntt = dto.getIdntt();
 		String memContent = dto.getMem_content();
 		String intTag = "/ ";
 		String joinStudy = "";
-	
-		
-		for (int i = 0; i < intTagSearch.size(); i++) 
+
+		for (int i = 0; i < intTagSearch.size(); i++)
 		{
 			intTag += intTagSearch.get(i).getInt_tag();
 			intTag += " /";
 		}
-		
-		if (!stuTitle.isEmpty()) 
+
+		if (!stuTitle.isEmpty())
 		{
 			joinStudy = "/ ";
-			
-			for (int i = 0; i < stuTitle.size(); i++) 
+
+			for (int i = 0; i < stuTitle.size(); i++)
 			{
 				joinStudy += stuTitle.get(i).getJoin_stu_title();
 				joinStudy += " /";
 			}
-		}
-		else 
+		} else
 		{
 			joinStudy += "없음";
 		}
 		// 테스트
 		// System.out.println(intTag);
-		
+
 		model.addAttribute("name", name);
 		model.addAttribute("idntt", idntt);
 		model.addAttribute("memContent", memContent);
 		model.addAttribute("intTag", intTag);
 		model.addAttribute("joinStudy", joinStudy);
-		
+
 		view = "/WEB-INF/views/member/AjaxMemModal.jsp";
-		
+
 		return view;
-		
+	}
+
+	// 스터디원 모달창 정보
+	@RequestMapping(value = "/meminfomodal.action", method =
+	{ RequestMethod.GET, RequestMethod.POST })
+	public String memInfoModal(Model model, HttpServletRequest request)
+	{
+		String view = null;
+
+		IMemberDAO memberDao = sqlSession.getMapper(IMemberDAO.class);
+
+		MemberDTO dto = new MemberDTO();
+
+		dto = memberDao.memModalList(request.getParameter("joinMemCd"));
+		ArrayList<MemberDTO> intTagSearch = memberDao.memIntTagSearch(request.getParameter("joinMemCd"));
+		ArrayList<MemberDTO> stuTitle = memberDao.modalStudyList(request.getParameter("joinMemCd"));
+
+		String name = dto.getName();
+		String idntt = dto.getIdntt();
+		String memContent = dto.getMem_content();
+		String intTag = "/ ";
+		String joinStudy = "";
+
+		for (int i = 0; i < intTagSearch.size(); i++)
+		{
+			intTag += intTagSearch.get(i).getInt_tag();
+			intTag += " /";
+		}
+
+		if (!stuTitle.isEmpty())
+		{
+			joinStudy = "/ ";
+
+			for (int i = 0; i < stuTitle.size(); i++)
+			{
+				joinStudy += stuTitle.get(i).getJoin_stu_title();
+				joinStudy += " /";
+			}
+		} else
+		{
+			joinStudy += "없음";
+		}
+		// 테스트
+		// System.out.println(intTag);
+
+		model.addAttribute("name", name);
+		model.addAttribute("idntt", idntt);
+		model.addAttribute("memContent", memContent);
+		model.addAttribute("intTag", intTag);
+		model.addAttribute("joinStudy", joinStudy);
+
+		view = "/WEB-INF/views/member/AjaxMemModal.jsp";
+
+		return view;
+
 	}
 
 	// 수진
@@ -320,7 +310,7 @@ public class StudyController
 
 		MyUtil util = new MyUtil();
 
-		String pageNum = request.getParameter("pageNum"); // 페이지 번호? 왜 삭제 버튼에서..?
+		String pageNum = request.getParameter("pageNum");
 
 		int currentPage = 1;
 		if (pageNum != null && pageNum.length() != 0)
@@ -328,13 +318,67 @@ public class StudyController
 			currentPage = Integer.parseInt(pageNum);
 		}
 
+		// 검색 값들
 		String searchKey = null;
 		String searchValue = null;
+
+		StudyDTO dto = new StudyDTO();
+		ArrayList<String> cat_cd_list = new ArrayList<String>(); // 카테고리 리스트들
+
+		// 필터 값들 : 카테고리, 지역, 세부지역, 인원수, 레벨
+		// String cat_cd = request.getParameter("catChk");
+
+		// String level = request.getParameter("levelChk");
+
+		// 카테고리
+		String[] cat_cd = request.getParameterValues("catChk");
+
+		if (cat_cd != null)
+		{
+
+			System.out.println(cat_cd.length);
+
+			for (int i = 0; i < cat_cd.length; i++)
+			{
+				System.out.println("카테고리" + cat_cd[i]);
+
+				cat_cd_list.add(cat_cd[i]); // 뽑아온 각각의 카테고리코드를 담기
+				// dto.setCat_cd_list(cat_cd[i]);
+			}
+
+			dto.setCat_cd_list(cat_cd_list); // 담겨있는 카테고리들을 dto에 세팅하기
+
+		}
+
+		// 세부지역
+		String spc_area_cd = null;
+
+		spc_area_cd = request.getParameter("spcArea");
+
+		System.out.println("세부지역" + spc_area_cd); // 세부지역
+		dto.setSpc_area_cd(spc_area_cd);
+
+		System.out.println(dto);
+		// 레벨
+		String[] level = request.getParameterValues("levelChk");
+
+		if (level != null)
+		{
+			System.out.println(level.length);
+			for (int i = 0; i < level.length; i++)
+			{
+				System.out.println("레벨" + level[i]);
+			}
+		}
+
+		// System.out.println("카테고리" + cat_cd);
+
+		// System.out.println("레벨" + level);
 
 		searchKey = request.getParameter("searchKey");
 		System.out.println("searchKey : " + searchKey);
 		searchValue = request.getParameter("searchValue");
-		System.out.println("searchValue : " +searchValue);
+		System.out.println("searchValue : " + searchValue);
 
 		if (searchKey == null)
 		{
@@ -347,14 +391,13 @@ public class StudyController
 			searchValue = URLDecoder.decode(searchValue, "UTF-8");
 		}
 
-		StudyDTO dto = new StudyDTO();
-
 		dto.setSearchKey(searchKey);
 		dto.setSearchValue(searchValue);
 
 		// 전체 데이터 개수
 		int dataCount = studyDao.studySearchCount(dto); // 검색 완료된 데이터 개수
 
+		System.out.println("검색완료개수:" + dataCount);
 		// 전체 페이지 수 구하기
 		int numPerPage = 10;
 		int totalPage = util.getPageCount(numPerPage, dataCount);
@@ -378,6 +421,8 @@ public class StudyController
 		// 테이블에서 리스트를 출력할 데이터 가져오기
 		List<StudyDTO> study = studyDao.getListData(dto);
 
+		System.out.println("결과" + study.size());
+
 		String params = "";
 		if (searchValue != null && searchValue.length() != 0)
 		{
@@ -400,6 +445,8 @@ public class StudyController
 		request.setAttribute("study", study);
 		request.setAttribute("pageIndexList", pageIndexList);
 		request.setAttribute("dataCount", dataCount);
+
+		// 페이징 처리 끝 --------------------------------------
 
 		view = "WEB-INF/views/study/StudyList.jsp";
 
