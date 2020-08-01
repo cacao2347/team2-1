@@ -24,7 +24,7 @@
 <link rel="shortcut icon" href="<%=cp %>/assets/images/pen_1.ico" type="image/x-icon">
 <link rel="icon" href="<%=cp %>/assets/images/pen_1.ico" type="image/x-icon">
 <style type="text/css">
-
+ 
 body
 {
    font-family: 'Noto Sans KR', sans-serif !important;
